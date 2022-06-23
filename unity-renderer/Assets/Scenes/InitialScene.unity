@@ -221,7 +221,7 @@ MonoBehaviour:
   useCustomContentServer: 0
   customContentServerUrl: http://localhost:1338/
   baseUrlMode: 1
-  baseUrlCustom: https://play.decentraland.zone/?
+  baseUrlCustom: https://play.decentraland.zone/?DISABLE_ASSET_BUNDLES=&DISABLE_WEARABLE_ASSET_BUNDLES&
   environment: 4
   realm: loki
   startInCoords: {x: 0, y: 0}
