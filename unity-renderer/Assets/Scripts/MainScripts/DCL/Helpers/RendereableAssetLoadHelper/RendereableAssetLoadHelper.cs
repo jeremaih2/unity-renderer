@@ -43,7 +43,7 @@ namespace DCL.Components
         ContentProvider contentProvider;
 
         AssetPromise_GLTF gltfPromise;
-        AssetPromise_GLTFast gltfastPromise;
+        AssetPromise_GLTFast_GameObject gltfastPromise;
         AssetPromise_AB_GameObject abPromise;
 
 #if UNITY_EDITOR
@@ -147,7 +147,7 @@ namespace DCL.Components
         {
             if ( gltfastPromise != null )
             {
-                AssetPromiseKeeper_GLTFast.i.Forget(gltfastPromise);
+                AssetPromiseKeeper_GLTFast_GameObject.i.Forget(gltfastPromise);
             }
         }
 
@@ -268,12 +268,12 @@ namespace DCL.Components
                 return;
             }
 
-            gltfastPromise = new AssetPromise_GLTFast(contentProvider, targetUrl, hash)
+            gltfastPromise = new AssetPromise_GLTFast_GameObject(targetUrl, hash)
             {
                 settings = settings
             };
 
-            gltfastPromise.OnSuccessEvent += (Asset_GLTFast x) =>
+            gltfastPromise.OnSuccessEvent += (Asset_GLTFast_GameObject x) =>
             {
 #if UNITY_EDITOR
                 x.container.name = GLTF_GO_NAME_PREFIX + x.container.name;
@@ -296,7 +296,7 @@ namespace DCL.Components
             };
             gltfastPromise.OnFailEvent += (asset, exception) => OnFailWrapper(OnFail, exception);
 
-            AssetPromiseKeeper_GLTFast.i.Keep(gltfastPromise);
+            AssetPromiseKeeper_GLTFast_GameObject.i.Keep(gltfastPromise);
         }
 
         private void OnFailWrapper(Action<Exception> OnFail, Exception exception)
