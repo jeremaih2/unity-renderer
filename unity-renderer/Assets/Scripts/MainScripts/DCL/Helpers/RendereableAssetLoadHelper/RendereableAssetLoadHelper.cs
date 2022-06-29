@@ -43,6 +43,7 @@ namespace DCL.Components
         }
 
         string bundlesContentUrl;
+        private readonly Func<bool> checkIfGltFastIsEnabled;
         ContentProvider contentProvider;
 
         AssetPromise_GLTF gltfPromise;
@@ -78,10 +79,11 @@ namespace DCL.Components
         float loadFinishTime = float.MaxValue;
 #endif
 
-        public RendereableAssetLoadHelper(ContentProvider contentProvider, string bundlesContentUrl)
+        public RendereableAssetLoadHelper( ContentProvider contentProvider, string bundlesContentUrl, Func<bool> checkIfGltFastIsEnabled)
         {
             this.contentProvider = contentProvider;
             this.bundlesContentUrl = bundlesContentUrl;
+            this.checkIfGltFastIsEnabled = checkIfGltFastIsEnabled;
         }
 
         public event Action<Rendereable> OnSuccessEvent;
@@ -118,8 +120,7 @@ namespace DCL.Components
         private void ProxyLoadGltf(string targetUrl)
         {
             // TODO: Replace with feature flag
-            bool shouldUseGLTFast = true;
-
+            bool shouldUseGLTFast = checkIfGltFastIsEnabled();
             
             if (shouldUseGLTFast)
             {
