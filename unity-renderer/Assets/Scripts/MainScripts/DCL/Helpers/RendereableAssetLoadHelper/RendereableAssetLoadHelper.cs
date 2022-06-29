@@ -282,7 +282,7 @@ namespace DCL.Components
                 return;
             }
 
-            gltfastPromise = new AssetPromise_GLTFast_GameObject(targetUrl, hash, contentProvider)
+            gltfastPromise = new AssetPromise_GLTFast_GameObject(targetUrl, hash, Environment.i.platform.webRequest, contentProvider)
             {
                 settings = settings
             };
