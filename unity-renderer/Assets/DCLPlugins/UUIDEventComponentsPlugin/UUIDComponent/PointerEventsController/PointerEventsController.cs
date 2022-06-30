@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using DCL.Models;
-using DCLPlugins.UUIDEventComponentsPlugin.UUIDComponent.Interfaces;
 using Ray = UnityEngine.Ray;
 
 namespace DCL
@@ -122,7 +121,7 @@ namespace DCL
             }
 
             if (CollidersManager.i.GetColliderInfo(hitInfo.collider, out ColliderInfo info))
-                newHoveredInputEvent = GetPointerEvent(info.entity);
+                newHoveredInputEvent = info.entity.gameObject.GetComponentInChildren<IPointerEvent>();
             else
                 newHoveredInputEvent = hitInfo.collider.GetComponentInChildren<IPointerEvent>();
 
@@ -195,24 +194,6 @@ namespace DCL
 
             newHoveredGO = null;
             newHoveredInputEvent = null;
-        }
-
-        private IPointerEvent GetPointerEvent(IDCLEntity entity)
-        {
-            // If an event exist in the new ECS, we got that value, if not it is ECS 6, so we continue as before
-            if (DataStore.i.ecs7.entityEvents.TryGetValue(entity.entityId, out List<IPointerInputEvent> pointerInputEvent))
-                return pointerInputEvent.First();
-            else
-                return entity.gameObject.GetComponentInChildren<IPointerEvent>();
-        }
-
-        private IList<IPointerInputEvent> GetPointerInputEvents(IDCLEntity entity, GameObject hitGameObject)
-        {
-            // If an event exist in the new ECS, we got that value, if not it is ECS 6, so we continue as before
-            if (DataStore.i.ecs7.entityEvents.TryGetValue(entity.entityId, out List<IPointerInputEvent> pointerInputEvent))
-                return pointerInputEvent;
-            else
-                return hitGameObject.GetComponentsInChildren<IPointerInputEvent>();
         }
 
         private bool EventObjectCanBeHovered(ColliderInfo colliderInfo, float distance)
@@ -439,9 +420,9 @@ namespace DCL
                 else
                     hitGameObject = collider.gameObject;
 
-                IList<IPointerInputEvent> events = GetPointerInputEvents(info.entity, hitGameObject);
+                var events = hitGameObject.GetComponentsInChildren<IPointerInputEvent>();
 
-                for (var i = 0; i < events.Count; i++)
+                for (var i = 0; i < events.Length; i++)
                 {
                     IPointerInputEvent e = events[i];
                     bool areSameEntity = AreSameEntity(e, info);

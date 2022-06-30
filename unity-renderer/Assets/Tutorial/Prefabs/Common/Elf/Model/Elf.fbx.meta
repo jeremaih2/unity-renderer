@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: 24555079a0d602b4daa15c11f867d115
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 4452549750696079851
+    second: rig0
+  - first:
+      74: -8144243347756248847
+    second: rig0.001
+  - first:
+      74: -1037679533009841756
+    second: body|CameraAction
+  - first:
+      74: -7610279349473884300
+    second: body|PoseLib
+  - first:
+      74: 4402846518235436611
+    second: rig.003|CameraAction
+  - first:
+      74: 8170532270070441719
+    second: rig.003|PoseLib
+  - first:
+      74: -3943976929538178209
+    second: rig.003|rig.003Action
+  - first:
+      74: -6990759789964068998
+    second: rig.003|rig0
+  - first:
+      74: 8440248360967096626
+    second: Camera|CameraAction
+  - first:
+      74: 3570554827865673945
+    second: Camera|PoseLib
+  - first:
+      74: 5658316486338323137
+    second: rig0.001 (1)
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: rig0.001
+      takeName: rig0.001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 119
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig0.001 (1)
+      takeName: rig0.001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 119
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig.003|rig.003Action
+      takeName: rig.003|rig.003Action
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 69
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig.003|rig0
+      takeName: rig.003|rig0
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: "jingling.blend  \u5907\u4EFD.blend  kzq.blendfangxiag(Clone)"
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: body
+      parentName: "jingling.blend  \u5907\u4EFD.blend  kzq.blendfangxiag(Clone)"
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: metarig
+      parentName: "jingling.blend  \u5907\u4EFD.blend  kzq.blendfangxiag(Clone)"
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Bone
+      parentName: metarig
+      position: {x: -0, y: 0, z: -0.025463704}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.001
+      parentName: Bone
+      position: {x: -0, y: 0.01677933, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.001_end
+      parentName: Bone.001
+      position: {x: -0, y: 0.016851649, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.002
+      parentName: Bone
+      position: {x: -0.008769447, y: 0.01201483, z: 0.0000000016142985}
+      rotation: {x: -0.0000019620672, y: 0.00000013901224, z: 0.99052054, w: 0.13736464}
+      scale: {x: 0.99999565, y: 0.9999999, z: 1}
+    - name: Bone.002_end
+      parentName: Bone.002
+      position: {x: -0, y: 0.0063127996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.003
+      parentName: Bone
+      position: {x: 0.008769447, y: 0.01201483, z: 0.0000000016142985}
+      rotation: {x: -0.0000019737336, y: -0.00000040680044, z: 0.99052054, w: -0.13736464}
+      scale: {x: 0.99999565, y: 0.9999999, z: 1}
+    - name: Bone.003_end
+      parentName: Bone.003
+      position: {x: -0, y: 0.0063127996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rig.003
+      parentName: "jingling.blend  \u5907\u4EFD.blend  kzq.blendfangxiag(Clone)"
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: root
+      parentName: rig.003
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.9832549, y: -0, z: -0, w: 0.18223567}
+      scale: {x: 1, y: 0.9999999, z: 0.9999999}
+    - name: ORG-Bone
+      parentName: root
+      position: {x: -0, y: 0, z: -0.025463704}
+      rotation: {x: -0.3983487, y: -0, z: -0, w: 0.91723406}
+      scale: {x: 1, y: 0.99999976, z: 0.99999976}
+    - name: ORG-Bone.001
+      parentName: ORG-Bone
+      position: {x: -0, y: 0.01677933, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-Bone.001
+      parentName: ORG-Bone.001
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-Bone.001_end
+      parentName: DEF-Bone.001
+      position: {x: -0, y: 0.016851649, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ORG-Bone.002
+      parentName: ORG-Bone
+      position: {x: -0.008769447, y: 0.01201483, z: 0.0000000016142985}
+      rotation: {x: -0.0000019595025, y: 0.00000008940696, z: 0.9905205, w: 0.13736485}
+      scale: {x: 0.99999595, y: 1.0000001, z: 1}
+    - name: DEF-Bone.002
+      parentName: ORG-Bone.002
+      position: {x: -2.9802955e-10, y: -0.000000001639128, z: 1.7053025e-15}
+      rotation: {x: 1.13686824e-13, y: -6.217248e-15, z: -0.000000059604464, w: 1}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: DEF-Bone.002_end
+      parentName: DEF-Bone.002
+      position: {x: -0, y: 0.0063127996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ORG-Bone.003
+      parentName: ORG-Bone
+      position: {x: 0.008769447, y: 0.01201483, z: 0.0000000016142985}
+      rotation: {x: -0.0000020563602, y: -0.0000004172325, z: 0.99052054, w: -0.13736486}
+      scale: {x: 0.99999565, y: 0.99999976, z: 1}
+    - name: DEF-Bone.003
+      parentName: ORG-Bone.003
+      position: {x: 2.9801647e-10, y: -0.000000001639128, z: -3.9790398e-15}
+      rotation: {x: -8.526512e-14, y: -1.7763567e-14, z: 0.00000002980146, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: DEF-Bone.003_end
+      parentName: DEF-Bone.003
+      position: {x: -0, y: 0.0063127996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.001 1
+      parentName: ORG-Bone
+      position: {x: -0, y: 0.01677933, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.001_end 1
+      parentName: Bone.001 1
+      position: {x: -0, y: 0.016851649, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.002 1
+      parentName: ORG-Bone
+      position: {x: -0.008769447, y: 0.01201483, z: 0.0000000016142985}
+      rotation: {x: -0.0000018030406, y: 0.0000009834768, z: 0.8001536, w: 0.59979516}
+      scale: {x: 0.99999595, y: 1.0000001, z: 1}
+    - name: Bone.002_end 1
+      parentName: Bone.002 1
+      position: {x: -0, y: 0.0063127996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.003 1
+      parentName: ORG-Bone
+      position: {x: 0.008769447, y: 0.01201483, z: 0.0000000016142985}
+      rotation: {x: -0.0000013709068, y: -0.0000014007092, z: 0.8001537, w: -0.59979516}
+      scale: {x: 0.99999565, y: 0.99999976, z: 1}
+    - name: Bone.003_end 1
+      parentName: Bone.003 1
+      position: {x: -0, y: 0.0063127996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-Bone
+      parentName: ORG-Bone
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-Bone_end
+      parentName: DEF-Bone
+      position: {x: -0, y: 0.013178529, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone 1
+      parentName: root
+      position: {x: -0, y: 0, z: -0.025463704}
+      rotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 0.99999976, z: 0.99999976}
+    - name: Bone_end
+      parentName: Bone 1
+      position: {x: -0, y: 0.013178529, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Camera
+      parentName: "jingling.blend  \u5907\u4EFD.blend  kzq.blendfangxiag(Clone)"
+      position: {x: -2.4761493, y: -0.0829171, z: 8.264433}
+      rotation: {x: -0.002136098, y: -0.98813206, z: 0.013796632, w: -0.15297104}
+      scale: {x: 100.00001, y: 100.00001, z: 99.99999}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

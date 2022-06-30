@@ -129,7 +129,6 @@ namespace DCL
             if ( !pluginGroupByFlag.ContainsKey(featureFlag) )
                 pluginGroupByFlag.Add(featureFlag, new PluginGroup());
 
-            allPlugins.plugins[type].flag = featureFlag;
             pluginGroupByFlag[featureFlag].Add(type, allPlugins.plugins[type]);
         }
 

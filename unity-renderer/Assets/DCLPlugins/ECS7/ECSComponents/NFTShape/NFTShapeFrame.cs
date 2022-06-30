@@ -1,6 +1,5 @@
 ﻿using System;
 using DCL.Components;
-using DCL.Configuration;
 using NFTShape_Internal;
 using UnityEngine;
 
@@ -29,12 +28,6 @@ namespace DCL.ECSComponents
         /// </summary>
         /// <param name="withCollision"></param>
         void SetHasCollisions(bool withCollision);
-
-        /// <summary>
-        /// Enable or disable the pointer events on the frame
-        /// </summary>
-        /// <param name="isPointerBlocker"></param>
-        void SetPointerBlocker(bool isPointerBlocker);
         
         /// <summary>
         /// This set the image and creates the HQ Texture handler
@@ -94,7 +87,7 @@ namespace DCL.ECSComponents
         private void Awake()
         {
             // NOTE: we use half scale to keep backward compatibility cause we are using 512px to normalize the scale with a 256px value that comes from the images
-            meshRenderer.transform.localScale = new UnityEngine.Vector3(0.5f, 0.5f, 1);
+            meshRenderer.transform.localScale = new Vector3(0.5f, 0.5f, 1);
             InitializeMaterials();
         }
         
@@ -119,13 +112,6 @@ namespace DCL.ECSComponents
         public void SetHasCollisions(bool withCollision)
         {
             boxCollider.enabled = withCollision;
-        }
-
-        public void SetPointerBlocker(bool isPointerBlocker)
-        {
-            int colliderLayer = isPointerBlocker ? PhysicsLayers.onPointerEventLayer : DCL.Configuration.PhysicsLayers.defaultLayer;
-
-            boxCollider.gameObject.layer = colliderLayer;
         }
 
         public void SetImage(string name, string url, INFTAsset nftAsset)
@@ -184,7 +170,7 @@ namespace DCL.ECSComponents
                     h *= texture.height / (float) texture.width;
                 else if (texture.width < texture.height)
                     w *= texture.width / (float) texture.height;
-                UnityEngine.Vector3 newScale = new UnityEngine.Vector3(w, h, 1f);
+                Vector3 newScale = new Vector3(w, h, 1f);
 
                 meshRenderer.transform.localScale = newScale;
             }

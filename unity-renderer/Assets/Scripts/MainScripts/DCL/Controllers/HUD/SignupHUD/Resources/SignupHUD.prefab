@@ -108,7 +108,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -306,10 +307,13 @@ MonoBehaviour:
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
+  m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
+  isAlert: 0
   m_InputValidator: {fileID: 0}
+  m_ShouldActivateOnSelect: 1
 --- !u!1 &706022184231525018
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +498,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -503,6 +507,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -609,8 +614,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8890651973664796486}
   m_HandleRect: {fileID: 4030468191070943104}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.013214337
+  m_Value: 0.99999994
+  m_Size: 0.013214338
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -724,7 +729,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -733,6 +738,7 @@ MonoBehaviour:
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -878,7 +884,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -887,6 +893,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1227,7 +1234,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1236,6 +1243,7 @@ MonoBehaviour:
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1381,7 +1389,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1390,6 +1398,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1824,7 +1833,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1833,6 +1842,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1990,62 +2000,62 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1. Acceptance of Terms\r\n\r\nThe Decentraland Foundation (the \"Foundation\"),
-    acting for the benefit of the Decentraland community as a whole, holds the intellectual
+  m_text: "1. Acceptance of Terms\r\n\r\nThe Andverse Foundation (the \"Foundation\"),
+    acting for the benefit of the Andverse community as a whole, holds the intellectual
     property rights over, and makes available, (a) the DCL Client, the Desktop Client,
-    the SDK 5.0, the Marketplace (https://market.decentraland.org), the Builder,
-    the Blog, Events, Agora, Forum, the Land Manager, the Command Line Interface,
-    DAO, the Developers\u2019 Hub, the Rewards tool which, with any other features,
-    tools and/or materials made available from time to time by the Foundation, are
-    referred to herein as the \"Tools\" and (b) the website https://decentraland.org
-    (the \"Site\"). Please read these Terms of Use (the \"Terms\" or \"Terms of Use\")
-    carefully before using the Tools and the Site. By using or otherwise accessing
-    the Tools and the Site, you: (1) accept and agree to be bound by these Terms;
-    (2) accept that the Tools are still in testing phase and that you use at your
-    own risk, as further explained in Section 2 below; (3) represent that you are
-    old enough to use the Tools and the Site pursuant to Sections 3 and 9 below;
-    (4) consent to the collection, use, disclosure and other handling of information
-    as described in the Privacy Policy, available here https://decentraland.org/privacy
-    ; (5) accept and agree (5.1.) the Content Policy approved by the DAO, available
-    here https://decentraland.org/content, and (5.2.) any additional terms and conditions
-    of participation issued by the Foundation from time to time. If you do not agree
-    to the Terms, then you must not access or use the Tools or the Site.\r\n\r\nAs
-    per the endowment received, the Foundation makes available the Tools and the
-    Site free of charge in order to allow different interactions with the Decentraland
-    platform (\"Decentraland\"), a decentralized virtual world. The Foundation does
-    not own or control Decentraland, as ownership and governance is decentralized
-    in the community through the DAO.\r\n\r\nDecentraland is governed by a decentralized
-    autonomous organization (the \"DAO\"). For further information please see https://dao.decentraland.org.\r\n\r\nThe
-    Foundation has no continuing obligation to operate the Tools and the Site and
-    may cease to operate one or more of the Tools in the future, at its exclusive
-    discretion, with no liability whatsoever in connection thereto.\r\n\r\nWith respect
-    to the source code of the software of the Tools that has been released under
-    an open source license, such software code must be used in accordance with the
-    applicable open source license terms and conditions as described in Section 13
-    below. Other similar tools might be developed in the future by the community
-    or third parties.\r\n\r\n2. Disclaimer and Modification of Terms of Use\r\n\r\nThe
-    Tools are provided on an \"as is\" and \"as available\" basis and may contain
-    defects and software bugs. You are advised to safeguard important data, property
-    and content, to use caution, and not to rely in any way on the correct or secure
-    functionality or performance of the Tools.\r\n\r\nExcept for Section 17, providing
-    for binding arbitration and waiver of class action rights, as detailed in Section
-    7, the Foundation reserves the right, at the sole discretion of the DAO, to modify
-    or replace the Terms of Use at any time. The most current version of these Terms
+    the SDK 5.0, the Marketplace (https://market.andverse.org), the Builder, the
+    Blog, Events, Agora, Forum, the Land Manager, the Command Line Interface, DAO,
+    the Developers\u2019 Hub, the Rewards tool which, with any other features, tools
+    and/or materials made available from time to time by the Foundation, are referred
+    to herein as the \"Tools\" and (b) the website https://andverse.org (the \"Site\").
+    Please read these Terms of Use (the \"Terms\" or \"Terms of Use\") carefully
+    before using the Tools and the Site. By using or otherwise accessing the Tools
+    and the Site, you: (1) accept and agree to be bound by these Terms; (2) accept
+    that the Tools are still in testing phase and that you use at your own risk,
+    as further explained in Section 2 below; (3) represent that you are old enough
+    to use the Tools and the Site pursuant to Sections 3 and 9 below; (4) consent
+    to the collection, use, disclosure and other handling of information as described
+    in the Privacy Policy, available here https://andverse.org/privacy ; (5) accept
+    and agree (5.1.) the Content Policy approved by the DAO, available here https://andverse.org/content,
+    and (5.2.) any additional terms and conditions of participation issued by the
+    Foundation from time to time. If you do not agree to the Terms, then you must
+    not access or use the Tools or the Site.\r\n\r\nAs per the endowment received,
+    the Foundation makes available the Tools and the Site free of charge in order
+    to allow different interactions with the Andverse platform (\"Andverse\"), a
+    decentralized virtual world. The Foundation does not own or control Andverse,
+    as ownership and governance is decentralized in the community through the DAO.\r\n\r\nAndverse
+    is governed by a decentralized autonomous organization (the \"DAO\"). For further
+    information please see https://dao.andverse.org.\r\n\r\nThe Foundation has no
+    continuing obligation to operate the Tools and the Site and may cease to operate
+    one or more of the Tools in the future, at its exclusive discretion, with no
+    liability whatsoever in connection thereto.\r\n\r\nWith respect to the source
+    code of the software of the Tools that has been released under an open source
+    license, such software code must be used in accordance with the applicable open
+    source license terms and conditions as described in Section 13 below. Other similar
+    tools might be developed in the future by the community or third parties.\r\n\r\n2.
+    Disclaimer and Modification of Terms of Use\r\n\r\nThe Tools are provided on
+    an \"as is\" and \"as available\" basis and may contain defects and software
+    bugs. You are advised to safeguard important data, property and content, to use
+    caution, and not to rely in any way on the correct or secure functionality or
+    performance of the Tools.\r\n\r\nExcept for Section 17, providing for binding
+    arbitration and waiver of class action rights, as detailed in Section 7, the
+    Foundation reserves the right, at the sole discretion of the DAO, to modify or
+    replace the Terms of Use at any time. The most current version of these Terms
     will be posted on the Site. You shall be responsible for reviewing and becoming
     familiar with any such modifications. Use of the Tools by you after any modification
     to the Terms constitutes your acceptance of the Terms of Use as modified.\r\n\r\n3.
     Eligibility\r\n\r\nYou hereby represent and warrant that you are fully able and
     competent to enter into the terms, conditions, obligations, affirmations, representations
     and warranties set forth in these Terms and to abide by and comply with these
-    Terms. Decentraland is a global platform and by accessing the Content, the Site
-    or Tools, you are representing and warranting that you are of the legal age of
-    majority in your jurisdiction as is required to access such Tools and Content
-    and enter into arrangements as provided by the Tools. You further represent that
-    you are otherwise legally permitted to use the Tools in your jurisdiction including
-    owning cryptographic tokens, and interacting with the Site, Tools or Content
-    in any way. You further represent that you are responsible for ensuring compliance
-    with the laws of your jurisdiction and acknowledge that the Foundation is not
-    liable for your compliance or failure to comply with such laws. You further represent
+    Terms. Andverse is a global platform and by accessing the Content, the Site or
+    Tools, you are representing and warranting that you are of the legal age of majority
+    in your jurisdiction as is required to access such Tools and Content and enter
+    into arrangements as provided by the Tools. You further represent that you are
+    otherwise legally permitted to use the Tools in your jurisdiction including owning
+    cryptographic tokens, and interacting with the Site, Tools or Content in any
+    way. You further represent that you are responsible for ensuring compliance with
+    the laws of your jurisdiction and acknowledge that the Foundation is not liable
+    for your compliance or failure to comply with such laws. You further represent
     and warrant that all funds or assets used by you have been lawfully obtained
     by you in compliance with all applicable laws.\r\n\r\n4. Account Access and Security\r\n\r\nAccess
     to the Tools is provided via a third party private key manager selected by you
@@ -2101,8 +2111,8 @@ MonoBehaviour:
     or covenants concerning any Content contained in or accessed through the Site,
     Tools, and the DAO and/or the Foundation will not be responsible or liable for
     the accuracy, copyright compliance, legality or decency of material contained
-    in or accessed through the Tools. The Content Policy over Decentraland is established
-    and enforced exclusively by the Decentraland community through the DAO.\r\n\r\n5.2
+    in or accessed through the Tools. The Content Policy over Andverse is established
+    and enforced exclusively by the Andverse community through the DAO.\r\n\r\n5.2
     Sophistication and Risk of Cryptographic Systems\r\n\r\nBy utilizing the Tools,
     the Site or interacting with the Tools or platform or anything contained or provided
     therein in any way, you represent that you understand the inherent risks associated
@@ -2111,9 +2121,9 @@ MonoBehaviour:
     intricacies of native cryptographic tokens, like Ether (ETH) and Bitcoin (BTC),
     smart contract based tokens such as those that follow the Ethereum Token Standard
     (https://github.com/ethereum/EIPs/issues/20), MANA (the ERC-20 token that allows
-    users to claim parcels of LAND and trade with each other within Decentraland),
-    LAND (the ERC-721 token, associating each LAND parcel's x and y coordinates with
-    a definition of a parcel's 3D scene that makes up the larger metaverse) and blockchain-based
+    users to claim parcels of LAND and trade with each other within Andverse), LAND
+    (the ERC-721 token, associating each LAND parcel's x and y coordinates with a
+    definition of a parcel's 3D scene that makes up the larger metaverse) and blockchain-based
     software systems.\r\n\r\n5.3 Risk of Regulatory Actions in One or More Jurisdictions\r\n\r\nThe
     Foundation, MANA, LAND and ETH could be impacted by one or more regulatory inquiries
     or regulatory action, which could impede or limit your ability to access or use
@@ -2167,7 +2177,7 @@ MonoBehaviour:
     determining what, if any, Taxes apply to your LAND parcel related transactions,
     and any other transaction conducted by you. The Foundation does not, and will
     not, have any insight into or control over any transactions conducted by you
-    in Decentraland, and thus is not responsible for determining the Taxes that apply
+    in Andverse, and thus is not responsible for determining the Taxes that apply
     to your transactions entered through the Tools or otherwise involving any LAND
     parcel, or any other related transaction, and is not to act as a withholding
     Tax agent in any circumstances whatsoever.\r\n\r\n5.9 Uses of the Tools\r\n\r\nYou
@@ -2206,7 +2216,7 @@ MonoBehaviour:
     over the amount of MANA involved in such transactions. Such MANA cost will be
     borne by the participants to the transaction. All MANA spent under the Marketplace
     Transaction Cost will be transferred to the treasury of the DAO. Please be aware
-    that transactions in third-party NFT marketplaces (inside or outside Decentraland)
+    that transactions in third-party NFT marketplaces (inside or outside Andverse)
     may be subject to the fees charged by said third-party marketplaces as per the
     respective terms and conditions. The Foundation and/or the DAO shall have no
     liability whatsoever with regards to transactions conducted in third-party marketplaces.\r\n\r\n6.4
@@ -2215,7 +2225,7 @@ MonoBehaviour:
     income) now or hereafter claimed or imposed by any governmental authority (collectively,
     \"Taxes\") associated with your use of the Tools (including, without limitation,
     any Taxes that may become payable as the result of your ownership, or transfer
-    of any NFT and any activity conducted by you in Decentraland). Except for income
+    of any NFT and any activity conducted by you in Andverse). Except for income
     taxes levied on the Foundation, you: (i) will pay or reimburse the Foundation
     for all national, federal, state, local or other taxes and assessments of any
     jurisdiction, including value added taxes and taxes as required by international
@@ -2326,83 +2336,82 @@ MonoBehaviour:
     OF ANY ISSUES WITH THE BLOCKCHAIN SUPPORTING THE ETHEREUM NETWORK, INCLUDING
     FORKS, TECHNICAL NODE ISSUES, OR ANY OTHER ISSUES HAVING FUND LOSSES AS A RESULT.\r\n\r\n10.9.
     SOME TOOLS, AS THE DESKTOP CLIENT PROVIDES YOU WITH FASTER ACCESS AND INTERACTION
-    WITH DECENTRALAND. THE DOWNLOAD AND USE OF THE DESKTOP CLIENT MAY INCLUDE THE
-    DOWNLOAD OF THE CONTENT CREATED BY THE USERS AND AVAILABLE AT DECENTRALAND TO
-    YOUR DEVICE, WHICH MAY BE ILLEGAL IN YOUR COUNTRY OR OFFENSIVE. THE DAO AND THE
-    FOUNDATION ARE NOT LIABLE FOR SUCH CONTENT. CONTENT AVAILABLE IN DECENTRALAND
-    MAY REDIRECT YOU TO THIRD-PARTY LINKS FOR WHICH THE DAO AND/OR THE FOUNDATION
-    ARE NOT RESPONSIBLE. YOU ARE SOLELY RESPONSIBLE FOR ALL DOWNLOADS OF THIRD-PARTY
-    CONTENT AND DATA, AND FOR ALL THIRD-PARTY LINKS CLICKED ON. PLEASE NOTE THAT
-    BY CREATING A USER ON THE APP YOU RELEASE THE DAO AND THE FOUNDATION FROM ANY
-    AND ALL LIABILITY REGARDING THE ABOVE-MENTIONED CONTENT, DATA OR LINKS AND ASSUME
-    THE RISKS DESCRIBED ABOVE. \r\n\r\n11. Limitation on Liability\r\n\r\n11.1 YOU
-    UNDERSTAND AND AGREE THAT THE FOUNDATION, ITS OFFICERS, EMPLOYEES, DIRECTORS,
-    THE DAO, AND LICENSORS WILL NOT BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY
-    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES WHICH
-    YOU MAY INCUR, HOWSOEVER CAUSED AND UNDER ANY THEORY OF LIABILITY, INCLUDING,
-    WITHOUT LIMITATION, ANY LOSS OF PROFITS (WHETHER INCURRED DIRECTLY OR INDIRECTLY),
-    LOSS OF GOODWILL OR BUSINESS REPUTATION, LOSS OF DATA, COST OF PROCUREMENT OF
-    SUBSTITUTE GOODS OR SERVICES, OR ANY OTHER INTANGIBLE LOSS, EVEN IF THE FOUNDATION
-    HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\r\n\r\n11.2 YOU AGREE THAT
-    THE FOUNDATION\u2019S TOTAL, AGGREGATE LIABILITY TO YOU FOR ANY AND ALL CLAIMS
-    ARISING OUT OF OR RELATING TO THESE TERMS OR YOUR ACCESS TO OR USE OF (OR YOUR
-    INABILITY TO ACCESS OR USE) ANY PORTION OF THE TOOLS, WHETHER IN CONTRACT, TORT,
-    STRICT LIABILITY, OR ANY OTHER LEGAL THEORY, IS LIMITED TO THE GREATER OF (A)
-    THE AMOUNTS ACTUALLY PAID BY YOU TO THE FOUNDATION UNDER THESE TERMS IN THE 12
-    MONTH PERIOD PRECEDING THE DATE THE CLAIM AROSE, OR (B) $100.\r\n\r\n11.3 YOU
-    ACKNOWLEDGE AND AGREE THAT THE FOUNDATION HAS MADE THE TOOLS AVAILABLE TO YOU
-    AND ENTERED INTO THESE TERMS IN RELIANCE UPON THE WARRANTY DISCLAIMERS AND LIMITATIONS
-    OF LIABILITY SET FORTH HEREIN, WHICH REFLECT A REASONABLE AND FAIR ALLOCATION
-    OF RISK BETWEEN THE PARTIES AND FORM AN ESSENTIAL BASIS OF THE BARGAIN BETWEEN
-    US. THE FOUNDATION WOULD NOT BE ABLE TO PROVIDE THE TOOLS TO YOU WITHOUT THESE
-    LIMITATIONS.\r\n\r\n11.4 SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION
-    OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, AND SOME JURISDICTIONS ALSO LIMIT DISCLAIMERS
-    OR LIMITATIONS OF LIABILITY FOR PERSONAL INJURY FROM CONSUMER PRODUCTS, SO THE
-    ABOVE LIMITATIONS MAY NOT APPLY TO PERSONAL INJURY CLAIMS.\r\n\r\n12. Proprietary
-    Rights\r\n\r\n12.1 All title, ownership and Intellectual Property Rights in and
-    to the Site and the Tools are owned exclusively by the Foundation or its licensors.
-    The Foundation holds these Intellectual Property Rights for the benefit of the
-    Decentraland community as a whole. You acknowledge and agree that the Site and
-    Tools contains proprietary and confidential information that is protected by
-    applicable intellectual property and other laws. Except as expressly authorized
-    in Section 13, you agree not to copy, modify, rent, lease, loan, sell, distribute,
-    perform, display or create Derivative Works based on the Site and the Tools,
-    in whole or in part. The Foundation's exclusive ownership shall include all elements
-    of the Site and Tools, and all Intellectual Property Rights therein. The visual
-    interfaces, graphics (including, without limitation, all art and drawings associated
-    with Tools), design, systems, methods, information, computer code, software,
-    \"look and feel\", organization, compilation of the content, code, data, and
-    all other elements of the Site and the Tools (but excluding the Content submitted
-    by Users) (collectively, the \" Foundation Materials\") are owned by the Foundation,
-    and are protected by copyright, trade dress, patent, and trademark laws, international
-    conventions, other relevant intellectual property and proprietary rights, and
-    applicable laws. All the Foundation Materials are the copyrighted property of
-    the Foundation or its licensors, and all trademarks, logos, service marks, and
-    trade names contained in the Foundation Materials are proprietary to the Foundation
-    or its licensors. Except as expressly set forth herein, your use of the Site
-    and the Tools does not grant you ownership of or any other rights with respect
-    to any content, code, data, or other materials that you may access on or through
-    the Site and the Tools. The Foundation reserves all rights in and to the Foundation
-    Materials not expressly granted to you in the Terms. For the sake of clarity,
-    you understand and agree: (i) that any \"purchase\" of LAND, whether via the
-    Tools or otherwise, does not give you any rights or licenses in or to the Foundation
-    Materials (including, without limitation, the Foundation\u2019s copyright in
-    and to the art and drawings associated with the Tools and content therein) other
-    than those expressly contained in these Terms; and (ii) that you do not have
-    the right to reproduce, distribute, or otherwise commercialize any elements of
-    the Foundation Materials (including, without limitation, the Foundation\u2019s
-    copyright in and to the art and drawings associated with the Tools and content
-    therein) in any way without the Foundation\u2019s prior written consent in each
-    case, which consent the Foundation may withhold in its sole and absolute discretion.\r\n\r\n12.2
-    You may choose to submit comments, bug reports, ideas or other feedback about
-    the Site or the Tools, including without limitation about how to improve the
-    Tools (collectively, \"Feedback\"). By submitting any Feedback, you agree that
-    the Foundation is free to use such Feedback at the Foundation\u2019s discretion
-    and without additional compensation to you, and to disclose such Feedback to
-    third parties (whether on a non-confidential basis, or otherwise), including
-    the DAO. You hereby grant the Foundation and the DAO a perpetual, irrevocable,
-    nonexclusive, worldwide license under all rights necessary for the Foundation
-    and the DAO to incorporate and use your Feedback for any purpose.\r\n\r\n12.3
+    WITH ANDVERSE. THE DOWNLOAD AND USE OF THE DESKTOP CLIENT MAY INCLUDE THE DOWNLOAD
+    OF THE CONTENT CREATED BY THE USERS AND AVAILABLE AT ANDVERSE TO YOUR DEVICE,
+    WHICH MAY BE ILLEGAL IN YOUR COUNTRY OR OFFENSIVE. THE DAO AND THE FOUNDATION
+    ARE NOT LIABLE FOR SUCH CONTENT. CONTENT AVAILABLE IN ANDVERSE MAY REDIRECT YOU
+    TO THIRD-PARTY LINKS FOR WHICH THE DAO AND/OR THE FOUNDATION ARE NOT RESPONSIBLE.
+    YOU ARE SOLELY RESPONSIBLE FOR ALL DOWNLOADS OF THIRD-PARTY CONTENT AND DATA,
+    AND FOR ALL THIRD-PARTY LINKS CLICKED ON. PLEASE NOTE THAT BY CREATING A USER
+    ON THE APP YOU RELEASE THE DAO AND THE FOUNDATION FROM ANY AND ALL LIABILITY
+    REGARDING THE ABOVE-MENTIONED CONTENT, DATA OR LINKS AND ASSUME THE RISKS DESCRIBED
+    ABOVE. \r\n\r\n11. Limitation on Liability\r\n\r\n11.1 YOU UNDERSTAND AND AGREE
+    THAT THE FOUNDATION, ITS OFFICERS, EMPLOYEES, DIRECTORS, THE DAO, AND LICENSORS
+    WILL NOT BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+    SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES WHICH YOU MAY INCUR, HOWSOEVER CAUSED
+    AND UNDER ANY THEORY OF LIABILITY, INCLUDING, WITHOUT LIMITATION, ANY LOSS OF
+    PROFITS (WHETHER INCURRED DIRECTLY OR INDIRECTLY), LOSS OF GOODWILL OR BUSINESS
+    REPUTATION, LOSS OF DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES,
+    OR ANY OTHER INTANGIBLE LOSS, EVEN IF THE FOUNDATION HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGES.\r\n\r\n11.2 YOU AGREE THAT THE FOUNDATION\u2019S
+    TOTAL, AGGREGATE LIABILITY TO YOU FOR ANY AND ALL CLAIMS ARISING OUT OF OR RELATING
+    TO THESE TERMS OR YOUR ACCESS TO OR USE OF (OR YOUR INABILITY TO ACCESS OR USE)
+    ANY PORTION OF THE TOOLS, WHETHER IN CONTRACT, TORT, STRICT LIABILITY, OR ANY
+    OTHER LEGAL THEORY, IS LIMITED TO THE GREATER OF (A) THE AMOUNTS ACTUALLY PAID
+    BY YOU TO THE FOUNDATION UNDER THESE TERMS IN THE 12 MONTH PERIOD PRECEDING THE
+    DATE THE CLAIM AROSE, OR (B) $100.\r\n\r\n11.3 YOU ACKNOWLEDGE AND AGREE THAT
+    THE FOUNDATION HAS MADE THE TOOLS AVAILABLE TO YOU AND ENTERED INTO THESE TERMS
+    IN RELIANCE UPON THE WARRANTY DISCLAIMERS AND LIMITATIONS OF LIABILITY SET FORTH
+    HEREIN, WHICH REFLECT A REASONABLE AND FAIR ALLOCATION OF RISK BETWEEN THE PARTIES
+    AND FORM AN ESSENTIAL BASIS OF THE BARGAIN BETWEEN US. THE FOUNDATION WOULD NOT
+    BE ABLE TO PROVIDE THE TOOLS TO YOU WITHOUT THESE LIMITATIONS.\r\n\r\n11.4 SOME
+    JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL
+    DAMAGES, AND SOME JURISDICTIONS ALSO LIMIT DISCLAIMERS OR LIMITATIONS OF LIABILITY
+    FOR PERSONAL INJURY FROM CONSUMER PRODUCTS, SO THE ABOVE LIMITATIONS MAY NOT
+    APPLY TO PERSONAL INJURY CLAIMS.\r\n\r\n12. Proprietary Rights\r\n\r\n12.1 All
+    title, ownership and Intellectual Property Rights in and to the Site and the
+    Tools are owned exclusively by the Foundation or its licensors. The Foundation
+    holds these Intellectual Property Rights for the benefit of the Andverse community
+    as a whole. You acknowledge and agree that the Site and Tools contains proprietary
+    and confidential information that is protected by applicable intellectual property
+    and other laws. Except as expressly authorized in Section 13, you agree not to
+    copy, modify, rent, lease, loan, sell, distribute, perform, display or create
+    Derivative Works based on the Site and the Tools, in whole or in part. The Foundation's
+    exclusive ownership shall include all elements of the Site and Tools, and all
+    Intellectual Property Rights therein. The visual interfaces, graphics (including,
+    without limitation, all art and drawings associated with Tools), design, systems,
+    methods, information, computer code, software, \"look and feel\", organization,
+    compilation of the content, code, data, and all other elements of the Site and
+    the Tools (but excluding the Content submitted by Users) (collectively, the \"
+    Foundation Materials\") are owned by the Foundation, and are protected by copyright,
+    trade dress, patent, and trademark laws, international conventions, other relevant
+    intellectual property and proprietary rights, and applicable laws. All the Foundation
+    Materials are the copyrighted property of the Foundation or its licensors, and
+    all trademarks, logos, service marks, and trade names contained in the Foundation
+    Materials are proprietary to the Foundation or its licensors. Except as expressly
+    set forth herein, your use of the Site and the Tools does not grant you ownership
+    of or any other rights with respect to any content, code, data, or other materials
+    that you may access on or through the Site and the Tools. The Foundation reserves
+    all rights in and to the Foundation Materials not expressly granted to you in
+    the Terms. For the sake of clarity, you understand and agree: (i) that any \"purchase\"
+    of LAND, whether via the Tools or otherwise, does not give you any rights or
+    licenses in or to the Foundation Materials (including, without limitation, the
+    Foundation\u2019s copyright in and to the art and drawings associated with the
+    Tools and content therein) other than those expressly contained in these Terms;
+    and (ii) that you do not have the right to reproduce, distribute, or otherwise
+    commercialize any elements of the Foundation Materials (including, without limitation,
+    the Foundation\u2019s copyright in and to the art and drawings associated with
+    the Tools and content therein) in any way without the Foundation\u2019s prior
+    written consent in each case, which consent the Foundation may withhold in its
+    sole and absolute discretion.\r\n\r\n12.2 You may choose to submit comments,
+    bug reports, ideas or other feedback about the Site or the Tools, including without
+    limitation about how to improve the Tools (collectively, \"Feedback\"). By submitting
+    any Feedback, you agree that the Foundation is free to use such Feedback at the
+    Foundation\u2019s discretion and without additional compensation to you, and
+    to disclose such Feedback to third parties (whether on a non-confidential basis,
+    or otherwise), including the DAO. You hereby grant the Foundation and the DAO
+    a perpetual, irrevocable, nonexclusive, worldwide license under all rights necessary
+    for the Foundation and the DAO to incorporate and use your Feedback for any purpose.\r\n\r\n12.3
     You acknowledge and agree that you are responsible for your own conduct while
     accessing or using the Site and the Tools, and for any consequences thereof.
     You agree to use the Site and the Tools only for purposes that are legal, proper
@@ -2467,8 +2476,8 @@ MonoBehaviour:
     of the Content may impose its own terms, conditions and licenses for access and
     use of said Content. You are advised to review any such terms, conditions and
     policies before accessing any such Content. All Content must comply with the
-    Content Policy.\r\n\r\n12.5 The use of Decentraland logo and trademarks are regulated
-    in the Terms of use available at https://decentraland.org/brand/\r\n\r\n13. Open
+    Content Policy.\r\n\r\n12.5 The use of Andverse logo and trademarks are regulated
+    in the Terms of use available at https://andverse.org/brand/\r\n\r\n13. Open
     Source License.\r\n\r\n13.1 Grant of Copyright License.\r\n\r\nSubject to the
     terms and conditions of this License, each Contributor hereby grants to you a
     perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright
@@ -2528,8 +2537,8 @@ MonoBehaviour:
     have executed with the Foundation and/or its licensors regarding such Contributions.\r\n\r\n13.5
     Trademarks.\r\n\r\nThis License does not grant permission to use the trade names,
     logo, trademarks, service marks, or product names of the licensee and/or its
-    licensors, except as provided in the Terms of Use for Decentraland\xB4s Logo
-    and Name.\r\n\r\n13.6 Disclaimer of Warranty.\r\n\r\nUnless required by applicable
+    licensors, except as provided in the Terms of Use for Andverse\xB4s Logo and
+    Name.\r\n\r\n13.6 Disclaimer of Warranty.\r\n\r\nUnless required by applicable
     law or agreed to in writing, the Foundation and/or its licensors provide the
     Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including,
@@ -2608,17 +2617,17 @@ MonoBehaviour:
     a statement by you, made under penalty of perjury, that the above information
     in your Notice is accurate and that you are Intellectual Property owner or authorized
     to act on the owner's behalf.\r\n\r\nThe Foundation can be reached at email:
-    legal@decentraland.org\r\n\r\nTo the extent possible, the Foundation may try
-    to reach the would-be infringing party to forward your concerns. The Foundation
-    is not in a position to assess the legal merits of the claims.\r\n\r\nAs the
-    Foundation does not control the Content being uploaded by the users, if the user
-    does not agree with your claim and/or does not accept to withdraw the infringing
-    content, the DAO, as per the votes of the community, may take any of the following
-    measures, (i) block the infringing Content so as to render it inaccessible through
-    the Tools (although it could be still accessible through other clients); (ii)
-    block the infringing user's Account. Any further action, claim or remedy against
-    the infringing user must be undertaken by the aggrieved user.\r\n\r\nAlthough
-    not at the core of its role or responsibilities, to the extent technically possible,
+    legal@andverse.org\r\n\r\nTo the extent possible, the Foundation may try to reach
+    the would-be infringing party to forward your concerns. The Foundation is not
+    in a position to assess the legal merits of the claims.\r\n\r\nAs the Foundation
+    does not control the Content being uploaded by the users, if the user does not
+    agree with your claim and/or does not accept to withdraw the infringing content,
+    the DAO, as per the votes of the community, may take any of the following measures,
+    (i) block the infringing Content so as to render it inaccessible through the
+    Tools (although it could be still accessible through other clients); (ii) block
+    the infringing user's Account. Any further action, claim or remedy against the
+    infringing user must be undertaken by the aggrieved user.\r\n\r\nAlthough not
+    at the core of its role or responsibilities, to the extent technically possible,
     the Foundation may also, at its sole discretion, (i) block any kind of Content
     uploaded by users; (ii) suspend user Accounts; and/or (iii) request documents
     evidencing the right of the contributor to use Intellectual Property Rights embedded
@@ -2674,7 +2683,7 @@ MonoBehaviour:
     court's jurisdiction.\r\n\r\n18.5 30-day Right to Opt-Out\r\n\r\nYou have the
     right to opt-out and not be bound by the arbitration and class action waiver
     provisions set forth above by sending written notice of your decision to opt-out
-    to the following email address: legal@decentraland.org. Your notice must be sent
+    to the following email address: legal@andverse.org. Your notice must be sent
     within 30 days of your first use of the Tools, otherwise you shall be bound to
     arbitrate disputes in accordance with the terms of those paragraphs. If you opt-out
     of these arbitration provisions, the Foundation also will not be bound by them.\r\n\r\n18.6
@@ -2708,7 +2717,7 @@ MonoBehaviour:
     Titles\r\n\r\nThe section titles in the Terms are for convenience only and have
     no legal or contractual effect.\r\n\r\n19.5 Communications\r\n\r\nUsers with
     questions, complaints or claims with respect to the Site or the Tools may contact
-    us using the relevant contact information set forth above and at legal@decentraland.org.\r\n\r\n20.
+    us using the relevant contact information set forth above and at legal@andverse.org.\r\n\r\n20.
     Definitions\r\n\r\nThe following definitions shall apply only to Section 13 of
     the Terms:\r\n\r\n\"Contribution\" shall mean any work of authorship, including
     the original version of the Work and any modifications or additions to that Work
@@ -2787,7 +2796,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2796,6 +2805,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2973,7 +2983,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 3
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2982,6 +2992,7 @@ MonoBehaviour:
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -3171,10 +3182,13 @@ MonoBehaviour:
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
+  m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
+  isAlert: 0
   m_InputValidator: {fileID: 0}
+  m_ShouldActivateOnSelect: 1
 --- !u!1 &4681674058129223728
 GameObject:
   m_ObjectHideFlags: 0
@@ -3283,7 +3297,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -3292,6 +3306,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -3544,7 +3559,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 3
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -3553,6 +3568,7 @@ MonoBehaviour:
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -4199,7 +4215,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -4208,6 +4224,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -4335,7 +4352,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 100.8188, y: 19.2647}
+  m_SizeDelta: {x: 68.711, y: 68.711}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5699764324167211267
 CanvasRenderer:
@@ -4365,7 +4382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 24bad1613b3e14b969cf6086aa095ffc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00917f24e8d7de24fbf3dcb56e33ceba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4483,7 +4500,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -4492,6 +4509,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -4848,7 +4866,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -4857,6 +4875,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -4982,7 +5001,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -4991,6 +5010,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -5117,7 +5137,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -5126,6 +5146,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -5340,7 +5361,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -5349,6 +5370,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

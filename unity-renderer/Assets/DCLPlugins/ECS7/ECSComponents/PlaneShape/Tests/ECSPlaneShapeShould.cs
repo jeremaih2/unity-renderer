@@ -78,7 +78,7 @@ namespace DCL.ECSComponents.Test
             planeShapeComponentHandler.meshesInfo = null;
 
             // Act
-            planeShapeComponentHandler.DisposeMesh(entity, scene);
+            planeShapeComponentHandler.DisposeMesh(scene);
 
             // Assert
             Assert.IsNull(planeShapeComponentHandler.meshesInfo);

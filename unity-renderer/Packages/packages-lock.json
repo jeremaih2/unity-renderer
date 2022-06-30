@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.coffee.ui-particle": {
-      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git#3.3.0",
+      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "429ff2dd09264fd091ed3005c7a4c247f118c7ae"
+      "hash": "65c60000c258a1cbfd21575fd43c48742039dae5"
     },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
@@ -176,14 +176,14 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework.performance": {
-        "version": "2.8.1-preview",
-        "depth": 0,
-        "source": "registry",
-        "dependencies": {
-            "com.unity.test-framework": "1.1.0",
-            "com.unity.modules.jsonserialize": "1.0.0"
-        },
-        "url": "https://packages.unity.com"
+      "version": "2.8.1-preview",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.testtools.codecoverage": {
       "version": "1.1.0",

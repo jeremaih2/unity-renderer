@@ -81,7 +81,7 @@ namespace DCL.ECSComponents.Test
             boxShapeComponentHandler.meshesInfo = null;
 
             // Act
-            boxShapeComponentHandler.DisposeMesh(entity,scene);
+            boxShapeComponentHandler.DisposeMesh(scene);
 
             // Assert
             Assert.IsNull(boxShapeComponentHandler.meshesInfo);

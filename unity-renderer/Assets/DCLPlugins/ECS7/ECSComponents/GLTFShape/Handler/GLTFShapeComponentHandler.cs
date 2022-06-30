@@ -1,6 +1,5 @@
 ﻿using System;
 using DCL.Components;
-using DCL.Configuration;
 using DCL.Controllers;
 using DCL.ECSRuntime;
 using DCL.Models;
@@ -95,7 +94,7 @@ namespace DCL.ECSComponents
                     // Apply the model for visibility, collision and event pointer
                     ApplyModel(model);
                     dataStore.RemovePendingResource(scene.sceneData.id, model);
-                    dataStore.AddShapeReady(entity.entityId,meshesInfo.meshRootGameObject);
+                    dataStore.AddReadyAnimatorShape(entity.entityId,meshesInfo.meshRootGameObject);
                     
                 }, (wrapper, exception) =>
                 {
@@ -118,14 +117,19 @@ namespace DCL.ECSComponents
             // Set visibility
             meshesInfo.meshRootGameObject.SetActive(model.Visible);
             
-            // Set collisions and pointer blocker
-            ECSComponentsUtils.UpdateMeshInfoColliders(model.WithCollisions, model.IsPointerBlocker, meshesInfo);
+            // Set collisions
+            foreach (var collider in meshesInfo.colliders)
+            {
+                collider.enabled = model.WithCollisions;
+            }
+            
+            //TODO: Implement events here
         }
 
         internal void DisposeMesh(IParcelScene scene)
         {
             if (entity != null)
-                dataStore.RemoveShapeReady(entity.entityId);
+                dataStore.RemoveReadyAnimatorShape(entity.entityId);
             if (meshesInfo != null)
                 ECSComponentsUtils.DisposeMeshInfo(meshesInfo);
             if (rendereable != null)

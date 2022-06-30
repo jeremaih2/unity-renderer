@@ -66,10 +66,7 @@ namespace DCL
                     {
                         texture.wrapMode = unityWrap;
                         texture.filterMode = unitySamplingMode;
-                        
-                        if (DataStore.i.textureConfig.runCompression.Get())
-                            texture.Compress(false);
-                        
+                        texture.Compress(false);
                         texture.Apply(unitySamplingMode != FilterMode.Point, true);
                         asset.texture2D = texture;
                     }

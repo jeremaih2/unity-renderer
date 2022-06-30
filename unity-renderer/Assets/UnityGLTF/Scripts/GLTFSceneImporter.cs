@@ -717,10 +717,15 @@ namespace UnityGLTF
 
             //  NOTE: the second parameter of LoadImage() marks non-readable, but we can't mark it until after we call Apply()
             texture.LoadImage(buffer, false);
-            
-            //NOTE(Brian): This tex compression breaks importing in editor mode
-            if (Application.isPlaying && DataStore.i.textureConfig.runCompression.Get())
+
+            // We need to keep compressing in UNITY_EDITOR for the Asset Bundles Converter
+#if !UNITY_STANDALONE || UNITY_EDITOR
+            if ( Application.isPlaying )
+            {
+                //NOTE(Brian): This breaks importing in editor mode
                 texture.Compress(false);
+            }
+#endif
 
             texture.wrapMode = settings.wrapMode;
             texture.filterMode = settings.filterMode;

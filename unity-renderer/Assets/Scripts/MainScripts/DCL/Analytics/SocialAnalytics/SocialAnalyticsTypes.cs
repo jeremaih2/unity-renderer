@@ -6,6 +6,13 @@ namespace SocialFeaturesAnalytics
         Guest
     }
 
+    public enum ChatContentType
+    {
+        Text,
+        Coords,
+        Link
+    }
+
     public enum PlayerActionSource
     {
         Passport,

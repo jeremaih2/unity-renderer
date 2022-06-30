@@ -17,13 +17,11 @@ namespace DCL.ECSComponents
         internal INFTShapeFrame shapeFrame;
 
         private PBNFTShape model;
-
-        public DataStore_ECS7 dataStore;
         
-        public ECSNFTShapeComponentHandler(DataStore_ECS7 dataStore, INFTShapeFrameFactory factory, INFTInfoRetriever infoRetriever, INFTAssetRetriever assetRetriever)
+        public ECSNFTShapeComponentHandler(INFTShapeFrameFactory factory, INFTInfoRetriever infoRetriever, INFTAssetRetriever assetRetriever)
         {
-            this.dataStore = dataStore;
             this.factory = factory;
+
             this.infoRetriever = infoRetriever;
             this.assetRetriever = assetRetriever;
         }
@@ -47,7 +45,7 @@ namespace DCL.ECSComponents
             ApplyModel(model);
 
             // We load the NFT image
-            LoadNFT(model);
+            LoadNFT(scene,model);
         }
 
         private void DisposeShapeFrame(IDCLEntity entity)
@@ -55,13 +53,12 @@ namespace DCL.ECSComponents
             if (shapeFrame == null)
                 return;
             
-            dataStore.RemoveShapeReady(entity.entityId);
             shapeFrame.Dispose();
             ECSComponentsUtils.DisposeMeshInfo(entity.meshesInfo);
             GameObject.Destroy(shapeFrame.gameObject);
         }
         
-        internal async void LoadNFT(PBNFTShape model)
+        internal async void LoadNFT(IParcelScene scene,PBNFTShape model)
         {
             NFTInfo info = await infoRetriever.FetchNFTInfo(model.Src);
 
@@ -95,8 +92,6 @@ namespace DCL.ECSComponents
             entity.meshesInfo.meshRootGameObject.name = "NFT mesh";
             entity.meshesInfo.meshRootGameObject.transform.SetParent(entity.gameObject.transform);
             entity.meshesInfo.meshRootGameObject.transform.ResetLocalTRS();
-            
-            dataStore.AddShapeReady(entity.entityId, entity.meshesInfo.meshRootGameObject);
         }
 
         private void LoadFailed()
@@ -109,7 +104,6 @@ namespace DCL.ECSComponents
         {
             shapeFrame.SetVisibility(model.Visible);
             shapeFrame.SetHasCollisions(model.WithCollisions);
-            shapeFrame.SetPointerBlocker(model.IsPointerBlocker);
             UpdateBackgroundColor(model);
 
             this.model = model;
