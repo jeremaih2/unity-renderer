@@ -221,7 +221,7 @@ MonoBehaviour:
   useCustomContentServer: 0
   customContentServerUrl: http://localhost:1338/
   baseUrlMode: 1
-  baseUrlCustom: https://play.decentraland.zone/?
+  baseUrlCustom: http://play.devnet.andverse.org/?
   environment: 4
   realm: loki
   startInCoords: {x: 0, y: 0}
