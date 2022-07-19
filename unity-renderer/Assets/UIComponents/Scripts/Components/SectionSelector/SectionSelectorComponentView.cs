@@ -5,20 +5,20 @@ using UnityEngine;
 public interface ISectionSelectorComponentView
 {
     /// <summary>
-    /// Set the sections of the selector.
+    /// Set the sections of the selector.设置选择器的各个部分
     /// </summary>
     /// <param name="sections">List of UI components.</param>
     void SetSections(List<SectionToggleModel> sections);
 
     /// <summary>
-    /// Get a section of the section selector.
+    /// Get a section of the section selector.获取部分选择器的一部分。
     /// </summary>
     /// <param name="index">Index of the list of sections.</param>
     /// <returns>A specific section toggle.</returns>
     ISectionToggle GetSection(int index);
 
     /// <summary>
-    /// Get all the sections of the section selector.
+    /// Get all the sections of the section selector.获取部分选择器的所有部分
     /// </summary>
     /// <returns>The list of sections.</returns>
     List<ISectionToggle> GetAllSections();
@@ -27,7 +27,7 @@ public interface ISectionSelectorComponentView
 public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorComponentView, IComponentModelConfig
 {
     [Header("Prefab References")]
-    [SerializeField] internal SectionToggle sectionToggleTemplate;
+    [SerializeField] internal SectionToggle sectionToggleTemplate;//部分选择器切换模板
 
     [Header("Configuration")]
     [SerializeField] internal SectionSelectorComponentModel model;
@@ -38,7 +38,7 @@ public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorC
     {
         base.Awake();
 
-        RegisterCurrentInstantiatedSections();
+        RegisterCurrentInstantiatedSections();//注册当前实例化的部分
     }
 
     public void Configure(BaseComponentModel newModel)

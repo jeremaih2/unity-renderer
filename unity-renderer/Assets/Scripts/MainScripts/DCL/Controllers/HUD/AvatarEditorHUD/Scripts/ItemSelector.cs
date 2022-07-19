@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class ItemSelector : MonoBehaviour
 {
-    private const string DECENTRALAND_COLLECTION_ID = "Decentraland";
+    private const string DECENTRALAND_COLLECTION_ID = "Andverse";
 
     [SerializeField]
     internal ItemToggleFactory itemToggleFactory;

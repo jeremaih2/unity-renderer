@@ -191,7 +191,7 @@ namespace DCL.SettingsPanelHUD
 
         public void OnAddHelpAndSupportWindow()
         {
-            helpAndSupportButton.gameObject.SetActive(true);
+            helpAndSupportButton.gameObject.SetActive(false);
             helpAndSupportButton.onClick.AddListener(() => OnHelpAndSupportClicked?.Invoke());
         }
 

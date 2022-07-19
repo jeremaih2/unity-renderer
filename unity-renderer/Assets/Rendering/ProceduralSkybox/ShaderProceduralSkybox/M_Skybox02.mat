@@ -101,11 +101,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _cubemap_2:
-        m_Texture: {fileID: 8900000, guid: 6916db5be836ac04fa4b08138fc15fb9, type: 3}
+        m_Texture: {fileID: 8900000, guid: f7259264e80cfbd4eaa0ec239af27173, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _cubemap_3:
-        m_Texture: {fileID: 8900000, guid: 0095a9bafa47e9048995bf8ca764aeee, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _cubemap_4:
@@ -228,7 +228,7 @@ Material:
     - _RenderDistance_0: 3.4
     - _RenderDistance_1: 3.4
     - _RenderDistance_2: 0
-    - _RenderDistance_3: 0
+    - _RenderDistance_3: 3.4
     - _RenderDistance_4: 0
     - _dayTime: 0
     - _distance_0: 20
@@ -260,7 +260,7 @@ Material:
     - _layerType_0: 0
     - _layerType_1: 2
     - _layerType_2: 4
-    - _layerType_3: 4
+    - _layerType_3: 0
     - _layerType_4: 4
     - _lightIntensity00: 0
     - _lightIntensity01: 0
@@ -268,7 +268,7 @@ Material:
     - _lightIntensity_0: 0
     - _lightIntensity_1: 0
     - _lightIntensity_2: 1
-    - _lightIntensity_3: 0.475
+    - _lightIntensity_3: 0
     - _lightIntensity_4: 0
     - _normalIntensity00: 0.45
     - _normalIntensity01: 0.357
@@ -320,7 +320,7 @@ Material:
     - _color_0: {r: 1, g: 1, b: 1, a: 0}
     - _color_1: {r: 13.865452, g: 10.590144, b: 8.263404, a: 1}
     - _color_2: {r: 0.9736468, g: 0.9736468, b: 0.9736468, a: 1}
-    - _color_3: {r: 0.9805969, g: 0.8959962, b: 0.8759674, a: 0.75325525}
+    - _color_3: {r: 1, g: 1, b: 1, a: 0}
     - _color_4: {r: 0.5365418, g: 0.4904895, b: 0.47692195, a: 1}
     - _distortIntAndSize_0: {r: 0, g: 0, b: 0, a: 0}
     - _distortIntAndSize_1: {r: 0, g: 0, b: 0, a: 0}
@@ -352,14 +352,14 @@ Material:
     - _rowAndCollumns_0: {r: 1, g: 1, b: 0, a: 0}
     - _rowAndCollumns_1: {r: 1, g: 1, b: 0, a: 0}
     - _rowAndCollumns_2: {r: 0, g: 0, b: 0, a: 0}
-    - _rowAndCollumns_3: {r: 0, g: 0, b: 0, a: 0}
+    - _rowAndCollumns_3: {r: 1, g: 1, b: 0, a: 0}
     - _rowAndCollumns_4: {r: 0, g: 0, b: 0, a: 0}
     - _skyColor: {r: 0.47794396, g: 0.6772139, b: 0.944402, a: 1}
     - _smoothRange: {r: 0, g: 0, b: 0, a: 0}
     - _speedAndRotation_0: {r: 0, g: 0, b: 0, a: 0}
     - _speedAndRotation_1: {r: 0, g: 0, b: 0, a: 0}
     - _speedAndRotation_2: {r: 0, g: 0.4, b: 0, a: 0}
-    - _speedAndRotation_3: {r: 0, g: 1, b: 0, a: 0}
+    - _speedAndRotation_3: {r: 0, g: 0, b: 0, a: 0}
     - _speedAndRotation_4: {r: 0, g: 0, b: 0, a: 0}
     - _speed_0: {r: 0, g: 0, b: 0, a: 0}
     - _speed_1: {r: 0, g: 0, b: 0, a: 0}
@@ -370,7 +370,7 @@ Material:
     - _tilingAndOffset_0: {r: 1, g: 1, b: 0, a: 0}
     - _tilingAndOffset_1: {r: 3.7620354, g: 3.7620354, b: 45, a: 60.011547}
     - _tilingAndOffset_2: {r: 0, g: 0, b: 0, a: 0}
-    - _tilingAndOffset_3: {r: 0, g: 0, b: 0, a: 0}
+    - _tilingAndOffset_3: {r: 1, g: 1, b: 0, a: 0}
     - _tilingAndOffset_4: {r: 0, g: 0, b: 0, a: 0}
     - _timeFrame00: {r: 0, g: 10, b: 0, a: 0}
     - _timeFrame01: {r: 9, g: 16, b: 0, a: 0}
@@ -378,6 +378,6 @@ Material:
     - _timeFrame_0: {r: 0, g: 0, b: 0, a: 0}
     - _timeFrame_1: {r: 5, g: 20, b: 0, a: 0}
     - _timeFrame_2: {r: 0, g: 24, b: 0, a: 0}
-    - _timeFrame_3: {r: 0, g: 24, b: 0, a: 0}
+    - _timeFrame_3: {r: 0, g: 0, b: 0, a: 0}
     - _timeFrame_4: {r: 0, g: 24, b: 0, a: 0}
   m_BuildTextureStacks: []

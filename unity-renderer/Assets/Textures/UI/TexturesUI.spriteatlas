@@ -162,6 +162,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 06ec3644c3f104203b897e53615acd2c, type: 3}
   - {fileID: 21300000, guid: 2cc1bc54dd98f77459c059ab58670f74, type: 3}
   - {fileID: 21300000, guid: 14d01e642387749e482a6f14133c57b8, type: 3}
+  - {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3, type: 3}
   - {fileID: 21300000, guid: 51517794ebfef5b49b08d321c661cee2, type: 3}
   - {fileID: 21300000, guid: d077f9943309847eb8bb9c36ecff7a44, type: 3}
   - {fileID: 21300000, guid: 3bdf32a4d196e1d429119d1477906987, type: 3}
@@ -511,6 +512,7 @@ SpriteAtlas:
   - SpeakerOff
   - HideIcon
   - Container12Shadow4
+  - logo01
   - DclLogoCircle
   - LockIcon
   - DclLogoLine3

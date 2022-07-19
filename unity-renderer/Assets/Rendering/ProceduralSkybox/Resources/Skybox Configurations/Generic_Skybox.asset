@@ -832,7 +832,7 @@ MonoBehaviour:
     tintPercentage: 100
     renderDistance: []
     texture: {fileID: 0}
-    cubemap: {fileID: 8900000, guid: 6916db5be836ac04fa4b08138fc15fb9, type: 3}
+    cubemap: {fileID: 8900000, guid: f7259264e80cfbd4eaa0ec239af27173, type: 3}
     color:
       serializedVersion: 2
       key0: {r: 0.5692789, g: 0.46715, b: 0.86142135, a: 0.61960787}
@@ -892,9 +892,9 @@ MonoBehaviour:
     movementTypePlanar_Radial: 0
     movementTypeSatellite: 0
   - slotID: 3
-    renderType: 0
+    renderType: 1
     layerType: 4
-    enabled: 1
+    enabled: 0
     nameInEditor: Near Clouds
     expandedInEditor: 0
     timeSpan_start: 0
