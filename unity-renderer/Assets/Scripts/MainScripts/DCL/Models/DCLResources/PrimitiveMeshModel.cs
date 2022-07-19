@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Google.Protobuf.Collections;
 using UnityEngine;
-
+//原始网格模型
 public class PrimitiveMeshModel 
 {
     public static bool operator ==(PrimitiveMeshModel left, PrimitiveMeshModel right) { return Equals(left, right); }

@@ -28,6 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 30759184884034351}
+  - {fileID: 3370891630103604273}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,6 +123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785260624521939365, guid: ffee176dc073145748f97a170835fe04,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1892427996420698771, guid: ffee176dc073145748f97a170835fe04,
         type: 3}
@@ -445,4 +451,620 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2722569914141991954, guid: ffee176dc073145748f97a170835fe04,
     type: 3}
   m_PrefabInstance: {fileID: 2712791750263344957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5345577591811276762
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9157638742130759987}
+    m_Modifications:
+    - target: {fileID: 245544715989954904, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandPinky1
+      objectReference: {fileID: 0}
+    - target: {fileID: 245544715989954904, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 409535123255116493, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 444742324839656415, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 449721452257698985, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 642302472303551831, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 747189216846851508, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandIndex2
+      objectReference: {fileID: 0}
+    - target: {fileID: 747189216846851508, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 755052043800178090, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 755052043800178090, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 798310693175604888, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 951373903747843432, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandMiddle1
+      objectReference: {fileID: 0}
+    - target: {fileID: 951373903747843432, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027941114356282040, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132515066288181828, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandThumb4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132515066288181828, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301386672151654415, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714720840336062880, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandMiddle1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714720840336062880, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729504628960638638, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandThumb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729504628960638638, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821806761513330091, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850109632063714892, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1911307041453745625, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916814141031931147, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandIndex2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916814141031931147, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993792268236105490, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandMiddle3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993792268236105490, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997569128028390151, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135117910226382926, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186511612439975948, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230333395807914213, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandPinky1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230333395807914213, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2484365492857497291, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2484365492857497291, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531185434035489386, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandPinky3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531185434035489386, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676278156406616993, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901988123234925224, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightArm
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901988123234925224, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088180838080359758, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandThumb3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088180838080359758, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202206161579302930, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandMiddle2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202206161579302930, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263237200129115796, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandThumb4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263237200129115796, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406577359496491173, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandThumb3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406577359496491173, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556529953922591651, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandMiddle2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556529953922591651, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589836679832310250, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625674467799551248, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandIndex3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625674467799551248, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933379170996670956, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042702637394179783, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandPinky4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042702637394179783, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134929133914497318, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150876355129020228, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240390697788001106, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandPinky3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240390697788001106, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575418616878272455, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandIndex1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575418616878272455, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706619577237403809, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751470047533159054, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951072246218545144, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightForeArm
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951072246218545144, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485077983524417821, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandPinky2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485077983524417821, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521463787960385540, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521463787960385540, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595171470547622559, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722054033474800584, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandIndex1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722054033474800584, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017116362381015575, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6095893511175606362, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242955979705253494, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478033963261460060, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: AvatarBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478033963261460060, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478033963261460060, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552576200497585217, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandThumb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552576200497585217, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6651549728760311832, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883579703413268865, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219656245917605699, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandIndex4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219656245917605699, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335011975178789539, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7649494283584429357, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandMiddle4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7649494283584429357, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715919590833237324, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandThumb1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715919590833237324, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909252059424681321, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandPinky2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909252059424681321, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025466997526757729, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandPinky4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025466997526757729, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067655950081701243, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199337963708001034, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202176068704680617, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandMiddle4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202176068704680617, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423360023263523022, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandThumb1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423360023263523022, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449892938093629574, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandIndex3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449892938093629574, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561367085959017665, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561367085959017665, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916397378737918938, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003669005685335998, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_RightHandMiddle3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003669005685335998, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101128920895344938, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Name
+      value: Avatar_LeftHandIndex4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101128920895344938, guid: dbd7ba814dd5802499783da388c14424,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4853578900337578334, guid: dbd7ba814dd5802499783da388c14424, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: dbd7ba814dd5802499783da388c14424, type: 3}
+--- !u!4 &3370891630103604273 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7271235787425534955, guid: dbd7ba814dd5802499783da388c14424,
+    type: 3}
+  m_PrefabInstance: {fileID: 5345577591811276762}
   m_PrefabAsset: {fileID: 0}

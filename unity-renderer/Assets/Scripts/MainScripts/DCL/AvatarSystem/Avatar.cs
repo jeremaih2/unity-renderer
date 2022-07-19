@@ -13,16 +13,16 @@ namespace AvatarSystem
     {
         private const float RESCALING_BOUNDS_FACTOR = 100f;
         internal const string LOADING_VISIBILITY_CONSTRAIN = "Loading";
-        private readonly IAvatarCurator avatarCurator;
+        private readonly IAvatarCurator avatarCurator;//avatar 策划人，监护人
         private readonly ILoader loader;
         private readonly IAnimator animator;
         private readonly IVisibility visibility;
         private readonly ILOD lod;
-        private readonly IGPUSkinning gpuSkinning;
-        private readonly IGPUSkinningThrottler gpuSkinningThrottler;
-        private readonly IEmoteAnimationEquipper emoteAnimationEquipper;
+        private readonly IGPUSkinning gpuSkinning;//GPU 层
+        private readonly IGPUSkinningThrottler gpuSkinningThrottler;//GPU 节流阀
+        private readonly IEmoteAnimationEquipper emoteAnimationEquipper;//表情动画提供者
         private readonly IBaseAvatar baseAvatar;
-        private CancellationTokenSource disposeCts = new CancellationTokenSource();
+        private CancellationTokenSource disposeCts = new CancellationTokenSource();//取消标记源
 
         public IAvatar.Status status { get; private set; } = IAvatar.Status.Idle;
         public Vector3 extents { get; private set; }
@@ -42,13 +42,13 @@ namespace AvatarSystem
         }
 
         /// <summary>
-        /// Starts the loading process for the Avatar. 
+        /// Starts the loading process for the Avatar. 开始加载avatar程序
         /// </summary>
         /// <param name="wearablesIds"></param>
         /// <param name="settings"></param>
         /// <param name="ct"></param>
         public async UniTask Load(List<string> wearablesIds, AvatarSettings settings, CancellationToken ct = default)
-        {
+        {//UniTask解决了C#Task异步不能执行某些API的问题，将C# async/awake异步编程模型完美的带入了Unity中
             disposeCts ??= new CancellationTokenSource();
 
             status = IAvatar.Status.Idle;

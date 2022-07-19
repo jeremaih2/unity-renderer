@@ -9,18 +9,18 @@ using Object = UnityEngine.Object;
 namespace AvatarSystem
 {
     public static class AvatarSystemUtils
-    {
+    {//存档avatar系统工具类函数
         public const float AVATAR_Y_OFFSET = 0.75f;
-        private const string AB_FEATURE_FLAG_NAME = "wearable_asset_bundles";
-
+        private const string AB_FEATURE_FLAG_NAME = "wearable_asset_bundles";//AB包功能标记名称
+//是否是类别要求
         public static bool IsCategoryRequired(string category) { return WearableLiterals.Categories.REQUIRED_CATEGORIES.Contains(category); }
-
+//是否使用AB包
         public static bool UseAssetBundles()
         {
             var featureFlags = DataStore.i.featureFlags.flags.Get();
             return featureFlags != null && featureFlags.IsFeatureEnabled(AB_FEATURE_FLAG_NAME);
         }
-
+//获取面部特征纹理url   
         public static (string mainTextureUrl, string maskTextureUrl) GetFacialFeatureTexturesUrls(string bodyshapeId, WearableItem facialFeature)
         {
             if (facialFeature.data.category != WearableLiterals.Categories.EYES && facialFeature.data.category == WearableLiterals.Categories.EYEBROWS && facialFeature.data.category == WearableLiterals.Categories.MOUTH)
@@ -40,7 +40,7 @@ namespace AvatarSystem
 
             return (mainTextureUrl, maskTextureUrl);
         }
-
+//复制骨骼
         public static void CopyBones(SkinnedMeshRenderer source, IEnumerable<SkinnedMeshRenderer> targets)
         {
             if (source == null)
@@ -52,7 +52,7 @@ namespace AvatarSystem
                 skinnedMeshRenderer.bones = source.bones;
             }
         }
-
+//准备材质球的颜色
         public static void PrepareMaterialColors(Rendereable rendereable, Color skinColor, Color hairColor)
         {
             foreach (Renderer renderer in rendereable.renderers)
@@ -66,7 +66,7 @@ namespace AvatarSystem
                 }
             }
         }
-
+//可穿戴设备分离
         public static (WearableItem bodyshape, WearableItem eyes, WearableItem eyebrows, WearableItem mouth, List<WearableItem> wearables) SplitWearables(IEnumerable<WearableItem> wearables)
         {
             WearableItem bodyshape = null;
@@ -100,9 +100,10 @@ namespace AvatarSystem
         }
 
         /// <summary>
-        /// Extract bodyparts of a Rendereable.
+        /// Extract bodyparts of a Rendereable.提取身体部分的Rendereable。
         ///
         /// Using this on a Rendereable that doesn't comes from a bodyshape might result in unexpected result
+        ///在Rendereable上使用这个不是来自一个身体形状可能会导致意想不到的结果 
         /// </summary>
         /// <param name="rendereable"></param>
         /// <returns></returns>
@@ -152,7 +153,7 @@ namespace AvatarSystem
 
         /// <summary>
         /// Filters hidden wearables.
-        /// Conflicts will be resolved by order in the array
+        /// Conflicts will be resolved by order in the array冲突将通过数组中的顺序来解决 
         /// </summary>
         /// <param name="bodyshapeId"></param>
         /// <param name="wearables"></param>
@@ -174,7 +175,7 @@ namespace AvatarSystem
 
             return filteredWearables;
         }
-
+//获取激活的身体部位
         public static (bool headVisible, bool upperBodyVisible, bool lowerBodyVisible, bool feetVisible) GetActiveBodyParts(string bodyshapeId, IEnumerable<WearableItem> wearables)
         {
             bool headVisible = true;
@@ -199,7 +200,7 @@ namespace AvatarSystem
             feetVisible = !hiddenList.Contains(WearableLiterals.Categories.FEET) && !usedCategories.Contains(WearableLiterals.Categories.FEET);
             return (headVisible, upperBodyVisible, lowerBodyVisible, feetVisible);
         }
-
+//获取激活的身体部位渲染
         public static List<SkinnedMeshRenderer> GetActiveBodyPartsRenderers(IBodyshapeLoader bodyshapeLoader, bool headVisible, bool upperBodyVisible, bool lowerBodyVisible, bool feetVisible)
         {
             List<SkinnedMeshRenderer> result = new List<SkinnedMeshRenderer>();

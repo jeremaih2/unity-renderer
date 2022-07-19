@@ -10,7 +10,7 @@ namespace AvatarSystem
         private Transform avatarRevealerContainer;
         public GameObject armatureContainer;
         public SkinnedMeshRenderer meshRenderer { get; private set; }
-
+//基础avatar假人
         public BaseAvatarDummy(Transform avatarRevealerContainer, GameObject armatureContainer)
         {
             this.avatarRevealerContainer = avatarRevealerContainer;

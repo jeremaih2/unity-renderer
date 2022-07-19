@@ -68,6 +68,7 @@ public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorC
 
         if (instantiatedSections.Count > 0)
             instantiatedSections[0].SelectToggle();
+        
     }
 
     public ISectionToggle GetSection(int index)
@@ -87,6 +88,7 @@ public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorC
 
         SectionToggle newGO = Instantiate(sectionToggleTemplate, transform);
         newGO.name = name;
+        Debug.Log("1111111111111111111"+newGO.name);
         newGO.gameObject.SetActive(true);
         newGO.SetInfo(newSectionModel);
         newGO.SelectToggle();

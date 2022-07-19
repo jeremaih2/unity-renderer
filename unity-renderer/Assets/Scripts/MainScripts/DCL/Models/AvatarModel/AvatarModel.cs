@@ -18,7 +18,7 @@ public class AvatarModel : BaseModel
     public string stickerTriggerId = null;
     public long stickerTriggerTimestamp = -1;
     public bool talking = false;
-
+//其他的avatar模型是否有相同颜色
     public bool HaveSameWearablesAndColors(AvatarModel other)
     {
         if (other == null)
@@ -32,14 +32,14 @@ public class AvatarModel : BaseModel
                eyeColor == other.eyeColor &&
                wearablesAreEqual;
     }
-
+//其他avatar模型是否有相同的表示
     public bool HaveSameExpressions(AvatarModel other)
     {
         return expressionTriggerId == other.expressionTriggerId &&
                expressionTriggerTimestamp == other.expressionTriggerTimestamp &&
                stickerTriggerTimestamp == other.stickerTriggerTimestamp;
     }
-
+//其他avatar模型是否相同
     public bool Equals(AvatarModel other)
     {
         bool wearablesAreEqual = wearables.All(other.wearables.Contains) && wearables.Count == other.wearables.Count;
@@ -55,7 +55,7 @@ public class AvatarModel : BaseModel
                stickerTriggerTimestamp == other.stickerTriggerTimestamp &&
                wearablesAreEqual;
     }
-
+//更改模型时复制相同属性
     public void CopyFrom(AvatarModel other)
     {
         if (other == null)
@@ -73,6 +73,6 @@ public class AvatarModel : BaseModel
         stickerTriggerTimestamp = other.stickerTriggerTimestamp;
         wearables = new List<string>(other.wearables);
     }
-
+//基础模型从json表中获取数据
     public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<AvatarModel>(json); }
 }

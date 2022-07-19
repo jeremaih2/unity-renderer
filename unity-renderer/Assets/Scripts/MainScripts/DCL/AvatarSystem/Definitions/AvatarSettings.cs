@@ -6,6 +6,7 @@ namespace AvatarSystem
     {
         /// <summary>
         /// Name of the player controlling this avatar (if any)
+        /// 控制这个角色的玩家的名字(如果有的话) 
         /// </summary>
         public string playerName;
 

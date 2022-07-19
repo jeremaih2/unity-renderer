@@ -1,17 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityGLTF.Cache;
 
 namespace UnityGLTF
 {
     /// <summary>
     /// Instantiated GLTF Object component that gets added to the root of every GLTF game object created by a scene importer.
+    /// 实例化GLTF对象组件，它被添加到由场景导入器创建的每个GLTF游戏对象的根目录中。 
     /// </summary>
     public class InstantiatedGLTFObject : MonoBehaviour
     {
         /// <summary>
-        /// Ref-counted cache data for this object.
+        /// Ref-counted cache data for this object.引用该对象的缓存数据
         /// The same instance of this cached data will be used for all copies of this GLTF object,
         /// and the data gets cleaned up when the ref counts goes to 0.
+        /// 这个缓存数据的同一个实例将被用于这个GLTF对象的所有副本,当ref计数为0时，数据会被清除。 
         /// </summary>
         private RefCountedCacheData cachedData;
 

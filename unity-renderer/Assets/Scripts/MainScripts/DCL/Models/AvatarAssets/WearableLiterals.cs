@@ -11,12 +11,13 @@ public static class WearableLiterals
 
     public static class Tags
     {
-        public const string BASE_WEARABLE = "base-wearable";
-        public const string EXCLUSIVE = "exclusive";
+        public const string BASE_WEARABLE = "base-wearable";//基础穿戴
+        public const string EXCLUSIVE = "exclusive";//独家的
     }
 
     public static class Categories
-    {
+    {//必须的类别
+        //public static readonly ReadOnlyCollection<string> REQUIRED_CATEGORIES = new ReadOnlyCollection<string>(new List<string> { SKIN});
         public static readonly ReadOnlyCollection<string> REQUIRED_CATEGORIES = new ReadOnlyCollection<string>(new List<string> { UPPER_BODY, LOWER_BODY, EYES, EYEBROWS, MOUTH });
 
         public const string BODY_SHAPE = "body_shape";
@@ -32,6 +33,7 @@ public static class WearableLiterals
         public const string FACIAL_HAIR = "facial_hair";
 
         //TODO: Implement an IReadOnlyCollection for HashSet to make them immutable
+        //为 HashSet 实现 IReadOnlyCollection 以使其不可变
         public static readonly HashSet<string> ALL  = new HashSet<string>
         {
             UPPER_BODY,
@@ -72,14 +74,16 @@ public static class WearableLiterals
             { (BodyShapes.MALE, Categories.UPPER_BODY), "urn:decentraland:off-chain:base-avatars:green_hoodie" },
             { (BodyShapes.MALE, Categories.LOWER_BODY), "urn:decentraland:off-chain:base-avatars:brown_pants" },
             { (BodyShapes.MALE, Categories.FEET), "urn:decentraland:off-chain:base-avatars:sneakers" },
+            { (BodyShapes.MALE, Categories.SKIN), "urn:decentraland:off-chain:base-avatars:skin_greywhale" },
 
-            { (BodyShapes.FEMALE, Categories.EYES), "urn:decentraland:off-chain:base-avatars:f_eyes_00" },
-            { (BodyShapes.FEMALE, Categories.EYEBROWS), "urn:decentraland:off-chain:base-avatars:f_eyebrows_00" },
-            { (BodyShapes.FEMALE, Categories.MOUTH), "urn:decentraland:off-chain:base-avatars:f_mouth_00" },
-            { (BodyShapes.FEMALE, Categories.HAIR), "urn:decentraland:off-chain:base-avatars:standard_hair" },
-            { (BodyShapes.FEMALE, Categories.UPPER_BODY), "urn:decentraland:off-chain:base-avatars:f_sweater" },
-            { (BodyShapes.FEMALE, Categories.LOWER_BODY), "urn:decentraland:off-chain:base-avatars:f_jeans" },
-            { (BodyShapes.FEMALE, Categories.FEET), "urn:decentraland:off-chain:base-avatars:bun_shoes" },
+             { (BodyShapes.FEMALE, Categories.EYES), "urn:decentraland:off-chain:base-avatars:f_eyes_00" },//
+             { (BodyShapes.FEMALE, Categories.EYEBROWS), "urn:decentraland:off-chain:base-avatars:f_eyebrows_00" },
+             { (BodyShapes.FEMALE, Categories.MOUTH), "urn:decentraland:off-chain:base-avatars:f_mouth_00" },
+             { (BodyShapes.FEMALE, Categories.HAIR), "urn:decentraland:off-chain:base-avatars:standard_hair" },
+             { (BodyShapes.FEMALE, Categories.UPPER_BODY), "urn:decentraland:off-chain:base-avatars:f_sweater" },
+             { (BodyShapes.FEMALE, Categories.LOWER_BODY), "urn:decentraland:off-chain:base-avatars:f_jeans" },
+             { (BodyShapes.FEMALE, Categories.FEET), "urn:decentraland:off-chain:base-avatars:bun_shoes" },
+             { (BodyShapes.FEMALE, Categories.SKIN), "urn:decentraland:off-chain:base-avatars:skin_ly" },
         };
 
         public static string[] GetDefaultWearables() => defaultWearables.Values.Distinct().ToArray();

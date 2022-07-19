@@ -20,8 +20,8 @@ namespace AvatarSystem
         }
 
         /// <summary>
-        /// Curate a flattened into IDs set of wearables.
-        /// Bear in mind that the bodyshape must be part of the list of wearables
+        /// Curate a flattened into IDs set of wearables.策划一套可穿戴的可识别设备
+        /// Bear in mind that the bodyshape must be part of the list of wearables记住，身材必须是可穿戴设备清单的一部分 
         /// </summary>
         /// <param name="settings"></param>
         /// <param name="wearablesId"></param>
@@ -49,15 +49,15 @@ namespace AvatarSystem
                 {
                     WearableItem wearableItem = wearableItems[i];
 
-                    // Ignore hidden categories
+                    // Ignore hidden categories 忽略隐藏分类
                     if (hiddenCategories.Contains(wearableItem.data.category))
                         continue;
 
-                    // Avoid having two items with the same category.
+                    // Avoid having two items with the same category.避免同一类别的两件物品。 
                     if (wearableItem == null || wearablesByCategory.ContainsKey(wearableItem.data.category) )
                         continue;
 
-                    // Filter wearables without representation for the bodyshape
+                    // Filter wearables without representation for the bodyshape 对可穿戴设备进行不含体型表示的过滤 
                     if (!wearableItem.TryGetRepresentation(settings.bodyshapeId, out var representation))
                         continue;
 
@@ -81,7 +81,7 @@ namespace AvatarSystem
                     wearablesByCategory.Add(wearableItem.data.category, wearableItem);
                 }
 
-                // Wearables that are not bodyshape or facialFeatures
+                // Wearables that are not bodyshape or facialFeatures 非体型或面部特征的可穿戴设备 
                 List<WearableItem> wearables = wearablesByCategory.Where(
                                                                       x =>
                                                                           x.Key != WearableLiterals.Categories.BODY_SHAPE &&

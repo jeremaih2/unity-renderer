@@ -8,6 +8,7 @@ namespace DCL
 {
     /// <summary>
     /// This class is used by the AvatarMeshCombiner to combine meshes. Each layer represents a new generated sub-mesh.
+    /// 这个类被AvatarMeshCombiner用来合并网格。 每一层代表一个新生成的子网格。 
     /// </summary>
     public class CombineLayer
     {
@@ -33,9 +34,9 @@ namespace DCL
     }
 
     /// <summary>
-    /// This class is used to determine the original materials uniform properties
-    /// will be passed on to UV values. texturePointers and emissionColors are bound to UV channels.
-    /// Colors are bound to the color channel.
+    /// This class is used to determine the original materials uniform properties这类是用来确定原始材料的均匀性的 
+    /// will be passed on to UV values. texturePointers and emissionColors are bound to UV channels.将被传递到UV值。 texturepointer和emissionColors被绑定到UV通道。 
+    /// Colors are bound to the color channel.颜色绑定到颜色通道。
     /// </summary>
     public class FlattenedMaterialsData
     {

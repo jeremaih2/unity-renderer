@@ -41,7 +41,7 @@ public class QuestModel : BaseModel
     public string visibility;
     public string thumbnail_banner;
     public QuestSection[] sections;
-    public DateTime assignmentTime = DateTime.Now; //TODO remove this once kernel send the data properly
+    public DateTime assignmentTime = DateTime.Now; //TODO remove this once kernel send the data properly一旦内核正确地发送了数据，TODO就会删除它 
     public DateTime completionTime = DateTime.Now; //TODO remove this once kernel send the data properly
     public QuestReward[] rewards;
 

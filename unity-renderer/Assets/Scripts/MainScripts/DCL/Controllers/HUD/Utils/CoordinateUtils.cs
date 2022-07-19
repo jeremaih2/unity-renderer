@@ -9,10 +9,10 @@ using System.Text.RegularExpressions;
 public class CoordinateUtils
 {
     public const string COORDINATE_MATCH_REGEX = "[-]?\\d{1,3},[-]?\\d{1,3}";
-    public const int MAX_X_COORDINATE = 163;
-    public const int MIN_X_COORDINATE = -150;
-    public const int MAX_Y_COORDINATE = 158;
-    public const int MIN_Y_COORDINATE = -150;
+    public const int MAX_X_COORDINATE = 256;//163;
+    public const int MIN_X_COORDINATE = -256;//-150;
+    public const int MAX_Y_COORDINATE = 256;//158;
+    public const int MIN_Y_COORDINATE = -256;//-150;
 
     public static bool IsCoordinateInRange(int x, int y) { return (x <= MAX_X_COORDINATE && x >= MIN_X_COORDINATE && y <= MAX_Y_COORDINATE && y >= MIN_Y_COORDINATE); }
 

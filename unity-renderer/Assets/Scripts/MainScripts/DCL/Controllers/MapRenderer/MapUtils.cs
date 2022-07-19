@@ -4,8 +4,8 @@ namespace DCL.Helpers
 {
     public static class MapUtils
     {
-        public static readonly Vector2Int WORLD_PARCELS_OFFSET_MIN = new Vector2Int(-150, -150);
-        public static readonly Vector2Int WORLD_PARCELS_OFFSET_MAX = new Vector2Int(175, 175); //NOTE(Brian): We use 175 instead of 150 to make the chunks look even.
+        public static readonly Vector2Int WORLD_PARCELS_OFFSET_MIN = new Vector2Int(-256, -256);
+        public static readonly Vector2Int WORLD_PARCELS_OFFSET_MAX = new Vector2Int(281,281); //NOTE(Brian): We use 175 instead of 150 to make the chunks look even.
         public static readonly Vector2Int CHUNK_SIZE = new Vector2Int(1020, 1020);
         public static readonly int PARCEL_SIZE = 20;
 

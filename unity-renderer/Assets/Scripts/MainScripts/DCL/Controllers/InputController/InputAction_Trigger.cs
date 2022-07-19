@@ -2,6 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// An instantaneous action which dispatches an event as soon as the input is read
+///一种瞬时动作，一旦读取输入就立即分派事件 
 /// </summary>
 [CreateAssetMenu(fileName = "InputAction_Trigger", menuName = "InputActions/Trigger")]
 public class InputAction_Trigger : ScriptableObject

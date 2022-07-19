@@ -126,34 +126,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tips:
-  - text: "MANA is Decentraland\u2019s virtual currency. Use it to buy LAND and other
-      premium items, vote on key policies and pay platform fees."
-    sprite: {fileID: 21300000, guid: c6536212dc1f24674904faa55732f64c, type: 3}
-  - text: 'Buy and sell LAND, Estates, Avatar wearables and names in the Decentraland
-      Marketplace: stocking the very best digital goods and paraphernalia backed
-      by the ethereum blockchain.'
-    sprite: {fileID: 21300000, guid: dfb614ec29ae64410a9cb17a66431d03, type: 3}
-  - text: 'Create scenes, artworks, challenges and more, using the simple Builder:
-      an easy drag and drop tool. For more experienced creators, the SDK provides
-      the tools to fill the world with social games and applications.'
-    sprite: {fileID: 21300000, guid: 8955cba7efb204195bf48ea239760527, type: 3}
-  - text: 'Decentraland is made up of over 90,000 LANDs: virtual spaces backed by
-      cryptographic tokens. Only LAND owners can determine the content that sits
-      on their LAND.'
-    sprite: {fileID: 21300000, guid: 7d674afaaca5844098399b4413b743fa, type: 3}
-  - text: Except for the default set of wearables you get when you start out, each
-      wearable model has a limited supply. The rarest ones can get to be super valuable.
-      You can buy and sell them in the Marketplace.
-    sprite: {fileID: 21300000, guid: c1e81be26094f46b4b00b853ca617eca, type: 3}
-  - text: Decentraland is the first fully decentralized virtual world. By voting
-      through the DAO  ('Decentralized Autonomous Organization'), you are in control
-      of the policies created to determine how the world behaves.
-    sprite: {fileID: 21300000, guid: 7a23dbd753bf44e2fa14e2860cd16083, type: 3}
-  - text: Genesis Plaza is built and maintained by the Decentraland Foundation but
-      is still in many ways a community project. Around here you'll find several
-      teleports that can take you directly to special scenes marked as points of
-      interest.
-    sprite: {fileID: 21300000, guid: 9932402d6a77c484999857fc085618a0, type: 3}
+  - text: Welcome to Andverse!
+    sprite: {fileID: 21300000, guid: 1a175a1312d459e4f965787a01053204, type: 3}
+  - text: Welcome to Andverse!
+    sprite: {fileID: 21300000, guid: f72ab828c4a93ae429d5bd4e94f37352, type: 3}
+  - text: Welcome to Andverse!
+    sprite: {fileID: 21300000, guid: 1d5d58132b8b3f74b9d674b36bea2deb, type: 3}
+  - text: Welcome to Andverse!
+    sprite: {fileID: 21300000, guid: f72ab828c4a93ae429d5bd4e94f37352, type: 3}
+  - text: Welcome to Andverse!
+    sprite: {fileID: 21300000, guid: 1a175a1312d459e4f965787a01053204, type: 3}
+  - text: Welcome to Andverse!
+    sprite: {fileID: 21300000, guid: f72ab828c4a93ae429d5bd4e94f37352, type: 3}
+  - text: Welcome to Andverse!
+    sprite: {fileID: 21300000, guid: 1d5d58132b8b3f74b9d674b36bea2deb, type: 3}
   image: {fileID: 3804272290582730524}
   label: {fileID: 6114554693447143876}
   secondsBetweenTips: 5
@@ -811,7 +797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9932402d6a77c484999857fc085618a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a175a1312d459e4f965787a01053204, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1079,21 +1065,26 @@ PrefabInstance:
     - target: {fileID: 1589542079670726707, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1589542079670726710, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1.4342629
       objectReference: {fileID: 0}
     - target: {fileID: 1589542079670726710, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1.4342629
       objectReference: {fileID: 0}
     - target: {fileID: 1589542079670726710, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_LocalScale.z
+      value: 1.4342629
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589542079670726711, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1589542080061902745, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
@@ -1109,22 +1100,22 @@ PrefabInstance:
     - target: {fileID: 1589542080091205437, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1.4342629
       objectReference: {fileID: 0}
     - target: {fileID: 1589542080091205437, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1.4342629
       objectReference: {fileID: 0}
     - target: {fileID: 1589542080091205437, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1.4342629
       objectReference: {fileID: 0}
     - target: {fileID: 1589542080091205438, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1589542080154100004, guid: 2da37fa1269fc1f48a3470d0ca3e9450,
         type: 3}

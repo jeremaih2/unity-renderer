@@ -126,7 +126,7 @@ async function createPackageJson() {
     path.resolve(DIST_PATH, "package.json"),
     JSON.stringify(
       {
-        name: "@dcl/unity-renderer",
+        name: "xsk-unity-renderer",
         main: "index.js",
         typings: "index.d.ts",
         version: `1.0.${process.env.CIRCLE_BUILD_NUM || "0-development"}-${time}.commit-${shortCommitHash}`,

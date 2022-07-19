@@ -14,7 +14,7 @@ namespace DCL
         const int RIGHT_BORDER_PARCELS = 31;
         const int TOP_BORDER_PARCELS = 31;
         const int BOTTOM_BORDER_PARCELS = 25;
-        const int WORLDMAP_WIDTH_IN_PARCELS = 300;
+        const int WORLDMAP_WIDTH_IN_PARCELS = 512;
         const string MINIMAP_USER_ICONS_POOL_NAME = "MinimapUserIconsPool";
         const int MINIMAP_USER_ICONS_MAX_PREWARM = 30;
         private const int MAX_CURSOR_PARCEL_DISTANCE = 40;
@@ -76,7 +76,7 @@ namespace DCL
 
         List<WorldRange> validWorldRanges = new List<WorldRange>
         {
-            new WorldRange(-150, -150, 150, 150) // default range
+            new WorldRange(-256, -256, 256, 256) // default range
         };
 
         public bool parcelHighlightEnabled
@@ -355,10 +355,12 @@ namespace DCL
 
         bool CoordinatesAreInsideTheWorld(int xCoord, int yCoord)
         {
+            Debug.Log("111111111111111111111"+xCoord);
             foreach (WorldRange worldRange in validWorldRanges)
             {
                 if (worldRange.Contains(xCoord, yCoord))
                 {
+                    Debug.Log("99999999999999999999"+xCoord);
                     return true;
                 }
             }
