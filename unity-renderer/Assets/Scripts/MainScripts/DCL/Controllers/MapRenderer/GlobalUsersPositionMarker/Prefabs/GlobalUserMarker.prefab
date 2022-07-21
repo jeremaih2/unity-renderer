@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -133,8 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.07058824, b: 0.38431373, a: 1}
+  m_Color: {r: 0.8235294, g: 0.15294118, b: 0.3254902, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -199,5 +201,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorImage: {fileID: 6232952214765234628}
-  sameRealmColor: {r: 1, g: 0.07058824, b: 0.38431373, a: 1}
+  sameRealmColor: {r: 0.8235294, g: 0.15294118, b: 0.3254902, a: 1}
   otherRealmColor: {r: 0.69411767, g: 0.7254902, b: 0.80784315, a: 1}
