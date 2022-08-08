@@ -15,14 +15,14 @@ MonoBehaviour:
   skyboxID: Generic_Skybox
   skyColor:
     serializedVersion: 2
-    key0: {r: 0.22083157, g: 0.15521538, b: 0.3018868, a: 1}
+    key0: {r: 0.044499747, g: 0.19587386, b: 0.7075472, a: 1}
     key1: {r: 0.5189569, g: 0.6661849, b: 0.9245283, a: 1}
     key2: {r: 0.36320752, g: 0.7080682, b: 1, a: 0}
     key3: {r: 0.51690996, g: 0.71755534, b: 0.9056604, a: 0}
-    key4: {r: 0.47284436, g: 0.38039216, b: 0.5019608, a: 0}
-    key5: {r: 0.4072821, g: 0.31198823, b: 0.5377358, a: 0}
-    key6: {r: 0.118179135, g: 0.058873262, b: 0.1981132, a: 0}
-    key7: {r: 0.21960784, g: 0.15686275, b: 0.3019608, a: 0}
+    key4: {r: 0.25780225, g: 0.29006323, b: 0.5188679, a: 0}
+    key5: {r: 0.15076533, g: 0.19969222, b: 0.6226415, a: 0}
+    key6: {r: 0, g: 0.23277223, b: 0.7075472, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 7132
     ctime1: 26214
     ctime2: 37779
@@ -44,21 +44,21 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   horizonColor:
     serializedVersion: 2
-    key0: {r: 0.4745098, g: 0.22352941, b: 0.58431375, a: 1}
-    key1: {r: 1, g: 0.48612696, b: 0, a: 1}
-    key2: {r: 0.8160377, g: 0.9916906, b: 1, a: 0}
-    key3: {r: 1, g: 1, b: 1, a: 0}
-    key4: {r: 0.9339623, g: 0.508445, b: 0.374466, a: 0}
-    key5: {r: 1, g: 0.24847966, b: 0.10849059, a: 0}
-    key6: {r: 0.4676065, g: 0.21181916, b: 0.5283019, a: 0}
-    key7: {r: 0.47303528, g: 0.22347811, b: 0.5849056, a: 0}
-    ctime0: 0
-    ctime1: 16384
-    ctime2: 30647
-    ctime3: 36237
-    ctime4: 49151
-    ctime5: 53199
-    ctime6: 58211
+    key0: {r: 0.044499747, g: 0.19587386, b: 0.7075472, a: 1}
+    key1: {r: 0.5189569, g: 0.6661849, b: 0.9245283, a: 1}
+    key2: {r: 0.36320752, g: 0.7080682, b: 1, a: 0}
+    key3: {r: 0.51690996, g: 0.71755534, b: 0.9056604, a: 0}
+    key4: {r: 0.25780225, g: 0.29006323, b: 0.5188679, a: 0}
+    key5: {r: 0.15076533, g: 0.19969222, b: 0.6226415, a: 0}
+    key6: {r: 0, g: 0.23277223, b: 0.7075472, a: 0}
+    key7: {r: 0, g: 0.10830519, b: 0.2924528, a: 0}
+    ctime0: 7132
+    ctime1: 26214
+    ctime2: 37779
+    ctime3: 44718
+    ctime4: 50886
+    ctime5: 53392
+    ctime6: 59174
     ctime7: 65535
     atime0: 0
     atime1: 65535
@@ -73,22 +73,22 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   groundColor:
     serializedVersion: 2
-    key0: {r: 0.08266131, g: 0.00088999845, b: 0.18867922, a: 1}
-    key1: {r: 0.1448469, g: 0.21552171, b: 0.2924528, a: 1}
-    key2: {r: 0.14509805, g: 0.21568628, b: 0.29411766, a: 0}
-    key3: {r: 0.08235294, g: 0, b: 0.1882353, a: 0}
-    key4: {r: 0.20035598, g: 0.24997427, b: 0.26415092, a: 0}
-    key5: {r: 0.20035598, g: 0.24997427, b: 0.26415092, a: 0}
-    key6: {r: 0.20035598, g: 0.24997427, b: 0.26415092, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 16384
-    ctime2: 49151
-    ctime3: 65535
-    ctime4: 65535
-    ctime5: 65535
-    ctime6: 65535
-    ctime7: 0
+    key0: {r: 0.044499747, g: 0.19587386, b: 0.7075472, a: 1}
+    key1: {r: 0.5189569, g: 0.6661849, b: 0.9245283, a: 1}
+    key2: {r: 0.36320752, g: 0.7080682, b: 1, a: 0}
+    key3: {r: 0.51690996, g: 0.71755534, b: 0.9056604, a: 0}
+    key4: {r: 0.25780225, g: 0.29006323, b: 0.5188679, a: 0}
+    key5: {r: 0.15076533, g: 0.19969222, b: 0.6226415, a: 0}
+    key6: {r: 0, g: 0.23277223, b: 0.7075472, a: 0}
+    key7: {r: 0, g: 0.10830519, b: 0.2924528, a: 0}
+    ctime0: 7132
+    ctime1: 26214
+    ctime2: 37779
+    ctime3: 44718
+    ctime4: 50886
+    ctime5: 53392
+    ctime6: 59174
+    ctime7: 65535
     atime0: 0
     atime1: 65535
     atime2: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 4
+    m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   horizonWidth: []
   horizonHeight: []
@@ -143,21 +143,21 @@ MonoBehaviour:
   ambientTrilight: 1
   ambientSkyColor:
     serializedVersion: 2
-    key0: {r: 0.603605, g: 0.52954787, b: 0.9433962, a: 1}
-    key1: {r: 0.9528302, g: 0.9420304, b: 0.91237986, a: 1}
-    key2: {r: 1, g: 0.79283834, b: 0.5896226, a: 0}
-    key3: {r: 0.9433962, g: 0.7880045, b: 0.6986472, a: 0}
-    key4: {r: 0.8962264, g: 0.78220105, b: 0.6721698, a: 0}
-    key5: {r: 0.6039216, g: 0.5294118, b: 0.94509804, a: 0}
-    key6: {r: 0.46666667, g: 0.3647059, b: 0.93333334, a: 0}
-    key7: {r: 0.45490196, g: 0.8352941, b: 1, a: 0}
-    ctime0: 0
-    ctime1: 12914
-    ctime2: 23516
-    ctime3: 34888
-    ctime4: 50693
-    ctime5: 65535
-    ctime6: 65535
+    key0: {r: 0.7825522, g: 0.77500886, b: 0.7924528, a: 1}
+    key1: {r: 0.8781298, g: 0.9019771, b: 0.9433962, a: 1}
+    key2: {r: 0.91387796, g: 0.9350372, b: 0.9528302, a: 0}
+    key3: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 0}
+    key4: {r: 0.47284436, g: 0.38039216, b: 0.5019608, a: 0}
+    key5: {r: 0.4072821, g: 0.31198823, b: 0.5377358, a: 0}
+    key6: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0}
+    key7: {r: 0.64629614, g: 0.6427554, b: 0.6509434, a: 0}
+    ctime0: 7132
+    ctime1: 26214
+    ctime2: 37779
+    ctime3: 44718
+    ctime4: 50886
+    ctime5: 53392
+    ctime6: 59174
     ctime7: 65535
     atime0: 0
     atime1: 65535
@@ -168,25 +168,25 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 6
+    m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   ambientEquatorColor:
     serializedVersion: 2
-    key0: {r: 0.7254902, g: 0.5411765, b: 0.93333334, a: 1}
-    key1: {r: 0.8867924, g: 0.6660114, b: 0.51450694, a: 1}
-    key2: {r: 0.6367924, g: 0.73736405, b: 0.8490566, a: 0}
-    key3: {r: 1, g: 0.898633, b: 0.8160377, a: 0}
-    key4: {r: 0.8679245, g: 0.8052499, b: 0.741011, a: 0}
-    key5: {r: 0.8584906, g: 0.7731221, b: 0.6600659, a: 0}
-    key6: {r: 0.7271467, g: 0.54187435, b: 0.9339623, a: 0}
-    key7: {r: 0.47058824, g: 0.3019608, b: 0.65882355, a: 0}
-    ctime0: 0
-    ctime1: 11372
-    ctime2: 20624
-    ctime3: 26021
-    ctime4: 41441
-    ctime5: 50693
-    ctime6: 65535
+    key0: {r: 0.7825522, g: 0.77500886, b: 0.7924528, a: 1}
+    key1: {r: 0.8781298, g: 0.9019771, b: 0.9433962, a: 1}
+    key2: {r: 0.91387796, g: 0.9350372, b: 0.9528302, a: 0}
+    key3: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 0}
+    key4: {r: 0.47284436, g: 0.38039216, b: 0.5019608, a: 0}
+    key5: {r: 0.4072821, g: 0.31198823, b: 0.5377358, a: 0}
+    key6: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0}
+    key7: {r: 0.64629614, g: 0.6427554, b: 0.6509434, a: 0}
+    ctime0: 7132
+    ctime1: 26214
+    ctime2: 37779
+    ctime3: 44718
+    ctime4: 50886
+    ctime5: 53392
+    ctime6: 59174
     ctime7: 65535
     atime0: 0
     atime1: 65535
@@ -197,25 +197,25 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 7
+    m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   ambientGroundColor:
     serializedVersion: 2
-    key0: {r: 0.21176471, g: 0.039215688, b: 0.47058824, a: 1}
-    key1: {r: 0.49414682, g: 0.30184227, b: 0.5377358, a: 1}
-    key2: {r: 0.8490566, g: 0.5358029, b: 0.2683339, a: 0}
-    key3: {r: 0.21947311, g: 0.2760963, b: 0.33962262, a: 0}
-    key4: {r: 0.8113208, g: 0.58811593, b: 0.4247953, a: 0}
-    key5: {r: 0.8584906, g: 0.6924617, b: 0.7805073, a: 0}
-    key6: {r: 0.21176471, g: 0.039215688, b: 0.47058824, a: 0}
-    key7: {r: 0.44313726, g: 0.078431375, b: 0.98039216, a: 0}
-    ctime0: 0
-    ctime1: 9830
-    ctime2: 21395
-    ctime3: 30647
-    ctime4: 45489
-    ctime5: 52235
-    ctime6: 65535
+    key0: {r: 0.7825522, g: 0.77500886, b: 0.7924528, a: 1}
+    key1: {r: 0.8781298, g: 0.9019771, b: 0.9433962, a: 1}
+    key2: {r: 0.91387796, g: 0.9350372, b: 0.9528302, a: 0}
+    key3: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 0}
+    key4: {r: 0.47284436, g: 0.38039216, b: 0.5019608, a: 0}
+    key5: {r: 0.4072821, g: 0.31198823, b: 0.5377358, a: 0}
+    key6: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0}
+    key7: {r: 0.64629614, g: 0.6427554, b: 0.6509434, a: 0}
+    ctime0: 7132
+    ctime1: 26214
+    ctime2: 37779
+    ctime3: 44718
+    ctime4: 50886
+    ctime5: 53392
+    ctime6: 59174
     ctime7: 65535
     atime0: 0
     atime1: 65535
@@ -226,7 +226,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 7
+    m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   useAvatarGradient: 1
   avatarTintGradient:
@@ -426,7 +426,7 @@ MonoBehaviour:
     tintPercentage: 0
     renderDistance: []
     texture: {fileID: 0}
-    cubemap: {fileID: 8900000, guid: f61d7b727f05abf47bd40d677f08330d, type: 3}
+    cubemap: {fileID: 8900000, guid: 52732eeab3095ea43bdb90b258a98738, type: 3}
     color:
       serializedVersion: 2
       key0: {r: 0.17959554, g: 0.1709238, b: 0.21698111, a: 1}
@@ -488,7 +488,7 @@ MonoBehaviour:
     movementTypePlanar_Radial: 0
     movementTypeSatellite: 0
   - slotID: 0
-    renderType: 1
+    renderType: 0
     layerType: 1
     enabled: 1
     nameInEditor: Stars
@@ -500,7 +500,7 @@ MonoBehaviour:
     tintPercentage: 0
     renderDistance: []
     texture: {fileID: 2800000, guid: 1f19dbb2b85e7a94987d2b6cb4687dde, type: 3}
-    cubemap: {fileID: 0}
+    cubemap: {fileID: 8900000, guid: 1f74d902e93a89b4580c9fe7ba8ca058, type: 3}
     color:
       serializedVersion: 2
       key0: {r: 383.49805, g: 383.49805, b: 383.49805, a: 0}
@@ -530,9 +530,9 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
-    tiling: {x: 27.3, y: 4}
-    flipbookRowsAndColumns: {x: 2.43, y: -9.78}
-    flipbookAnimSpeed: 0
+    tiling: {x: 27, y: 4}
+    flipbookRowsAndColumns: {x: 4.4, y: 3.3}
+    flipbookAnimSpeed: 0.1
     offset: []
     satelliteWidthHeight: []
     rotations_float: []
@@ -566,7 +566,7 @@ MonoBehaviour:
     movementTypePlanar_Radial: 0
     movementTypeSatellite: 0
   - slotID: 1
-    renderType: 0
+    renderType: 1
     layerType: 2
     enabled: 1
     nameInEditor: Big Sun
@@ -732,7 +732,7 @@ MonoBehaviour:
     movementTypePlanar_Radial: 0
     movementTypeSatellite: 1
   - slotID: 1
-    renderType: 1
+    renderType: 0
     layerType: 2
     enabled: 1
     nameInEditor: Moon
@@ -832,7 +832,7 @@ MonoBehaviour:
     tintPercentage: 100
     renderDistance: []
     texture: {fileID: 0}
-    cubemap: {fileID: 8900000, guid: f7259264e80cfbd4eaa0ec239af27173, type: 3}
+    cubemap: {fileID: 8900000, guid: 6916db5be836ac04fa4b08138fc15fb9, type: 3}
     color:
       serializedVersion: 2
       key0: {r: 0.5692789, g: 0.46715, b: 0.86142135, a: 0.61960787}
@@ -892,9 +892,9 @@ MonoBehaviour:
     movementTypePlanar_Radial: 0
     movementTypeSatellite: 0
   - slotID: 3
-    renderType: 1
+    renderType: 0
     layerType: 4
-    enabled: 0
+    enabled: 1
     nameInEditor: Near Clouds
     expandedInEditor: 0
     timeSpan_start: 0
@@ -904,7 +904,7 @@ MonoBehaviour:
     tintPercentage: 47.5
     renderDistance: []
     texture: {fileID: 0}
-    cubemap: {fileID: 8900000, guid: 0095a9bafa47e9048995bf8ca764aeee, type: 3}
+    cubemap: {fileID: 8900000, guid: 3e0b55746f737d946b3747c870dced89, type: 3}
     color:
       serializedVersion: 2
       key0: {r: 0.59171927, g: 0.49942148, b: 0.8207547, a: 0.5019608}

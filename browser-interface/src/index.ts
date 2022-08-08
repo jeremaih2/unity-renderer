@@ -88,7 +88,8 @@ export async function initializeWebRenderer(options: RendererOptions): Promise<D
   const enableBrotli =
     typeof options.enableBrotli != "undefined" ? !!options.enableBrotli : document.location.protocol == "https:"
 
-  const postfix = enableBrotli ? ".br" : ""
+  //const postfix = enableBrotli ? ".br" : ""
+  const postfix = enableBrotli ? "" : ""
 
   const config = {
     dataUrl: resolveWithBaseUrl(generatedFiles.dataUrl + postfix),

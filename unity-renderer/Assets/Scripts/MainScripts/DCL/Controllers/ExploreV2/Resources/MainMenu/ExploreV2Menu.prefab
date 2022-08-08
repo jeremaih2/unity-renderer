@@ -1663,7 +1663,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!114 &2479434681052017708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3577,7 +3577,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &2967283414270930883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7486,6 +7486,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
+        type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 0.34117648
       objectReference: {fileID: 0}
@@ -7497,6 +7507,26 @@ PrefabInstance:
     - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
         type: 3}
       propertyPath: m_Colors.m_NormalColor.r
+      value: 0.27058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.22352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
       value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 7528735507517742048, guid: 17c845a92d1948c4783ccac4b36e7c7f,

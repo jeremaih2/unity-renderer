@@ -9,6 +9,8 @@ public class ServiceProviders : IServiceProviders
     public ICatalyst catalyst { get; } = new Catalyst();
     public IAnalytics analytics { get; } = new Analytics();
 
+    //public INFTMarket newTon { get; } = new Newtonsoft();
+
     public void Dispose()
     {
         catalyst.Dispose();

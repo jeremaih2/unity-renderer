@@ -10,7 +10,7 @@ namespace DCL
 
         public void SetVisible(bool active)
         {
-            gameObject.SetActive(active);
+            gameObject.SetActive(false);
         }
 
         public void Setup(string network, string realm)

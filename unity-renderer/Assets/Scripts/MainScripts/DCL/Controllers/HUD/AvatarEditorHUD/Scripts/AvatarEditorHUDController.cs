@@ -268,7 +268,8 @@ public class AvatarEditorHUDController : IHUD
             return;
         }
 
-        view.SetIsWeb3(userProfile.hasConnectedWeb3);
+        //view.SetIsWeb3(userProfile.hasConnectedWeb3);
+        view.SetIsWeb3(false);
 
         ProcessCatalog(this.catalog);
         EquipBodyShape(bodyShape);

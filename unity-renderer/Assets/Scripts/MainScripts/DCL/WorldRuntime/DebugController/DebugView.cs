@@ -44,12 +44,14 @@ namespace DCL
         public void ShowInfoPanel(string network, string realm)
         {
             infoPanel.Setup(network, realm);
-            infoPanel.SetVisible(true);
+            //infoPanel.SetVisible(true);
+            infoPanel.SetVisible(false);
         }
 
         public void HideInfoPanel()
         {
-            infoPanel.SetVisible(false);
+            //infoPanel.SetVisible(false);
+            infoPanel.SetVisible(true);
         }
 
         public void SetRealm(string realm)

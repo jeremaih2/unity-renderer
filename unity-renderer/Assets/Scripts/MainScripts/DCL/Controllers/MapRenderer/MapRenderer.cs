@@ -355,12 +355,12 @@ namespace DCL
 
         bool CoordinatesAreInsideTheWorld(int xCoord, int yCoord)
         {
-            Debug.Log("111111111111111111111"+xCoord);
+            //Debug.Log("111111111111111111111"+xCoord);
             foreach (WorldRange worldRange in validWorldRanges)
             {
                 if (worldRange.Contains(xCoord, yCoord))
                 {
-                    Debug.Log("99999999999999999999"+xCoord);
+                    //Debug.Log("99999999999999999999"+xCoord);
                     return true;
                 }
             }

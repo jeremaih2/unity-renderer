@@ -968,10 +968,10 @@ MonoBehaviour:
   gradientTexture: {fileID: 0}
   gradient:
     serializedVersion: 2
-    key0: {r: 0.4386287, g: 0, b: 1, a: 1}
-    key1: {r: 1, g: 0.61900264, b: 0, a: 1}
-    key2: {r: 1, g: 0, b: 0.02109909, a: 0}
-    key3: {r: 0.43862867, g: 0, b: 1, a: 0}
+    key0: {r: 0.070962325, g: 0.3278023, b: 0.8679245, a: 1}
+    key1: {r: 0.26278618, g: 0.9716981, b: 0.27997768, a: 1}
+    key2: {r: 1, g: 0, b: 0.8848572, a: 0}
+    key3: {r: 0, g: 0.98003936, b: 1, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -1439,6 +1439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537373784269895647, guid: bac007ac4ef98284c8cf05867a35ee0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8865446388248603219, guid: bac007ac4ef98284c8cf05867a35ee0f,
         type: 3}

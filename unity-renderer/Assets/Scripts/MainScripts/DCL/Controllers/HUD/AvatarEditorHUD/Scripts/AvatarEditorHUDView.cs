@@ -178,9 +178,11 @@ public class AvatarEditorHUDView : MonoBehaviour, IPointerDownHandler
     public void SetIsWeb3(bool isWeb3User)
     {
         web3Container.SetActive(isWeb3User);
-        noWeb3Container.SetActive(!isWeb3User);
+        //noWeb3Container.SetActive(!isWeb3User);
+        noWeb3Container.SetActive(isWeb3User);
         skinsWeb3Container.SetActive(isWeb3User);
-        skinsMissingWeb3Container.SetActive(!isWeb3User);
+        //skinsMissingWeb3Container.SetActive(!isWeb3User);
+        skinsMissingWeb3Container.SetActive(isWeb3User);
     }
 
     internal void InitializeNavigationEvents(bool isGuest)
@@ -640,7 +642,7 @@ public class AvatarEditorHUDView : MonoBehaviour, IPointerDownHandler
         sectionSelector.GetSection(AVATAR_SECTION_INDEX).onSelect.AddListener((isSelected) =>
         {
             avatarSection.SetActive(isSelected);
-            randomizeButton.gameObject.SetActive(true);
+            randomizeButton.gameObject.SetActive(false);
 
             if (isSelected)
             {

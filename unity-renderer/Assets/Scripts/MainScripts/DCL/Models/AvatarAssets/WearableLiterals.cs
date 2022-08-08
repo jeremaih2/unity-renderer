@@ -74,7 +74,7 @@ public static class WearableLiterals
             { (BodyShapes.MALE, Categories.UPPER_BODY), "urn:decentraland:off-chain:base-avatars:green_hoodie" },
             { (BodyShapes.MALE, Categories.LOWER_BODY), "urn:decentraland:off-chain:base-avatars:brown_pants" },
             { (BodyShapes.MALE, Categories.FEET), "urn:decentraland:off-chain:base-avatars:sneakers" },
-            { (BodyShapes.MALE, Categories.SKIN), "urn:decentraland:off-chain:base-avatars:skin_greywhale" },
+            { (BodyShapes.MALE, Categories.SKIN), "urn:decentraland:off-chain:base-avatars:skin_astronaut_male" },
 
              { (BodyShapes.FEMALE, Categories.EYES), "urn:decentraland:off-chain:base-avatars:f_eyes_00" },//
              { (BodyShapes.FEMALE, Categories.EYEBROWS), "urn:decentraland:off-chain:base-avatars:f_eyebrows_00" },
@@ -83,7 +83,7 @@ public static class WearableLiterals
              { (BodyShapes.FEMALE, Categories.UPPER_BODY), "urn:decentraland:off-chain:base-avatars:f_sweater" },
              { (BodyShapes.FEMALE, Categories.LOWER_BODY), "urn:decentraland:off-chain:base-avatars:f_jeans" },
              { (BodyShapes.FEMALE, Categories.FEET), "urn:decentraland:off-chain:base-avatars:bun_shoes" },
-             { (BodyShapes.FEMALE, Categories.SKIN), "urn:decentraland:off-chain:base-avatars:skin_ly" },
+             { (BodyShapes.FEMALE, Categories.SKIN), "urn:decentraland:off-chain:base-avatars:skin_astronaut_female" },
         };
 
         public static string[] GetDefaultWearables() => defaultWearables.Values.Distinct().ToArray();

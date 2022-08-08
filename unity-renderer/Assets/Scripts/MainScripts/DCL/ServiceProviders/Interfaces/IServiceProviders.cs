@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DCL.Helpers.NFT.Markets;
 
 namespace DCL
@@ -9,5 +9,6 @@ namespace DCL
         ICatalyst catalyst { get; }
         IAnalytics analytics { get; }
         INFTMarket openSea { get; }
+        //INFTMarket newTon { get; }
     }
 }
