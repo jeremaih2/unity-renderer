@@ -20,7 +20,7 @@ namespace DCL.Skybox
         public const string DEFAULT_SKYBOX_ID = "Generic_Skybox";
 
         public string loadedConfig;
-        public float lifecycleDuration = 2;
+        public float lifecycleDuration = 20;
 
         private float timeOfTheDay;                            // (Nishant.K) Time will be provided from outside, So remove this variable
         private Light directionalLight;

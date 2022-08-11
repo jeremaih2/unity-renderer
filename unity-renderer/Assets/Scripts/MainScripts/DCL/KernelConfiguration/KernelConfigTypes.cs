@@ -124,7 +124,7 @@ namespace KernelConfigurationTypes
     public class ProceduralSkybox
     {
         public string configToLoad = "Generic_Skybox";
-        public float lifecycleDuration = 120;
+        public float lifecycleDuration = 1200;
         public float fixedTime = -1;
         public bool disableReflection = false;
         public float updateReflectionTime = -1;     // in mins

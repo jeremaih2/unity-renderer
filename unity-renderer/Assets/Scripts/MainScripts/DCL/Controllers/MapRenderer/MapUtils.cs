@@ -57,7 +57,8 @@ namespace DCL.Helpers
             int sceneMaxSize = Mathf.Clamp(Mathf.Max(max.x - min.x, max.y - min.y), 1, int.MaxValue);
             int size = sizeFactor / sceneMaxSize;
 
-            return $"https://api2.devnet.andverse.org/v1/map.png?width={width}&height={height}&size={size}&center={centerX},{centerY}&selected={parcelsStr}";
+            //return $"https://api2.devnet.andverse.org/v1/map.png?width={width}&height={height}&size={size}&center={centerX},{centerY}&selected={parcelsStr}";
+            return $"https://api2.testnet.andverse.org/v1/map.png?width={width}&height={height}&size={size}&center={centerX},{centerY}&selected={parcelsStr}";
         }
     }
 }

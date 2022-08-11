@@ -126,21 +126,21 @@ async function createPackageJson() {
     path.resolve(DIST_PATH, "package.json"),
     JSON.stringify(
       {
-        name: "xsk-unity-renderer",
+        name: "andverse-unity-renderer-testnet",
         main: "index.js",
         typings: "index.d.ts",
-        version: `1.0.${process.env.CIRCLE_BUILD_NUM || "0-development"}-${time}.commit-${shortCommitHash}`,
+        version: `0.1.${process.env.CIRCLE_BUILD_NUM || "0-development"}-${time}.commit-${shortCommitHash}`,
         tag: process.env.CIRCLE_TAG,
         commit: process.env.CIRCLE_SHA1,
         branch: process.env.CIRCLE_BRANCH,
-        author: "Decentraland Contributors",
+        author: "Andverse Contributors",
         license: "Apache-2.0",
         publishConfig: {
           access: "public",
         },
         repository: {
           type: "git",
-          url: "https://github.com/decentraland/unity-renderer.git",
+          url: "https://github.com/andverse-core/unity-renderer.git",
         },
       },
       null,

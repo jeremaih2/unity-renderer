@@ -398,7 +398,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   layers:
   - slotID: 0
-    renderType: 0
+    renderType: 1
     layerType: 1
     enabled: 1
     nameInEditor: Stars
@@ -712,7 +712,7 @@ MonoBehaviour:
     movementTypePlanar_Radial: 0
     movementTypeSatellite: 1
   - slotID: 0
-    renderType: 1
+    renderType: 0
     layerType: 1
     enabled: 1
     nameInEditor: FarClouds

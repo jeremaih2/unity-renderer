@@ -18,7 +18,7 @@ namespace DCL.Skybox
 
         public bool isPaused;
         public float timeOfTheDay;
-        public float lifecycleDuration = 1;
+        public float lifecycleDuration = 20;
 
         private Material selectedMat;
         private Vector2 leftPanelScrollPos;
@@ -59,8 +59,11 @@ namespace DCL.Skybox
                 return;
             }
 
-            float timeNormalizationFactor = lifecycleDuration * 60 / SkyboxUtils.CYCLE_TIME;
+            //float timeNormalizationFactor = lifecycleDuration * 60 / SkyboxUtils.CYCLE_TIME;
+            float timeNormalizationFactor = 50;
+            //Debug.Log("77777777777777777777"+timeNormalizationFactor);
             timeOfTheDay += Time.deltaTime / timeNormalizationFactor;
+            //Debug.Log("88888888888888888888" + timeOfTheDay);
             timeOfTheDay = Mathf.Clamp(timeOfTheDay, 0.01f, SkyboxUtils.CYCLE_TIME);
 
             ApplyOnMaterial(false);

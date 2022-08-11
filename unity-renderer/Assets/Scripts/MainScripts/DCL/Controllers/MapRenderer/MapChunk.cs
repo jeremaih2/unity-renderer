@@ -7,7 +7,8 @@ namespace DCL
     public class MapChunk : MonoBehaviour
     {
         private bool VERBOSE = false;
-        const string MAP_API_BASE = "https://api2.devnet.andverse.org/v1/map.png";
+        //const string MAP_API_BASE = "https://api2.devnet.andverse.org/v1/map.png";
+        const string MAP_API_BASE = "https://api2.testnet.andverse.org/v1/map.png";
 
         public RawImage targetImage;
 
