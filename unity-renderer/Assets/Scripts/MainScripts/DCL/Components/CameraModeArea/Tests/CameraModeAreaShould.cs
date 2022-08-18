@@ -2,6 +2,7 @@ using System;
 using DCL.Components;
 using DCL.Controllers;
 using DCL.Models;
+using DCL.CameraTool;
 using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;

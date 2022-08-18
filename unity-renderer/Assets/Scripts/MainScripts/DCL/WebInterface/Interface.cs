@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DCL.CameraTool;
 using DCL.Helpers;
 using DCL.Models;
 using Newtonsoft.Json;
@@ -31,7 +32,7 @@ namespace DCL.Interface
 
             /** Character rotation */
             public Quaternion rotation;
-            
+
             /** Camera rotation */
             public Quaternion cameraRotation;
 
@@ -109,20 +110,20 @@ namespace DCL.Interface
 
         public enum ACTION_BUTTON
         {
-            POINTER,
-            PRIMARY,
-            SECONDARY,
-            ANY,
-            FORWARD,
-            BACKWARD,
-            RIGHT,
-            LEFT,
-            JUMP,
-            WALK,
-            ACTION_3,
-            ACTION_4,
-            ACTION_5,
-            ACTION_6
+            POINTER = 0,
+            PRIMARY = 1,
+            SECONDARY = 2,
+            ANY = 3,
+            FORWARD = 4,
+            BACKWARD = 5,
+            RIGHT = 6,
+            LEFT = 7,
+            JUMP = 8,
+            WALK = 9,
+            ACTION_3 = 10,
+            ACTION_4 = 11,
+            ACTION_5 = 12,
+            ACTION_6 = 13
         }
 
         [System.Serializable]
@@ -133,7 +134,7 @@ namespace DCL.Interface
         {
             public CameraMode.ModeId cameraMode;
         };
-        
+
         [System.Serializable]
         public class Web3UseResponsePayload
         {
@@ -463,6 +464,9 @@ namespace DCL.Interface
             public string processorType = SystemInfo.processorType;
             public int processorCount = SystemInfo.processorCount;
             public int systemMemorySize = SystemInfo.systemMemorySize;
+
+            // TODO: remove useBinaryTransform after ECS7 is fully in prod
+            public bool useBinaryTransform = true;
         }
 
         [System.Serializable]
@@ -680,8 +684,6 @@ namespace DCL.Interface
             public float time;
         }
 
-        public static event Action<string, byte[]> OnBinaryMessageFromEngine;
-
 #if UNITY_WEBGL && !UNITY_EDITOR
     /**
      * This method is called after the first render. It marks the loading of the
@@ -757,15 +759,6 @@ namespace DCL.Interface
         public static string GetGraphicCard() => "In Editor Graphic Card";
 #endif
 
-        public static void SendBinaryMessage(string sceneId, byte[] bytes)
-        {
-#if UNITY_WEBGL && !UNITY_EDITOR
-            BinaryMessageFromEngine(sceneId, bytes, bytes.Length);
-#else
-            OnBinaryMessageFromEngine?.Invoke(sceneId, bytes);
-#endif
-        }        
-
         public static void SendMessage(string type)
         {
             // sending an empty JSON object to be compatible with other messages
@@ -777,7 +770,7 @@ namespace DCL.Interface
             string messageJson = JsonUtility.ToJson(message);
             SendJson(type, messageJson);
         }
-        
+
         public static void SendJson(string type, string json)
         {
             if (VERBOSE)
@@ -878,7 +871,7 @@ namespace DCL.Interface
                 SendAllScenesEvent("cameraModeChanged", cameraModePayload);
             }
         }
-        
+
         public static void Web3UseResponse(string id, bool result)
         {
             web3UseResponsePayload.id = id;
@@ -963,11 +956,11 @@ namespace DCL.Interface
         public static void ReportGlobalPointerDownEvent(ACTION_BUTTON buttonId, Ray ray, Vector3 point, Vector3 normal,
             float distance, string sceneId, string entityId = "0", string meshName = null, bool isHitInfoValid = false)
         {
-            SetPointerEventPayload((OnPointerEventPayload) onGlobalPointerEventPayload, buttonId,
+            SetPointerEventPayload((OnPointerEventPayload)onGlobalPointerEventPayload, buttonId,
                 entityId, meshName, ray, point, normal, distance,
                 isHitInfoValid);
             onGlobalPointerEventPayload.type = OnGlobalPointerEventPayload.InputEventType.DOWN;
-            
+
             onGlobalPointerEvent.payload = onGlobalPointerEventPayload;
 
             SendSceneEvent(sceneId, "actionButtonEvent", onGlobalPointerEvent);
@@ -976,7 +969,7 @@ namespace DCL.Interface
         public static void ReportGlobalPointerUpEvent(ACTION_BUTTON buttonId, Ray ray, Vector3 point, Vector3 normal,
             float distance, string sceneId, string entityId = "0", string meshName = null, bool isHitInfoValid = false)
         {
-            SetPointerEventPayload((OnPointerEventPayload) onGlobalPointerEventPayload, buttonId,
+            SetPointerEventPayload((OnPointerEventPayload)onGlobalPointerEventPayload, buttonId,
                 entityId, meshName, ray, point, normal, distance,
                 isHitInfoValid);
             onGlobalPointerEventPayload.type = OnGlobalPointerEventPayload.InputEventType.UP;
@@ -1421,7 +1414,7 @@ namespace DCL.Interface
             killPortableExperiencePayload.portableExperienceId = portableExperienceId;
             SendMessage("KillPortableExperience", killPortableExperiencePayload);
         }
-        
+
         public static void RequestThirdPartyWearables(
             string ownedByUser,
             string thirdPartyCollectionId,
@@ -1537,14 +1530,14 @@ namespace DCL.Interface
             avatarOnClickPayload.ray.distance = distance;
 
             SendSceneEvent(sceneId, "playerClicked", avatarOnClickPayload);
-        }        
-        
+        }
+
         public static void ReportOnPointerHoverEnterEvent(string sceneId, string uuid)
         {
             onPointerHoverEnterEvent.uuid = uuid;
             SendSceneEvent(sceneId, "uuidEvent", onPointerHoverEnterEvent);
         }
- 
+
         public static void ReportOnPointerHoverExitEvent(string sceneId, string uuid)
         {
             onPointerHoverExitEvent.uuid = uuid;

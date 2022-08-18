@@ -9,6 +9,7 @@ using NSubstitute.Extensions;
 using NSubstitute.ReceivedExtensions;
 using NUnit.Framework;
 using UnityEngine;
+using DCL.CameraTool;
 
 namespace Tests.AvatarsLODController
 {

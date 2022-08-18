@@ -5,6 +5,7 @@ using DCL.Controllers;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
+using DCL.CameraTool;
 
 namespace Tests
 {

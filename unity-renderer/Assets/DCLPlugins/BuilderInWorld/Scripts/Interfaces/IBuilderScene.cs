@@ -13,7 +13,7 @@ namespace DCL.Builder
             PROJECT = 0,
             LAND = 1
         }
-        
+
         /// <summary>
         /// This enum represent the version of the scene, legacy is the old ECS while ECS is the new runtime
         /// </summary>
@@ -42,7 +42,7 @@ namespace DCL.Builder
         /// Parcel scene associated with the scene
         /// </summary>
         IParcelScene scene { get; }
-        
+
         /// <summary>
         /// Version of the scene, legacy or new ECS
         /// </summary>
@@ -52,7 +52,7 @@ namespace DCL.Builder
         /// Type of scene 
         /// </summary>
         SceneType sceneType { get; }
-        
+
         /// <summary>
         /// If there is a land associated to the project, this will be the coords associated to them
         /// </summary>

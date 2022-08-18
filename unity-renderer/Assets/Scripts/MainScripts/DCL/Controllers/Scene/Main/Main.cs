@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DCL.Components;
 using DCL.Controllers;
 using DCL.Helpers;
-using DCL.SettingsCommon;
+using DCL.SettingsCommon;using RPC;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -24,7 +24,7 @@ namespace DCL
         protected IKernelCommunication kernelCommunication;
 
         protected PluginSystem pluginSystem;
-        
+
         protected virtual void Awake()
         {
             if (i != null)
@@ -47,7 +47,7 @@ namespace DCL
 
                 DataStore.i.HUDs.loadingHUD.visible.OnChange += OnLoadingScreenVisibleStateChange;
             }
-            
+
 #if UNITY_STANDALONE || UNITY_EDITOR
             Application.quitting += () => DataStore.i.common.isApplicationQuitting.Set(true);
 #endif
@@ -55,17 +55,13 @@ namespace DCL
             InitializeDataStore();
             SetupPlugins();
             InitializeCommunication();
-
-            // TODO(Brian): This is a temporary fix to address elevators issue in the xmas event.
-            // We should re-enable this later as produces a performance regression.
-            if (!Configuration.EnvironmentSettings.RUNNING_TESTS)
-                Environment.i.platform.cullingController.SetAnimationCulling(false);
         }
 
         protected virtual void InitializeDataStore()
         {
-            DataStore.i.textureSize.gltfMaxSize.Set(512);
-            DataStore.i.textureSize.generalMaxSize.Set(2048);
+            DataStore.i.textureConfig.gltfMaxSize.Set(512);
+            DataStore.i.textureConfig.generalMaxSize.Set(2048);
+            DataStore.i.avatarConfig.useHologramAvatar.Set(true);
         }
 
         protected virtual void InitializeCommunication()
@@ -83,6 +79,7 @@ namespace DCL
                 kernelCommunication = new WebSocketCommunication(DebugConfigComponent.i.webSocketSSL);
             }
 #endif
+            RPCServerBuilder.BuildDefaultServer();
         }
 
         void OnLoadingScreenVisibleStateChange(bool newVisibleValue, bool previousVisibleValue)
@@ -122,7 +119,7 @@ namespace DCL
         {
             performanceMetricsController?.Update();
         }
-        
+
         [RuntimeInitializeOnLoadMethod]
         static void RunOnStart()
         {
@@ -132,7 +129,7 @@ namespace DCL
         {
             if (i != null)
                 i.Dispose();
-    
+
             return true;
         }
 
@@ -146,10 +143,10 @@ namespace DCL
 
             if (!Configuration.EnvironmentSettings.RUNNING_TESTS)
                 Environment.Dispose();
-            
+
             kernelCommunication?.Dispose();
         }
-        
+
         protected virtual void InitializeSceneDependencies()
         {
             gameObject.AddComponent<UserProfileController>();

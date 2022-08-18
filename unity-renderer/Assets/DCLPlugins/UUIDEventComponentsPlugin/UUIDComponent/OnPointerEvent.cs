@@ -4,35 +4,12 @@ using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Interface;
 using DCL.Models;
+using DCLPlugins.UUIDEventComponentsPlugin.UUIDComponent.Interfaces;
 using UnityEngine;
 using Ray = UnityEngine.Ray;
 
 namespace DCL.Components
 {
-    public enum PointerInputEventType
-    {
-        NONE,
-        CLICK,
-        DOWN,
-        UP
-    }
-
-    public interface IPointerEvent : IMonoBehaviour
-    {
-        IDCLEntity entity { get; }
-        void SetHoverState(bool state);
-        bool IsAtHoverDistance(float distance);
-        bool IsVisible();
-    }
-
-    public interface IPointerInputEvent : IPointerEvent
-    {
-        void Report(WebInterface.ACTION_BUTTON buttonId, Ray ray, HitInfo hit);
-        PointerInputEventType GetEventType();
-        WebInterface.ACTION_BUTTON GetActionButton();
-        bool ShouldShowHoverFeedback();
-    }
-
     public class OnPointerEventHandler : IDisposable
     {
         public static bool enableInteractionHoverFeedback = true;
@@ -136,12 +113,12 @@ namespace DCL.Components
 
         public WebInterface.ACTION_BUTTON GetActionButton()
         {
-            return ((Model) this.model).GetActionButton();
+            return ((Model)this.model).GetActionButton();
         }
 
         public void SetHoverState(bool hoverState)
         {
-            Model model = (Model) this.model;
+            Model model = (Model)this.model;
             pointerEventHandler.SetFeedbackState(model.showFeedback, hoverState, model.button, model.hoverText);
         }
 

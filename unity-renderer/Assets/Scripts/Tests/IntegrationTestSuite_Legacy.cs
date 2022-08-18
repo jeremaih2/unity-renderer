@@ -11,6 +11,7 @@ using NSubstitute;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.TestTools;
+using DCL.CameraTool;
 
 public class IntegrationTestSuite_Legacy
 {

@@ -8,13 +8,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material.001
-  m_Shader: {fileID: 4800000, guid: 48ab4630448d99f40b8df0f1d6076f87, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3b75227de96217540aae9be81fbd99f6, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _EMISSION _NORMALMAP
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2451
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -24,7 +25,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 8e8bdaf58c10f584e913b2cbae281acb, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -104,7 +105,6 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EdgeThickness: 1
     - _EmissiveMapUVs: 0
     - _EnvironmentReflections: 1
     - _FadeDirection: 0
@@ -130,8 +130,5 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 5}
-    - _PatternSpeed: {r: 0.01, g: 0.02, b: 0, a: 0}
-    - _RevealNormal: {r: 0, g: 1, b: 0, a: 0}
-    - _RevealPosition: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

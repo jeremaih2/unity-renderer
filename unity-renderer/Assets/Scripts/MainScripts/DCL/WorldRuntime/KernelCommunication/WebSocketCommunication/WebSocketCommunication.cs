@@ -8,6 +8,9 @@ using WebSocketSharp.Server;
 
 public class WebSocketCommunication : IKernelCommunication
 {
+    public static event Action<DCLWebSocketService> OnWebSocketServiceAdded;
+    public static DCLWebSocketService service;
+
     WebSocketServer ws;
     private Coroutine updateCoroutine;
     private bool requestStop = false;
@@ -45,7 +48,7 @@ public class WebSocketCommunication : IKernelCommunication
                         ClientCertificateRequired = false,
                         CheckCertificateRevocation = false,
                         ClientCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,
-                        EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 
+                        EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12
                     },
                     KeepClean = false
                 };
@@ -56,7 +59,12 @@ public class WebSocketCommunication : IKernelCommunication
                 ws = new WebSocketServer(wssServerUrl);
             }
 
-            ws.AddWebSocketService<DCLWebSocketService>("/" + wssServiceId);
+            ws.AddWebSocketService("/" + wssServiceId, () =>
+            {
+                service = new DCLWebSocketService();
+                OnWebSocketServiceAdded?.Invoke(service);
+                return service;
+            });
             ws.Start();
         }
         catch (InvalidOperationException e)
@@ -164,7 +172,7 @@ public class WebSocketCommunication : IKernelCommunication
         messageTypeToBridgeName["SetVoiceChatEnabledByScene"] = "HUDController";
         messageTypeToBridgeName["TriggerSelfUserExpression"] = "HUDController";
         messageTypeToBridgeName["AirdroppingRequest"] = "HUDController";
-        
+
         messageTypeToBridgeName["GetMousePosition"] = "BuilderController";
         messageTypeToBridgeName["SelectGizmo"] = "BuilderController";
         messageTypeToBridgeName["ResetObject"] = "BuilderController";

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DCL.Builder;
 using DCL.Camera;
+using DCL.CameraTool;
 using DCL.Configuration;
 using DCL.Controllers;
 using DCL.Helpers;
@@ -30,7 +31,7 @@ namespace DCL.Builder
             if (context.sceneReferences.cameraController != null)
             {
                 if (context.sceneReferences.cameraController.GetComponent<Camera.CameraController>().TryGetCameraStateByType<FreeCameraMovement>(out CameraStateBase cameraState))
-                    freeCameraController = (FreeCameraMovement) cameraState;
+                    freeCameraController = (FreeCameraMovement)cameraState;
 
                 cameraController = context.sceneReferences.cameraController.GetComponent<Camera.CameraController>();
             }
@@ -50,22 +51,22 @@ namespace DCL.Builder
 
         public void TakeSceneScreenshot(IScreenshotCameraController.OnSnapshotsReady onSuccess)
         {
-           screenshotCameraController.TakeSceneScreenshot(onSuccess);
+            screenshotCameraController.TakeSceneScreenshot(onSuccess);
         }
 
         public void TakeSceneScreenshot(Vector3 camPosition, Vector3 pointToLookAt, int width, int height, IScreenshotCameraController.OnSnapshotsReady onSuccess)
         {
-            screenshotCameraController.TakeSceneScreenshot(camPosition,pointToLookAt,width,height,onSuccess);
+            screenshotCameraController.TakeSceneScreenshot(camPosition, pointToLookAt, width, height, onSuccess);
         }
 
         public void TakeSceneAerialScreenshot(IParcelScene parcelScene, IScreenshotCameraController.OnSnapshotsReady onSuccess)
         {
-           screenshotCameraController.TakeSceneAerialScreenshot(parcelScene,onSuccess); 
+            screenshotCameraController.TakeSceneAerialScreenshot(parcelScene, onSuccess);
         }
 
         public void TakeSceneScreenshotFromResetPosition(IScreenshotCameraController.OnSnapshotsReady onSuccess)
         {
-           screenshotCameraController.TakeSceneScreenshot(initialCameraPosition,initialPointToLookAt,onSuccess);
+            screenshotCameraController.TakeSceneScreenshot(initialCameraPosition, initialPointToLookAt, onSuccess);
         }
 
         public void ActivateCamera(IParcelScene parcelScene)
@@ -76,7 +77,7 @@ namespace DCL.Builder
 
             initialPointToLookAt = pointToLookAt;
             initialCameraPosition = cameraPosition;
-            
+
             freeCameraController.SetPosition(cameraPosition);
             freeCameraController.LookAt(pointToLookAt);
             freeCameraController.SetResetConfiguration(cameraPosition, pointToLookAt);

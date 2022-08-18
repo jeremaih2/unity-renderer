@@ -52,7 +52,7 @@ namespace DCL
             CommonScriptableObjects.sceneID.OnChange += OnCurrentSceneIdChange;
 
             // TODO(Brian): Move this later to Main.cs
-            if ( !EnvironmentSettings.RUNNING_TESTS )
+            if (!EnvironmentSettings.RUNNING_TESTS)
             {
                 PrewarmSceneMessagesPool();
             }
@@ -69,7 +69,7 @@ namespace DCL
             TaskUtils.Run(async () => await WatchForNewChunksToDecode(tokenSourceToken), cancellationToken: tokenSourceToken).Forget();
 #endif
         }
-        
+
         private void PrewarmSceneMessagesPool()
         {
             if (prewarmSceneMessagesPool)
@@ -247,7 +247,7 @@ namespace DCL
                             {
                                 delayedComponent = scene.componentsManagerLegacy.EntityComponentCreateOrUpdate(
                                     entityIdHelper.EntityFromLegacyEntityString(payload.entityId),
-                                    (CLASS_ID_COMPONENT) payload.classId, payload.json) as IDelayedComponent;
+                                    (CLASS_ID_COMPONENT)payload.classId, payload.json) as IDelayedComponent;
                             }
 
                             break;
@@ -438,7 +438,7 @@ namespace DCL
         }
         private void EnqueueChunk(string chunk)
         {
-            string[] payloads = chunk.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] payloads = chunk.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
             var count = payloads.Length;
 
             for (int i = 0; i < count; i++)
@@ -480,7 +480,7 @@ namespace DCL
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                string[] payloads = chunk.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] payloads = chunk.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 var count = payloads.Length;
 
                 for (int i = 0; i < count; i++)
@@ -519,7 +519,7 @@ namespace DCL
 
         //======================================================================
         public event Action<string> OnReadyScene;
-        
+
         public void SendSceneReady(string sceneId)
         {
             Environment.i.world.state.readyScenes.Add(sceneId);
@@ -540,8 +540,8 @@ namespace DCL
 
         private void SetPositionDirty(Vector3 worldPosition, Vector3 previous)
         {
-            var currentX = (int) Math.Floor(worldPosition.x / ParcelSettings.PARCEL_SIZE);
-            var currentY = (int) Math.Floor(worldPosition.z / ParcelSettings.PARCEL_SIZE);
+            var currentX = (int)Math.Floor(worldPosition.x / ParcelSettings.PARCEL_SIZE);
+            var currentY = (int)Math.Floor(worldPosition.z / ParcelSettings.PARCEL_SIZE);
 
             positionDirty = currentX != currentGridSceneCoordinate.x || currentY != currentGridSceneCoordinate.y;
 
@@ -730,7 +730,7 @@ namespace DCL
         public void UnloadScene(string sceneKey)
         {
             var queuedMessage = new QueuedSceneMessage()
-                { type = QueuedSceneMessage.Type.UNLOAD_PARCEL, message = sceneKey };
+            { type = QueuedSceneMessage.Type.UNLOAD_PARCEL, message = sceneKey };
 
             ProfilingEvents.OnMessageWillQueue?.Invoke(MessagingTypes.SCENE_DESTROY);
 
@@ -747,12 +747,12 @@ namespace DCL
             if (!worldState.Contains(sceneId))
                 return;
 
-            ParcelScene scene = (ParcelScene) worldState.loadedScenes[sceneId];
-            
+            ParcelScene scene = (ParcelScene)worldState.loadedScenes[sceneId];
+
             worldState.loadedScenes.Remove(sceneId);
             worldState.globalSceneIds.Remove(sceneId);
             DataStore.i.world.portableExperienceIds.Remove(sceneId);
-            
+
             // Remove the scene id from the msg. priorities list
             worldState.scenesSortedByDistance.Remove(scene);
 
@@ -769,6 +769,7 @@ namespace DCL
             Environment.i.world.blockersController.SetupWorldBlockers();
 
             ProfilingEvents.OnMessageProcessEnds?.Invoke(MessagingTypes.SCENE_DESTROY);
+            OnSceneRemoved?.Invoke(scene);
         }
 
         public void UnloadAllScenes(bool includePersistent = false)
@@ -781,7 +782,7 @@ namespace DCL
             {
                 if (list[i].Value.isPersistent && !includePersistent)
                     continue;
-                
+
                 UnloadParcelSceneExecute(list[i].Key);
             }
         }
@@ -805,7 +806,7 @@ namespace DCL
         public void UpdateParcelScenes(string decentralandSceneJSON)
         {
             var queuedMessage = new QueuedSceneMessage()
-                { type = QueuedSceneMessage.Type.UPDATE_PARCEL, message = decentralandSceneJSON };
+            { type = QueuedSceneMessage.Type.UPDATE_PARCEL, message = decentralandSceneJSON };
 
             ProfilingEvents.OnMessageWillQueue?.Invoke(MessagingTypes.SCENE_UPDATE);
 
@@ -922,7 +923,8 @@ namespace DCL
         public event Action OnSortScenes;
         public event Action<IParcelScene, string> OnOpenExternalUrlRequest;
         public event Action<IParcelScene> OnNewSceneAdded;
-        
+        public event Action<IParcelScene> OnSceneRemoved;
+
         private Vector2Int currentGridSceneCoordinate = new Vector2Int(EnvironmentSettings.MORDOR_SCALAR, EnvironmentSettings.MORDOR_SCALAR);
         private Vector2Int sortAuxiliaryVector = new Vector2Int(EnvironmentSettings.MORDOR_SCALAR, EnvironmentSettings.MORDOR_SCALAR);
     }

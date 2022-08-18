@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DCL.Controllers;
 using UnityEngine;
@@ -30,5 +30,6 @@ namespace DCL.Models
 
         Action<object> OnNameChange { get; set; }
         Action<object> OnTransformChange { get; set; }
+        long parentId { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace DCL.Skybox
         public const string DEFAULT_SKYBOX_ID = "Generic_Skybox";
 
         public string loadedConfig;
-        public float lifecycleDuration = 20;
+        public float lifecycleDuration = 2;
 
         private float timeOfTheDay;                            // (Nishant.K) Time will be provided from outside, So remove this variable
         private Light directionalLight;
@@ -102,11 +102,8 @@ namespace DCL.Skybox
 
             // Register for camera references
             DataStore.i.camera.transform.OnChange += AssignCameraReferences;
-            DataStore.i.camera.mainCamEnabled.OnChange += SkyboxCameraEnabled;
             AssignCameraReferences(DataStore.i.camera.transform.Get(), null);
         }
-
-        private void SkyboxCameraEnabled(bool current, bool previous) { skyboxCam.SetCameraEnabledState(current); }
 
         private void AssignCameraReferences(Transform currentTransform, Transform prevTransform)
         {
@@ -486,7 +483,6 @@ namespace DCL.Skybox
             DataStore.i.skyboxConfig.fixedTime.OnChange -= FixedTime_OnChange;
             DataStore.i.skyboxConfig.reflectionResolution.OnChange -= ReflectionResolution_OnChange;
             DataStore.i.camera.transform.OnChange -= AssignCameraReferences;
-            DataStore.i.camera.mainCamEnabled.OnChange -= SkyboxCameraEnabled;
 
             timeReporter.Dispose();
         }

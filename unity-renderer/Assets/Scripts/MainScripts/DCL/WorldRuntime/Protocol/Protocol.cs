@@ -13,13 +13,17 @@ namespace DCL.Models
         public const string THIRD_PERSON_CAMERA_ENTITY_REFERENCE = "PlayerEntityReference";
     }
 
-    public enum SpecialEntityId
+    public static class SpecialEntityId
     {
-        SCENE_ROOT_ENTITY = 0,
-        AVATAR_ENTITY_REFERENCE = 1,
-        AVATAR_POSITION_REFERENCE = 2,
-        FIRST_PERSON_CAMERA_ENTITY_REFERENCE = 3,
-        THIRD_PERSON_CAMERA_ENTITY_REFERENCE = 4
+        public const long SCENE_ROOT_ENTITY = 0;
+        public const long PLAYER_ENTITY = 1;
+        public const long CAMERA_ENTITY = 2;
+
+        // To be deprecated soon
+        public const long AVATAR_ENTITY_REFERENCE = 3;
+        public const long AVATAR_POSITION_REFERENCE = 4;
+        public const long FIRST_PERSON_CAMERA_ENTITY_REFERENCE = 5;
+        public const long THIRD_PERSON_CAMERA_ENTITY_REFERENCE = 6;
     }
 
     public static class ComponentNameLiterals
@@ -115,7 +119,7 @@ namespace DCL.Models
 
             public static CreateEntity FromPB(PB_CreateEntity pbPayload)
             {
-                return new CreateEntity() {entityId = pbPayload.Id};
+                return new CreateEntity() { entityId = pbPayload.Id };
             }
         }
 
@@ -126,7 +130,7 @@ namespace DCL.Models
 
             public static RemoveEntity FromPB(PB_RemoveEntity pbPayload)
             {
-                return new RemoveEntity() {entityId = pbPayload.Id};
+                return new RemoveEntity() { entityId = pbPayload.Id };
             }
         }
 
@@ -138,7 +142,7 @@ namespace DCL.Models
 
             public static SetEntityParent FromPB(PB_SetEntityParent pbPayload)
             {
-                return new SetEntityParent() {entityId = pbPayload.EntityId, parentId = pbPayload.ParentId};
+                return new SetEntityParent() { entityId = pbPayload.EntityId, parentId = pbPayload.ParentId };
             }
         }
 
@@ -152,7 +156,7 @@ namespace DCL.Models
             public static EntityComponentCreateOrUpdate FromPB(PB_UpdateEntityComponent pbPayload)
             {
                 return new EntityComponentCreateOrUpdate()
-                    {entityId = pbPayload.EntityId, classId = pbPayload.ClassId, json = pbPayload.Data};
+                { entityId = pbPayload.EntityId, classId = pbPayload.ClassId, json = pbPayload.Data };
             }
         }
 
@@ -164,7 +168,7 @@ namespace DCL.Models
 
             public static EntityComponentDestroy FromPB(PB_ComponentRemoved pbPayload)
             {
-                return new EntityComponentDestroy() {entityId = pbPayload.EntityId, name = pbPayload.Name};
+                return new EntityComponentDestroy() { entityId = pbPayload.EntityId, name = pbPayload.Name };
             }
         }
 
@@ -178,7 +182,7 @@ namespace DCL.Models
             public static SharedComponentAttach FromPB(PB_AttachEntityComponent pbPayload)
             {
                 return new SharedComponentAttach()
-                    {entityId = pbPayload.EntityId, id = pbPayload.Id, name = pbPayload.Name};
+                { entityId = pbPayload.EntityId, id = pbPayload.Id, name = pbPayload.Name };
             }
         }
 
@@ -192,7 +196,7 @@ namespace DCL.Models
             public static SharedComponentCreate FromPB(PB_ComponentCreated pbPayload)
             {
                 return new SharedComponentCreate()
-                    {id = pbPayload.Id, classId = pbPayload.Classid, name = pbPayload.Name};
+                { id = pbPayload.Id, classId = pbPayload.Classid, name = pbPayload.Name };
             }
         }
 
@@ -203,7 +207,7 @@ namespace DCL.Models
 
             public static SharedComponentDispose FromPB(PB_ComponentDisposed pbPayload)
             {
-                return new SharedComponentDispose() {id = pbPayload.Id};
+                return new SharedComponentDispose() { id = pbPayload.Id };
             }
         }
 
@@ -215,7 +219,7 @@ namespace DCL.Models
 
             public static SharedComponentUpdate FromPB(PB_ComponentUpdated pbPayload)
             {
-                return new SharedComponentUpdate() {componentId = pbPayload.Id, json = pbPayload.Json};
+                return new SharedComponentUpdate() { componentId = pbPayload.Id, json = pbPayload.Json };
             }
         }
 
@@ -241,7 +245,7 @@ namespace DCL.Models
 
             public static OpenExternalUrl FromPB(PB_OpenExternalUrl pbPayload)
             {
-                return new OpenExternalUrl() {url = pbPayload.Url};
+                return new OpenExternalUrl() { url = pbPayload.Url };
             }
         }
 

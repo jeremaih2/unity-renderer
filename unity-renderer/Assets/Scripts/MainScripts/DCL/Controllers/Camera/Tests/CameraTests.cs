@@ -6,6 +6,7 @@ using DCL.Camera;
 using DCL.Helpers;
 using UnityEngine;
 using UnityEngine.TestTools;
+using DCL.CameraTool;
 
 namespace CameraController_Test
 {

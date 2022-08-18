@@ -1,18 +1,25 @@
 {
   "dependencies": {
     "com.coffee.ui-particle": {
-      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
+      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git#3.3.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "65c60000c258a1cbfd21575fd43c48742039dae5"
+      "hash": "429ff2dd09264fd091ed3005c7a4c247f118c7ae"
     },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "78db78c7bd5c1c75902dabb1496c85bd2316fca5"
+      "hash": "50a67d8f419b6cea0398eff6c19cf0bbe11ed609"
+    },
+    "com.decentraland.rpc-csharp": {
+      "version": "https://github.com/decentraland/rpc-csharp.git?path=rpc-csharp/src",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "31340a3706dda78916910dc2b925756fd3ee0ece"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

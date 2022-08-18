@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using DCL.Models;
+using DCLPlugins.UUIDEventComponentsPlugin.UUIDComponent.Interfaces;
 using Ray = UnityEngine.Ray;
 
 namespace DCL

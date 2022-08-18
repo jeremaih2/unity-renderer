@@ -51,6 +51,9 @@ public class DCLCharacterController : MonoBehaviour
 
     Vector3 velocity = Vector3.zero;
 
+    public Plane p;
+    public Light l;
+    public Transform t;
     public bool isWalking { get; private set; } = false;
     public bool isMovingByUserInput { get; private set; } = false;
     public bool isJumping { get; private set; } = false;

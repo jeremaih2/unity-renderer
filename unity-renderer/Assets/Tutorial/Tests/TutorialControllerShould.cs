@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using static DCL.Tutorial.TutorialController;
 using Object = UnityEngine.Object;
+using DCL.CameraTool;
 
 namespace DCL.Tutorial_Tests
 {
