@@ -4,6 +4,8 @@ namespace DCL.Helpers.NFT.Markets.OpenSea_Internal
     {
         //public const string SINGLE_ASSET_URL = "https://api.devnet.andverse.org/api/v1/nft/asset";
         //public const string MULTIPLE_ASSETS_URL = "https://api.devnet.andverse.org/api/v1/nft/assets";
+
+        //opensea
         public const string SINGLE_ASSET_URL = "https://api.opensea.io/api/v1/asset";
         public const string MULTIPLE_ASSETS_URL = "https://api.opensea.io/api/v1/assets";
         public const string OWNED_ASSETS_URL = "https://api.opensea.io/api/v1/assets?owner=";
