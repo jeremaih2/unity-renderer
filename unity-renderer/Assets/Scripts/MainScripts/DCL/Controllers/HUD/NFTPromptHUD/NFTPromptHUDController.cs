@@ -53,8 +53,8 @@ public class NFTPromptHUDController : IHUD
             }
 
             view.SetLoading();
-
-            fetchNFTRoutine = CoroutineStarter.Start(NFTUtils.FetchNFTInfoSingleAsset(model.contactAddress, model.tokenId,
+            string darURLProtocol = "";
+            fetchNFTRoutine = CoroutineStarter.Start(NFTUtils.FetchNFTInfoSingleAsset(darURLProtocol, model.contactAddress, model.tokenId,
                 (nftInfo) => SetNFT(nftInfo, model.comment, true),
                 (error) => view.OnError(string.Format(COULD_NOT_FETCH_NFT_FROM_API + " " + error + ". " + DOES_NOT_SUPPORT_POLYGON, model.contactAddress, model.tokenId))
             ));

@@ -16,6 +16,7 @@ public class TheGraph : ITheGraph
     private const string LAND_SUBGRAPH_URL_MATIC = "https://api.thegraph.com/subgraphs/name/decentraland/mana-matic-mainnet";
     private const string NFT_COLLECTIONS_SUBGRAPH_URL_ETHEREUM = "https://api.thegraph.com/subgraphs/name/decentraland/collections-ethereum-mainnet";
     private const string NFT_COLLECTIONS_SUBGRAPH_URL_MATIC = "https://api.thegraph.com/subgraphs/name/decentraland/collections-matic-mainnet";
+    private const string NFT_COLLECTIONS_SUBGRAPH_URL_NEWTON = "";
 
     private readonly IDataCache<List<Land>> landQueryCache = new DataCache<List<Land>>();
 
@@ -133,6 +134,9 @@ public class TheGraph : ITheGraph
             case NftCollectionsLayer.MATIC:
                 url = NFT_COLLECTIONS_SUBGRAPH_URL_MATIC;
                 break;
+            case NftCollectionsLayer.NEWTON:
+                url = NFT_COLLECTIONS_SUBGRAPH_URL_NEWTON;
+                break;    
         }
 
         Query(url, TheGraphQueries.getNftCollectionsQuery, new AddressVariable() { address = address.ToLower() })

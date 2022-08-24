@@ -9,7 +9,7 @@ public class ServiceProviders : IServiceProviders
     public ICatalyst catalyst { get; } = new Catalyst();
     public IAnalytics analytics { get; } = new Analytics();
 
-    //public INFTMarket newTon { get; } = new Newtonsoft();
+    public INFTMarket newton { get; } = new OpenSea();
 
     public void Dispose()
     {
@@ -17,6 +17,7 @@ public class ServiceProviders : IServiceProviders
         analytics.Dispose();
         theGraph.Dispose();
         openSea.Dispose();
+        //newton.Dispose();
     }
 
     public void Initialize()

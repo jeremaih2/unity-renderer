@@ -146,9 +146,10 @@ public class BIWNFTController
     private IEnumerator FetchNfts()
     {
         string userId = userProfile.ethAddress;
+        string darURLProtocol = "";
         if (!string.IsNullOrEmpty(userId))
         {
-            yield return NFTUtils.FetchNFTsFromOwner(userId, (nftOwner) =>
+            yield return NFTUtils.FetchNFTsFromOwner(darURLProtocol, userId, (nftOwner) =>
                 {
                     NftsFeteched(nftOwner);
                 },

@@ -55,6 +55,7 @@ namespace DCL.Configuration
 
         //NFT
         public const string NFT_ETHEREUM_PROTOCOL = "ethereum://";
+        public const string NFT_NEWTON_PROTOCOL = "newton://";
 
         //Scene files
         public const string BUILDER_SCENE_STATE_DEFINITION_FILE_NAME = "scene-state-definition.json";

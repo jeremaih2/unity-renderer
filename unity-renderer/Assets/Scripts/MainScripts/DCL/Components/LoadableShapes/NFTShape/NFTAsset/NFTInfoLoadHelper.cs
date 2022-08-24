@@ -10,7 +10,7 @@ public interface INFTInfoRetriever : IDisposable
 {
     public event Action<NFTInfo> OnFetchInfoSuccess;
     public event Action OnFetchInfoFail;
-    void FetchNFTInfo(string address, string id);
+    void FetchNFTInfo(string protocol, string address, string id);
     UniTask<NFTInfo> FetchNFTInfo(string src);
 }
 
@@ -36,12 +36,12 @@ public class NFTInfoRetriever : INFTInfoRetriever
         tokenSource?.Dispose();
     }
 
-    public void FetchNFTInfo(string address, string id)
+    public void FetchNFTInfo(string protocol, string address, string id)
     {
         if (fetchCoroutine != null)
             CoroutineStarter.Stop(fetchCoroutine);
 
-        fetchCoroutine = CoroutineStarter.Start(FetchNFTInfoCoroutine(address, id));
+        fetchCoroutine = CoroutineStarter.Start(FetchNFTInfoCoroutine(protocol,address, id));
     }
 
     public async UniTask<NFTInfo> FetchNFTInfo(string src)
@@ -60,7 +60,7 @@ public class NFTInfoRetriever : INFTInfoRetriever
 
         Match match = regexMatches[0];
         string darURLProtocol = match.Groups["protocol"].ToString();
-        if (darURLProtocol != "ethereum")
+        if (darURLProtocol != "ethereum"&& darURLProtocol != "newton")
         {
             string errorMessage = string.Format(COULD_NOT_FETCH_DAR_URL + " " + SUPPORTED_PROTOCOL + " " + ACCEPTED_URL_FORMAT, src);
             Debug.Log(errorMessage);
@@ -73,7 +73,7 @@ public class NFTInfoRetriever : INFTInfoRetriever
 
         NFTInfo nftInformation = null;
         
-        var rutine = NFTUtils.FetchNFTInfo(darURLRegistry, darURLAsset,
+        var rutine = NFTUtils.FetchNFTInfo(darURLProtocol, darURLRegistry, darURLAsset,
             (info) =>
             {
                 nftInformation = info;
@@ -88,9 +88,9 @@ public class NFTInfoRetriever : INFTInfoRetriever
         return nftInformation;
     }
 
-    private IEnumerator FetchNFTInfoCoroutine(string address, string id)
+    private IEnumerator FetchNFTInfoCoroutine(string protocol,string address, string id)
     {
-        yield return NFTUtils.FetchNFTInfo(address, id,
+        yield return NFTUtils.FetchNFTInfo(protocol,address, id,
             (info) => { OnFetchInfoSuccess?.Invoke(info); },
             (error) =>
             {

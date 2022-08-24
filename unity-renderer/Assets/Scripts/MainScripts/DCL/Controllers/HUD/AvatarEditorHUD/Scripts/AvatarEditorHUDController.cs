@@ -55,6 +55,7 @@ public class AvatarEditorHUDController : IHUD
     private bool ownedWearablesAlreadyLoaded = false;
     private List<Nft> ownedNftCollectionsL1 = new List<Nft>();
     private List<Nft> ownedNftCollectionsL2 = new List<Nft>();
+    private List<Nft> ownedNftCollectionsL3 = new List<Nft>();
     private bool avatarIsDirty = false;
     private float lastTimeOwnedWearablesChecked = 0;
     internal bool collectionsAlreadyLoaded = false;
@@ -210,6 +211,11 @@ public class AvatarEditorHUDController : IHUD
         Environment.i.platform.serviceProviders.theGraph.QueryNftCollections(userProfile.userId, NftCollectionsLayer.MATIC)
            .Then((nfts) => ownedNftCollectionsL2 = nfts)
            .Catch((error) => Debug.LogError(error));
+
+        Environment.i.platform.serviceProviders.theGraph.QueryNftCollections(userProfile.userId, NftCollectionsLayer.NEWTON)
+           .Then((nfts) => ownedNftCollectionsL3 = nfts)
+           .Catch((error) => Debug.LogError(error));
+           
     }
 
     public void RetryLoadOwnedWearables()

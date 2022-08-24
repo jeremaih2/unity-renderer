@@ -3,7 +3,8 @@ using System;
 public enum NftCollectionsLayer
 {
     ETHEREUM,
-    MATIC
+    MATIC,
+    NEWTON
 }
 
 public class Nft

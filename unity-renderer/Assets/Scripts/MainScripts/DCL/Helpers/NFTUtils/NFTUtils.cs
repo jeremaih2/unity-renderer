@@ -13,14 +13,27 @@ namespace DCL.Helpers.NFT
         /// <param name="onSuccess">success callback</param>
         /// <param name="onError">error callback</param>
         /// <returns>IEnumerator</returns>
-        public static IEnumerator FetchNFTsFromOwner(string address, Action<NFTOwner> onSuccess, Action<string> onError)
+        public static IEnumerator FetchNFTsFromOwner(string darURLProtocol, string address, Action<NFTOwner> onSuccess, Action<string> onError)
         {
             INFTMarket selectedMarket = null;
-            yield return GetMarket(address, (mkt) => selectedMarket = mkt);
+            INFTMarket selectedMarket_Newton = null;
+            if (darURLProtocol == "ethereum")
+            {
+                yield return GetMarket(darURLProtocol, address, (mkt) => selectedMarket = mkt);
+            }
+            if (darURLProtocol == "newton")
+            {
+                yield return GetMarket(darURLProtocol, address, (mkt_newton) => selectedMarket_Newton = mkt_newton);
+            }
+            
 
             if (selectedMarket != null)
             {
                 yield return selectedMarket.FetchNFTsFromOwner(address, onSuccess, onError);
+            }
+            else if (selectedMarket_Newton != null)
+            {
+                yield return selectedMarket_Newton.FetchNFTsFromOwner(address, onSuccess, onError);
             }
             else
             {
@@ -37,18 +50,31 @@ namespace DCL.Helpers.NFT
         /// <param name="onSuccess">success callback</param>
         /// <param name="onError">error callback</param>
         /// <returns>IEnumerator</returns>
-        public static IEnumerator FetchNFTInfo(string assetContractAddress, string tokenId, Action<NFTInfo> onSuccess, Action<string> onError)
+        public static IEnumerator FetchNFTInfo(string darURLProtocol,string assetContractAddress, string tokenId, Action<NFTInfo> onSuccess, Action<string> onError)
         {
+            //INFTMarket_Newton selectedMarket_Newton = null;
             INFTMarket selectedMarket = null;
-            yield return GetMarket(assetContractAddress, tokenId, (mkt) => selectedMarket = mkt);
+            INFTMarket selectedMarket_Newton = null;
+            if (darURLProtocol == "ethereum")
+            {
+                yield return GetMarket(darURLProtocol, assetContractAddress, tokenId, (mkt) => selectedMarket = mkt);
+            }
+            if (darURLProtocol == "newton")
+            {
+                yield return GetMarket(darURLProtocol, assetContractAddress, tokenId, (selectedMarket_Newton) => selectedMarket = selectedMarket_Newton);
+            }
 
             if (selectedMarket != null)
             {
                 yield return selectedMarket.FetchNFTInfo(assetContractAddress, tokenId, onSuccess, onError);
             }
+            else if (selectedMarket_Newton != null)
+            {
+                yield return selectedMarket_Newton.FetchNFTInfo(assetContractAddress, tokenId, onSuccess, onError);
+            }
             else
             {
-                onError?.Invoke($"Market not found for asset {assetContractAddress}/{tokenId}");
+                onError?.Invoke($"Market_Newton not found for asset {assetContractAddress}/{tokenId}");
             }
         }
 
@@ -62,14 +88,26 @@ namespace DCL.Helpers.NFT
         /// <param name="onSuccess">success callback</param>
         /// <param name="onError">error callback</param>
         /// <returns>IEnumerator</returns>
-        public static IEnumerator FetchNFTInfoSingleAsset(string assetContractAddress, string tokenId, Action<NFTInfoSingleAsset> onSuccess, Action<string> onError)
+        public static IEnumerator FetchNFTInfoSingleAsset(string darURLProtocol, string assetContractAddress, string tokenId, Action<NFTInfoSingleAsset> onSuccess, Action<string> onError)
         {
             INFTMarket selectedMarket = null;
-            yield return GetMarket(assetContractAddress, tokenId, (mkt) => selectedMarket = mkt);
+            INFTMarket selectedMarket_Newton = null;
+            if (darURLProtocol == "ethereum")
+            {
+                yield return GetMarket(darURLProtocol, assetContractAddress, tokenId, (mkt) => selectedMarket = mkt);
+            }
+            if (darURLProtocol == "newton")
+            {
+                yield return GetMarket(darURLProtocol, assetContractAddress, tokenId, (mkt_newton) => selectedMarket_Newton = mkt_newton);
+            }
 
             if (selectedMarket != null)
             {
                 yield return selectedMarket.FetchNFTInfoSingleAsset(assetContractAddress, tokenId, onSuccess, onError);
+            }
+            else if (selectedMarket_Newton != null)
+            {
+                yield return selectedMarket_Newton.FetchNFTInfoSingleAsset(assetContractAddress, tokenId, onSuccess, onError);
             }
             else
             {
@@ -78,28 +116,62 @@ namespace DCL.Helpers.NFT
         }
 
         // NOTE: this method doesn't make sense now, but it will when support for other market is added
-        public static IEnumerator GetMarket(string assetContractAddress, string tokenId, Action<INFTMarket> onSuccess)
+        //这种方法现在没有意义，但当支持其他市场时，它会
+        public static IEnumerator GetMarket(string darURLProtocol, string assetContractAddress, string tokenId, Action<INFTMarket> onSuccess)
         {
             IServiceProviders serviceProviders = Environment.i.platform.serviceProviders;
             INFTMarket openSea = null;
+            INFTMarket newMall = null;
 
             if ( serviceProviders != null )
-                openSea = serviceProviders.openSea;
-
-            onSuccess?.Invoke(openSea);
+            {
+                if (darURLProtocol == "ethereum")
+                {
+                    openSea = serviceProviders.openSea;
+                    onSuccess?.Invoke(openSea);
+                }
+                else
+                {
+                    newMall = serviceProviders.newton;
+                    onSuccess?.Invoke(newMall);
+                }
+                
+            }
             yield break;
         }
 
-        public static IEnumerator GetMarket(string assetContractAddress, Action<INFTMarket> onSuccess)
+        public static IEnumerator GetMarket(string darURLProtocol, string assetContractAddress, Action<INFTMarket> onSuccess)
         {
             IServiceProviders serviceProviders = Environment.i.platform.serviceProviders;
             INFTMarket openSea = null;
+            INFTMarket newMall = null;
 
             if ( serviceProviders != null )
-                openSea = serviceProviders.openSea;
-
-            onSuccess?.Invoke(openSea);
+            {
+                if (darURLProtocol == "ethereum")
+                {
+                    openSea = serviceProviders.openSea;
+                    onSuccess?.Invoke(openSea);
+                }
+                else
+                {
+                    newMall = serviceProviders.newton;
+                    onSuccess?.Invoke(newMall);
+                }
+            }
             yield break;
         }
+
+        //public static IEnumerator GetMarket_Newton(string assetContractAddress, string tokenId, Action<INFTMarket> onSuccess)
+        //{
+        //    IServiceProviders serviceProviders = Environment.i.platform.serviceProviders;
+        //    INFTMarket_Newton newton = null;
+
+        //    if (serviceProviders != null)
+        //        newton = serviceProviders.newton;
+
+        //    onSuccess?.Invoke(newton);
+        //    yield break;
+        //}
     }
 }

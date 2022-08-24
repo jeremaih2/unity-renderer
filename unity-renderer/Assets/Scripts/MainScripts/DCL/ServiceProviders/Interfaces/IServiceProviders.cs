@@ -9,6 +9,6 @@ namespace DCL
         ICatalyst catalyst { get; }
         IAnalytics analytics { get; }
         INFTMarket openSea { get; }
-        //INFTMarket newTon { get; }
+        INFTMarket newton { get; }
     }
 }

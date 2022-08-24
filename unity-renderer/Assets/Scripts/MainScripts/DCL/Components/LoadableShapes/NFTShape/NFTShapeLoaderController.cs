@@ -117,6 +117,7 @@ public class NFTShapeLoaderController : MonoBehaviour, INFTShapeLoaderController
         ShowErrorFeedback(false);
         UpdateBackgroundColor(backgroundColor);
 
+        //检查src是否遵循所需的格式
         // Check the src follows the needed format e.g.: 'ethereum://0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/558536'
         var regexMatches = Regex.Matches(url, "(?<protocol>[^:]+)://(?<registry>0x([A-Fa-f0-9])+)(?:/(?<asset>.+))?");
         if (regexMatches.Count == 0)
@@ -139,7 +140,7 @@ public class NFTShapeLoaderController : MonoBehaviour, INFTShapeLoaderController
         }
 
         darURLProtocol = match.Groups["protocol"].ToString();
-        if (darURLProtocol != "ethereum")
+        if (darURLProtocol != "ethereum"&& darURLProtocol != "newton")
         {
             Debug.LogError(string.Format(COULD_NOT_FETCH_DAR_URL + " " + SUPPORTED_PROTOCOL + " " + ACCEPTED_URL_FORMAT, url));
             ShowErrorFeedback(true);
@@ -167,7 +168,7 @@ public class NFTShapeLoaderController : MonoBehaviour, INFTShapeLoaderController
     private void FetchNFTContents()
     {
         ShowLoading(true);
-        nftInfoRetriever.FetchNFTInfo(darURLRegistry, darURLAsset);
+        nftInfoRetriever.FetchNFTInfo(darURLProtocol, darURLRegistry, darURLAsset);
     }
 
     private void FetchNftInfoSuccess(NFTInfo nftInfo)
