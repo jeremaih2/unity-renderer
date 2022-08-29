@@ -80,7 +80,7 @@ namespace DCL
         public void Unregister<T>() where T : IPlugin
         {
             Type type = typeof(T);
-            if ( !allPlugins.plugins.ContainsKey(type))
+            if (!allPlugins.plugins.ContainsKey(type))
                 return;
 
             PluginInfo info = allPlugins.plugins[type];
@@ -101,13 +101,13 @@ namespace DCL
             allPlugins.Remove(type);
             info.Disable();
         }
-        
+
         /// <summary>
         /// Initialize all enabled and registered plugin.
         /// </summary>
         public void Initialize()
         {
-            foreach ( var kvp in allPlugins.plugins )
+            foreach (var kvp in allPlugins.plugins)
             {
                 PluginInfo info = kvp.Value;
                 if (info.enableOnInit)
@@ -126,9 +126,10 @@ namespace DCL
             Type type = typeof(T);
             Assert.IsNotNull(plugin);
 
-            if ( !pluginGroupByFlag.ContainsKey(featureFlag) )
+            if (!pluginGroupByFlag.ContainsKey(featureFlag))
                 pluginGroupByFlag.Add(featureFlag, new PluginGroup());
 
+            allPlugins.plugins[type].flag = featureFlag;
             pluginGroupByFlag[featureFlag].Add(type, allPlugins.plugins[type]);
         }
 
@@ -152,12 +153,12 @@ namespace DCL
         /// <param name="featureFlag">The feature flag to enable</param>
         public void EnableFlag(string featureFlag)
         {
-            if ( !pluginGroupByFlag.ContainsKey(featureFlag) )
+            if (!pluginGroupByFlag.ContainsKey(featureFlag))
                 return;
 
             PluginGroup pluginGroup = pluginGroupByFlag[featureFlag];
 
-            foreach ( var feature in pluginGroup.plugins )
+            foreach (var feature in pluginGroup.plugins)
             {
                 PluginInfo info = feature.Value;
                 info.Enable();
@@ -171,12 +172,12 @@ namespace DCL
         /// <param name="featureFlag">The feature flag to enable</param>
         public void DisableFlag(string featureFlag)
         {
-            if ( !pluginGroupByFlag.ContainsKey(featureFlag) )
+            if (!pluginGroupByFlag.ContainsKey(featureFlag))
                 return;
 
             PluginGroup pluginGroup = pluginGroupByFlag[featureFlag];
 
-            foreach ( var feature in pluginGroup.plugins )
+            foreach (var feature in pluginGroup.plugins)
             {
                 PluginInfo info = feature.Value;
                 info.Disable();
@@ -192,7 +193,7 @@ namespace DCL
         /// <param name="featureFlagsBaseVariable">The data object to listen to.</param>
         public void SetFeatureFlagsData(BaseVariable<FeatureFlag> featureFlagsBaseVariable)
         {
-            if ( featureFlagsDataSource != null )
+            if (featureFlagsDataSource != null)
                 featureFlagsDataSource.OnChange -= OnFeatureFlagsChange;
 
             featureFlagsDataSource = featureFlagsBaseVariable;
@@ -204,7 +205,7 @@ namespace DCL
         {
             Assert.IsNotNull(current, "Current feature flags object should never be null!");
 
-            foreach ( var flag in current.flags )
+            foreach (var flag in current.flags)
             {
                 SetFlag(flag.Key, flag.Value);
             }
@@ -212,13 +213,13 @@ namespace DCL
 
         public void Dispose()
         {
-            foreach ( var kvp in allPlugins.plugins )
+            foreach (var kvp in allPlugins.plugins)
             {
                 PluginInfo info = kvp.Value;
                 info.Disable();
             }
 
-            if ( featureFlagsDataSource != null )
+            if (featureFlagsDataSource != null)
                 featureFlagsDataSource.OnChange -= OnFeatureFlagsChange;
         }
     }

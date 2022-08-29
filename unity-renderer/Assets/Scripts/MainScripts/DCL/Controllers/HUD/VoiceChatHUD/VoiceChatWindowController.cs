@@ -46,7 +46,9 @@ public class VoiceChatWindowController : IHUD
         DataStore dataStore,
         Settings settings)
     {
+        Debug.Log("3333333333333333333333");
         Initialize(userProfileBridge, friendsController, socialAnalytics, dataStore, settings);
+        Debug.Log("2222222222222222222222");
     }
 
     public void Initialize(
@@ -56,15 +58,16 @@ public class VoiceChatWindowController : IHUD
         DataStore dataStore,
         Settings settings)
     {
+    
         this.userProfileBridge = userProfileBridge;
         this.friendsController = friendsController;
         this.socialAnalytics = socialAnalytics;
         this.dataStore = dataStore;
         this.settings = settings;
-
+        Debug.Log("44444444444444444444444"+ isVoiceChatFFEnabled);
         if (!isVoiceChatFFEnabled)
             return;
-
+        Debug.Log("1111111111111111111111111");
         voiceChatWindowView = CreateVoiceChatWindowView();
         voiceChatWindowView.Hide(instant: true);
 
@@ -102,7 +105,7 @@ public class VoiceChatWindowController : IHUD
             voiceChatWindowView.Hide();
     }
 
-    public void SetUsersMuted(string[] usersId, bool isMuted) 
+    public void SetUsersMuted(string[] usersId, bool isMuted)
     {
         for (int i = 0; i < usersId.Length; i++)
         {
@@ -116,8 +119,8 @@ public class VoiceChatWindowController : IHUD
         SetWhichPlayerIsTalking();
     }
 
-    public void SetVoiceChatRecording(bool recording) 
-    { 
+    public void SetVoiceChatRecording(bool recording)
+    {
         voiceChatBarView.PlayVoiceChatRecordingAnimation(recording);
         isOwnPLayerTalking = recording;
         SetWhichPlayerIsTalking();
@@ -162,7 +165,7 @@ public class VoiceChatWindowController : IHUD
     internal void CloseView() { SetVisibility(false); }
 
     internal void JoinVoiceChat(bool isJoined)
-    { 
+    {
         voiceChatWindowView.SetAsJoined(isJoined);
 
         if (isJoined)
@@ -203,7 +206,7 @@ public class VoiceChatWindowController : IHUD
 
         if (otherProfile == null)
             return;
-        
+
         voiceChatWindowView.AddOrUpdatePlayer(otherProfile);
 
         if (!trackedUsersHashSet.Contains(userId))

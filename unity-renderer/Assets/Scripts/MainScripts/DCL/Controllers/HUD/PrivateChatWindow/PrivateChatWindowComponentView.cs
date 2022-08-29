@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections;
 using SocialBar.UserThumbnail;
+using SocialFeaturesAnalytics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,13 +15,16 @@ public class PrivateChatWindowComponentView : BaseComponentView, IPrivateChatCom
     [SerializeField] internal TMP_Text userNameLabel;
     [SerializeField] internal PrivateChatHUDView chatView;
     [SerializeField] internal GameObject jumpInButtonContainer;
+    [SerializeField] internal JumpInButton jumpInButton;
     [SerializeField] internal UserContextMenu userContextMenu;
     [SerializeField] internal RectTransform userContextMenuReferencePoint;
     [SerializeField] internal Button optionsButton;
     [SerializeField] private Model model;
     [SerializeField] internal CanvasGroup[] previewCanvasGroup;
     [SerializeField] private Vector2 previewModeSize;
-    
+
+    private IFriendsController friendsController;
+    private ISocialAnalytics socialAnalytics;
     private Coroutine alphaRoutine;
     private Vector2 originalSize;
 
@@ -32,12 +36,16 @@ public class PrivateChatWindowComponentView : BaseComponentView, IPrivateChatCom
         add => userContextMenu.OnUnfriend += value;
         remove => userContextMenu.OnUnfriend -= value;
     }
-
-    public event Action<bool> OnFocused;
+    public event Action<bool> OnFocused
+    {
+        add => onFocused += value;
+        remove => onFocused -= value;
+    }
+    public event Action OnClickOverWindow;
 
     public IChatHUDComponentView ChatHUD => chatView;
     public bool IsActive => gameObject.activeInHierarchy;
-    public RectTransform Transform => (RectTransform) transform;
+    public RectTransform Transform => (RectTransform)transform;
     public bool IsFocused => isFocused;
 
     public static PrivateChatWindowComponentView Create()
@@ -48,23 +56,29 @@ public class PrivateChatWindowComponentView : BaseComponentView, IPrivateChatCom
     public override void Awake()
     {
         base.Awake();
-        originalSize = ((RectTransform) transform).sizeDelta;
+        originalSize = ((RectTransform)transform).sizeDelta;
         backButton.onClick.AddListener(() => OnPressBack?.Invoke());
         closeButton.onClick.AddListener(() => OnClose?.Invoke());
         optionsButton.onClick.AddListener(ShowOptions);
         userContextMenu.OnBlock += HandleBlockFromContextMenu;
     }
 
+    public void Initialize(IFriendsController friendsController, ISocialAnalytics socialAnalytics)
+    {
+        this.friendsController = friendsController;
+        this.socialAnalytics = socialAnalytics;
+    }
+
     public override void Dispose()
     {
         if (!this) return;
         if (!gameObject) return;
-        
+
         if (userContextMenu != null)
         {
             userContextMenu.OnBlock -= HandleBlockFromContextMenu;
         }
-            
+
         base.Dispose();
     }
 
@@ -72,41 +86,41 @@ public class PrivateChatWindowComponentView : BaseComponentView, IPrivateChatCom
     {
         if (!this) return;
         if (!gameObject) return;
-        
+
         const float alphaTarget = 0f;
-        
+
         if (!gameObject.activeInHierarchy)
         {
             foreach (var group in previewCanvasGroup)
                 group.alpha = alphaTarget;
-            
+
             return;
         }
-        
+
         if (alphaRoutine != null)
             StopCoroutine(alphaRoutine);
-        
+
         alphaRoutine = StartCoroutine(SetAlpha(alphaTarget, 0.5f));
-        ((RectTransform) transform).sizeDelta = previewModeSize;
+        ((RectTransform)transform).sizeDelta = previewModeSize;
     }
 
     public void DeactivatePreview()
     {
         const float alphaTarget = 1f;
-        
+
         if (!gameObject.activeInHierarchy)
         {
             foreach (var group in previewCanvasGroup)
                 group.alpha = alphaTarget;
-            
+
             return;
         }
-        
+
         if (alphaRoutine != null)
             StopCoroutine(alphaRoutine);
-        
+
         alphaRoutine = StartCoroutine(SetAlpha(alphaTarget, 0.5f));
-        ((RectTransform) transform).sizeDelta = originalSize;
+        ((RectTransform)transform).sizeDelta = originalSize;
     }
 
     public override void RefreshControl()
@@ -132,23 +146,19 @@ public class PrivateChatWindowComponentView : BaseComponentView, IPrivateChatCom
             isUserBlocked = isBlocked
         };
         RefreshControl();
+
+        jumpInButton.Initialize(friendsController, profile.userId, socialAnalytics);
     }
 
     public void Show() => gameObject.SetActive(true);
 
     public void Hide() => gameObject.SetActive(false);
 
-    public override void OnPointerExit(PointerEventData eventData)
-    {
-        base.OnPointerExit(eventData);
-        OnFocused?.Invoke(false);
-    }
-
-    public void OnPointerDown(PointerEventData eventData) => OnFocused?.Invoke(true);
+    public void OnPointerDown(PointerEventData eventData) => OnClickOverWindow?.Invoke();
 
     private void ShowOptions()
     {
-        var contextMenuTransform = (RectTransform) userContextMenu.transform;
+        var contextMenuTransform = (RectTransform)userContextMenu.transform;
         contextMenuTransform.pivot = userContextMenuReferencePoint.pivot;
         contextMenuTransform.position = userContextMenuReferencePoint.position;
         userContextMenu.Show(model.userId);
@@ -160,18 +170,18 @@ public class PrivateChatWindowComponentView : BaseComponentView, IPrivateChatCom
         model.isUserBlocked = isBlocked;
         RefreshControl();
     }
-    
+
     private IEnumerator SetAlpha(float target, float duration)
     {
         var t = 0f;
-        
+
         while (t < duration)
         {
             t += Time.deltaTime;
-            
+
             foreach (var group in previewCanvasGroup)
                 group.alpha = Mathf.Lerp(group.alpha, target, t / duration);
-            
+
             yield return null;
         }
 

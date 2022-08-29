@@ -15,7 +15,20 @@ namespace DCL
         AssetPromise_AB subPromise;
         Coroutine loadingCoroutine;
 
-        public AssetPromise_AB_GameObject(string contentUrl, string hash) : base(contentUrl, hash) { }
+        private BaseVariable<FeatureFlag> featureFlags => DataStore.i.featureFlags.flags;
+        private const string AB_LOAD_ANIMATION = "ab_load_animation";
+        private bool doTransitionAnimation;
+
+        public AssetPromise_AB_GameObject(string contentUrl, string hash) : base(contentUrl, hash)
+        {
+            featureFlags.OnChange += OnFeatureFlagChange;
+            OnFeatureFlagChange(featureFlags.Get(), null);
+        }
+
+        private void OnFeatureFlagChange(FeatureFlag current, FeatureFlag previous)
+        {
+            doTransitionAnimation = current.IsFeatureEnabled(AB_LOAD_ANIMATION);
+        }
 
         protected override void OnLoad(Action OnSuccess, Action<Exception> OnFail) { loadingCoroutine = CoroutineStarter.Start(LoadingCoroutine(OnSuccess, OnFail)); }
 
@@ -50,6 +63,15 @@ namespace DCL
         protected override void OnAfterLoadOrReuse()
         {
             asset.renderers = MeshesInfoUtils.ExtractUniqueRenderers(asset.container);
+            if (settings.visibleFlags != AssetPromiseSettings_Rendering.VisibleFlags.INVISIBLE && doTransitionAnimation)
+            {
+                foreach (Renderer assetRenderer in asset.renderers)
+                {
+                    MaterialTransitionController transition = assetRenderer.gameObject.AddComponent<MaterialTransitionController>();
+                    transition.delay = 0;
+                    transition.OnDidFinishLoading(assetRenderer.sharedMaterial);
+                }
+            }
             settings.ApplyAfterLoad(asset.container.transform);
         }
 
@@ -89,7 +111,7 @@ namespace DCL
             Exception loadingException = null;
             subPromise.OnSuccessEvent += (x) => success = true;
 
-            subPromise.OnFailEvent += ( ab,  exception) =>
+            subPromise.OnFailEvent += (ab, exception) =>
             {
                 loadingException = exception;
                 success = false;
@@ -153,7 +175,7 @@ namespace DCL
                 asset.renderers = MeshesInfoUtils.ExtractUniqueRenderers(assetBundleModelGO);
                 asset.materials = MeshesInfoUtils.ExtractUniqueMaterials(asset.renderers);
                 asset.SetTextures(MeshesInfoUtils.ExtractUniqueTextures(asset.materials));
-                
+
                 UploadMeshesToGPU(MeshesInfoUtils.ExtractUniqueMeshes(asset.renderers));
                 asset.totalTriangleCount = MeshesInfoUtils.ComputeTotalTriangles(asset.renderers, asset.meshToTriangleCount);
 
@@ -180,9 +202,9 @@ namespace DCL
 
         private void UploadMeshesToGPU(HashSet<Mesh> meshesList)
         {
-            foreach ( Mesh mesh in meshesList )
+            foreach (Mesh mesh in meshesList)
             {
-                if ( !mesh.isReadable )
+                if (!mesh.isReadable)
                     continue;
 
                 asset.meshToTriangleCount[mesh] = mesh.triangles.Length;
@@ -194,13 +216,20 @@ namespace DCL
         {
             if (settings.forceNewInstance)
             {
-                return ((AssetLibrary_AB_GameObject) library).GetCopyFromOriginal(id);
+                return ((AssetLibrary_AB_GameObject)library).GetCopyFromOriginal(id);
             }
             else
             {
                 return base.GetAsset(id);
             }
         }
+
+        internal override void OnForget()
+        {
+            base.OnForget();
+            featureFlags.OnChange -= OnFeatureFlagChange;
+        }
+
     }
 
 }

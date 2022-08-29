@@ -83,6 +83,7 @@ public class VoiceChatBarComponentView : BaseComponentView, IVoiceChatBarCompone
 
     internal static VoiceChatBarComponentView Create()
     {
+        Debug.Log("000000000000000000000000");
         VoiceChatBarComponentView voiceChatBarComponentView = Instantiate(Resources.Load<GameObject>("SocialBarV1/VoiceChatBar")).GetComponent<VoiceChatBarComponentView>();
         voiceChatBarComponentView.name = "_VoiceChatBar";
 

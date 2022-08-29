@@ -126,7 +126,7 @@ async function createPackageJson() {
     path.resolve(DIST_PATH, "package.json"),
     JSON.stringify(
       {
-        name: "andverse-unity-renderer-debug",
+        name: "andverse-unity-renderer-testnet",
         main: "index.js",
         typings: "index.d.ts",
         version: `0.1.${process.env.CIRCLE_BUILD_NUM || "0-development"}-${time}.commit-${shortCommitHash}`,

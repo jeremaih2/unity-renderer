@@ -148,14 +148,14 @@ public class ExploreV2MenuComponentView : BaseComponentView, IExploreV2MenuCompo
     [Header("Tutorial References")]
     [SerializeField] internal RectTransform profileCardTooltipReference;
 
-    internal const ExploreSection DEFAULT_SECTION = ExploreSection.Backpack;//Explore;
+    internal const ExploreSection DEFAULT_SECTION = ExploreSection.Explore;
     internal const string REALM_SELECTOR_MODAL_ID = "RealmSelector_Modal";
 
     public IRealmViewerComponentView currentRealmViewer => realmViewer;
     public IRealmSelectorComponentView currentRealmSelectorModal => realmSelectorModal;
     public IProfileCardComponentView currentProfileCard => profileCard;
     public IPlacesAndEventsSectionComponentView currentPlacesAndEventsSection => placesAndEventsSection;
-    public RectTransform currentTopMenuTooltipReference => sectionSelector.GetSection((int) ExploreSection.Explore).pivot;
+    public RectTransform currentTopMenuTooltipReference => sectionSelector.GetSection((int)ExploreSection.Explore).pivot;
     public RectTransform currentPlacesAndEventsTooltipReference => sectionSelector.GetSection((int)ExploreSection.Explore).pivot;
     public RectTransform currentBackpackTooltipReference => sectionSelector.GetSection((int)ExploreSection.Backpack).pivot;
     public RectTransform currentMapTooltipReference => sectionSelector.GetSection((int)ExploreSection.Map).pivot;
@@ -170,6 +170,7 @@ public class ExploreV2MenuComponentView : BaseComponentView, IExploreV2MenuCompo
 
     internal RectTransform profileCardRectTranform;
     internal RealmSelectorComponentView realmSelectorModal;
+    internal HUDCanvasCameraModeController hudCanvasCameraModeController;
 
     public override void Awake()
     {
@@ -177,6 +178,12 @@ public class ExploreV2MenuComponentView : BaseComponentView, IExploreV2MenuCompo
 
         profileCardRectTranform = profileCard.GetComponent<RectTransform>();
         realmSelectorModal = ConfigureRealmSelectorModal();
+        hudCanvasCameraModeController = new HUDCanvasCameraModeController(GetComponent<Canvas>(), DataStore.i.camera.hudsCamera);
+    }
+
+    public void OnDestroy()
+    {
+        hudCanvasCameraModeController?.Dispose();
     }
 
     public override void Start()
@@ -256,7 +263,7 @@ public class ExploreV2MenuComponentView : BaseComponentView, IExploreV2MenuCompo
 
     public void OnAfterShowAnimationCompleted()
     {
-        if(!DataStore.i.exploreV2.isOpen.Get())
+        if (!DataStore.i.exploreV2.isOpen.Get())
             return;
 
         DataStore.i.exploreV2.isInShowAnimationTransiton.Set(false);
@@ -319,8 +326,6 @@ public class ExploreV2MenuComponentView : BaseComponentView, IExploreV2MenuCompo
                                DataStore.i.exploreV2.currentSectionIndex.Set((int)ExploreSection.Explore, false);
                                OnSectionOpen?.Invoke(ExploreSection.Explore);
                            }
-                           
-
                        });
 
         sectionSelector.GetSection((int)ExploreSection.Backpack)

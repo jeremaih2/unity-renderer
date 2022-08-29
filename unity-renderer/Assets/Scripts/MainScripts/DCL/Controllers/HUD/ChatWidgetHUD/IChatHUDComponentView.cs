@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DCL.Interface;
 
 public interface IChatHUDComponentView
@@ -27,4 +27,5 @@ public interface IChatHUDComponentView
     void SetInputFieldText(string text);
     void ActivatePreview();
     void DeactivatePreview();
+    void FadeOutMessages();
 }

@@ -18,6 +18,7 @@ public class DCLCharacterController : MonoBehaviour
     public float jumpForce = 12f;
     public float movementSpeed = 8f;
     public float runningSpeedMultiplier = 2f;
+    public int jumpLimit = 2;
 
     public DCLCharacterPosition characterPosition;
 
@@ -327,17 +328,17 @@ public class DCLCharacterController : MonoBehaviour
 
             bool jumpButtonPressedWithGraceTime = jumpButtonPressed && (Time.time - lastJumpButtonPressedTime < 0.15f);
 
-            if (jumpButtonPressedWithGraceTime) // almost-grounded jump button press allowed time
+            if (jumpButtonPressedWithGraceTime) // almost-grounded jump button press allowed time几乎接地跳按钮按允许的时间
             {
                 bool justLeftGround = (Time.time - lastUngroundedTime) < 0.1f;
 
-                if (isGrounded || justLeftGround) // just-left-ground jump allowed time
+                if (isGrounded || justLeftGround) // just-left-ground jump allowed time 左跳是有时间的
                 {
                     Jump();
                 }
             }
 
-            //NOTE(Mordi): Detecting when the character hits the ground (for landing-SFX)
+            //NOTE(Mordi): Detecting when the character hits the ground (for landing-SFX)检测角色何时触地(用于着陆- sfx)
             if (isGrounded && !previouslyGrounded && (Time.time - lastUngroundedTime) > 0.4f)
             {
                 OnHitGround?.Invoke();
@@ -348,6 +349,7 @@ public class DCLCharacterController : MonoBehaviour
         {
             //NOTE(Brian): Transform has to be in sync before the Move call, otherwise this call
             //             will reset the character controller to its previous position.
+            //             Transform必须在Move调用之前同步，否则这个调用将重置角色控制器到它之前的位置。
             Environment.i.platform.physicsSyncController?.Sync();
             lastCharacterControllerCollision = characterController.Move(velocity * Time.deltaTime);
         }
@@ -382,12 +384,19 @@ public class DCLCharacterController : MonoBehaviour
         if (isJumping)
             return;
 
+        if (isGrounded) jumpLimit = 2;
+
         isJumping = true;
         isGrounded = false;
 
         ResetGround();
 
-        velocity.y = jumpForce;
+        if (jumpLimit>0)
+        {
+            velocity.y = jumpForce;
+            jumpLimit-- ;
+        }
+        
         //cameraTargetProbe.damping.y = dampingOnAir;
 
         OnJump?.Invoke();

@@ -185,8 +185,8 @@ public class VoiceChatWindowControllerShould
         // Arrange
         string testPlayerId = "playerId4";
         string testPlayerName = "Test Player";
-        Player testPlayer = new Player 
-        { 
+        Player testPlayer = new Player
+        {
             id = testPlayerId,
             name = testPlayerName
         };

@@ -9,6 +9,7 @@ using UnityEngine;
 
 // Note: we should make this class a part of BIWController and only fetch the NFTs if the biw is active instead of only 
 // when you enter builder in world
+//我们应该使这个类成为BIWController的一部分，并且只在biw激活时才获取nft，而不是只有当你进入世界中的builder时才获取
 public class BIWNFTController
 {
     public event System.Action OnNFTUsageChange;

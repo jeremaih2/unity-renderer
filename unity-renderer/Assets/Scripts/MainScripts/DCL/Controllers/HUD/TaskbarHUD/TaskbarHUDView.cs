@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DCL;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,12 +35,16 @@ public class TaskbarHUDView : MonoBehaviour
     public event System.Action<bool> OnVoiceChatToggle;
     public event System.Action<bool> OnExperiencesToggle;
 
+    private HUDCanvasCameraModeController hudCanvasCameraModeController;
+
     internal static TaskbarHUDView Create()
     {
         var view = Instantiate(Resources.Load<GameObject>(VIEW_PATH)).GetComponent<TaskbarHUDView>();
         view.Initialize();
         return view;
     }
+
+    private void Awake() { hudCanvasCameraModeController = new HUDCanvasCameraModeController(GetComponent<Canvas>(), DataStore.i.camera.hudsCamera); }
 
     private void Initialize()
     {
@@ -77,6 +82,8 @@ public class TaskbarHUDView : MonoBehaviour
 
     private void OnDestroy()
     {
+        hudCanvasCameraModeController?.Dispose();
+
         if (chatButton != null)
         {
             chatButton.OnToggleOn -= ToggleOn;
@@ -95,7 +102,7 @@ public class TaskbarHUDView : MonoBehaviour
             emotesButton.OnToggleOff -= ToggleOff;
         }
 
-        if(voiceChatButton != null)
+        if (voiceChatButton != null)
         {
             voiceChatButton.OnToggleOn -= ToggleOn;
             voiceChatButton.OnToggleOff -= ToggleOff;
@@ -124,20 +131,20 @@ public class TaskbarHUDView : MonoBehaviour
     public void ToggleOn(TaskbarButtonType buttonType) => ToggleOn(buttonsByType[buttonType], false);
 
     public void ToggleOff(TaskbarButtonType buttonType) => ToggleOff(buttonsByType[buttonType], false);
-    
+
     private void ToggleOn(TaskbarButton obj) => ToggleOn(obj, true);
 
     private void ToggleOn(TaskbarButton obj, bool useCallback)
     {
         var wasToggled = lastToggledOnButton == obj;
         lastToggledOnButton = obj;
-        
+
         foreach (var btn in buttonsByType.Values)
             btn.SetToggleState(btn == obj, useCallback);
 
         if (!useCallback) return;
         if (wasToggled) return;
-        
+
         if (obj == friendsButton)
             OnFriendsToggle?.Invoke(true);
         if (obj == emotesButton)
@@ -155,15 +162,15 @@ public class TaskbarHUDView : MonoBehaviour
     private void ToggleOff(TaskbarButton obj, bool useCallback)
     {
         var wasToggled = lastToggledOnButton == obj;
-        
+
         if (wasToggled)
             lastToggledOnButton = null;
-        
+
         obj.SetToggleState(false, useCallback);
 
         if (!useCallback) return;
         if (!wasToggled) return;
-        
+
         if (obj == friendsButton)
             OnFriendsToggle?.Invoke(false);
         if (obj == emotesButton)

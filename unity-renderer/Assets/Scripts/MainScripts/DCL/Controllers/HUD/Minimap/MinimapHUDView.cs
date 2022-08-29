@@ -1,3 +1,4 @@
+using System;
 using DCL;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,8 @@ public class MinimapHUDView : MonoBehaviour
     private int START_MENU_HOVER_BOOL = Animator.StringToHash("hover");
     private int START_MENU_PRESSED_TRIGGER = Animator.StringToHash("pressed");
 
-    [Header("Information")] [SerializeField]
+    [Header("Information")]
+    [SerializeField]
     private TextMeshProUGUI sceneNameText;
 
     [SerializeField] private TextMeshProUGUI playerPositionText;
@@ -32,6 +34,9 @@ public class MinimapHUDView : MonoBehaviour
     public static System.Action OnOpenNavmapClicked;
     public InputAction_Trigger toggleNavMapAction;
     private IMouseCatcher mouseCatcher;
+    private HUDCanvasCameraModeController hudCanvasCameraModeController;
+
+    private void Awake() { hudCanvasCameraModeController = new HUDCanvasCameraModeController(GetComponent<Canvas>(), DataStore.i.camera.hudsCamera); }
 
     public void Initialize(MinimapHUDController controller)
     {
@@ -59,7 +64,7 @@ public class MinimapHUDView : MonoBehaviour
         usersAroundListHudButton.gameObject.SetActive(false);
     }
 
-    internal void OnMouseLocked() 
+    internal void OnMouseLocked()
     {
         sceneOptionsPanel.SetActive(false);
     }
@@ -89,7 +94,8 @@ public class MinimapHUDView : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(mouseCatcher != null)
+        if (mouseCatcher != null)
             mouseCatcher.OnMouseLock -= OnMouseLocked;
+        hudCanvasCameraModeController?.Dispose();
     }
 }

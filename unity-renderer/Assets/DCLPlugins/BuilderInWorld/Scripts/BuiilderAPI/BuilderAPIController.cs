@@ -373,6 +373,9 @@ public class BuilderAPIController : IBuilderAPIController
 
         // Note: In order to get the full catalog we need to do 2 calls, the default one and the specific one
         // This is done in order to cache the response in the server 
+        //为了获得完整的目录，我们需要执行两个调用，默认调用和特定调用
+        //这样做是为了在服务器中缓存响应
+
         promiseDefaultCatalog.Then(catalogJson =>
         {
             AssetCatalogBridge.i.AddFullSceneObjectCatalog(catalogJson);
