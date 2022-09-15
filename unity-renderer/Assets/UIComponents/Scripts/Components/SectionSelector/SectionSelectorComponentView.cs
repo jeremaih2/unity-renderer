@@ -67,7 +67,7 @@ public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorC
         }
 
         if (instantiatedSections.Count > 0)
-            instantiatedSections[0].SelectToggle();
+            instantiatedSections[1].SelectToggle();
         
     }
 

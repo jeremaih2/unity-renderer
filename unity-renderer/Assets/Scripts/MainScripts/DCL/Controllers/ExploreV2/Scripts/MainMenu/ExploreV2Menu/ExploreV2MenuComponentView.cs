@@ -148,7 +148,7 @@ public class ExploreV2MenuComponentView : BaseComponentView, IExploreV2MenuCompo
     [Header("Tutorial References")]
     [SerializeField] internal RectTransform profileCardTooltipReference;
 
-    internal const ExploreSection DEFAULT_SECTION = ExploreSection.Explore;
+    internal const ExploreSection DEFAULT_SECTION = ExploreSection.Backpack;
     internal const string REALM_SELECTOR_MODAL_ID = "RealmSelector_Modal";
 
     public IRealmViewerComponentView currentRealmViewer => realmViewer;

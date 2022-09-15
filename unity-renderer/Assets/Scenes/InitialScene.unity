@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: b4f78c510a8526547ab9c9946449480e, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.053662747, g: 0.08584118, b: 0.16162089, a: 1}
+  m_IndirectSpecularColor: {r: 0.03206923, g: 0.06622551, b: 0.12150279, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -308,24 +308,26 @@ MonoBehaviour:
     soloSceneCoords: {x: 0, y: 0}
     ignoreGlobalScenes: 0
     msgStepByStep: 0
-  openBrowserWhenStart: 0
+  OpenBrowserOnStart: 1
   webSocketSSL: 0
   kernelVersion: 
   useCustomContentServer: 0
   customContentServerUrl: http://localhost:1338/
-  baseUrlMode: 1
-  baseUrlCustom: http://play.devnet.andverse.org/?
-  environment: 4
+  baseUrlMode: 3
+  customURL: https://play.devnet.andverse.org/?
+  network: 0
   realm: loki
   startInCoords: {x: 0, y: 0}
   forceLocalComms: 0
-  allWearables: 0
-  testWearables: 0
   enableTutorial: 0
   builderInWorld: 0
   soloScene: 0
-  multithreaded: 0
+  disableAssetBundles: 0
+  enableDebugMode: 0
   debugPanelMode: 0
+  disableGLTFDownloadThrottle: 0
+  multithreaded: 0
+  runPerformanceMeterToolDuringLoading: 0
 --- !u!4 &1444882337
 Transform:
   m_ObjectHideFlags: 0
