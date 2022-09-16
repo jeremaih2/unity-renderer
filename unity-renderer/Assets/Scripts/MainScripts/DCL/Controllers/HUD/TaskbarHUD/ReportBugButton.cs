@@ -10,7 +10,8 @@ namespace MainScripts.DCL.Controllers.HUD.TaskbarHUD
     public class ReportBugButton : MonoBehaviour
     {
 
-        private const string ReportBugURL = "https://github.com/decentraland/issues/issues/new?assignees=&labels=new%2Cexplorer&template=bug_report.yml";
+        //private const string ReportBugURL = "https://github.com/decentraland/issues/issues/new?assignees=&labels=new%2Cexplorer&template=bug_report.yml";
+        private const string ReportBugURL = "https://github.com/andverse-core/issues/issues/new?assignees=&labels=new%2Cexplorer&template=bug_report.yml";
 
         [SerializeField] private Button button;
 
