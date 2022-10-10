@@ -178,11 +178,11 @@ public class AvatarEditorHUDView : MonoBehaviour, IPointerDownHandler
     public void SetIsWeb3(bool isWeb3User)
     {
         web3Container.SetActive(isWeb3User);
-        //noWeb3Container.SetActive(!isWeb3User);
-        noWeb3Container.SetActive(isWeb3User);
+        noWeb3Container.SetActive(!isWeb3User);
         skinsWeb3Container.SetActive(isWeb3User);
-        //skinsMissingWeb3Container.SetActive(!isWeb3User);
-        skinsMissingWeb3Container.SetActive(isWeb3User);
+        skinsMissingWeb3Container.SetActive(!isWeb3User);
+        //noWeb3Container.SetActive(isWeb3User);
+        //skinsMissingWeb3Container.SetActive(isWeb3User);
     }
 
     internal void InitializeNavigationEvents(bool isGuest)

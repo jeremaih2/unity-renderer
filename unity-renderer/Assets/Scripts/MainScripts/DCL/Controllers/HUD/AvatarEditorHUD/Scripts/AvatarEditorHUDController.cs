@@ -18,7 +18,8 @@ public class AvatarEditorHUDController : IHUD
 {
     private const int LOADING_OWNED_WEARABLES_RETRIES = 3;
     private const string LOADING_OWNED_WEARABLES_ERROR_MESSAGE = "There was a problem loading your wearables";
-    private const string URL_MARKET_PLACE = "https://market.decentraland.org/browse?section=wearables";
+    //private const string URL_MARKET_PLACE = "https://market.decentraland.org/browse?section=wearables";
+    private const string URL_MARKET_PLACE = "https://newmall.io/"; 
     private const string URL_GET_A_WALLET = "https://docs.decentraland.org/get-a-wallet";
     private const string URL_SELL_COLLECTIBLE_GENERIC = "https://market.decentraland.org/account";
     private const string URL_SELL_SPECIFIC_COLLECTIBLE = "https://market.decentraland.org/contracts/{collectionId}/tokens/{tokenId}";
@@ -85,7 +86,7 @@ public class AvatarEditorHUDController : IHUD
 
         view = AvatarEditorHUDView.Create(this);
 
-        view.skinsFeatureContainer.SetActive(false);
+        view.skinsFeatureContainer.SetActive(true);
         avatarEditorVisible.OnChange += OnAvatarEditorVisibleChanged;
         OnAvatarEditorVisibleChanged(avatarEditorVisible.Get(), false);
 
@@ -274,8 +275,9 @@ public class AvatarEditorHUDController : IHUD
             return;
         }
 
-        //view.SetIsWeb3(userProfile.hasConnectedWeb3);
-        view.SetIsWeb3(false);
+        view.SetIsWeb3(userProfile.hasConnectedWeb3);
+        //view.SetIsWeb3(false);
+        Debug.Log("5555555555555555555"+userProfile.hasConnectedWeb3);
 
         ProcessCatalog(this.catalog);
         EquipBodyShape(bodyShape);
