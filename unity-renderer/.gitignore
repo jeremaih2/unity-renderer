@@ -13,5 +13,6 @@ Assets/InitTestScene*.unity.meta
 **/CurrentTestImages/
 /AssetBundles/
 Logs/
+/Builds/unity
 Assets/BuildReports*
 /CodeCoverage/

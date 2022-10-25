@@ -26,7 +26,7 @@ public class AvatarEditorHUDController : IHUD
     private const string THIRD_PARTY_COLLECTIONS_FEATURE_FLAG = "third_party_collections";
     internal const string EQUIP_WEARABLE_METRIC = "equip_wearable";
     //protected static readonly string[] categoriesThatMustHaveSelection = { Categories.BODY_SHAPE, Categories.UPPER_BODY, Categories.LOWER_BODY, Categories.FEET, Categories.EYES, Categories.EYEBROWS, Categories.MOUTH ,Categories.SKIN};
-    protected static readonly string[] categoriesThatMustHaveSelection ={ Categories.SKIN };
+    protected static readonly string[] categoriesThatMustHaveSelection ={ Categories.BODY_SHAPE, Categories.SKIN };
     protected static readonly string[] categoriesToRandomize = { Categories.HAIR, Categories.EYES, Categories.EYEBROWS, Categories.MOUTH, Categories.FACIAL, Categories.HAIR, Categories.UPPER_BODY, Categories.LOWER_BODY, Categories.FEET };
 
     [NonSerialized]
@@ -289,6 +289,7 @@ public class AvatarEditorHUDController : IHUD
         view.UnselectAllWearables();
 
         int wearablesCount = userProfile.avatar.wearables.Count;
+        Debug.Log("可穿戴的数量count是：" + wearablesCount);
 
         if (isPlayerRendererLoaded)
         {

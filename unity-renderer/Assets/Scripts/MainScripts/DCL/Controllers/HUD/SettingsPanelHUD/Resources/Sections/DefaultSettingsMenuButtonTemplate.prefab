@@ -216,7 +216,7 @@ MonoBehaviour:
   button: {fileID: 1483986414648455124}
   backgroundImage: {fileID: 6719262581451911450}
   textColorOnSelect: {r: 1, g: 1, b: 1, a: 1}
-  backgroundColorOnSelect: {r: 1, g: 0.45490196, b: 0.22352941, a: 1}
+  backgroundColorOnSelect: {r: 0.92941177, g: 0.3137255, b: 0.6862745, a: 1}
 --- !u!114 &5975792976868128833
 MonoBehaviour:
   m_ObjectHideFlags: 0
