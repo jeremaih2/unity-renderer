@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityGLTF;
 using Environment = DCL.Environment;
 
-public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
+public class BIWSceneManagerShould : IntegrationTestSuite_Legacy
 {
     private BuilderInWorldBridge biwBridge;
     private SceneManager mainController;
@@ -64,7 +64,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
         mainController.context.editorContext.saveController.Configure().GetSaveAttempsSinceLastSave().Returns(2);
         builderScene.Configure().sceneType.Returns(sceneType);
         mainController.sceneToEdit = builderScene;
-        
+
         // Act
         mainController.StartExitMode();
 
@@ -87,7 +87,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
         Environment.i.world.sceneController.SendSceneReady(scene.sceneData.id);
 
         // Assert
-        Assert.AreEqual(SceneManager.State.SCENE_LOADED, mainController.currentState );
+        Assert.AreEqual(SceneManager.State.SCENE_LOADED, mainController.currentState);
     }
 
     [Test]
@@ -106,7 +106,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
         mainController.ExitEditMode();
 
         // Assert
-        Assert.AreEqual(mainController.currentState, SceneManager.State.IDLE );
+        Assert.AreEqual(mainController.currentState, SceneManager.State.IDLE);
     }
 
     [Test]
@@ -115,7 +115,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
         // Arrange
         scene.CreateEntity(1);
         Environment.i.world.sceneController.SendSceneReady(scene.sceneData.id);
-        CommonScriptableObjects.playerWorldPosition.Set(new Vector3(scene.sceneData.basePosition.x, 0, scene.sceneData.basePosition.y));
+        DataStore.i.player.playerWorldPosition.Set(new Vector3(scene.sceneData.basePosition.x, 0, scene.sceneData.basePosition.y));
 
         // Act
         var sceneFound = mainController.FindSceneToEdit();
@@ -152,7 +152,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
         resultOkPromise.Resolve(true);
 
         // Assert
-        Assert.GreaterOrEqual(mainController.currentState, SceneManager.State.CATALOG_LOADED );
+        Assert.GreaterOrEqual(mainController.currentState, SceneManager.State.CATALOG_LOADED);
     }
 
     [Test]
@@ -263,7 +263,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
 
         InitialStateResponse initialStateResponse = new InitialStateResponse();
         initialStateResponse.manifest = Substitute.For<IManifest>();
-            
+
         // Act
         mainController.CheckSceneToEditByShorcut();
         statePromise.Resolve(initialStateResponse);
@@ -284,7 +284,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
         mainController.ExitAfterCharacterTeleport(new DCLCharacterPosition());
 
         // Assert
-        Assert.AreEqual(mainController.currentState,  SceneManager.State.IDLE);
+        Assert.AreEqual(mainController.currentState, SceneManager.State.IDLE);
     }
 
     private void AddSceneToPermissions()
@@ -309,7 +309,7 @@ public class BIWSceneManagerShould :  IntegrationTestSuite_Legacy
 
     protected override IEnumerator TearDown()
     {
-        yield return new DCL.WaitUntil( () => GLTFComponent.downloadingCount == 0 );
+        yield return new DCL.WaitUntil(() => GLTFComponent.downloadingCount == 0);
         UnityEngine.Object.Destroy(biwBridge.gameObject);
         mainController.context.Dispose();
         mainController.Dispose();

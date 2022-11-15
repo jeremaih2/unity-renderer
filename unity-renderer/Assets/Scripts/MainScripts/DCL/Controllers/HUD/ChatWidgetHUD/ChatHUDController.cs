@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Cysharp.Threading.Tasks;
 using DCL;
 using DCL.Interface;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using DCL.Chat;
 
 public class ChatHUDController : IDisposable
 {
@@ -62,15 +62,15 @@ public class ChatHUDController : IDisposable
         this.view.OnMessageUpdated += HandleMessageUpdated;
     }
 
-    public void AddChatMessage(ChatMessage message, bool setScrollPositionToBottom = false, bool spamFiltering = true)
+    public void AddChatMessage(ChatMessage message, bool setScrollPositionToBottom = false, bool spamFiltering = true, bool limitMaxEntries = true)
     {
-        AddChatMessage(ChatMessageToChatEntry(message), setScrollPositionToBottom, spamFiltering).Forget();
+        AddChatMessage(ChatMessageToChatEntry(message), setScrollPositionToBottom, spamFiltering, limitMaxEntries).Forget();
     }
 
-    public async UniTask AddChatMessage(ChatEntryModel chatEntryModel, bool setScrollPositionToBottom = false, bool spamFiltering = true)
+    public async UniTask AddChatMessage(ChatEntryModel chatEntryModel, bool setScrollPositionToBottom = false, bool spamFiltering = true, bool limitMaxEntries = true)
     {
         if (IsSpamming(chatEntryModel.senderName) && spamFiltering) return;
-        
+
         chatEntryModel.bodyText = ChatUtils.AddNoParse(chatEntryModel.bodyText);
 
         if (IsProfanityFilteringEnabled() && chatEntryModel.messageType != ChatMessage.Type.PRIVATE)
@@ -88,9 +88,9 @@ public class ChatHUDController : IDisposable
 
         view.AddEntry(chatEntryModel, setScrollPositionToBottom);
 
-        if (view.EntryCount > MAX_CHAT_ENTRIES)
+        if (limitMaxEntries && view.EntryCount > MAX_CHAT_ENTRIES)
             view.RemoveFirstEntry();
-        
+
         if (string.IsNullOrEmpty(chatEntryModel.senderId)) return;
 
         if (spamFiltering)
@@ -119,20 +119,22 @@ public class ChatHUDController : IDisposable
     public void FocusInputField() => view.FocusInputField();
 
     public void SetInputFieldText(string setInputText) => view.SetInputFieldText(setInputText);
-    
+
     public void UnfocusInputField() => view.UnfocusInputField();
 
     public void ActivatePreview() => view.ActivatePreview();
-    
+
     public void DeactivatePreview() => view.DeactivatePreview();
 
     public void FadeOutMessages() => view.FadeOutMessages();
+
 
     private ChatEntryModel ChatMessageToChatEntry(ChatMessage message)
     {
         var model = new ChatEntryModel();
         var ownProfile = userProfileBridge.GetOwn();
 
+        model.messageId = message.messageId;
         model.messageType = message.messageType;
         model.bodyText = message.body;
         model.timestamp = message.timestamp;
@@ -243,7 +245,7 @@ public class ChatHUDController : IDisposable
         var isSpamming = false;
 
         if (!temporarilyMutedSenders.ContainsKey(senderName)) return false;
-        
+
         var muteTimestamp = CreateBaseDateTime().AddMilliseconds(temporarilyMutedSenders[senderName]).ToLocalTime();
         if ((DateTime.Now - muteTimestamp).Minutes < TEMPORARILY_MUTE_MINUTES)
             isSpamming = true;
@@ -252,7 +254,7 @@ public class ChatHUDController : IDisposable
 
         return isSpamming;
     }
-    
+
     private void UpdateSpam(ChatEntryModel model)
     {
         if (spamMessages.Count == 0)
@@ -293,7 +295,7 @@ public class ChatHUDController : IDisposable
     {
         return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
     }
-    
+
     private void FillInputWithNextMessage()
     {
         if (lastMessagesSent.Count == 0) return;
@@ -309,11 +311,11 @@ public class ChatHUDController : IDisposable
             view.ResetInputField();
             return;
         }
-        
+
         currentHistoryIteration--;
         if (currentHistoryIteration < 0)
             currentHistoryIteration = lastMessagesSent.Count - 1;
-        
+
         view.FocusInputField();
         view.SetInputFieldText(lastMessagesSent[currentHistoryIteration]);
     }

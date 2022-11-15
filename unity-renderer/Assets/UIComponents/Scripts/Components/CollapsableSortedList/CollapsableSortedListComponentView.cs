@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,16 +37,16 @@ namespace UIComponents.CollapsableSortedList
         public override void Update()
         {
             base.Update();
-            
+
             if (isLayoutDirty)
-                Utils.ForceRebuildLayoutImmediate((RectTransform) container);
+                Utils.ForceRebuildLayoutImmediate((RectTransform)container);
             isLayoutDirty = false;
         }
 
         public override void RefreshControl()
         {
             Clear();
-            
+
             if (model.isExpanded)
                 Expand();
             else
@@ -140,7 +140,7 @@ namespace UIComponents.CollapsableSortedList
             UpdateLayout();
             UpdateEmptyState();
         }
-        
+
         public IEnumerator FilterAsync(Func<V, bool> comparision, int throttlingBudget = 10)
         {
             filteredCount = 0;
@@ -151,7 +151,7 @@ namespace UIComponents.CollapsableSortedList
                 iterations++;
                 if (iterations % throttlingBudget == 0)
                     yield return null;
-                
+
                 var isMatch = comparision.Invoke(entry.Value);
                 entry.Value.gameObject.SetActive(isMatch);
 
@@ -173,7 +173,7 @@ namespace UIComponents.CollapsableSortedList
             }
         }
 
-        private void UpdateEmptyState()
+        protected virtual void UpdateEmptyState()
         {
             if (emptyStateContainer == null) return;
             emptyStateContainer.SetActive(Count() == 0);

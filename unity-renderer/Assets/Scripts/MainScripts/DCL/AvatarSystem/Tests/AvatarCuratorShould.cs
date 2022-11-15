@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,7 @@ namespace Test.AvatarSystem
         private AvatarCurator curator;
         private IWearableItemResolver resolver;
         private Dictionary<string, WearableItem> catalog;
+        private IEmotesCatalogService emotesCatalogService;
 
         [SetUp]
         public void SetUp()
@@ -30,26 +31,27 @@ namespace Test.AvatarSystem
             //Resolver returns items from our own dictionary
             resolver.Configure()
                     .ResolveAndSplit(Arg.Any<IEnumerable<string>>())
-                    .Returns( x =>
+                    .Returns(x =>
                     {
                         List<WearableItem> wearables = GetWearablesFromIDs(x.ArgAt<IEnumerable<string>>(0)).ToList();
-                        return new UniTask<(List<WearableItem> wearableItems, List<WearableItem> emotes)>( (wearables, new List<WearableItem>() ));
+                        return new UniTask<(List<WearableItem> wearableItems, List<WearableItem> emotes)>((wearables, new List<WearableItem>()));
                     });
             resolver.Configure()
                     .Resolve(Arg.Any<IEnumerable<string>>())
-                    .Returns( x =>
+                    .Returns(x =>
                     {
                         WearableItem[] wearables = GetWearablesFromIDs(x.ArgAt<IEnumerable<string>>(0));
                         return new UniTask<WearableItem[]>(wearables);
                     });
             resolver.Configure()
                     .Resolve(Arg.Any<string>())
-                    .Returns( x =>
+                    .Returns(x =>
                     {
                         WearableItem wearable = GetWearableFromID(x.ArgAt<string>(0));
                         return new UniTask<WearableItem>(wearable);
                     });
-            curator = new AvatarCurator(resolver);
+            emotesCatalogService = Substitute.For<IEmotesCatalogService>();
+            curator = new AvatarCurator(resolver, emotesCatalogService);
         }
 
         [TearDown]
@@ -66,7 +68,7 @@ namespace Test.AvatarSystem
                     List<WearableItem> emotes)
                 = await curator.Curate(
                     new AvatarSettings { bodyshapeId = WearableLiterals.BodyShapes.FEMALE },
-                    new [] { WearableLiterals.BodyShapes.FEMALE, "ubody_id", "lbody_id", "eyes_id", "eyebrows_id", "mouth_id", "feet_id", "hair_id" });
+                    new[] { WearableLiterals.BodyShapes.FEMALE, "ubody_id", "lbody_id", "eyes_id", "eyebrows_id", "mouth_id", "feet_id", "hair_id" }, new string[] { });
 
             Assert.NotNull(bodyshape);
             Assert.AreEqual(catalog[WearableLiterals.BodyShapes.FEMALE], bodyshape);
@@ -93,7 +95,7 @@ namespace Test.AvatarSystem
                 WearableItem eyebrows,
                 WearableItem mouth,
                 List<WearableItem> wearables,
-                List<WearableItem> emotes) = await curator.Curate(new AvatarSettings { bodyshapeId = WearableLiterals.BodyShapes.FEMALE }, new [] { WearableLiterals.BodyShapes.FEMALE, "WontFindThis" });
+                List<WearableItem> emotes) = await curator.Curate(new AvatarSettings { bodyshapeId = WearableLiterals.BodyShapes.FEMALE }, new[] { WearableLiterals.BodyShapes.FEMALE, "WontFindThis" }, new string[] { });
 
             Assert.NotNull(bodyshape);
             Assert.AreEqual(catalog[WearableLiterals.BodyShapes.FEMALE], bodyshape);
@@ -119,7 +121,7 @@ namespace Test.AvatarSystem
             cts.Cancel();
 
             //Assert
-            TestUtils.ThrowsAsync<OperationCanceledException>(curator.Curate(new AvatarSettings { bodyshapeId = WearableLiterals.BodyShapes.FEMALE }, null, cts.Token));
+            TestUtils.ThrowsAsync<OperationCanceledException>(curator.Curate(new AvatarSettings { bodyshapeId = WearableLiterals.BodyShapes.FEMALE }, null, null, cts.Token));
         });
 
         [Test]
@@ -154,7 +156,7 @@ namespace Test.AvatarSystem
         {
             catalog = new Dictionary<string, WearableItem>();
             catalog.Add(WearableLiterals.BodyShapes.FEMALE, GetWearableForFemaleBodyshape(WearableLiterals.BodyShapes.FEMALE, WearableLiterals.Categories.BODY_SHAPE));
-            catalog.Add("ubody_id",  GetWearableForFemaleBodyshape("ubody", WearableLiterals.Categories.UPPER_BODY));
+            catalog.Add("ubody_id", GetWearableForFemaleBodyshape("ubody", WearableLiterals.Categories.UPPER_BODY));
             catalog.Add("lbody_id", GetWearableForFemaleBodyshape("ubody", WearableLiterals.Categories.LOWER_BODY));
             catalog.Add("eyes_id", GetWearableForFemaleBodyshape("ubody", WearableLiterals.Categories.EYES));
             catalog.Add("eyebrows_id", GetWearableForFemaleBodyshape("ubody", WearableLiterals.Categories.EYEBROWS));
@@ -178,7 +180,7 @@ namespace Test.AvatarSystem
                 data = new WearableItem.Data
                 {
                     category = category,
-                    representations = new []
+                    representations = new[]
                     {
                         new WearableItem.Representation
                         {

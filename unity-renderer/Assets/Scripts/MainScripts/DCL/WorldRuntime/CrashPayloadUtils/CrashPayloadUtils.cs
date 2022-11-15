@@ -12,7 +12,7 @@ namespace DCL.Helpers
 {
     public static class CrashPayloadUtils
     {
-        public static CrashPayload ComputePayload(Dictionary<string, IParcelScene> allScenes,
+        public static CrashPayload ComputePayload(IEnumerable<KeyValuePair<string, IParcelScene>> allScenes,
             List<Vector3> trackedMovements,
             List<Vector3> trackedTeleports)
         {
@@ -187,7 +187,7 @@ namespace DCL.Helpers
             public int quantity;
         }
 
-        public static void Dump(Dictionary<string, IParcelScene> allScenes, AssetLibrary_Texture library,
+        public static void Dump(IEnumerable<KeyValuePair<string, IParcelScene>> allScenes, AssetLibrary_Texture library,
             Dictionary<string, RefCountedTextureData> textureData, CrashPayload payload)
         {
             var componentsDump = new List<ComponentsDump>();
@@ -214,12 +214,12 @@ namespace DCL.Helpers
                 totalSceneLimits += scene.metricsCounter?.currentCount.ToMetricsModel();
 
                 loadedScenes.Add(new LoadedScenesDump
-                    {
-                        id = kvp.Key
-                    }
+                {
+                    id = kvp.Key
+                }
                 );
 
-                foreach ( var kvpComponents in scene.componentsManagerLegacy.GetSceneSharedComponentsDictionary() )
+                foreach (var kvpComponents in scene.componentsManagerLegacy.GetSceneSharedComponentsDictionary())
                 {
                     int classId = kvpComponents.Value.GetClassId();
 
@@ -237,8 +237,8 @@ namespace DCL.Helpers
                         {
                             int classId = iterator.Current.GetClassId();
 
-                            if ( !entityComponentsCount.ContainsKey(classId) )
-                                entityComponentsCount.Add( classId, 0 );
+                            if (!entityComponentsCount.ContainsKey(classId))
+                                entityComponentsCount.Add(classId, 0);
 
                             entityComponentsCount[classId]++;
                         }
@@ -249,20 +249,20 @@ namespace DCL.Helpers
             foreach (var kvp in sharedComponentsCount)
             {
                 componentsDump.Add(new ComponentsDump
-                    {
-                        type = ((CLASS_ID) kvp.Key).ToString(),
-                        quantity = kvp.Value
-                    }
+                {
+                    type = ((CLASS_ID)kvp.Key).ToString(),
+                    quantity = kvp.Value
+                }
                 );
             }
 
             foreach (var kvp in entityComponentsCount)
             {
                 componentsDump.Add(new ComponentsDump
-                    {
-                        type = ((CLASS_ID_COMPONENT) kvp.Key).ToString(),
-                        quantity = kvp.Value
-                    }
+                {
+                    type = ((CLASS_ID_COMPONENT)kvp.Key).ToString(),
+                    quantity = kvp.Value
+                }
                 );
             }
 

@@ -53,7 +53,7 @@ public class PreviewCameraRotation : MonoBehaviour, IDragHandler, IBeginDragHand
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            currentHorizontalRotationVelocity  = Mathf.Lerp(slowDownVelocity, 0, 1 - (timer * inverseTimer));
+            currentHorizontalRotationVelocity = Mathf.Lerp(slowDownVelocity, 0, 1 - (timer * inverseTimer));
             OnHorizontalRotation?.Invoke(currentHorizontalRotationVelocity);
 
             yield return null;

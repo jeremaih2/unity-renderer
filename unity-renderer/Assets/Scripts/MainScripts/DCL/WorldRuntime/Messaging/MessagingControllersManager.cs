@@ -10,8 +10,8 @@ namespace DCL
     public class MessagingControllersManager : IMessagingControllersManager
     {
         public static bool VERBOSE = false;
-        
-        private const float MAX_GLOBAL_MSG_BUDGET = 0.006f;
+
+        private const float MAX_GLOBAL_MSG_BUDGET = 0.02f;
         private const float MAX_SYSTEM_MSG_BUDGET_FOR_FAR_SCENES = 0.003f;
 
         private const float GLTF_BUDGET_MAX = 0.033f;
@@ -82,87 +82,87 @@ namespace DCL
         public void PopulateBusesToBeProcessed()
         {
             lock (sortedControllers)
-            lock (busesToProcess)
-            {
-                IWorldState worldState = Environment.i.world.state;
-                string currentSceneId = worldState.currentSceneId;
-                List<IParcelScene> scenesSortedByDistance = worldState.scenesSortedByDistance;
-
-                int count = scenesSortedByDistance.Count; // we need to retrieve list count everytime because it
-                // may change after a yield return
-
-                sortedControllers.Clear();
-
-                if (!string.IsNullOrEmpty(currentSceneId) && messagingControllers.ContainsKey(currentSceneId))
-                    currentSceneController = messagingControllers[currentSceneId];
-
-                for (int i = 0; i < count; i++)
+                lock (busesToProcess)
                 {
-                    string controllerId = scenesSortedByDistance[i].sceneData.id;
+                    IWorldState worldState = Environment.i.world.state;
+                    string currentSceneId = worldState.GetCurrentSceneId();
+                    var scenesSortedByDistance = worldState.GetScenesSortedByDistance();
 
-                    if (controllerId != currentSceneId)
+                    int count = scenesSortedByDistance.Count; // we need to retrieve list count everytime because it
+                                                              // may change after a yield return
+
+                    sortedControllers.Clear();
+
+                    if (!string.IsNullOrEmpty(currentSceneId) && messagingControllers.ContainsKey(currentSceneId))
+                        currentSceneController = messagingControllers[currentSceneId];
+
+                    for (int i = 0; i < count; i++)
                     {
-                        if (!messagingControllers.ContainsKey(controllerId))
-                            continue;
+                        string controllerId = scenesSortedByDistance[i].sceneData.id;
 
-                        sortedControllers.Add(messagingControllers[controllerId]);
+                        if (controllerId != currentSceneId)
+                        {
+                            if (!messagingControllers.ContainsKey(controllerId))
+                                continue;
+
+                            sortedControllers.Add(messagingControllers[controllerId]);
+                        }
                     }
-                }
 
-                sortedControllersCount = sortedControllers.Count;
+                    sortedControllersCount = sortedControllers.Count;
 
-                bool globalSceneControllerActive = globalSceneControllers.Count > 0;
-                bool globalControllerActive = globalController != null && globalController.enabled;
-                bool currentSceneControllerActive = currentSceneController != null && currentSceneController.enabled;
+                    bool globalSceneControllerActive = globalSceneControllers.Count > 0;
+                    bool globalControllerActive = globalController != null && globalController.enabled;
+                    bool currentSceneControllerActive = currentSceneController != null && currentSceneController.enabled;
 
-                bool atLeastOneControllerShouldBeProcessed = globalSceneControllerActive || globalControllerActive ||
-                                                             currentSceneControllerActive || sortedControllersCount > 0;
+                    bool atLeastOneControllerShouldBeProcessed = globalSceneControllerActive || globalControllerActive ||
+                                                                 currentSceneControllerActive || sortedControllersCount > 0;
 
-                if (!atLeastOneControllerShouldBeProcessed)
-                    return;
+                    if (!atLeastOneControllerShouldBeProcessed)
+                        return;
 
-                busesToProcess.Clear();
+                    busesToProcess.Clear();
 
-                //-------------------------------------------------------------------------------------------
-                // Global scenes
-                using (var globalScenecontrollersIterator = globalSceneControllers.GetEnumerator())
-                {
-                    while (globalScenecontrollersIterator.MoveNext())
+                    //-------------------------------------------------------------------------------------------
+                    // Global scenes
+                    using (var globalScenecontrollersIterator = globalSceneControllers.GetEnumerator())
                     {
-                        busesToProcess.Add(globalScenecontrollersIterator.Current.Value.uiBus);
-                        busesToProcess.Add(globalScenecontrollersIterator.Current.Value.initBus);
-                        busesToProcess.Add(globalScenecontrollersIterator.Current.Value.systemBus);
+                        while (globalScenecontrollersIterator.MoveNext())
+                        {
+                            busesToProcess.Add(globalScenecontrollersIterator.Current.Value.uiBus);
+                            busesToProcess.Add(globalScenecontrollersIterator.Current.Value.initBus);
+                            busesToProcess.Add(globalScenecontrollersIterator.Current.Value.systemBus);
+                        }
                     }
+
+                    if (globalControllerActive)
+                    {
+                        busesToProcess.Add(globalController.initBus);
+                    }
+
+                    if (currentSceneControllerActive)
+                    {
+                        busesToProcess.Add(currentSceneController.initBus);
+                        busesToProcess.Add(currentSceneController.uiBus);
+                        busesToProcess.Add(currentSceneController.systemBus);
+                    }
+
+                    for (int i = 0; i < sortedControllersCount; ++i)
+                    {
+                        MessagingController msgController = sortedControllers[i];
+
+                        busesToProcess.Add(msgController.initBus);
+                        busesToProcess.Add(msgController.uiBus);
+                    }
+
+                    for (int i = 0; i < sortedControllersCount; ++i)
+                    {
+                        MessagingController msgController = sortedControllers[i];
+                        busesToProcess.Add(msgController.systemBus);
+                    }
+
+                    busesToProcessCount = busesToProcess.Count;
                 }
-
-                if (globalControllerActive)
-                {
-                    busesToProcess.Add(globalController.initBus);
-                }
-
-                if (currentSceneControllerActive)
-                {
-                    busesToProcess.Add(currentSceneController.initBus);
-                    busesToProcess.Add(currentSceneController.uiBus);
-                    busesToProcess.Add(currentSceneController.systemBus);
-                }
-
-                for (int i = 0; i < sortedControllersCount; ++i)
-                {
-                    MessagingController msgController = sortedControllers[i];
-
-                    busesToProcess.Add(msgController.initBus);
-                    busesToProcess.Add(msgController.uiBus);
-                }
-
-                for (int i = 0; i < sortedControllersCount; ++i)
-                {
-                    MessagingController msgController = sortedControllers[i];
-                    busesToProcess.Add(msgController.systemBus);
-                }
-
-                busesToProcessCount = busesToProcess.Count;
-            }
         }
 
         public void Dispose()
@@ -295,7 +295,7 @@ namespace DCL
                     {
                         bus = busesToProcess[i];
                     }
-                    
+
                     if (ProcessBus(bus))
                         break;
                 }

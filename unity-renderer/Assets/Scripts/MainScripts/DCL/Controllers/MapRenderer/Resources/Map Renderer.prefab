@@ -101,7 +101,7 @@ MonoBehaviour:
     type: 3}
   selectParcelHighlighImagePrefab: {fileID: 396097962848855216, guid: de10b7ec0d61e314f97d8c8b4b8875c4,
     type: 3}
-  cursorMapCoords: {x: 0, y: 0, z: 0}
+  cursorMapCoords: {x: 0, y: 0}
   showCursorCoords: 1
   atlas: {fileID: 8867674412829076673}
   highlightedParcelText: {fileID: 205258686199008947}
@@ -114,6 +114,8 @@ MonoBehaviour:
   scenesOfInterestIconPrefab: {fileID: 4461918297282884638, guid: f7b91bf31609c8a43b5dbc0ae70e47ab,
     type: 3}
   userIconPrefab: {fileID: 9031851020175058759, guid: de55552ad87874a44aefe9d124170fe8,
+    type: 3}
+  homePointIconPrefab: {fileID: 9031851020175058759, guid: 375da175c4e3b864dafb0d630714e6bb,
     type: 3}
   globalUserMarkerPrefab: {fileID: 5313837265398941890, guid: 6b6245a77381540da8f58d770d619b05,
     type: 3}
@@ -136,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5671061822795681277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -833,7 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewport: {fileID: 0}
   container: {fileID: 7164109601661372131}
-  chunksParent: {fileID: 8867674413542430455}
+  chunksParent: {fileID: 8867674413542430443}
   overlayLayerGameobject: {fileID: 3620416516788639812}
   mapChunkPrefab: {fileID: 7275614131455466647, guid: 1b2b2c80782c4a641bd3e9a0e6a94806,
     type: 3}

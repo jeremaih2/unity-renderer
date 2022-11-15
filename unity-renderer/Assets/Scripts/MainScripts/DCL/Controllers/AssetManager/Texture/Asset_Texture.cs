@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 using UnityGLTF.Cache;
 using Object = UnityEngine.Object;
 
@@ -20,11 +18,10 @@ namespace DCL
 
             texture.wrapMode = textureWrapMode;
             texture.filterMode = textureFilterMode;
-            
-#if !UNITY_STANDALONE
-            texture.Compress(false);
-#endif
-            
+
+            if (DataStore.i.textureConfig.runCompression.Get())
+                texture.Compress(false);
+
             texture.Apply(textureFilterMode != FilterMode.Point, makeNoLongerReadable);
         }
 

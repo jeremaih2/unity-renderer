@@ -30,7 +30,7 @@ namespace DCL
         GameObject newHoveredGO = null;
 
         IPointerEvent newHoveredInputEvent = null;
-        IPointerEvent[] lastHoveredEventList = null;
+        IList<IPointerEvent> lastHoveredEventList = null;
 
         RaycastHit hitInfo;
         PointerEventData uiGraphicRaycastPointerEventData = new PointerEventData(null);
@@ -41,6 +41,8 @@ namespace DCL
         private InputController_Legacy inputControllerLegacy;
         private InteractionHoverCanvasController hoverCanvas;
 
+        private DataStore_ECS7 dataStoreEcs7 = DataStore.i.ecs7;
+
         public PointerEventsController(InputController_Legacy inputControllerLegacy,
             InteractionHoverCanvasController hoverCanvas)
         {
@@ -49,7 +51,7 @@ namespace DCL
 
             for (int i = 0; i < Enum.GetValues(typeof(WebInterface.ACTION_BUTTON)).Length; i++)
             {
-                var buttonId = (WebInterface.ACTION_BUTTON) i;
+                var buttonId = (WebInterface.ACTION_BUTTON)i;
 
                 if (buttonId == WebInterface.ACTION_BUTTON.ANY)
                     continue;
@@ -82,14 +84,15 @@ namespace DCL
             IWorldState worldState = Environment.i.world.state;
 
             // We use Physics.Raycast() instead of our raycastHandler.Raycast() as that one is slower, sometimes 2x, because it fetches info we don't need here
-            bool didHit = Physics.Raycast(GetRayFromCamera(), out hitInfo, Mathf.Infinity,
+            Ray ray = GetRayFromCamera();
+            bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity,
                 PhysicsLayers.physicsCastLayerMaskWithoutCharacter);
 
             bool uiIsBlocking = false;
-            string currentSceneId = worldState.currentSceneId;
+            string currentSceneId = worldState.GetCurrentSceneId();
 
             bool validCurrentSceneId = !string.IsNullOrEmpty(currentSceneId);
-            bool validCurrentScene = validCurrentSceneId && worldState.loadedScenes.ContainsKey(currentSceneId);
+            bool validCurrentScene = validCurrentSceneId && worldState.ContainsScene(currentSceneId);
 
             // NOTE: in case of a single scene loaded (preview or builder) sceneId is set to null when stepping outside
             if (didHit && validCurrentSceneId && validCurrentScene)
@@ -106,23 +109,37 @@ namespace DCL
                 }
             }
 
+            if (dataStoreEcs7.isEcs7Enabled)
+            {
+                dataStoreEcs7.lastPointerRayHit.hit.collider = hitInfo.collider;
+                dataStoreEcs7.lastPointerRayHit.hit.point = hitInfo.point;
+                dataStoreEcs7.lastPointerRayHit.hit.normal = hitInfo.normal;
+                dataStoreEcs7.lastPointerRayHit.hit.distance = hitInfo.distance;
+                dataStoreEcs7.lastPointerRayHit.didHit = didHit;
+                dataStoreEcs7.lastPointerRayHit.ray = ray;
+                dataStoreEcs7.lastPointerRayHit.hasValue = true;
+            }
+
             if (!didHit || uiIsBlocking)
             {
                 clickHandler = null;
                 UnhoverLastHoveredObject();
+
                 return;
             }
 
             var raycastHandlerTarget = hitInfo.collider.GetComponent<IRaycastPointerHandler>();
+
             if (raycastHandlerTarget != null)
             {
                 ResolveGenericRaycastHandlers(raycastHandlerTarget);
                 UnhoverLastHoveredObject();
+
                 return;
             }
 
             if (CollidersManager.i.GetColliderInfo(hitInfo.collider, out ColliderInfo info))
-                newHoveredInputEvent = info.entity.gameObject.GetComponentInChildren<IPointerEvent>();
+                newHoveredInputEvent = GetPointerEvent(info.entity);
             else
                 newHoveredInputEvent = hitInfo.collider.GetComponentInChildren<IPointerEvent>();
 
@@ -131,6 +148,7 @@ namespace DCL
             if (!EventObjectCanBeHovered(info, hitInfo.distance))
             {
                 UnhoverLastHoveredObject();
+
                 return;
             }
 
@@ -142,13 +160,10 @@ namespace DCL
 
                 lastHoveredObject = newHoveredGO;
 
-                lastHoveredEventList = newHoveredInputEvent.entity.gameObject.transform.Cast<Transform>()
-                    .Select(child => child.GetComponent<IPointerEvent>())
-                    .Where(pointerComponent => pointerComponent != null)
-                    .ToArray();
+                lastHoveredEventList = GetPointerEventList(newHoveredInputEvent.entity);
 
                 // NOTE: this case is for the Avatar, since it hierarchy differs from other ECS components
-                if (lastHoveredEventList?.Length == 0)
+                if (lastHoveredEventList?.Count == 0)
                 {
                     lastHoveredEventList = newHoveredGO.GetComponents<IPointerEvent>();
                 }
@@ -157,11 +172,11 @@ namespace DCL
             }
 
             // OnPointerDown/OnClick and OnPointerUp should display their hover feedback at different moments
-            if (lastHoveredEventList != null && lastHoveredEventList.Length > 0)
+            if (lastHoveredEventList != null && lastHoveredEventList.Count > 0)
             {
                 bool isEntityShowingHoverFeedback = false;
 
-                for (int i = 0; i < lastHoveredEventList.Length; i++)
+                for (int i = 0; i < lastHoveredEventList.Count; i++)
                 {
                     if (lastHoveredEventList[i] is IPointerInputEvent e)
                     {
@@ -195,6 +210,24 @@ namespace DCL
 
             newHoveredGO = null;
             newHoveredInputEvent = null;
+        }
+
+        private IList<IPointerEvent> GetPointerEventList(IDCLEntity entity)
+        {
+            return entity.gameObject.transform.Cast<Transform>()
+                                    .Select(child => child.GetComponent<IPointerEvent>())
+                                    .Where(pointerComponent => pointerComponent != null)
+                                    .ToArray();
+        }
+
+        private IPointerEvent GetPointerEvent(IDCLEntity entity)
+        {
+            return entity.gameObject.GetComponentInChildren<IPointerEvent>();
+        }
+
+        private IList<IPointerInputEvent> GetPointerInputEvents(GameObject hitGameObject)
+        {
+            return hitGameObject.GetComponentsInChildren<IPointerInputEvent>();
         }
 
         private bool EventObjectCanBeHovered(ColliderInfo colliderInfo, float distance)
@@ -234,6 +267,7 @@ namespace DCL
                 {
                     if (clickHandler == click)
                         click.OnPointerClick();
+
                     clickHandler = null;
                 }
             }
@@ -251,10 +285,11 @@ namespace DCL
 
             OnPointerHoverEnds?.Invoke();
 
-            for (int i = 0; i < lastHoveredEventList.Length; i++)
+            for (int i = 0; i < lastHoveredEventList.Count; i++)
             {
                 if (lastHoveredEventList[i] == null)
                     continue;
+
                 lastHoveredEventList[i].SetHoverState(false);
             }
 
@@ -266,7 +301,7 @@ namespace DCL
         {
             for (int i = 0; i < Enum.GetValues(typeof(WebInterface.ACTION_BUTTON)).Length; i++)
             {
-                var buttonId = (WebInterface.ACTION_BUTTON) i;
+                var buttonId = (WebInterface.ACTION_BUTTON)i;
 
                 if (buttonId == WebInterface.ACTION_BUTTON.ANY)
                     continue;
@@ -294,10 +329,7 @@ namespace DCL
             }
         }
 
-        public Ray GetRayFromCamera()
-        {
-            return charCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        }
+        public Ray GetRayFromCamera() { return charCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); }
 
         void OnButtonEvent(WebInterface.ACTION_BUTTON buttonId, InputController_Legacy.EVENT evt, bool useRaycast,
             bool enablePointerEvent)
@@ -322,6 +354,7 @@ namespace DCL
 
             var pointerEventLayer =
                 PhysicsLayers.physicsCastLayerMaskWithoutCharacter; //Ensure characterController is being filtered
+
             var globalLayer = pointerEventLayer & ~PhysicsLayers.physicsCastLayerMask;
 
             if (evt == InputController_Legacy.EVENT.BUTTON_DOWN)
@@ -332,6 +365,13 @@ namespace DCL
             {
                 ProcessButtonUp(buttonId, useRaycast, enablePointerEvent, pointerEventLayer, globalLayer);
             }
+
+            if (dataStoreEcs7.isEcs7Enabled)
+            {
+                dataStoreEcs7.lastPointerInputEvent.buttonId = (int)buttonId;
+                dataStoreEcs7.lastPointerInputEvent.isButtonDown = evt == InputController_Legacy.EVENT.BUTTON_DOWN;
+                dataStoreEcs7.lastPointerInputEvent.hasValue = evt == InputController_Legacy.EVENT.BUTTON_DOWN || evt == InputController_Legacy.EVENT.BUTTON_UP;
+            }
         }
 
         private void ProcessButtonUp(WebInterface.ACTION_BUTTON buttonId, bool useRaycast, bool enablePointerEvent,
@@ -339,25 +379,34 @@ namespace DCL
         {
             IWorldState worldState = Environment.i.world.state;
 
-            if (string.IsNullOrEmpty(worldState.currentSceneId))
+            string currentSceneId = worldState.GetCurrentSceneId();
+            if (string.IsNullOrEmpty(currentSceneId))
                 return;
 
             RaycastHitInfo raycastGlobalLayerHitInfo;
             Ray ray = GetRayFromCamera();
 
             // Raycast for global pointer events
+            worldState.TryGetScene(currentSceneId, out var loadedScene);
+
             RaycastResultInfo raycastInfoGlobalLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, globalLayer,
-                worldState.loadedScenes[worldState.currentSceneId]);
+                loadedScene);
+
             raycastGlobalLayerHitInfo = raycastInfoGlobalLayer.hitInfo;
 
-            if (pointerInputUpEvent != null)
+            RaycastResultInfo raycastInfoPointerEventLayer = null;
+            if (pointerInputUpEvent != null || dataStoreEcs7.isEcs7Enabled)
             {
                 // Raycast for pointer event components
-                RaycastResultInfo raycastInfoPointerEventLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane,
-                    pointerEventLayer, worldState.loadedScenes[worldState.currentSceneId]);
+                raycastInfoPointerEventLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane,
+                    pointerEventLayer, loadedScene);
+            }
 
+            if (pointerInputUpEvent != null && raycastInfoPointerEventLayer != null)
+            {
                 bool isOnClickComponentBlocked =
                     IsBlockingOnClick(raycastInfoPointerEventLayer.hitInfo, raycastGlobalLayerHitInfo);
+
                 bool isSameEntityThatWasPressed = AreCollidersFromSameEntity(raycastInfoPointerEventLayer.hitInfo,
                     lastPointerDownEventHitInfo);
 
@@ -370,20 +419,23 @@ namespace DCL
             }
 
             ReportGlobalPointerUpEvent(buttonId, useRaycast, raycastGlobalLayerHitInfo, raycastInfoGlobalLayer,
-                worldState.currentSceneId);
+                currentSceneId);
 
             // Raycast for global pointer events (for each PE scene)
-            List<string> currentPortableExperienceIds =
-                DataStore.i.Get<DataStore_World>().portableExperienceIds.Get().ToList();
+            List<string> currentPortableExperienceIds = DataStore.i.Get<DataStore_World>().portableExperienceIds.Get().ToList();
 
             for (int i = 0; i < currentPortableExperienceIds.Count; i++)
             {
-                raycastInfoGlobalLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, globalLayer,
-                    worldState.loadedScenes[currentPortableExperienceIds[i]]);
-                raycastGlobalLayerHitInfo = raycastInfoGlobalLayer.hitInfo;
+                if (worldState.TryGetScene(currentPortableExperienceIds[i], out var portableScene))
+                {
+                    raycastInfoGlobalLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, globalLayer,
+                        portableScene);
 
-                ReportGlobalPointerUpEvent(buttonId, useRaycast, raycastGlobalLayerHitInfo, raycastInfoGlobalLayer,
-                    currentPortableExperienceIds[i]);
+                    raycastGlobalLayerHitInfo = raycastInfoGlobalLayer.hitInfo;
+
+                    ReportGlobalPointerUpEvent(buttonId, useRaycast, raycastGlobalLayerHitInfo, raycastInfoGlobalLayer,
+                        currentPortableExperienceIds[i]);
+                }
             }
         }
 
@@ -392,19 +444,20 @@ namespace DCL
         {
             IWorldState worldState = Environment.i.world.state;
 
-            if (string.IsNullOrEmpty(worldState.currentSceneId))
+            string currentSceneId = worldState.GetCurrentSceneId();
+            if (string.IsNullOrEmpty(currentSceneId))
                 return;
 
             RaycastHitInfo raycastGlobalLayerHitInfo;
             Ray ray = GetRayFromCamera();
+            worldState.TryGetScene(currentSceneId, out var loadedScene);
 
             // Raycast for pointer event components
-            RaycastResultInfo raycastInfoPointerEventLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane,
-                pointerEventLayer, worldState.loadedScenes[worldState.currentSceneId]);
+            RaycastResultInfo raycastInfoPointerEventLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, pointerEventLayer, loadedScene);
 
             // Raycast for global pointer events
-            RaycastResultInfo raycastInfoGlobalLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, globalLayer,
-                worldState.loadedScenes[worldState.currentSceneId]);
+            RaycastResultInfo raycastInfoGlobalLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, globalLayer, loadedScene);
+
             raycastGlobalLayerHitInfo = raycastInfoGlobalLayer.hitInfo;
 
             bool isOnClickComponentBlocked =
@@ -421,9 +474,9 @@ namespace DCL
                 else
                     hitGameObject = collider.gameObject;
 
-                var events = hitGameObject.GetComponentsInChildren<IPointerInputEvent>();
+                IList<IPointerInputEvent> events = GetPointerInputEvents(hitGameObject);
 
-                for (var i = 0; i < events.Length; i++)
+                for (var i = 0; i < events.Count; i++)
                 {
                     IPointerInputEvent e = events[i];
                     bool areSameEntity = AreSameEntity(e, info);
@@ -433,16 +486,19 @@ namespace DCL
                         case PointerInputEventType.CLICK:
                             if (areSameEntity && enablePointerEvent)
                                 e.Report(buttonId, ray, raycastInfoPointerEventLayer.hitInfo.hit);
+
                             break;
                         case PointerInputEventType.DOWN:
                             if (areSameEntity && enablePointerEvent)
                                 e.Report(buttonId, ray, raycastInfoPointerEventLayer.hitInfo.hit);
+
                             break;
                         case PointerInputEventType.UP:
                             if (areSameEntity && enablePointerEvent)
                                 pointerInputUpEvent = e;
                             else
                                 pointerInputUpEvent = null;
+
                             break;
                     }
                 }
@@ -450,20 +506,23 @@ namespace DCL
                 lastPointerDownEventHitInfo = raycastInfoPointerEventLayer.hitInfo;
             }
 
-            ReportGlobalPointerDownEvent(buttonId, useRaycast, raycastGlobalLayerHitInfo, raycastInfoGlobalLayer,
-                worldState.currentSceneId);
+            ReportGlobalPointerDownEvent(buttonId, useRaycast, raycastGlobalLayerHitInfo, raycastInfoGlobalLayer, currentSceneId);
 
             // Raycast for global pointer events (for each PE scene)
             IEnumerable<string> currentPortableExperienceIds = DataStore.i.world.portableExperienceIds.Get();
 
             foreach (var pexId in currentPortableExperienceIds)
             {
-                raycastInfoGlobalLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, globalLayer,
-                    worldState.loadedScenes[pexId]);
-                raycastGlobalLayerHitInfo = raycastInfoGlobalLayer.hitInfo;
+                if (worldState.TryGetScene(pexId, out var portableScene))
+                {
+                    raycastInfoGlobalLayer = raycastHandler.Raycast(ray, charCamera.farClipPlane, globalLayer, portableScene);
 
-                ReportGlobalPointerDownEvent(buttonId, useRaycast, raycastGlobalLayerHitInfo, raycastInfoGlobalLayer,
-                    pexId);
+                    raycastGlobalLayerHitInfo = raycastInfoGlobalLayer.hitInfo;
+
+                    ReportGlobalPointerDownEvent(buttonId, useRaycast, raycastGlobalLayerHitInfo, raycastInfoGlobalLayer,
+                        pexId);
+                }
+
             }
         }
 
@@ -559,6 +618,7 @@ namespace DCL
         bool EntityHasPointerEvent(IDCLEntity entity)
         {
             var componentsManager = entity.scene.componentsManagerLegacy;
+
             return componentsManager.HasComponent(entity, Models.CLASS_ID_COMPONENT.UUID_CALLBACK) ||
                    componentsManager.HasComponent(entity, Models.CLASS_ID_COMPONENT.UUID_ON_UP) ||
                    componentsManager.HasComponent(entity, Models.CLASS_ID_COMPONENT.UUID_ON_DOWN) ||
@@ -601,19 +661,10 @@ namespace DCL
                 UnhoverLastHoveredObject();
         }
 
-        private void HideOrShowCursor(bool isCursorLocked)
-        {
-            DataStore.i.Get<DataStore_Cursor>().cursorVisible.Set(isCursorLocked);
-        }
+        private void HideOrShowCursor(bool isCursorLocked) { DataStore.i.Get<DataStore_Cursor>().cursorVisible.Set(isCursorLocked); }
 
-        private void SetHoverCursor()
-        {
-            DataStore.i.Get<DataStore_Cursor>().cursorType.Set(DataStore_Cursor.CursorType.HOVER);
-        }
+        private void SetHoverCursor() { DataStore.i.Get<DataStore_Cursor>().cursorType.Set(DataStore_Cursor.CursorType.HOVER); }
 
-        private void SetNormalCursor()
-        {
-            DataStore.i.Get<DataStore_Cursor>().cursorType.Set(DataStore_Cursor.CursorType.NORMAL);
-        }
+        private void SetNormalCursor() { DataStore.i.Get<DataStore_Cursor>().cursorType.Set(DataStore_Cursor.CursorType.NORMAL); }
     }
 }

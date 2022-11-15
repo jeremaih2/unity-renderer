@@ -17,7 +17,8 @@ public class DebugShapesBoundingBoxDisplayer : IPlugin
         DataStore.i.debugConfig.showSceneBoundingBoxes,
         Environment.i.world.state,
         Environment.i.world.sceneController,
-        Environment.i.platform.updateEventHandler) { }
+        Environment.i.platform.updateEventHandler)
+    { }
 
     internal DebugShapesBoundingBoxDisplayer(
         IBaseDictionary<string, bool> isBoundingBoxEnabledVariable,
@@ -69,7 +70,7 @@ public class DebugShapesBoundingBoxDisplayer : IPlugin
     private void WatchScene(string sceneId)
     {
         // NOTE: in case scene is not loaded yet, we add it to the "pending" list
-        if (!worldState.loadedScenes.TryGetValue(sceneId, out IParcelScene scene))
+        if (!worldState.TryGetScene(sceneId, out IParcelScene scene))
         {
             if (!pendingScenesId.Contains(sceneId))
             {

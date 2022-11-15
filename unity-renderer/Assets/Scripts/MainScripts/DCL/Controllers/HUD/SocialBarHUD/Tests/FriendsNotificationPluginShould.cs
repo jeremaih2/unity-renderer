@@ -1,4 +1,4 @@
-﻿using DCL;
+using DCL;
 using DCL.Helpers;
 using NSubstitute;
 using NUnit.Framework;
@@ -18,7 +18,7 @@ public class FriendsNotificationPluginShould
     {
         playerPrefs = Substitute.For<IPlayerPrefs>();
         friendsController = Substitute.For<IFriendsController>();
-        friendsController.friendCount.Returns(7);
+        friendsController.AllocatedFriendCount.Returns(7);
         pendingFriendRequests = ScriptableObject.CreateInstance<FloatVariable>();
         newApprovedFriends = ScriptableObject.CreateInstance<FloatVariable>();
         dataStore = new DataStore();
@@ -49,13 +49,10 @@ public class FriendsNotificationPluginShould
     [Test]
     public void MarkRequestsAsSeen()
     {
-        const string seenFriendsPrefsKey = "SeenFriendsCount";
-        const int seenRequestsCount = 3;
-        playerPrefs.GetInt(seenFriendsPrefsKey, Arg.Any<int>()).Returns(6);
-        
-        dataStore.friendNotifications.seenRequests.Set(seenRequestsCount);
+        const int pendingRequests = 3;
 
-        Assert.AreEqual(seenRequestsCount, pendingFriendRequests.Get());
-        Assert.AreEqual(1, newApprovedFriends.Get());
+        dataStore.friendNotifications.pendingFriendRequestCount.Set(pendingRequests);
+
+        Assert.AreEqual(pendingRequests, pendingFriendRequests.Get());
     }
 }

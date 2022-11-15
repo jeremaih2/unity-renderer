@@ -5,29 +5,29 @@ using UnityEngine;
 public interface ISectionSelectorComponentView
 {
     /// <summary>
-    /// Set the sections of the selector.设置选择器的各个部分
+    /// Set the sections of the selector.
     /// </summary>
     /// <param name="sections">List of UI components.</param>
     void SetSections(List<SectionToggleModel> sections);
 
     /// <summary>
-    /// Get a section of the section selector.获取部分选择器的一部分。
+    /// Get a section of the section selector.
     /// </summary>
     /// <param name="index">Index of the list of sections.</param>
     /// <returns>A specific section toggle.</returns>
     ISectionToggle GetSection(int index);
 
     /// <summary>
-    /// Get all the sections of the section selector.获取部分选择器的所有部分
+    /// Get all the sections of the section selector.
     /// </summary>
     /// <returns>The list of sections.</returns>
     List<ISectionToggle> GetAllSections();
 }
 
-public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorComponentView, IComponentModelConfig
+public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorComponentView, IComponentModelConfig<SectionSelectorComponentModel>
 {
     [Header("Prefab References")]
-    [SerializeField] internal SectionToggle sectionToggleTemplate;//部分选择器切换模板
+    [SerializeField] internal SectionToggle sectionToggleTemplate;
 
     [Header("Configuration")]
     [SerializeField] internal SectionSelectorComponentModel model;
@@ -38,12 +38,12 @@ public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorC
     {
         base.Awake();
 
-        RegisterCurrentInstantiatedSections();//注册当前实例化的部分
+        RegisterCurrentInstantiatedSections();
     }
 
-    public void Configure(BaseComponentModel newModel)
+    public void Configure(SectionSelectorComponentModel newModel)
     {
-        model = (SectionSelectorComponentModel)newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -67,8 +67,7 @@ public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorC
         }
 
         if (instantiatedSections.Count > 0)
-            instantiatedSections[1].SelectToggle();
-        
+            instantiatedSections[0].SelectToggle();
     }
 
     public ISectionToggle GetSection(int index)
@@ -88,7 +87,6 @@ public class SectionSelectorComponentView : BaseComponentView, ISectionSelectorC
 
         SectionToggle newGO = Instantiate(sectionToggleTemplate, transform);
         newGO.name = name;
-        Debug.Log("1111111111111111111"+newGO.name);
         newGO.gameObject.SetActive(true);
         newGO.SetInfo(newSectionModel);
         newGO.SelectToggle();

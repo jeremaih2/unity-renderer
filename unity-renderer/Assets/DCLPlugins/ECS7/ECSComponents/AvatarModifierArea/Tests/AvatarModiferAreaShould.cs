@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -30,7 +30,7 @@ namespace DCL.ECSComponents.Test
             gameObject = new GameObject();
             entity = Substitute.For<IDCLEntity>();
             scene = Substitute.For<IParcelScene>();
-            var modifierFactory =  new AvatarModifierFactory();
+            var modifierFactory = new AvatarModifierFactory();
             dataStorePlayer = new DataStore_Player();
             componentHandler = new AvatarModifierAreaComponentHandler(Substitute.For<IUpdateEventHandler>(), dataStorePlayer, modifierFactory);
 
@@ -39,7 +39,7 @@ namespace DCL.ECSComponents.Test
             LoadParcelScenesMessage.UnityParcelScene sceneData = new LoadParcelScenesMessage.UnityParcelScene();
             sceneData.id = "1";
             scene.sceneData.Configure().Returns(sceneData);
-            
+
             componentHandler.OnComponentCreated(scene, entity);
         }
 
@@ -61,7 +61,7 @@ namespace DCL.ECSComponents.Test
 
             // Assert
             Assert.IsNotNull(componentHandler.excludedColliders);
-            Assert.AreEqual(model,componentHandler.model);
+            Assert.AreEqual(model, componentHandler.model);
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace DCL.ECSComponents.Test
             componentHandler.OnComponentRemoved(scene, entity);
 
             // Assert
-            Assert.AreEqual(0,componentHandler.avatarsInArea.Count);
+            Assert.AreEqual(0, componentHandler.avatarsInArea.Count);
         }
 
         [Test]
@@ -87,10 +87,10 @@ namespace DCL.ECSComponents.Test
             var model = CreateModel();
             model.ExcludeIds.Add("PlayerId");
             dataStorePlayer.otherPlayers.Add("PlayerId", new Player());
-            
+
             // Act
             var result = componentHandler.GetExcludedColliders(model);
-            
+
             // Assert
             Assert.AreEqual(1, result.Count);
         }
@@ -103,7 +103,7 @@ namespace DCL.ECSComponents.Test
 
             // Act
             var newModel = SerializaAndDeserialize(model);
-            
+
             // Assert
             Assert.AreEqual(model.Area, newModel.Area);
             Assert.AreEqual(model.Modifiers, newModel.Modifiers);
@@ -126,7 +126,7 @@ namespace DCL.ECSComponents.Test
 
             model.Modifiers.Add(AvatarModifier.HideAvatars);
             model.ExcludeIds.Add("IdToExclude");
-            
+
             return model;
         }
     }

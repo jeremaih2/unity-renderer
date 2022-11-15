@@ -30,7 +30,9 @@ public class AvatarReporterControllerShould
 
         scenes = new Dictionary<string, IParcelScene>() { { "scene0", scene0 } };
 
-        worldState.loadedScenes.Returns(scenes);
+        worldState.GetLoadedScenes().Returns(scenes);
+        worldState.GetSceneIdByCoords(Vector2Int.zero).Returns("scene0");
+        worldState.GetSceneIdByCoords(Arg.Is<Vector2Int>(v => v != Vector2Int.zero)).Returns(default(string));
     }
 
     [Test]
@@ -61,7 +63,7 @@ public class AvatarReporterControllerShould
     {
         reporterController.SetUp(EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID, "1");
         reporterController.ReportAvatarRemoved();
-        reporterController.reporter.Received(1).ReportAvatarRemoved( "1");
+        reporterController.reporter.Received(1).ReportAvatarRemoved("1");
         reporterController.ReportAvatarPosition(Vector3.one);
         reporterController.reporter.DidNotReceive().ReportAvatarSceneChange("1", "scene0");
     }
@@ -69,7 +71,7 @@ public class AvatarReporterControllerShould
     [Test]
     public void DontReportSceneIfAvatarDidntMove()
     {
-        reporterController.SetUp(EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID,  "1");
+        reporterController.SetUp(EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID, "1");
         reporterController.ReportAvatarPosition(Vector3.one);
         reporterController.reporter.Received(1).ReportAvatarSceneChange("1", "scene0");
         reporterController.ReportAvatarPosition(Vector3.one);
@@ -91,41 +93,51 @@ public class AvatarReporterControllerShould
     {
         var position = new Vector3(ParcelSettings.PARCEL_SIZE, 0, 0);
 
-        reporterController.SetUp(EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID,  "1");
+        reporterController.SetUp(EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID, "1");
         reporterController.ReportAvatarPosition(position);
         reporterController.reporter.Received(1).ReportAvatarSceneChange("1", null);
 
         var loadScene = Substitute.For<IParcelScene>();
+        Vector2Int scenePos = new Vector2Int(1, 0);
+
+        string sceneId = "sceneLoaded";
+
         loadScene.sceneData.Returns(new LoadParcelScenesMessage.UnityParcelScene()
         {
-            id = "sceneLoaded",
-            parcels = new[] { new Vector2Int(1, 0) }
+            id = sceneId,
+            parcels = new[] { scenePos }
         });
 
-        scenes.Add("sceneLoaded", loadScene);
+        scenes.Add(sceneId, loadScene);
+        worldState.GetSceneIdByCoords(scenePos).Returns(sceneId);
 
         reporterController.ReportAvatarPosition(position);
-        reporterController.reporter.Received(1).ReportAvatarSceneChange("1", "sceneLoaded");
+        reporterController.reporter.Received(1).ReportAvatarSceneChange("1", sceneId);
     }
 
     [Test]
     public void ReportSceneWhenMovingFromLoadedToLoadedScene()
     {
-        reporterController.SetUp(EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID,  "1");
+        reporterController.SetUp(EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID, "1");
         reporterController.ReportAvatarPosition(Vector3.one);
         reporterController.reporter.Received(1).ReportAvatarSceneChange("1", "scene0");
 
         var loadScene = Substitute.For<IParcelScene>();
+        Vector2Int position = new Vector2Int(1, 0);
+
+        string sceneId = "sceneLoaded";
+
         loadScene.sceneData.Returns(new LoadParcelScenesMessage.UnityParcelScene()
         {
-            id = "sceneLoaded",
-            parcels = new[] { new Vector2Int(1, 0) }
+            id = sceneId,
+            parcels = new[] { position }
         });
 
-        scenes.Add("sceneLoaded", loadScene);
+        scenes.Add(sceneId, loadScene);
+        worldState.GetSceneIdByCoords(position).Returns(sceneId);
 
         reporterController.ReportAvatarPosition(new Vector3(ParcelSettings.PARCEL_SIZE, 0, 0));
-        reporterController.reporter.Received(1).ReportAvatarSceneChange("1", "sceneLoaded");
+        reporterController.reporter.Received(1).ReportAvatarSceneChange("1", sceneId);
     }
 
     [Test]
@@ -145,6 +157,6 @@ public class AvatarReporterControllerShould
         reporterController.ReportAvatarPosition(new Vector3(ParcelSettings.PARCEL_SIZE, 0, 0));
         reporterController.reporter.Received(1).ReportAvatarSceneChange("1", null);
         reporterController.ReportAvatarPosition(new Vector3(ParcelSettings.PARCEL_SIZE * 2, 0, 0));
-        reporterController.reporter.Received(1).ReportAvatarSceneChange( "1", null);
+        reporterController.reporter.Received(1).ReportAvatarSceneChange("1", null);
     }
 }

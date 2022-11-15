@@ -77,7 +77,7 @@ public class BIWEntity
     }
 
     public bool isLoaded { get; internal set; } = false;
-    
+
     public bool isVoxel { get; set; } = false;
 
     private CatalogItem associatedCatalogItem;
@@ -104,7 +104,7 @@ public class BIWEntity
 
     #region Error Handler definition
 
-    public bool hasError  { get; private set; } = false;
+    public bool hasError { get; private set; } = false;
 
     public bool hasMissingCatalogItemError { get; private set; } = false;
     public bool isInsideBoundariesError { get; private set; } = false;
@@ -128,7 +128,7 @@ public class BIWEntity
         isLoaded = false;
         isShapeComponentSet = false;
         InitRotation();
-        
+
         isFloor = IsEntityAFloor();
         isNFT = IsEntityNFT();
 
@@ -265,12 +265,12 @@ public class BIWEntity
             {
                 if (rootEntity.scene.componentsManagerLegacy.TryGetSharedComponent(rootEntity, CLASS_ID.NFT_SHAPE, out ISharedComponent component))
                 {
-                    BIWNFTController.i.StopUsingNFT(((NFTShape.Model) component.GetModel()).assetId);
+                    BIWNFTController.i.StopUsingNFT(((NFTShape.Model)component.GetModel()).assetId);
                 }
             }
 
-            DCL.Environment.i.world.sceneBoundsChecker?.EvaluateEntityPosition(rootEntity);
-            DCL.Environment.i.world.sceneBoundsChecker?.RemoveEntityToBeChecked(rootEntity);
+            DCL.Environment.i.world.sceneBoundsChecker?.RunEntityEvaluation(rootEntity);
+            DCL.Environment.i.world.sceneBoundsChecker?.RemoveEntity(rootEntity, true, true);
         }
 
         DestroyColliders();
@@ -334,9 +334,9 @@ public class BIWEntity
     {
         if (rootEntity.scene.componentsManagerLegacy.TryGetSharedComponent(rootEntity, CLASS_ID.LOCKED_ON_EDIT, out ISharedComponent component))
         {
-            return ((DCLLockedOnEdit.Model) component.GetModel()).isLocked;
+            return ((DCLLockedOnEdit.Model)component.GetModel()).isLocked;
         }
- 
+
         return isFloor;
     }
 
@@ -344,14 +344,14 @@ public class BIWEntity
     {
         if (rootEntity.scene.componentsManagerLegacy.TryGetSharedComponent(rootEntity, CLASS_ID.LOCKED_ON_EDIT, out ISharedComponent component))
         {
-            ((DCLLockedOnEdit) component).SetIsLocked(isLocked);
+            ((DCLLockedOnEdit)component).SetIsLocked(isLocked);
         }
         else
         {
             DCLLockedOnEdit.Model model = new DCLLockedOnEdit.Model();
             model.isLocked = isLocked;
-            
-            EntityComponentsUtils.AddLockedOnEditComponent(rootEntity.scene , rootEntity, model, Guid.NewGuid().ToString());
+
+            EntityComponentsUtils.AddLockedOnEditComponent(rootEntity.scene, rootEntity, model, Guid.NewGuid().ToString());
         }
     }
 
@@ -363,13 +363,13 @@ public class BIWEntity
     {
         if (rootEntity.scene.componentsManagerLegacy.TryGetSharedComponent(rootEntity, CLASS_ID.NAME, out ISharedComponent nameComponent))
         {
-            ((DCLName) nameComponent).SetNewName(newName);
+            ((DCLName)nameComponent).SetNewName(newName);
         }
         else
         {
             DCLName.Model model = new DCLName.Model();
             model.value = newName;
-            EntityComponentsUtils.AddNameComponent(rootEntity.scene , rootEntity,model, Guid.NewGuid().ToString());
+            EntityComponentsUtils.AddNameComponent(rootEntity.scene, rootEntity, model, Guid.NewGuid().ToString());
         }
 
         OnStatusUpdate?.Invoke(this);
@@ -379,7 +379,7 @@ public class BIWEntity
     {
         if (rootEntity != null && rootEntity.scene.componentsManagerLegacy.TryGetSharedComponent(rootEntity, CLASS_ID.NAME, out ISharedComponent nameComponent))
         {
-            return ((DCLName.Model) nameComponent.GetModel()).value;
+            return ((DCLName.Model)nameComponent.GetModel()).value;
         }
 
         return "";
@@ -415,14 +415,14 @@ public class BIWEntity
         {
             if (rootEntity.scene.componentsManagerLegacy.TryGetSharedComponent(rootEntity, CLASS_ID.NFT_SHAPE, out ISharedComponent component))
             {
-                BIWNFTController.i.UseNFT(((NFTShape.Model) component.GetModel()).assetId);
+                BIWNFTController.i.UseNFT(((NFTShape.Model)component.GetModel()).assetId);
             }
         }
 
         SaveOriginalMaterial();
 
-        DCL.Environment.i.world.sceneBoundsChecker.AddPersistent(rootEntity);
-        SetEntityBoundariesError(DCL.Environment.i.world.sceneBoundsChecker.IsEntityInsideSceneBoundaries(rootEntity));
+        DCL.Environment.i.world.sceneBoundsChecker.AddEntityToBeChecked(rootEntity, true, true);
+        SetEntityBoundariesError(DCL.Environment.i.world.sceneBoundsChecker.IsEntityMeshInsideSceneBoundaries(rootEntity));
 
         isLoaded = true;
     }
@@ -614,7 +614,7 @@ public class BIWEntity
         Transform[] children = rootEntity.gameObject.transform.GetComponentsInChildren<Transform>();
         foreach (Transform child in children)
         {
-            if (child.gameObject.layer ==  BIWSettings.COLLIDER_SELECTION_LAYER)
+            if (child.gameObject.layer == BIWSettings.COLLIDER_SELECTION_LAYER)
             {
                 GameObject.Destroy(child.gameObject);
             }

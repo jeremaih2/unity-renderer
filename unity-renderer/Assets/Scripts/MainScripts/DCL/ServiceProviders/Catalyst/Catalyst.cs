@@ -15,8 +15,8 @@ public class Catalyst : ICatalyst
     public string contentUrl => realmContentServerUrl;
     public string lambdasUrl => $"{realmDomain}/lambdas";
 
-    private string realmDomain = "https://peer-lb.decentraland.org";
-    private string realmContentServerUrl = "https://peer-lb.decentraland.org/content";
+    private string realmDomain = "https://peer.decentraland.org";
+    private string realmContentServerUrl = "https://peer.decentraland.org/content";
 
     private readonly IDataCache<CatalystSceneEntityPayload[]> deployedScenesCache = new DataCache<CatalystSceneEntityPayload[]>();
 
@@ -43,12 +43,12 @@ public class Catalyst : ICatalyst
         string url = $"{realmContentServerUrl}/contents/" + hash;
 
         var callPromise = Get(url);
-        callPromise.Then( result =>
+        callPromise.Then(result =>
         {
             callResult = result;
         });
 
-        callPromise.Catch( error =>
+        callPromise.Catch(error =>
         {
             callResult = error;
         });
@@ -125,17 +125,17 @@ public class Catalyst : ICatalyst
 
         if (pointers.Length <= MAX_POINTERS_PER_REQUEST)
         {
-            pointersGroupsToFetch = new [] { pointers };
+            pointersGroupsToFetch = new[] { pointers };
         }
         else
         {
             // split pointers array in length of MAX_POINTERS_PER_REQUEST
             int i = 0;
             var query = from s in pointers
-                let num = i++
-                group s by num / MAX_POINTERS_PER_REQUEST
+                        let num = i++
+                        group s by num / MAX_POINTERS_PER_REQUEST
                 into g
-                select g.ToArray();
+                        select g.ToArray();
             pointersGroupsToFetch = query.ToArray();
         }
 

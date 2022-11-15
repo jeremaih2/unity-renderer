@@ -1,20 +1,18 @@
 using System;
 using System.Runtime.InteropServices;
 using DCL;
-using DCL.Interface;
 using DCL.Models;
-using KernelCommunication;
-using UnityEngine;
-using Ray = DCL.Models.Ray;
 
 public class NativeBridgeCommunication : IKernelCommunication
 {
     private static string currentEntityId;
     private static string currentSceneId;
+    private static int currentSceneNumber;
     private static string currentTag;
 
     private static IMessageQueueHandler queueHandler;
-    private static KernelBinaryMessageProcessor binaryMessageProcessor;
+
+    delegate void JS_Delegate_VI(int a);
 
     delegate void JS_Delegate_VIS(int a, string b);
 
@@ -27,13 +25,10 @@ public class NativeBridgeCommunication : IKernelCommunication
     delegate void JS_Delegate_Query(Protocol.QueryPayload a);
 
     delegate void JS_Delegate_V();
-    
-    delegate void JS_Delegate_VIIS(int a, int b, string c);
 
     public NativeBridgeCommunication(IMessageQueueHandler queueHandler)
     {
         NativeBridgeCommunication.queueHandler = queueHandler;
-        binaryMessageProcessor = new KernelBinaryMessageProcessor(queueHandler);
 #if UNITY_WEBGL && !UNITY_EDITOR
         SetCallback_CreateEntity(CreateEntity);
         SetCallback_RemoveEntity(RemoveEntity);
@@ -41,6 +36,7 @@ public class NativeBridgeCommunication : IKernelCommunication
 
         SetCallback_SetEntityId(SetEntityId);
         SetCallback_SetSceneId(SetSceneId);
+        SetCallback_SetSceneNumber(SetSceneNumber);
         SetCallback_SetTag(SetTag);
 
         SetCallback_SetEntityParent(SetEntityParent);
@@ -57,12 +53,11 @@ public class NativeBridgeCommunication : IKernelCommunication
         SetCallback_OpenNftDialog(OpenNftDialog);
 
         SetCallback_Query(Query);
-        SetCallback_BinaryMessage(BinaryMessage);
 #endif
     }
     public void Dispose()
     {
-        
+
     }
 
     [MonoPInvokeCallback(typeof(JS_Delegate_VSSS))]
@@ -141,7 +136,7 @@ public class NativeBridgeCommunication : IKernelCommunication
 
         string queryId = Convert.ToString(payload.raycastPayload.id);
 
-        RaycastType raycastType = (RaycastType) payload.raycastPayload.raycastType;
+        RaycastType raycastType = (RaycastType)payload.raycastPayload.raycastType;
 
         Ray ray = new Ray()
         {
@@ -261,6 +256,9 @@ public class NativeBridgeCommunication : IKernelCommunication
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
     internal static void SetSceneId(string id) { currentSceneId = id; }
 
+    [MonoPInvokeCallback(typeof(JS_Delegate_VI))]
+    internal static void SetSceneNumber(int sceneNumber) { currentSceneNumber = sceneNumber; }
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
     internal static void SetTag(string id) { currentTag = id; }
 
@@ -317,16 +315,11 @@ public class NativeBridgeCommunication : IKernelCommunication
         }
 
         message.sceneId = currentSceneId;
+        message.sceneNumber = currentSceneNumber;
         message.tag = currentTag;
         message.type = QueuedSceneMessage.Type.SCENE_MESSAGE;
 
         return message;
-    }
-    
-    [MonoPInvokeCallback(typeof(JS_Delegate_VIIS))]
-    internal static void BinaryMessage(int intPtr, int length, string sceneId)
-    {
-        binaryMessageProcessor.Process(sceneId, new IntPtr(intPtr), length);
     }
 
     [DllImport("__Internal")]
@@ -343,6 +336,9 @@ public class NativeBridgeCommunication : IKernelCommunication
 
     [DllImport("__Internal")]
     private static extern void SetCallback_SetSceneId(JS_Delegate_VS callback);
+
+    [DllImport("__Internal")]
+    private static extern void SetCallback_SetSceneNumber(JS_Delegate_VI callback);
 
     [DllImport("__Internal")]
     private static extern void SetCallback_SetEntityParent(JS_Delegate_VS callback);
@@ -376,7 +372,4 @@ public class NativeBridgeCommunication : IKernelCommunication
 
     [DllImport("__Internal")]
     private static extern void SetCallback_Query(JS_Delegate_Query callback);
-    
-    [DllImport("__Internal")]
-    private static extern void SetCallback_BinaryMessage(JS_Delegate_VIIS callback);
 }

@@ -7,7 +7,7 @@ public class TaskbarHUDView : MonoBehaviour
 {
     private const string VIEW_PATH = "Taskbar";
 
-    [Header("Taskbar Animation")] [SerializeField]
+    [Header("Taskbar Animation")][SerializeField]
     internal ShowHideAnimator taskbarAnimator;
 
     [Header("Left Side Config")]

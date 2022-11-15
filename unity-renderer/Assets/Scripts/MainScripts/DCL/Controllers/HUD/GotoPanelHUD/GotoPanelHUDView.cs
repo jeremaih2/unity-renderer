@@ -87,7 +87,7 @@ namespace GotoPanel
             {
                 if (texturePromise != null)
                     AssetPromiseKeeper_Texture.i.Forget(texturePromise);
-                
+
                 texturePromise = new AssetPromise_Texture(sceneInfo.previewImageUrl, storeTexAsNonReadable: false);
                 texturePromise.OnSuccessEvent += (textureAsset) => { DisplayThumbnail(textureAsset.texture); };
                 texturePromise.OnFailEvent += (textureAsset, error) => { DisplayThumbnail(scenePreviewFailImage.texture); };
@@ -115,7 +115,7 @@ namespace GotoPanel
         {
             if (isDestroyed)
                 return;
-            isDestroyed = true; 
+            isDestroyed = true;
             ClearPromise();
             Destroy(gameObject);
         }

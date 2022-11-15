@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using DCL;
 using DCL.Components;
@@ -43,22 +43,22 @@ internal class UsersAroundListHUDListElementView : MonoBehaviour, IPoolLifecycle
 
     private void OnEnable()
     {
-        if ( profile != null )
+        if (profile != null)
             profile.snapshotObserver.AddListener(SetAvatarSnapshotImage);
 
-        if ( talkingAnimator.isActiveAndEnabled )
+        if (talkingAnimator.isActiveAndEnabled)
             talkingAnimator.SetBool(talkingAnimation, isRecording);
     }
 
     private void OnDisable()
     {
-        if ( profile != null )
+        if (profile != null)
             profile.snapshotObserver.RemoveListener(SetAvatarSnapshotImage);
     }
 
     private void OnDestroy()
     {
-        if ( profile != null )
+        if (profile != null)
             profile.snapshotObserver.RemoveListener(SetAvatarSnapshotImage);
     }
 
@@ -87,7 +87,7 @@ internal class UsersAroundListHUDListElementView : MonoBehaviour, IPoolLifecycle
     {
         this.isRecording = isRecording;
 
-        if ( talkingAnimator.isActiveAndEnabled )
+        if (talkingAnimator.isActiveAndEnabled)
             talkingAnimator.SetBool(talkingAnimation, isRecording);
     }
 
@@ -136,7 +136,7 @@ internal class UsersAroundListHUDListElementView : MonoBehaviour, IPoolLifecycle
             return;
         }
 
-        if (FriendsController.i.friends.TryGetValue(userId, out FriendsController.UserStatus status))
+        if (FriendsController.i.friends.TryGetValue(userId, out UserStatus status))
         {
             SetupFriendship(status.friendshipStatus);
         }

@@ -7,11 +7,12 @@ using UnityEngine.EventSystems;
 using DCL.Configuration;
 
 /// <summary>
-/// Mapping for Trigger actions
+/// Mapping for Trigger actions触发器操作的映射
 /// </summary>
 public enum DCLAction_Trigger
 {
     //Remember to explicitly assign the value to each entry so we minimize issues with serialization + conflicts
+    //记住显式地为每个条目赋值，这样我们就可以最小化序列化+冲突的问题
     CameraChange = 100,
     CursorUnlock = 101,
 
@@ -97,7 +98,7 @@ public enum DCLAction_Trigger
 }
 
 /// <summary>
-/// Mapping for hold actions
+/// Mapping for hold actions保持操作的映射
 /// </summary>
 public enum DCLAction_Hold
 {
@@ -124,7 +125,7 @@ public enum DCLAction_Hold
 }
 
 /// <summary>
-/// Mapping for measurable actions
+/// Mapping for measurable actions映射可衡量的行动
 /// </summary>
 public enum DCLAction_Measurable
 {
@@ -137,7 +138,7 @@ public enum DCLAction_Measurable
 }
 
 /// <summary>
-/// Group of actions currently actived
+/// Group of actions currently actived当前激活的一组操作
 /// </summary>
 public enum InputTypeMode
 {
@@ -149,6 +150,7 @@ public enum InputTypeMode
 
 /// <summary>
 /// Input Controller will map inputs(keys/mouse/axis) to DCL actions, check if they can be triggered (modifiers) and raise the events
+/// 输入控制器将输入(键/鼠标/轴)映射到DCL动作，检查它们是否可以被触发(修饰符)并引发事件
 /// </summary>
 public class InputController : MonoBehaviour
 {
@@ -462,6 +464,7 @@ public class InputController : MonoBehaviour
 
     /// <summary>
     /// Map the hold actions to inputs + modifiers and check if their events must be triggered
+    /// 将保持动作映射到输入+修饰符，并检查它们的事件是否必须被触发
     /// </summary>
     private void Update_Hold(InputAction_Hold[] holdActions)
     {

@@ -21,16 +21,14 @@ namespace AvatarSystem
         private readonly IGPUSkinning gpuSkinning;//GPU 层
         private readonly IGPUSkinningThrottler gpuSkinningThrottler;//GPU 节流阀
         private readonly IEmoteAnimationEquipper emoteAnimationEquipper;//表情动画提供者
-        private readonly IBaseAvatar baseAvatar;
         private CancellationTokenSource disposeCts = new CancellationTokenSource();//取消标记源
 
         public IAvatar.Status status { get; private set; } = IAvatar.Status.Idle;
         public Vector3 extents { get; private set; }
         public int lodLevel => lod?.lodIndex ?? 0;
 
-        public Avatar(IBaseAvatar baseAvatar, IAvatarCurator avatarCurator, ILoader loader, IAnimator animator, IVisibility visibility, ILOD lod, IGPUSkinning gpuSkinning, IGPUSkinningThrottler gpuSkinningThrottler, IEmoteAnimationEquipper emoteAnimationEquipper)
+        public Avatar(IAvatarCurator avatarCurator, ILoader loader, IAnimator animator, IVisibility visibility, ILOD lod, IGPUSkinning gpuSkinning, IGPUSkinningThrottler gpuSkinningThrottler, IEmoteAnimationEquipper emoteAnimationEquipper)
         {
-            this.baseAvatar = baseAvatar;
             this.avatarCurator = avatarCurator;
             this.loader = loader;
             this.animator = animator;
@@ -42,13 +40,14 @@ namespace AvatarSystem
         }
 
         /// <summary>
-        /// Starts the loading process for the Avatar. 开始加载avatar程序
+        /// Starts the loading process for the Avatar. 
         /// </summary>
         /// <param name="wearablesIds"></param>
+        /// <param name="emotesIds"></param>
         /// <param name="settings"></param>
         /// <param name="ct"></param>
-        public async UniTask Load(List<string> wearablesIds, AvatarSettings settings, CancellationToken ct = default)
-        {//UniTask解决了C#Task异步不能执行某些API的问题，将C# async/awake异步编程模型完美的带入了Unity中
+        public async UniTask Load(List<string> wearablesIds, List<string> emotesIds, AvatarSettings settings, CancellationToken ct = default)
+        {
             disposeCts ??= new CancellationTokenSource();
 
             status = IAvatar.Status.Idle;
@@ -65,18 +64,16 @@ namespace AvatarSystem
                 List<WearableItem> wearables = null;
                 List<WearableItem> emotes = null;
 
-                baseAvatar.Initialize();
-                animator.Prepare(settings.bodyshapeId, baseAvatar.GetArmatureContainer());
-                (bodyshape, eyes, eyebrows, mouth, wearables, emotes) = await avatarCurator.Curate(settings, wearablesIds, linkedCt);
+                (bodyshape, eyes, eyebrows, mouth, wearables, emotes) = await avatarCurator.Curate(settings, wearablesIds, emotesIds, linkedCt);
                 if (!loader.IsValidForBodyShape(bodyshape, eyes, eyebrows, mouth))
                 {
                     visibility.AddGlobalConstrain(LOADING_VISIBILITY_CONSTRAIN);
                 }
-                await loader.Load(bodyshape, eyes, eyebrows, mouth, wearables, settings, baseAvatar.GetMainRenderer(), linkedCt);
+                await loader.Load(bodyshape, eyes, eyebrows, mouth, wearables, settings, linkedCt);
 
                 //Scale the bounds due to the giant avatar not being skinned yet
                 extents = loader.combinedRenderer.localBounds.extents * 2f / RESCALING_BOUNDS_FACTOR;
-                
+                animator.Prepare(settings.bodyshapeId, loader.bodyshapeContainer);
                 emoteAnimationEquipper.SetEquippedEmotes(settings.bodyshapeId, emotes);
                 gpuSkinning.Prepare(loader.combinedRenderer);
                 gpuSkinningThrottler.Bind(gpuSkinning);
@@ -88,7 +85,6 @@ namespace AvatarSystem
                 gpuSkinningThrottler.Start();
 
                 status = IAvatar.Status.Loaded;
-                baseAvatar.FadeOut(loader.combinedRenderer.GetComponent<MeshRenderer>(), lodLevel <= 1);
             }
             catch (OperationCanceledException)
             {
@@ -98,7 +94,8 @@ namespace AvatarSystem
             catch (Exception e)
             {
                 Dispose();
-                Debug.Log($"Avatar.Load failed with wearables:[{string.Join(",", wearablesIds)}] for bodyshape:{settings.bodyshapeId} and player {settings.playerName}");
+                Debug.Log($"Avatar.Load failed with wearables:[{string.Join(",", wearablesIds)}] " +
+                          $"for bodyshape:{settings.bodyshapeId} and player {settings.playerName}");
                 if (e.InnerException != null)
                     ExceptionDispatchInfo.Capture(e.InnerException).Throw();
                 else
@@ -111,7 +108,7 @@ namespace AvatarSystem
             }
         }
 
-        public void AddVisibilityConstrain(string key) { visibility.AddGlobalConstrain(key); }
+        public void AddVisibilityConstraint(string key) { visibility.AddGlobalConstrain(key); }
 
         public void RemoveVisibilityConstrain(string key) { visibility.RemoveGlobalConstrain(key); }
 

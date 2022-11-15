@@ -1,4 +1,4 @@
-﻿using DCL.Helpers;
+using DCL.Helpers;
 using UnityEngine;
 
 public class FriendEntryModel
@@ -30,7 +30,7 @@ public class FriendEntryModel
         blocked = model.blocked;
     }
 
-    public virtual void CopyFrom(FriendsController.UserStatus status)
+    public virtual void CopyFrom(UserStatus status)
     {
         userId = status.userId;
         this.status = status.presence;

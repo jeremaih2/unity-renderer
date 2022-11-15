@@ -8,6 +8,7 @@ using Cysharp.Threading.Tasks;
 using DCL;
 using GPUSkinning;
 using UnityEngine;
+using Environment = DCL.Environment;
 
 public class CharacterPreviewController : MonoBehaviour
 {
@@ -56,10 +57,8 @@ public class CharacterPreviewController : MonoBehaviour
             { CameraFocus.BodySnapshot, bodySnapshotTemplate },
         };
         IAnimator animator = avatarContainer.gameObject.GetComponentInChildren<IAnimator>();
-        BaseAvatarDummy baseAvatar = new BaseAvatarDummy(avatarRevealContainer, avatarContainer);
         avatar = new AvatarSystem.Avatar(
-            baseAvatar,
-            new AvatarCurator(new WearableItemResolver()),
+            new AvatarCurator(new WearableItemResolver(), Environment.i.serviceLocator.Get<IEmotesCatalogService>()),
             new Loader(new WearableLoaderFactory(), avatarContainer, new AvatarMeshCombinerHelper()),
             animator,
             new Visibility(),
@@ -67,7 +66,7 @@ public class CharacterPreviewController : MonoBehaviour
             new SimpleGPUSkinning(),
             new GPUSkinningThrottler(),
             new EmoteAnimationEquipper(animator, DataStore.i.emotes)
-        ) ;
+        );
     }
 
     public void UpdateModel(AvatarModel newModel, Action onDone)
@@ -100,7 +99,7 @@ public class CharacterPreviewController : MonoBehaviour
             ct.ThrowIfCancellationRequested();
             List<string> wearables = new List<string>(newModel.wearables);
             wearables.Add(newModel.bodyShape);
-            await avatar.Load(wearables, new AvatarSettings
+            await avatar.Load(wearables, newModel.emotes.Select(x => x.urn).ToList(), new AvatarSettings
             {
                 bodyshapeId = newModel.bodyShape,
                 eyesColor = newModel.eyeColor,

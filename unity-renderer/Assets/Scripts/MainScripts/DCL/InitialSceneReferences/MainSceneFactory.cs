@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DCL.Builder;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -24,11 +24,11 @@ namespace DCL
             // Why we don't just add the playerGo?
             // This happens because the characterController reparents itself.
             // (and any of our systems may do this as well).
-            result.Add( playerReferences.cursorCanvas.gameObject );
-            result.Add( playerReferences.cameraController.gameObject );
-            result.Add( playerReferences.inputController.gameObject );
-            result.Add( playerReferences.avatarController.gameObject );
-            result.Add( playerGo );
+            result.Add(playerReferences.cursorCanvas.gameObject);
+            result.Add(playerReferences.cameraController.gameObject);
+            result.Add(playerReferences.inputController.gameObject);
+            result.Add(playerReferences.avatarController.gameObject);
+            result.Add(playerGo);
 
             return result;
         }

@@ -117,7 +117,7 @@ namespace DCL.Helpers
             }
 
             var previousQualityLevel = QualitySettings.GetQualityLevel();
-            QualitySettings.SetQualityLevel((int) QualityLevel.Good, true);
+            QualitySettings.SetQualityLevel((int)QualityLevel.Good, true);
 
             string finalPath = snapshotPath + snapshotName;
 
@@ -144,7 +144,7 @@ namespace DCL.Helpers
             var pixels = currentSnapshot.GetPixels();
             for (int index = 0; index < pixels.Length; index++)
             {
-                pixels[index] = new Color( Mathf.LinearToGammaSpace(pixels[index].r), Mathf.LinearToGammaSpace(pixels[index].g), Mathf.LinearToGammaSpace(pixels[index].b));
+                pixels[index] = new Color(Mathf.LinearToGammaSpace(pixels[index].r), Mathf.LinearToGammaSpace(pixels[index].g), Mathf.LinearToGammaSpace(pixels[index].b));
             }
 
             currentSnapshot.SetPixels(pixels);
@@ -316,7 +316,7 @@ namespace DCL.Helpers
         {
             if (position.HasValue)
             {
-                CommonScriptableObjects.playerWorldPosition.Set( cameraTransform.position );
+                DataStore.i.player.playerWorldPosition.Set(cameraTransform.position);
                 cameraTransform.position = position.Value;
             }
 

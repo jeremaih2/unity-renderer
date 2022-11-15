@@ -305,7 +305,7 @@ namespace DCL.Camera
 
             if (smoothFocusOnTargetCoroutine != null)
                 CoroutineStarter.Stop(smoothFocusOnTargetCoroutine);
-            
+
             Settings.i.generalSettings.OnChanged -= UpdateLocalGeneralSettings;
         }
 
@@ -331,7 +331,7 @@ namespace DCL.Camera
 
         private void HandleCameraLook()
         {
-            Quaternion nextIteration =  Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(pitch, yaw, 0f)), cameraLookAdvance);
+            Quaternion nextIteration = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(pitch, yaw, 0f)), cameraLookAdvance);
 
             if (Mathf.Abs(nextIteration.eulerAngles.magnitude - transform.rotation.eulerAngles.magnitude) >= CAMERA_ANGLE_THRESHOLD)
                 transform.rotation = nextIteration;
@@ -405,7 +405,7 @@ namespace DCL.Camera
         private Vector3 GetTotalVelocity(Vector3 velocityToAdd)
         {
             if (!isMouseRightClickDown)
-                return  Vector3.zero;
+                return Vector3.zero;
 
             if (isDetectingMovement)
                 hasBeenMovement = true;
@@ -462,7 +462,8 @@ namespace DCL.Camera
             {
                 pitch -= lookSpeedV * -axisY;
             }
-            else {
+            else
+            {
                 pitch -= lookSpeedV * axisY;
             }
             cameraLookAdvance = smoothCameraLookSpeed * Time.deltaTime;
@@ -472,7 +473,7 @@ namespace DCL.Camera
 
         public Vector3 GetCameraPosition => defaultVirtualCamera.transform.position;
         public Vector3 GetCameraFoward => defaultVirtualCamera.transform.forward;
-        
+
         public void FocusOnEntities(List<BIWEntity> entitiesToFocus)
         {
             if (entitiesToFocus.Count <= 0)

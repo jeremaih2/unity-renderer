@@ -1,6 +1,7 @@
 using DCL.Rendering;
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -34,17 +35,17 @@ namespace CullingControllerTests
             var originalRendererD = testGameObjectD.AddComponent<SkinnedMeshRenderer>();
             testGameObjectD.layer = 0;
 
-            Renderer[] renderers = null;
+            ICollection<Renderer> renderers = null;
             Renderer obtainedRendererA = null, obtainedRendererB = null, obtainedRendererC = null, obtainedRendererD = null;
 
             // Act
             yield return tracker.PopulateRenderersList();
 
             renderers = tracker.GetRenderers();
-            obtainedRendererA = renderers.FirstOrDefault( x => x == originalRendererA );
-            obtainedRendererB = renderers.FirstOrDefault( x => x == originalRendererB );
-            obtainedRendererC = tracker.GetSkinnedRenderers().FirstOrDefault( x => x == originalRendererC );
-            obtainedRendererD = tracker.GetSkinnedRenderers().FirstOrDefault( x => x == originalRendererD );
+            obtainedRendererA = renderers.FirstOrDefault(x => x == originalRendererA);
+            obtainedRendererB = renderers.FirstOrDefault(x => x == originalRendererB);
+            obtainedRendererC = tracker.GetSkinnedRenderers().FirstOrDefault(x => x == originalRendererC);
+            obtainedRendererD = tracker.GetSkinnedRenderers().FirstOrDefault(x => x == originalRendererD);
 
             // Assert
             Assert.IsTrue(originalRendererA != null);
@@ -80,7 +81,6 @@ namespace CullingControllerTests
             // Act
             tracker.ForcePopulateRenderersList(includeInactives);
 
-            Renderer[] renderers = tracker.GetRenderers();
             Renderer obtainedRenderer = tracker.GetRenderers().FirstOrDefault(x => x == originalRenderer);
 
             // Assert

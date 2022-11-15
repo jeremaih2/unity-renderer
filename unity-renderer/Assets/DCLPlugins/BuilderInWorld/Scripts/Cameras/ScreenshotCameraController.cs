@@ -17,19 +17,19 @@ namespace DCL.Builder
             GameObject screenshotCameraGameObject = new GameObject("BuilderScreenshotCamera");
             screenshotCamera = screenshotCameraGameObject.AddComponent<UnityEngine.Camera>();
             screenshotCamera.depth = -9999;
-       
+
             screenshotCamera.gameObject.SetActive(false);
-            
+
             if (context.sceneReferences.cameraController != null)
             {
                 var cameraController = context.sceneReferences.cameraController.GetComponent<Camera.CameraController>();
                 // We assign the same culling configuration as the camera
                 var biwCulling = BIWUtils.GetBIWCulling(cameraController.GetCulling());
                 screenshotCamera.cullingMask = biwCulling;
-                
-                if(cameraController.TryGetCameraStateByType<FreeCameraMovement>(out CameraStateBase cameraState))
-                    freeCameraMovement = (FreeCameraMovement) cameraState;
-            } 
+
+                if (cameraController.TryGetCameraStateByType<FreeCameraMovement>(out CameraStateBase cameraState))
+                    freeCameraMovement = (FreeCameraMovement)cameraState;
+            }
         }
 
         public void Dispose() { GameObject.Destroy(screenshotCamera.gameObject); }
@@ -38,7 +38,7 @@ namespace DCL.Builder
         {
             Vector3 pointToLookAt = BIWUtils.CalculateUnityMiddlePoint(parcelScene);
             float heightPosition = context.editorContext.godModeDynamicVariablesAsset.aerialScreenshotHeight * Mathf.Sqrt(parcelScene.sceneData.parcels.Length);
-            Vector3 cameraPosition = pointToLookAt  + Vector3.up * heightPosition;
+            Vector3 cameraPosition = pointToLookAt + Vector3.up * heightPosition;
 
             TakeSceneScreenshot(cameraPosition, pointToLookAt, BIWSettings.AERIAL_SCREENSHOT_WIDTH, BIWSettings.AERIAL_SCREENSHOT_HEIGHT, onSuccess);
         }
@@ -51,7 +51,7 @@ namespace DCL.Builder
             TakeScreenshot(onSuccess, BIWSettings.SCENE_SNAPSHOT_WIDTH_RES, BIWSettings.SCENE_SNAPSHOT_HEIGHT_RES);
         }
 
-        public void TakeSceneScreenshot(Vector3 camPosition, Vector3 pointToLookAt, IScreenshotCameraController.OnSnapshotsReady onSuccess) { TakeSceneScreenshot(camPosition, pointToLookAt, BIWSettings.SCENE_SNAPSHOT_WIDTH_RES, BIWSettings.SCENE_SNAPSHOT_HEIGHT_RES , onSuccess); }
+        public void TakeSceneScreenshot(Vector3 camPosition, Vector3 pointToLookAt, IScreenshotCameraController.OnSnapshotsReady onSuccess) { TakeSceneScreenshot(camPosition, pointToLookAt, BIWSettings.SCENE_SNAPSHOT_WIDTH_RES, BIWSettings.SCENE_SNAPSHOT_HEIGHT_RES, onSuccess); }
 
         public void TakeSceneScreenshot(Vector3 camPosition, Vector3 pointToLookAt, int width, int height, IScreenshotCameraController.OnSnapshotsReady onSuccess)
         {
@@ -67,7 +67,7 @@ namespace DCL.Builder
 
             //We deselect the entities to take better photos
             context.editorContext.entityHandler.DeselectEntities();
-            
+
             screenshotCamera.gameObject.SetActive(true);
 
             var current = screenshotCamera.targetTexture;
@@ -76,7 +76,7 @@ namespace DCL.Builder
             Texture2D sceneScreenshot = ScreenshotFromCamera(width, height);
             screenshotCamera.targetTexture = current;
             screenshotCamera.gameObject.SetActive(false);
-            
+
             callback?.Invoke(sceneScreenshot);
         }
 

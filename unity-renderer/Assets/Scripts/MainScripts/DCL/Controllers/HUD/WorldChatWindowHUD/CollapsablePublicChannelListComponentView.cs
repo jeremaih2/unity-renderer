@@ -8,21 +8,19 @@ using UnityEngine;
 public class CollapsablePublicChannelListComponentView : CollapsableSortedListComponentView<string, PublicChannelEntry>
 {
     private const string POOL_NAME_PREFIX = "PublicChannelEntriesPool_";
-    
+
     [SerializeField] private PublicChannelEntry entryPrefab;
 
     private readonly Dictionary<string, PoolableObject> pooleableEntries = new Dictionary<string, PoolableObject>();
     private Pool entryPool;
     private bool releaseEntriesFromPool = true;
     private IChatController chatController;
-    private ILastReadMessagesService lastReadMessagesService;
 
     public event Action<PublicChannelEntry> OnOpenChat;
-    
-    public void Initialize(IChatController chatController, ILastReadMessagesService lastReadMessagesService)
+
+    public void Initialize(IChatController chatController)
     {
         this.chatController = chatController;
-        this.lastReadMessagesService = lastReadMessagesService;
     }
 
     public void Filter(string search)
@@ -46,9 +44,9 @@ public class CollapsablePublicChannelListComponentView : CollapsableSortedListCo
         {
             if (pooleableEntries.ContainsKey(key))
                 pooleableEntries[key].Release();
-            pooleableEntries.Remove(key);    
+            pooleableEntries.Remove(key);
         }
-        
+
         return base.Remove(key);
     }
 
@@ -56,11 +54,11 @@ public class CollapsablePublicChannelListComponentView : CollapsableSortedListCo
     {
         if (!Contains(entryModel.channelId))
             CreateEntry(channelId);
-            
+
         var entry = Get(channelId);
         entry.Configure(entryModel);
     }
-    
+
     private void CreateEntry(string channelId)
     {
         entryPool = GetEntryPool();
@@ -68,7 +66,7 @@ public class CollapsablePublicChannelListComponentView : CollapsableSortedListCo
         pooleableEntries.Add(channelId, newFriendEntry);
         var entry = newFriendEntry.gameObject.GetComponent<PublicChannelEntry>();
         Add(channelId, entry);
-        entry.Initialize(chatController, lastReadMessagesService);
+        entry.Initialize(chatController);
         entry.OnOpenChat -= OnEntryOpenChat;
         entry.OnOpenChat += OnEntryOpenChat;
     }

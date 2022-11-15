@@ -24,7 +24,7 @@ public interface IColorPickerComponentView
     void SetIncrementAmount(float amount);
 }
 
-public class ColorPickerComponentView : BaseComponentView, IColorPickerComponentView, IComponentModelConfig
+public class ColorPickerComponentView : BaseComponentView, IColorPickerComponentView, IComponentModelConfig<ColorPickerComponentModel>
 {
 
     [SerializeField] private SliderComponentView sliderHue;
@@ -64,7 +64,7 @@ public class ColorPickerComponentView : BaseComponentView, IColorPickerComponent
         sliderValue.onDecrement.AddListener(() => ChangeProperty("val", -model.incrementAmount));
 
         toggleButton.onClick.AddListener(() => SetActive(!container.activeInHierarchy));
-        
+
         SetActive(false);
     }
 
@@ -77,14 +77,14 @@ public class ColorPickerComponentView : BaseComponentView, IColorPickerComponent
         SetIncrementAmount(model.incrementAmount);
     }
 
-    public void SetColorSelector(Color newColor) 
+    public void SetColorSelector(Color newColor)
     {
         colorSelector.Select(newColor);
     }
 
     public void SetColorList(List<Color> colorList)
     {
-        if(colorSelector == null)
+        if (colorSelector == null)
             colorSelector = colorSelectorObject.GetComponent<IColorSelector>();
 
         model.colorList = colorList;
@@ -92,9 +92,9 @@ public class ColorPickerComponentView : BaseComponentView, IColorPickerComponent
         colorSelector.Populate(colorList);
     }
 
-    public void Configure(BaseComponentModel newModel)
+    public void Configure(ColorPickerComponentModel newModel)
     {
-        model = (ColorPickerComponentModel)newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -153,7 +153,7 @@ public class ColorPickerComponentView : BaseComponentView, IColorPickerComponent
         OnColorChanged.Invoke(newColor);
     }
 
-    private IEnumerator PlaySound() 
+    private IEnumerator PlaySound()
     {
         isAudioPlaying = true;
         AudioScriptableObjects.buttonRelease.Play(true);
@@ -161,8 +161,8 @@ public class ColorPickerComponentView : BaseComponentView, IColorPickerComponent
         isAudioPlaying = false;
     }
 
-    public void SetActive(bool isActive) 
-    { 
+    public void SetActive(bool isActive)
+    {
         container.SetActive(isActive);
         containerImage.enabled = isActive;
     }

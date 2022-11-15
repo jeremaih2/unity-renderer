@@ -8,18 +8,19 @@ namespace DCL
 {
     public class AssetPromise_Texture : AssetPromise<Asset_Texture>
     {
-        const TextureWrapMode DEFAULT_WRAP_MODE = TextureWrapMode.Clamp;
-        const FilterMode DEFAULT_FILTER_MODE = FilterMode.Bilinear;
         private const string PLAIN_BASE64_PROTOCOL = "data:text/plain;base64,";
+        private const TextureWrapMode DEFAULT_WRAP_MODE = TextureWrapMode.Clamp;
+        private const FilterMode DEFAULT_FILTER_MODE = FilterMode.Bilinear;
 
-        string url;
-        string idWithTexSettings;
-        string idWithDefaultTexSettings;
-        TextureWrapMode wrapMode;
-        FilterMode filterMode;
-        bool storeDefaultTextureInAdvance = false;
-        bool storeTexAsNonReadable = false;
+        private readonly string idWithTexSettings;
+        private readonly string idWithDefaultTexSettings;
+        private readonly TextureWrapMode wrapMode;
+        private readonly FilterMode filterMode;
+        private readonly bool storeDefaultTextureInAdvance = false;
+        private readonly bool storeTexAsNonReadable = false;
         private readonly int maxTextureSize;
+
+        public string url { get; }
 
         WebRequestAsyncOperation webRequestOp = null;
 
@@ -86,7 +87,8 @@ namespace DCL
             {
                 //For Base64 protocols we just take the bytes and create the texture
                 //to avoid Unity's web request issue with large URLs
-                try {
+                try
+                {
                     string substring = url.Substring(PLAIN_BASE64_PROTOCOL.Length);
                     byte[] decodedTexture = Convert.FromBase64String(substring);
                     asset.texture = new Texture2D(1, 1);
@@ -99,7 +101,7 @@ namespace DCL
                 {
                     OnFail?.Invoke(e);
                 }
-                
+
             }
         }
 
@@ -136,7 +138,7 @@ namespace DCL
                 Debug.Log("add to library fail?");
                 return false;
             }
-            
+
             PerformanceAnalytics.PromiseTextureTracker.Track();
 
             asset = library.Get(asset.id);

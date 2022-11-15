@@ -6,6 +6,9 @@ using DCL.Controllers;
 using DCL.Helpers;
 using UnityEngine;
 
+/// <summary>
+/// This controller checks if an avatar entered or exited a scene by checking its position every frame
+/// </summary>
 public class AvatarReporterController : IAvatarReporterController
 {
     private string avatarId;
@@ -28,25 +31,15 @@ public class AvatarReporterController : IAvatarReporterController
         // NOTE: do not report avatars that doesn't belong to the global scene
         if (sceneId != EnvironmentSettings.AVATAR_GLOBAL_SCENE_ID)
             return;
-        
+
         this.avatarId = avatarId;
         isInitialReport = true;
         lastSceneId = null;
     }
-    
+
     string GetcurrentSceneIdNonAlloc(Vector2Int coords)
     {
-        foreach (KeyValuePair<string, IParcelScene> parcelScene in worldState.loadedScenes)
-        {
-            var parcels = parcelScene.Value.sceneData.parcels;
-
-            if (parcels != null && parcels.Contains(coords))
-            {
-                return parcelScene.Key;
-            }
-        }
-        
-        return null;
+        return worldState.GetSceneIdByCoords(coords);
     }
 
     void IAvatarReporterController.ReportAvatarPosition(Vector3 position)
@@ -65,7 +58,7 @@ public class AvatarReporterController : IAvatarReporterController
         {
             return;
         }
-        
+
         string currentSceneId = GetcurrentSceneIdNonAlloc(coords);
 
         if (currentSceneId == lastSceneId && !isInitialReport)
@@ -87,7 +80,7 @@ public class AvatarReporterController : IAvatarReporterController
             return;
 
         ((IAvatarReporterController)this).reporter.ReportAvatarRemoved(avatarId);
-        
+
         avatarId = null;
         lastSceneId = null;
         isInitialReport = true;

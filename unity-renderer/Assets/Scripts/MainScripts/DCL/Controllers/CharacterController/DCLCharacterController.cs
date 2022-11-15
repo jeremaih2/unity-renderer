@@ -8,53 +8,53 @@ public class DCLCharacterController : MonoBehaviour
 {
     public static DCLCharacterController i { get; private set; }
 
-    private const float CONTROLLER_DRIFT_OFFSET = 0.15f;
+    private const float CONTROLLER_DRIFT_OFFSET = 0.15f;//偏移差值
 
     [Header("Movement")]
-    public float minimumYPosition = 1f;
+    public float minimumYPosition = 1f;//最低Y的位置
 
-    public float groundCheckExtraDistance = 0.1f;
-    public float gravity = -55f;
-    public float jumpForce = 12f;
-    public float movementSpeed = 8f;
-    public float runningSpeedMultiplier = 2f;
-    public int jumpLimit = 2;
+    public float groundCheckExtraDistance = 0.1f;//检查地面最大距离
+    public float gravity = -55f;//重力
+    public float jumpForce = 12f;//跳跃力度
+    public float movementSpeed = 8f;//移动速度
+    public float runningSpeedMultiplier = 2f;//奔跑速度乘数
+    //public int jumpLimit = 3;//跳跃限制
 
-    public DCLCharacterPosition characterPosition;
+    public DCLCharacterPosition characterPosition;//角色位置
 
     [Header("Collisions")]
-    public LayerMask groundLayers;
+    public LayerMask groundLayers;//碰撞层
     
     [Header("Additional Camera Layers")]
-    public LayerMask cameraLayers;
+    public LayerMask cameraLayers;//相机层
 
     [System.NonSerialized]
-    public bool initialPositionAlreadySet = false;
+    public bool initialPositionAlreadySet = false;//初始化位置是否已经设置
 
     [System.NonSerialized]
-    public bool characterAlwaysEnabled = true;
+    public bool characterAlwaysEnabled = true;//人物是否一直激活
 
     [System.NonSerialized]
-    public CharacterController characterController;
+    public CharacterController characterController;//角色控制
 
-    FreeMovementController freeMovementController;
+    FreeMovementController freeMovementController;//自由移动控制
 
     new Collider collider;
 
-    float lastUngroundedTime = 0f;
-    float lastJumpButtonPressedTime = 0f;
-    float lastMovementReportTime;
-    float originalGravity;
-    Vector3 lastLocalGroundPosition;
+    float lastUngroundedTime = 0f;//最后不在地面时间
+    float lastJumpButtonPressedTime = 0f;//最后跳跃按钮时间
+    float lastMovementReportTime;//最后移动报告时间
+    float originalGravity;//起始重力
+    Vector3 lastLocalGroundPosition;//最后本地位置
 
-    Vector3 lastCharacterRotation;
-    Vector3 lastGlobalCharacterRotation;
+    Vector3 lastCharacterRotation;//最后角色旋转
+    Vector3 lastGlobalCharacterRotation;//最后全局角色旋转
 
     Vector3 velocity = Vector3.zero;
 
-    public Plane p;
-    public Light l;
-    public Transform t;
+    //public Plane p;
+    //public Light l;
+    //public Transform t;
     public bool isWalking { get; private set; } = false;
     public bool isMovingByUserInput { get; private set; } = false;
     public bool isJumping { get; private set; } = false;
@@ -66,45 +66,47 @@ public class DCLCharacterController : MonoBehaviour
     Vector3 lastPosition;
     Vector3 groundLastPosition;
     Quaternion groundLastRotation;
-    bool jumpButtonPressed = false;
+    bool jumpButtonPressed = false;//是否按下跳跃按钮
 
     [Header("InputActions")]
-    public InputAction_Hold jumpAction;
+    public InputAction_Hold jumpAction;//跳跃事件
 
-    public InputAction_Hold sprintAction;
+    public InputAction_Hold sprintAction;//冲刺事件
 
-    public Vector3 moveVelocity;
+    public Vector3 moveVelocity;//移动速度
 
-    private InputAction_Hold.Started jumpStartedDelegate;
-    private InputAction_Hold.Finished jumpFinishedDelegate;
-    private InputAction_Hold.Started walkStartedDelegate;
-    private InputAction_Hold.Finished walkFinishedDelegate;
+    private InputAction_Hold.Started jumpStartedDelegate;//开始跳的委托
+    private InputAction_Hold.Finished jumpFinishedDelegate;//完成跳的委托
+    private InputAction_Hold.Started walkStartedDelegate;//开始走的委托
+    private InputAction_Hold.Finished walkFinishedDelegate;//完成走的委托
 
     private Vector3NullableVariable characterForward => CommonScriptableObjects.characterForward;
 
-    public static System.Action<DCLCharacterPosition> OnCharacterMoved;
-    public static System.Action<DCLCharacterPosition> OnPositionSet;
-    public event System.Action<float> OnUpdateFinish;
+    public static System.Action<DCLCharacterPosition> OnCharacterMoved;//角色移动
+    public static System.Action<DCLCharacterPosition> OnPositionSet;//设置位置
+    public event System.Action<float> OnUpdateFinish;//完成更新
 
-    public GameObject avatarGameObject;
-    public GameObject firstPersonCameraGameObject;
-
-    [SerializeField]
-    private InputAction_Measurable characterYAxis;
+    public GameObject avatarGameObject;//角色gameobject
+    public GameObject firstPersonCameraGameObject;//第一人称视角的gameobject
 
     [SerializeField]
-    private InputAction_Measurable characterXAxis;
+    private InputAction_Measurable characterYAxis;//角色Y轴
+
+    [SerializeField]
+    private InputAction_Measurable characterXAxis;//角色X轴
 
     private Vector3Variable cameraForward => CommonScriptableObjects.cameraForward;
     private Vector3Variable cameraRight => CommonScriptableObjects.cameraRight;
 
-    [System.NonSerialized]
-    public float movingPlatformSpeed;
-    private CollisionFlags lastCharacterControllerCollision;
+    private readonly DataStore_Player dataStorePlayer = DataStore.i.player;
 
-    public event System.Action OnJump;
-    public event System.Action OnHitGround;
-    public event System.Action<float> OnMoved;
+    [System.NonSerialized]
+    public float movingPlatformSpeed;//地面移动速度
+    private CollisionFlags lastCharacterControllerCollision;//最后一次角色控制器的碰撞器
+
+    public event System.Action OnJump;//在跳跃
+    public event System.Action OnHitGround;//隐藏地面
+    public event System.Action<float> OnMoved;//在移动
     
     void Awake()
     {
@@ -119,9 +121,9 @@ public class DCLCharacterController : MonoBehaviour
 
         SubscribeToInput();
         CommonScriptableObjects.playerUnityPosition.Set(Vector3.zero);
-        CommonScriptableObjects.playerWorldPosition.Set(Vector3.zero);
+        dataStorePlayer.playerWorldPosition.Set(Vector3.zero);
         CommonScriptableObjects.playerCoords.Set(Vector2Int.zero);
-        DataStore.i.player.playerWorldPosition.Set(Vector2Int.zero);
+        dataStorePlayer.playerGridPosition.Set(Vector2Int.zero);
         CommonScriptableObjects.playerUnityEulerAngles.Set(Vector3.zero);
 
         characterPosition = new DCLCharacterPosition();
@@ -147,8 +149,8 @@ public class DCLCharacterController : MonoBehaviour
         worldData.fpsTransform.Set(firstPersonCameraGameObject.transform);
     }
 
-    private void SubscribeToInput()
-    {
+    private void SubscribeToInput()//订阅输入
+    {//跳跃，行走，开始，完成的委托
         jumpStartedDelegate = (action) =>
         {
             lastJumpButtonPressedTime = Time.time;
@@ -176,7 +178,7 @@ public class DCLCharacterController : MonoBehaviour
     }
 
     void OnWorldReposition(Vector3 current, Vector3 previous)
-    {
+    {//在世界重新定位
         Vector3 oldPos = this.transform.position;
         this.transform.position = characterPosition.unityPosition; //CommonScriptableObjects.playerUnityPosition;
 
@@ -189,6 +191,7 @@ public class DCLCharacterController : MonoBehaviour
     public void SetPosition(Vector3 newPosition)
     {
         // failsafe in case something teleports the player below ground collisions
+        //以防有东西将玩家传送到地面碰撞
         if (newPosition.y < minimumYPosition)
         {
             newPosition.y = minimumYPosition + 2f;
@@ -200,11 +203,11 @@ public class DCLCharacterController : MonoBehaviour
         Environment.i.platform.physicsSyncController?.MarkDirty();
 
         CommonScriptableObjects.playerUnityPosition.Set(characterPosition.unityPosition);
-        CommonScriptableObjects.playerWorldPosition.Set(characterPosition.worldPosition);
+        dataStorePlayer.playerWorldPosition.Set(characterPosition.worldPosition);
         Vector2Int playerPosition = Utils.WorldToGridPosition(characterPosition.worldPosition);
         CommonScriptableObjects.playerCoords.Set(playerPosition);
-        DataStore.i.player.playerWorldPosition.Set(playerPosition);
-        DataStore.i.player.playerUnityPosition.Set(characterPosition.unityPosition);
+        dataStorePlayer.playerGridPosition.Set(playerPosition);
+        dataStorePlayer.playerUnityPosition.Set(characterPosition.unityPosition);
 
         if (Moved(lastPosition))
         {
@@ -223,8 +226,8 @@ public class DCLCharacterController : MonoBehaviour
     }
 
     public void Teleport(string teleportPayload)
-    {
-        ResetGround();
+    {//传送
+        ResetGround();//重置地板
 
         var payload = Utils.FromJsonWithNulls<Vector3>(teleportPayload);
 
@@ -251,10 +254,10 @@ public class DCLCharacterController : MonoBehaviour
 
     bool Moved(Vector3 previousPosition, bool useThreshold = false)
     {
-        if (useThreshold)
+        if (useThreshold)//使用阈值
             return Vector3.Distance(characterPosition.worldPosition, previousPosition) > 0.001f;
         else
-            return characterPosition.worldPosition != previousPosition;
+            return characterPosition.worldPosition != previousPosition;//上一个位置
     }
 
     internal void LateUpdate()
@@ -263,14 +266,15 @@ public class DCLCharacterController : MonoBehaviour
             return;
 
         if (transform.position.y < minimumYPosition)
-        {
-            SetPosition(characterPosition.worldPosition);
+        {//当前y轴的位置小于最小y的位置
+            SetPosition(characterPosition.worldPosition);//设置角色的位置，角色世界位置
             return;
         }
 
         if (freeMovementController.IsActive())
-        {
-            velocity = freeMovementController.CalculateMovement();
+        {//自由移动控制是否激活
+            velocity = freeMovementController.CalculateMovement();//速度=自由移动的计算移动
+            Debug.Log("自由移动控制的状态是："+freeMovementController.IsActive());
         }
         else
         {
@@ -286,7 +290,7 @@ public class DCLCharacterController : MonoBehaviour
             if (isGrounded)
             {
                 isJumping = false;
-                velocity.y = gravity * Time.deltaTime; // to avoid accumulating gravity in velocity.y while grounded
+                velocity.y = gravity * Time.deltaTime; // to avoid accumulating gravity in velocity.y while grounded 避免重力在速度上积累。y而停飞
             }
             else if (previouslyGrounded && !isJumping)
             {
@@ -326,7 +330,7 @@ public class DCLCharacterController : MonoBehaviour
                 CommonScriptableObjects.playerUnityEulerAngles.Set(transform.eulerAngles);
             }
 
-            bool jumpButtonPressedWithGraceTime = jumpButtonPressed && (Time.time - lastJumpButtonPressedTime < 0.15f);
+            bool jumpButtonPressedWithGraceTime = jumpButtonPressed && (Time.time - lastJumpButtonPressedTime < 0.15f);//是否跳跃按钮宽限时间
 
             if (jumpButtonPressedWithGraceTime) // almost-grounded jump button press allowed time几乎接地跳按钮按允许的时间
             {
@@ -334,7 +338,7 @@ public class DCLCharacterController : MonoBehaviour
 
                 if (isGrounded || justLeftGround) // just-left-ground jump allowed time 左跳是有时间的
                 {
-                    Jump();
+                        Jump();
                 }
             }
 
@@ -384,19 +388,19 @@ public class DCLCharacterController : MonoBehaviour
         if (isJumping)
             return;
 
-        if (isGrounded) jumpLimit = 2;
+        //if (isGrounded) jumpLimit = 3;
 
         isJumping = true;
         isGrounded = false;
 
         ResetGround();
 
-        if (jumpLimit>0)
-        {
-            velocity.y = jumpForce;
-            jumpLimit-- ;
-        }
-        
+        //if (jumpLimit>0)
+        //{
+        //    velocity.y = jumpForce;
+        //    jumpLimit-- ;
+        //}
+        velocity.y = jumpForce;
         //cameraTargetProbe.damping.y = dampingOnAir;
 
         OnJump?.Invoke();

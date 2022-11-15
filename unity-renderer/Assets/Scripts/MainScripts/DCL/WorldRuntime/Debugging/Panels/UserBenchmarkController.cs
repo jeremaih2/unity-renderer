@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,37 +73,37 @@ namespace DCL
 
             statsPanel.PopulateTable(columnsList.Count, rowsList.Count, 240, 240);
 
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Columns.LABEL, "");
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Columns.LABEL, "");
 
             //Init Labels
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.PROCESSED_MESSAGES, PROCESSED_MESSAGES_TEXT);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.PENDING_MESSAGES, PENDING_MESSAGES_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.PROCESSED_MESSAGES, PROCESSED_MESSAGES_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.PENDING_MESSAGES, PENDING_MESSAGES_TEXT);
 
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.BREAK_0, BREAK_0_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.BREAK_0, BREAK_0_TEXT);
 
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.CURRENT_SCENE, CURRENT_SCENE_TEST);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.POLYGONS_VS_LIMIT, POLYGON_VS_LIMIT_TEXT);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.TEXTURES_VS_LIMIT, TEXTURES_VS_LIMIT_TEXT);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.MATERIALS_VS_LIMIT, MATERIALS_VS_LIMIT_TEXT);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.ENTITIES_VS_LIMIT, ENTITIES_VS_LIMIT_TEXT);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.MESHES_VS_LIMIT, MESHES_VS_LIMIT_TEXT);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.BODIES_VS_LIMIT, BODIES_VS_LIMIT_TEXT);
-            statsPanel.SetCellText((int) Columns.LABEL, (int) Rows.COMPONENT_OBJECTS_COUNT,
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.CURRENT_SCENE, CURRENT_SCENE_TEST);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.POLYGONS_VS_LIMIT, POLYGON_VS_LIMIT_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.TEXTURES_VS_LIMIT, TEXTURES_VS_LIMIT_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.MATERIALS_VS_LIMIT, MATERIALS_VS_LIMIT_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.ENTITIES_VS_LIMIT, ENTITIES_VS_LIMIT_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.MESHES_VS_LIMIT, MESHES_VS_LIMIT_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.BODIES_VS_LIMIT, BODIES_VS_LIMIT_TEXT);
+            statsPanel.SetCellText((int)Columns.LABEL, (int)Rows.COMPONENT_OBJECTS_COUNT,
                 COMPONENT_OBJECTS_COUNT_TEXT);
 
             //Init Values
 
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.PROCESSED_MESSAGES, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.PENDING_MESSAGES, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.PROCESSED_MESSAGES, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.PENDING_MESSAGES, "=/=");
 
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.CURRENT_SCENE, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.POLYGONS_VS_LIMIT, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.TEXTURES_VS_LIMIT, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.MATERIALS_VS_LIMIT, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.ENTITIES_VS_LIMIT, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.MESHES_VS_LIMIT, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.BODIES_VS_LIMIT, "=/=");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.COMPONENT_OBJECTS_COUNT, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.CURRENT_SCENE, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.POLYGONS_VS_LIMIT, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.TEXTURES_VS_LIMIT, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.MATERIALS_VS_LIMIT, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.ENTITIES_VS_LIMIT, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.MESHES_VS_LIMIT, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.BODIES_VS_LIMIT, "=/=");
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.COMPONENT_OBJECTS_COUNT, "=/=");
 
             Canvas.ForceUpdateCanvases();
         }
@@ -123,18 +123,18 @@ namespace DCL
         private void OnMessageWillDequeue(string obj)
         {
             totalMessagesCurrent = Math.Min(totalMessagesCurrent + 1, totalMessagesGlobal);
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.PROCESSED_MESSAGES,
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.PROCESSED_MESSAGES,
                 $"{totalMessagesCurrent} of {totalMessagesGlobal}");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.PENDING_MESSAGES,
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.PENDING_MESSAGES,
                 $"{totalMessagesGlobal - totalMessagesCurrent}");
         }
 
         private void OnMessageWillQueue(string obj)
         {
             totalMessagesGlobal++;
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.PROCESSED_MESSAGES,
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.PROCESSED_MESSAGES,
                 $"{totalMessagesCurrent}:{totalMessagesGlobal}");
-            statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.PENDING_MESSAGES,
+            statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.PENDING_MESSAGES,
                 $"{totalMessagesGlobal - totalMessagesCurrent}");
         }
 
@@ -159,14 +159,14 @@ namespace DCL
                 {
                     var metrics = activeScene.metricsCounter.currentCount;
                     var limits = activeScene.metricsCounter.maxCount;
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.CURRENT_SCENE, $"{activeScene.sceneData.id}");
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.POLYGONS_VS_LIMIT, $"{metrics.triangles} of {limits.triangles}");
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.TEXTURES_VS_LIMIT, $"{metrics.textures} of {limits.textures}");
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.MATERIALS_VS_LIMIT, $"{metrics.materials} of {limits.materials}");
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.ENTITIES_VS_LIMIT, $"{metrics.entities} of {limits.entities}");
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.MESHES_VS_LIMIT, $"{metrics.meshes} of {limits.meshes}");
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.BODIES_VS_LIMIT, $"{metrics.bodies} of {limits.bodies}");
-                    statsPanel.SetCellText((int) Columns.VALUE, (int) Rows.COMPONENT_OBJECTS_COUNT, (activeScene.componentsManagerLegacy.GetSceneSharedComponentsDictionary().Count + activeScene.componentsManagerLegacy.GetComponentsCount()).ToString());
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.CURRENT_SCENE, $"{activeScene.sceneData.id}");
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.POLYGONS_VS_LIMIT, $"{metrics.triangles} of {limits.triangles}");
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.TEXTURES_VS_LIMIT, $"{metrics.textures} of {limits.textures}");
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.MATERIALS_VS_LIMIT, $"{metrics.materials} of {limits.materials}");
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.ENTITIES_VS_LIMIT, $"{metrics.entities} of {limits.entities}");
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.MESHES_VS_LIMIT, $"{metrics.meshes} of {limits.meshes}");
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.BODIES_VS_LIMIT, $"{metrics.bodies} of {limits.bodies}");
+                    statsPanel.SetCellText((int)Columns.VALUE, (int)Rows.COMPONENT_OBJECTS_COUNT, (activeScene.componentsManagerLegacy.GetSceneSharedComponentsDictionary().Count + activeScene.componentsManagerLegacy.GetComponentsCount()).ToString());
                 }
 
                 yield return WaitForSecondsCache.Get(0.2f);
@@ -180,14 +180,14 @@ namespace DCL
 
             if (!string.IsNullOrEmpty(debugSceneId))
             {
-                if (worldState.loadedScenes.TryGetValue(debugSceneId, out IParcelScene scene))
+                if (worldState.TryGetScene(debugSceneId, out IParcelScene scene))
                     return scene;
             }
 
-            var currentPos = Utils.WorldToGridPosition(CommonScriptableObjects.playerWorldPosition);
-            return worldState.loadedScenes.Values.FirstOrDefault(
-                x => x.sceneData.parcels != null
-                     && x.sceneData.parcels.Any(y => y == currentPos));
+            var currentPos = DataStore.i.player.playerGridPosition.Get();
+            worldState.TryGetScene(worldState.GetSceneIdByCoords(currentPos), out IParcelScene resultScene);
+
+            return resultScene;
         }
     }
 }

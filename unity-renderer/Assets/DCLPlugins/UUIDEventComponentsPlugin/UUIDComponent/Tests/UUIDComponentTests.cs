@@ -1,4 +1,4 @@
-﻿using DCL;
+using DCL;
 using DCL.Components;
 using DCL.Helpers;
 using DCL.Interface;
@@ -7,14 +7,11 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using DCL.Camera;
 using DCL.Controllers;
 using NSubstitute;
 using NSubstitute.Extensions;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 
 namespace Tests
 {
@@ -59,7 +56,6 @@ namespace Tests
             mainCamera.transform.forward = Vector3.forward;
 
             EntityIdHelper idHelper = new EntityIdHelper();
-            DCL.Environment.i.world.state.currentSceneId = scene.sceneData.id;
             DCL.Environment.i.world.sceneController.Configure().entityIdHelper.Returns(idHelper);
 
             uuidEventsPlugin = new UUIDEventsPlugin();
@@ -70,7 +66,7 @@ namespace Tests
         {
             uuidEventsPlugin.Dispose();
             coreComponentsPlugin.Dispose();
-                
+
             Object.Destroy(mainCamera.gameObject);
             Utils.UnlockCursor();
             yield return base.TearDown();
@@ -705,6 +701,8 @@ namespace Tests
                 JsonConvert.SerializeObject(new BoxShape.Model { })
             );
 
+            yield return null;
+
             var meshFilter = component.entity.gameObject.GetComponentInChildren<MeshFilter>();
             var onPointerEventCollider = meshFilter.transform.Find(OnPointerEventColliders.COLLIDER_NAME);
 
@@ -742,6 +740,8 @@ namespace Tests
                 JsonConvert.SerializeObject(new BoxShape.Model { })
             );
 
+            yield return null;
+
             var meshFilter = scene.entities[entityId].gameObject.GetComponentInChildren<MeshFilter>();
             var onPointerEventCollider = meshFilter.transform.Find(OnPointerEventColliders.COLLIDER_NAME);
 
@@ -749,8 +749,6 @@ namespace Tests
 
             Assert.AreSame(meshFilter.sharedMesh, onPointerEventCollider.GetComponent<MeshCollider>().sharedMesh,
                 "OnPointerEventCollider should have the same mesh info as the mesh renderer");
-
-            yield break;
         }
 
         [UnityTest]
@@ -781,6 +779,8 @@ namespace Tests
                 JsonConvert.SerializeObject(new BoxShape.Model { })
             );
 
+            yield return null;
+
             var meshFilter = scene.entities[entityId].gameObject.GetComponentInChildren<MeshFilter>();
             var onPointerEventCollider = meshFilter.transform.Find(OnPointerEventColliders.COLLIDER_NAME);
 
@@ -788,8 +788,6 @@ namespace Tests
 
             Assert.AreSame(meshFilter.sharedMesh, onPointerEventCollider.GetComponent<MeshCollider>().sharedMesh,
                 "OnPointerEventCollider should have the same mesh info as the mesh renderer");
-
-            yield break;
         }
 
         [UnityTest]
@@ -820,6 +818,8 @@ namespace Tests
                 JsonConvert.SerializeObject(new BoxShape.Model { })
             );
 
+            yield return null;
+
             var meshFilter = scene.entities[entityId].gameObject.GetComponentInChildren<MeshFilter>();
             var onPointerEventCollider = meshFilter.transform.Find(OnPointerEventColliders.COLLIDER_NAME);
 
@@ -827,8 +827,6 @@ namespace Tests
 
             Assert.AreSame(meshFilter.sharedMesh, onPointerEventCollider.GetComponent<MeshCollider>().sharedMesh,
                 "OnPointerEventCollider should have the same mesh info as the mesh renderer");
-
-            yield break;
         }
 
         [UnityTest]
@@ -859,6 +857,8 @@ namespace Tests
                 JsonConvert.SerializeObject(new BoxShape.Model { })
             );
 
+            yield return null;
+
             var meshFilter = scene.entities[entityId].gameObject.GetComponentInChildren<MeshFilter>();
             var onPointerEventCollider = meshFilter.transform.Find(OnPointerEventColliders.COLLIDER_NAME);
 
@@ -866,8 +866,6 @@ namespace Tests
 
             Assert.AreSame(meshFilter.sharedMesh, onPointerEventCollider.GetComponent<MeshCollider>().sharedMesh,
                 "OnPointerEventCollider should have the same mesh info as the mesh renderer");
-
-            yield break;
         }
 
         [UnityTest]
@@ -985,7 +983,7 @@ namespace Tests
                 {
                     if (eventTriggered)
                         return true;
-                    
+
                     if (pointerEvent.eventType == sceneEvent.eventType &&
                         pointerEvent.payload.uuid == sceneEvent.payload.uuid &&
                         pointerEvent.payload.payload.hit.entityId == sceneEvent.payload.payload.hit.entityId)
@@ -1110,8 +1108,8 @@ namespace Tests
             string targetEventType = "SceneEvent";
 
             var onPointerHoverEnterEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload>
-                {uuid = uuidHoverEnter};
-            var onPointerHoverExitEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> {uuid = uuidHoverExit};
+            { uuid = uuidHoverEnter };
+            var onPointerHoverExitEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> { uuid = uuidHoverExit };
 
             var sceneEventHoverEnter = new WebInterface.SceneEvent<WebInterface.UUIDEvent<WebInterface.EmptyPayload>>
             {
@@ -1241,7 +1239,7 @@ namespace Tests
             Assert.IsTrue(eventTriggered1);
 
             // turn shape invisible
-            TestUtils.UpdateShape(scene, shape.id, JsonConvert.SerializeObject(new {visible = false}));
+            TestUtils.UpdateShape(scene, shape.id, JsonConvert.SerializeObject(new { visible = false }));
             uuidEventsPlugin.inputControllerLegacy.RaiseEvent(WebInterface.ACTION_BUTTON.POINTER,
                 DCL.InputController_Legacy.EVENT.BUTTON_DOWN, true, true);
 
@@ -1299,7 +1297,7 @@ namespace Tests
 
             string targetEventType = "SceneEvent";
 
-            var onPointerHoverEnterEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> {uuid = onPointerId};
+            var onPointerHoverEnterEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> { uuid = onPointerId };
 
             var sceneEvent = new WebInterface.SceneEvent<WebInterface.UUIDEvent<WebInterface.EmptyPayload>>
             {
@@ -1331,7 +1329,7 @@ namespace Tests
             Assert.IsTrue(eventTriggered1);
 
             // turn shape invisible
-            TestUtils.UpdateShape(scene, shape.id, JsonConvert.SerializeObject(new {visible = false}));
+            TestUtils.UpdateShape(scene, shape.id, JsonConvert.SerializeObject(new { visible = false }));
             mainCamera.transform.forward = Vector3.up;
 
             var pointerHoverReceived = false;
@@ -1377,7 +1375,7 @@ namespace Tests
                 new Vector3(1, 1, 1));
             yield return clickTargetShape.routine;
 
-            
+
             // Set character position and camera rotation
             mainCamera.transform.position = new Vector3(3, 3, 1);
 
@@ -1391,9 +1389,9 @@ namespace Tests
             var component = TestUtils.EntityComponentCreate<OnPointerDown, OnPointerDown.Model>(scene,
                 clickTargetEntity,
                 OnPointerDownModel, CLASS_ID_COMPONENT.UUID_CALLBACK);
-            
+
             // We simulate that entityId has come from kernel
-            DCL.Environment.i.world.sceneController.entityIdHelper.entityIdToLegacyId.Add(component.entity.entityId,component.entity.entityId.ToString());
+            DCL.Environment.i.world.sceneController.entityIdHelper.entityIdToLegacyId.Add(component.entity.entityId, component.entity.entityId.ToString());
 
             Assert.IsTrue(component != null);
 
@@ -1411,7 +1409,7 @@ namespace Tests
             sceneEvent.payload = onPointerDownEvent;
             sceneEvent.eventType = "uuidEvent";
             EntityIdHelper idHelper = new EntityIdHelper();
-            
+
 
             // Check if target entity is hit behind other entity
             bool targetEntityHit = false;
@@ -1503,7 +1501,7 @@ namespace Tests
 
             string targetEventType = "SceneEvent";
 
-            var onPointerHoverEnterEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> {uuid = onPointerId};
+            var onPointerHoverEnterEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> { uuid = onPointerId };
 
             var sceneEvent = new WebInterface.SceneEvent<WebInterface.UUIDEvent<WebInterface.EmptyPayload>>
             {
@@ -1601,8 +1599,8 @@ namespace Tests
 
             string targetEventType = "SceneEvent";
             // We simulate that entityId has come from kernel
-            DCL.Environment.i.world.sceneController.entityIdHelper.entityIdToLegacyId.Add(component.entity.entityId,component.entity.entityId.ToString());
-            
+            DCL.Environment.i.world.sceneController.entityIdHelper.entityIdToLegacyId.Add(component.entity.entityId, component.entity.entityId.ToString());
+
             var onPointerDownEvent = new WebInterface.OnPointerDownEvent();
             onPointerDownEvent.uuid = onPointerId;
             onPointerDownEvent.payload = new WebInterface.OnPointerEventPayload();
@@ -1715,10 +1713,10 @@ namespace Tests
 
             string targetEventType = "SceneEvent";
 
-            var onPointerHoverEnterEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> {uuid = onPointerId};
+            var onPointerHoverEnterEvent = new WebInterface.UUIDEvent<WebInterface.EmptyPayload> { uuid = onPointerId };
 
             var sceneEvent = new WebInterface.SceneEvent<WebInterface.UUIDEvent<WebInterface.EmptyPayload>>
-                {sceneId = scene.sceneData.id, payload = onPointerHoverEnterEvent, eventType = "uuidEvent"};
+            { sceneId = scene.sceneData.id, payload = onPointerHoverEnterEvent, eventType = "uuidEvent" };
 
             // Check the target entity is not hit behind the 'isPointerBlocker' shape
             bool targetEntityHit = false;
@@ -1769,9 +1767,8 @@ namespace Tests
         public IEnumerator PointerEventNotTriggeredByParent()
         {
             EntityIdHelper idHelper = new EntityIdHelper();
-            DCL.Environment.i.world.state.currentSceneId = scene.sceneData.id;
             DCL.Environment.i.world.sceneController.Configure().entityIdHelper.Returns(idHelper);
-            
+
             // Create parent entity
             InstantiateEntityWithShape(out IDCLEntity blockingEntity, out BoxShape blockingShape);
             TestUtils.SetEntityTransform(scene, blockingEntity, new Vector3(3, 3, 3), Quaternion.identity,
@@ -1808,7 +1805,7 @@ namespace Tests
             Assert.IsTrue(component != null);
 
             // We simulate that entityId has come from kernel
-            DCL.Environment.i.world.sceneController.entityIdHelper.entityIdToLegacyId.Add(component.entity.entityId,component.entity.entityId.ToString());
+            DCL.Environment.i.world.sceneController.entityIdHelper.entityIdToLegacyId.Add(component.entity.entityId, component.entity.entityId.ToString());
 
 
             string targetEventType = "SceneEvent";
@@ -1824,7 +1821,7 @@ namespace Tests
             sceneEvent.sceneId = scene.sceneData.id;
             sceneEvent.payload = onPointerDownEvent;
             sceneEvent.eventType = "uuidEvent";
-            
+
             // Check if target entity is triggered by hitting the parent entity
             bool targetEntityHit = false;
             yield return TestUtils.ExpectMessageToKernel(targetEventType, sceneEvent,

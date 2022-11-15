@@ -12,7 +12,7 @@ public class VoiceChatWindowController : IHUD
     internal const string VOICE_CHAT_FEATURE_FLAG = "voice_chat";
     internal const float MUTE_STATUS_UPDATE_INTERVAL = 0.3f;
     internal const string TALKING_MESSAGE_YOU = "You";
-    internal const string TALKING_MESSAGE_JUST_YOU_IN_THE_VOICE_CHAT = "Just you in the voice chat";
+    internal const string TALKING_MESSAGE_JUST_YOU_IN_THE_VOICE_CHAT = "No one else is here";
     internal const string TALKING_MESSAGE_NOBODY_TALKING = "Nobody is talking";
     internal const string TALKING_MESSAGE_SEVERAL_PEOPLE_TALKING = "Several people talking";
 
@@ -35,7 +35,6 @@ public class VoiceChatWindowController : IHUD
     internal bool isOwnPLayerTalking = false;
     private Coroutine updateMuteStatusRoutine = null;
     internal bool isMuteAll = false;
-    internal bool isJoined = false;
 
     public VoiceChatWindowController() { }
 
@@ -46,9 +45,7 @@ public class VoiceChatWindowController : IHUD
         DataStore dataStore,
         Settings settings)
     {
-        Debug.Log("3333333333333333333333");
         Initialize(userProfileBridge, friendsController, socialAnalytics, dataStore, settings);
-        Debug.Log("2222222222222222222222");
     }
 
     public void Initialize(
@@ -58,21 +55,20 @@ public class VoiceChatWindowController : IHUD
         DataStore dataStore,
         Settings settings)
     {
-    
         this.userProfileBridge = userProfileBridge;
         this.friendsController = friendsController;
         this.socialAnalytics = socialAnalytics;
         this.dataStore = dataStore;
         this.settings = settings;
-        Debug.Log("44444444444444444444444"+ isVoiceChatFFEnabled);
+
         if (!isVoiceChatFFEnabled)
             return;
-        Debug.Log("1111111111111111111111111");
+
         voiceChatWindowView = CreateVoiceChatWindowView();
         voiceChatWindowView.Hide(instant: true);
 
         voiceChatWindowView.OnClose += CloseView;
-        voiceChatWindowView.OnJoinVoiceChat += JoinVoiceChat;
+        voiceChatWindowView.OnJoinVoiceChat += RequestJoinVoiceChat;
         voiceChatWindowView.OnGoToCrowd += GoToCrowd;
         voiceChatWindowView.OnMuteAll += OnMuteAllToggled;
         voiceChatWindowView.OnMuteUser += MuteUser;
@@ -80,8 +76,11 @@ public class VoiceChatWindowController : IHUD
         voiceChatWindowView.SetNumberOfPlayers(0);
 
         voiceChatBarView = CreateVoiceChatBatView();
-        voiceChatBarView.Hide(instant: true);
-        voiceChatBarView.OnLeaveVoiceChat += LeaveVoiceChat;
+        voiceChatBarView.SetAsJoined(false);
+        voiceChatBarView.OnJoinVoiceChat += RequestJoinVoiceChat;
+
+        dataStore.voiceChat.isJoinedToVoiceChat.OnChange += OnVoiceChatStatusUpdated;
+        OnVoiceChatStatusUpdated(dataStore.voiceChat.isJoinedToVoiceChat.Get(), false);
 
         dataStore.player.otherPlayers.OnAdded += OnOtherPlayersStatusAdded;
         dataStore.player.otherPlayers.OnRemoved += OnOtherPlayerStatusRemoved;
@@ -89,6 +88,7 @@ public class VoiceChatWindowController : IHUD
         friendsController.OnUpdateFriendship += OnUpdateFriendship;
 
         settings.generalSettings.OnChanged += OnSettingsChanged;
+        SetAllowUsersOption(settings.generalSettings.Data.voiceChatAllow);
 
         CommonScriptableObjects.rendererState.OnChange += RendererState_OnChange;
         RendererState_OnChange(CommonScriptableObjects.rendererState.Get(), false);
@@ -144,7 +144,7 @@ public class VoiceChatWindowController : IHUD
         if (voiceChatWindowView != null)
         {
             voiceChatWindowView.OnClose -= CloseView;
-            voiceChatWindowView.OnJoinVoiceChat -= JoinVoiceChat;
+            voiceChatWindowView.OnJoinVoiceChat -= RequestJoinVoiceChat;
             voiceChatWindowView.OnGoToCrowd -= GoToCrowd;
             voiceChatWindowView.OnMuteAll -= OnMuteAllToggled;
             voiceChatWindowView.OnMuteUser -= MuteUser;
@@ -152,8 +152,9 @@ public class VoiceChatWindowController : IHUD
         }
 
         if (voiceChatBarView != null)
-            voiceChatBarView.OnLeaveVoiceChat -= LeaveVoiceChat;
+            voiceChatBarView.OnJoinVoiceChat -= RequestJoinVoiceChat;
 
+        dataStore.voiceChat.isJoinedToVoiceChat.OnChange -= OnVoiceChatStatusUpdated;
         dataStore.player.otherPlayers.OnAdded -= OnOtherPlayersStatusAdded;
         dataStore.player.otherPlayers.OnRemoved -= OnOtherPlayerStatusRemoved;
         ownProfile.OnUpdate -= OnUserProfileUpdated;
@@ -164,39 +165,40 @@ public class VoiceChatWindowController : IHUD
 
     internal void CloseView() { SetVisibility(false); }
 
-    internal void JoinVoiceChat(bool isJoined)
+    internal void RequestJoinVoiceChat(bool isJoined)
+    {
+        if (isJoined)
+        {
+            WebInterface.JoinVoiceChat();
+        }
+        else
+        {
+            if (dataStore.voiceChat.isRecording.Get().Key)
+                dataStore.voiceChat.isRecording.Set(new KeyValuePair<bool, bool>(false, false), true);
+
+            WebInterface.LeaveVoiceChat();
+        }
+    }
+
+    internal void OnVoiceChatStatusUpdated(bool isJoined, bool previous)
     {
         voiceChatWindowView.SetAsJoined(isJoined);
+        voiceChatBarView.SetAsJoined(isJoined);
 
         if (isJoined)
         {
-            voiceChatBarView.Show();
+            socialAnalytics.SendVoiceChannelConnection(voiceChatWindowView.numberOfPlayers);
             SetWhichPlayerIsTalking();
         }
         else
         {
-            dataStore.voiceChat.isRecording.Set(new KeyValuePair<bool, bool>(false, false), true);
-            isOwnPLayerTalking = false;
-            voiceChatBarView.Hide();
-        }
-
-        this.isJoined = isJoined;
-
-        if (!isJoined)
-        {
-            MuteAll(true);
             socialAnalytics.SendVoiceChannelDisconnection();
-        }
-        else
-        {
-            MuteAll(voiceChatWindowView.isMuteAllOn);
-            socialAnalytics.SendVoiceChannelConnection(voiceChatWindowView.numberOfPlayers);
-        }
+            isOwnPLayerTalking = false;
 
-        dataStore.voiceChat.isJoinedToVoiceChat.Set(isJoined);
+            if (dataStore.voiceChat.isRecording.Get().Key)
+                dataStore.voiceChat.isRecording.Set(new KeyValuePair<bool, bool>(false, false), true);
+        }
     }
-
-    internal void LeaveVoiceChat() { JoinVoiceChat(false); }
 
     internal void GoToCrowd() { WebInterface.GoToCrowd(); }
 
@@ -239,7 +241,7 @@ public class VoiceChatWindowController : IHUD
     {
         isMuteAll = isMute;
 
-        if (!isJoined)
+        if (!dataStore.voiceChat.isJoinedToVoiceChat.Get())
             return;
 
         MuteAll(isMute);
@@ -325,7 +327,13 @@ public class VoiceChatWindowController : IHUD
 
     internal void OnSettingsChanged(GeneralSettings settings)
     {
-        switch (settings.voiceChatAllow)
+        SetAllowUsersOption(settings.voiceChatAllow);
+        socialAnalytics.SendVoiceChatPreferencesChanged(settings.voiceChatAllow);
+    }
+
+    private void SetAllowUsersOption(VoiceChatAllow option)
+    {
+        switch (option)
         {
             case VoiceChatAllow.ALL_USERS:
                 voiceChatWindowView.SelectAllowUsersOption(0);
@@ -337,8 +345,6 @@ public class VoiceChatWindowController : IHUD
                 voiceChatWindowView.SelectAllowUsersOption(2);
                 break;
         }
-
-        socialAnalytics.SendVoiceChatPreferencesChanged(settings.voiceChatAllow);
     }
 
     internal void RendererState_OnChange(bool current, bool previous)
@@ -347,7 +353,7 @@ public class VoiceChatWindowController : IHUD
             return;
 
         CommonScriptableObjects.rendererState.OnChange -= RendererState_OnChange;
-        JoinVoiceChat(true);
+        RequestJoinVoiceChat(true);
     }
 
     internal void SetWhichPlayerIsTalking()

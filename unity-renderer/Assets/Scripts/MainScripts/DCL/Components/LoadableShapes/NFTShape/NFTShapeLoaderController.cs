@@ -189,7 +189,8 @@ public class NFTShapeLoaderController : MonoBehaviour, INFTShapeLoaderController
 
         var hqImageHandlerConfig = new NFTShapeHQImageConfig()
         {
-            controller = this,
+            collider = collider,
+            transform = transform,
             name = nftName,
             imageUrl = nftImageUrl,
             asset = nftAsset

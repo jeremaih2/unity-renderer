@@ -18,10 +18,12 @@ public class HUDBridge : MonoBehaviour
     public void ConfigureHUDElement(string payload)
     {
         ConfigureHUDElementMessage message = JsonUtility.FromJson<ConfigureHUDElementMessage>(payload);
-
+        Debug.Log(message);
         HUDElementID id = message.hudElementId;
         HUDConfiguration configuration = message.configuration;
+        Debug.Log("11111111111111" + message.configuration);
         string extraPayload = message.extraPayload;
+        Debug.Log("22222222222222" + extraPayload);
 
         HUDController.i.ConfigureHUDElement(id, configuration, extraPayload);
     }

@@ -1,4 +1,4 @@
-﻿using DCL;
+using DCL;
 using DCL.Components;
 using DCL.Controllers;
 using DCL.Helpers;
@@ -15,7 +15,7 @@ public class EntityMaterialUpdateTestController : MonoBehaviour
         sceneController.UnloadAllScenes();
         sceneController.LoadParcelScenes(scenesToLoad);
 
-        var scene = Environment.i.world.state.loadedScenes["0,0"] as ParcelScene;
+        var scene = Environment.i.world.state.GetScene("0,0") as ParcelScene;
 
         DCLTexture dclAtlasTexture = TestUtils.CreateDCLTexture(
             scene,

@@ -1,17 +1,16 @@
 using DCL;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using DCL.Camera;
-using DCL.Controllers;
+using DCL.CameraTool;
 using DCL.Helpers.NFT.Markets;
 using DCL.Rendering;
 using DCL.SettingsCommon;
 using NSubstitute;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.TestTools;
-using DCL.CameraTool;
 
 public class IntegrationTestSuite_Legacy
 {
@@ -33,6 +32,7 @@ public class IntegrationTestSuite_Legacy
 
         // TODO(Brian): Move these variants to a DataStore object to avoid having to reset them
         //              like this.
+        CommonScriptableObjects.allUIHidden.Set(false);
         CommonScriptableObjects.isFullscreenHUDOpen.Set(false);
         CommonScriptableObjects.rendererState.Set(true);
 
@@ -53,16 +53,16 @@ public class IntegrationTestSuite_Legacy
         result.Register<IMemoryManager>(() => Substitute.For<IMemoryManager>());
         result.Register<IParcelScenesCleaner>(() => Substitute.For<IParcelScenesCleaner>());
         result.Register<ICullingController>(() => Substitute.For<ICullingController>());
-        result.Register<ILastReadMessagesService>(() => Substitute.For<ILastReadMessagesService>());
+        result.Register<IEmotesCatalogService>(() => Substitute.For<IEmotesCatalogService>());
 
         result.Register<IServiceProviders>(
             () =>
             {
                 var mockedProviders = Substitute.For<IServiceProviders>();
-                mockedProviders.theGraph.Returns( Substitute.For<ITheGraph>() );
-                mockedProviders.analytics.Returns( Substitute.For<IAnalytics>() );
-                mockedProviders.catalyst.Returns( Substitute.For<ICatalyst>() );
-                mockedProviders.openSea.Returns( Substitute.For<INFTMarket>() );
+                mockedProviders.theGraph.Returns(Substitute.For<ITheGraph>());
+                mockedProviders.analytics.Returns(Substitute.For<IAnalytics>());
+                mockedProviders.catalyst.Returns(Substitute.For<ICatalyst>());
+                mockedProviders.openSea.Returns(Substitute.For<INFTMarket>());
                 return mockedProviders;
             });
 
@@ -80,7 +80,7 @@ public class IntegrationTestSuite_Legacy
     {
         Settings.i.Dispose();
 
-        foreach ( var go in legacySystems )
+        foreach (var go in legacySystems)
         {
             UnityEngine.Object.Destroy(go);
         }
@@ -102,6 +102,7 @@ public class IntegrationTestSuite_Legacy
 
         yield return TearDown_LegacySystems();
         DataStore.Clear();
+        ThumbnailsManager.Clear();
         TearDown_Memory();
 
         if (MapRenderer.i != null)
@@ -113,9 +114,15 @@ public class IntegrationTestSuite_Legacy
 
         yield return null;
 
+        NotificationScriptableObjects.UnloadAll();
+        AudioScriptableObjects.UnloadAll();
+        CommonScriptableObjects.UnloadAll();
+
+        yield return null;
+
         GameObject[] gos = Object.FindObjectsOfType<GameObject>(true);
 
-        foreach ( var go in gos )
+        foreach (var go in gos)
         {
             Object.Destroy(go);
         }
@@ -140,12 +147,12 @@ public class IntegrationTestSuite_Legacy
     {
         CameraController cameraController = Object.FindObjectOfType<CameraController>();
 
-        if ( cameraController == null )
+        if (cameraController == null)
             yield break;
 
         var tpsMode = cameraController.GetCameraMode(CameraMode.ModeId.ThirdPerson) as CameraStateTPS;
 
-        if ( tpsMode != null )
+        if (tpsMode != null)
         {
             tpsMode.cameraDampOnGroundType.settings.enabled = false;
             tpsMode.cameraFreefall.settings.enabled = false;
@@ -153,7 +160,7 @@ public class IntegrationTestSuite_Legacy
         }
     }
 
-    public static T Reflection_GetField<T>(object instance, string fieldName) { return (T) instance.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance).GetValue(instance); }
+    public static T Reflection_GetField<T>(object instance, string fieldName) { return (T)instance.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance).GetValue(instance); }
 
     protected GameObject CreateTestGameObject(string name) { return CreateTestGameObject(name, Vector3.zero); }
 
@@ -191,7 +198,7 @@ public class IntegrationTestSuite_Legacy
 
         if (RenderSettings.sun != null)
         {
-            RenderSettings.sun.color =  new Color(0.85882354f, 0.90795577f, 0.9137255f);
+            RenderSettings.sun.color = new Color(0.85882354f, 0.90795577f, 0.9137255f);
             RenderSettings.sun.transform.rotation = Quaternion.Euler(Vector3.one * 45);
         }
     }

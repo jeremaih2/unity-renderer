@@ -44,9 +44,9 @@ public class FreeMovementController : MonoBehaviour
         velocity.y = 0;
 
         if (characterController.enabled)
-        {
+        {//如果角色的碰撞器激活
             var speed = movementSpeed * (isSprinting ? runningSpeedMultiplier : 1f);
-
+            //速度=移动速度11乘以（是否冲刺，0.36f或者1f）
             transform.forward = characterForward.Get().Value;
 
             var xzPlaneForward = Vector3.Scale(cameraForward.Get(), new Vector3(1, 0, 1));

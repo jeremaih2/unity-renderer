@@ -35,6 +35,7 @@ public class WearableItem
         public string[] tags;
         public string[] replaces;
         public string[] hides;
+        public bool loop;
     }
 
     public Data data;
@@ -65,8 +66,7 @@ public class WearableItem
     //缩略精灵图
     public Sprite thumbnailSprite;
 
-    //This fields are temporary, once Kernel is finished we must move them to wherever they are placed
-    //这些字段是临时的，一旦内核完成，我们必须将它们移动到放置它们的地方 
+    //This fields are temporary, once Kernel is finished we must move them to wherever they are placed//这些字段是临时的，一旦内核完成，我们必须将它们移动到放置它们的地方 
     public string rarity;
     public string description;
     public int issuedId;
@@ -200,9 +200,15 @@ public class WearableItem
     }
 //是否隐藏
     public bool DoesHide(string category, string bodyShape) => GetHidesList(bodyShape).Any(s => s == category);
-//是否具有收藏价值
-    public bool IsCollectible() { return !string.IsNullOrEmpty(rarity); }
-//是否皮肤
+    //是否是收藏品
+    public bool IsCollectible()
+    {
+        if (id == null)
+            return false;
+
+        return !id.StartsWith("urn:decentraland:off-chain:base-avatars:");
+    }
+    //是否皮肤
     public bool IsSkin() => data.category == WearableLiterals.Categories.SKIN;
 
     public bool IsSmart()
@@ -284,6 +290,15 @@ public class WearableItem
     }
 
     public bool IsEmote() { return emoteDataV0 != null; }
+
+    public override string ToString() { return id; }
+}
+
+
+
+[Serializable]
+public class EmoteItem : WearableItem
+{
 }
 
 [Serializable]

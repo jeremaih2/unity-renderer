@@ -185,7 +185,7 @@ namespace DCL
                 QueuedSceneMessage m = pendingMessagesFirst.Value;
 
                 PerformanceAnalytics.MessagesProcessedTracker.Track();
-                
+
                 RemoveFirstReliableMessage();
 
                 if (m.isUnreliable)

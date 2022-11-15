@@ -1,0 +1,16 @@
+{
+    "name": "DCL.ECSComponents.Defaults",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6aacd2b3e54c7184fb26014699a47cc8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

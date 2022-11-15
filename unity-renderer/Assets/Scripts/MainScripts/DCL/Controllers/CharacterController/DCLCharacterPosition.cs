@@ -37,7 +37,7 @@ public class DCLCharacterPosition
     public DCLCharacterPosition()
     {
         CommonScriptableObjects.worldOffset.Set(Vector3.zero);
-        CommonScriptableObjects.playerWorldPosition.Set(Vector3.zero);
+        DataStore.i.player.playerWorldPosition.Set(Vector3.zero);
     }
 
     private void CheckAndRepositionWorld()
@@ -47,7 +47,7 @@ public class DCLCharacterPosition
 
         if (Mathf.Abs(unityPositionValue.x) > minDistanceForReposition)
         {
-            float dist = (int) (unityPositionValue.x / minDistanceForReposition) * minDistanceForReposition;
+            float dist = (int)(unityPositionValue.x / minDistanceForReposition) * minDistanceForReposition;
             unityPositionValue.x -= dist;
             offset.x += dist;
             dirty = true;
@@ -55,7 +55,7 @@ public class DCLCharacterPosition
 
         if (Mathf.Abs(unityPositionValue.z) > minDistanceForReposition)
         {
-            float dist = (int) (unityPositionValue.z / minDistanceForReposition) * minDistanceForReposition;
+            float dist = (int)(unityPositionValue.z / minDistanceForReposition) * minDistanceForReposition;
             unityPositionValue.z -= dist;
             offset.z += dist;
             dirty = true;
@@ -67,7 +67,7 @@ public class DCLCharacterPosition
 
             lastRepositionFrame = Time.frameCount;
 
-            CommonScriptableObjects.playerWorldPosition.Set(worldPositionValue);
+            DataStore.i.player.playerWorldPosition.Set(worldPositionValue);
             CommonScriptableObjects.worldOffset.Set(offset);
             DCL.Environment.i.platform.physicsSyncController.MarkDirty();
         }

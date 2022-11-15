@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +15,7 @@ using UnityGLTF;
 using UnityGLTF.Cache;
 using GLTF;
 using GLTF.Schema;
+using Newtonsoft.Json;
 using UnityGLTF.Loader;
 
 namespace DCL.ABConverter
@@ -132,9 +133,9 @@ namespace DCL.ABConverter
             GLTFImporter.ShouldWaitForPreloadedGLTF = true;
             GLTFImporter.PreloadedGLTFObjects.Clear();
             string currentLoadingGLTF = "";
-            
+
             assetsToMark.Clear();
-            
+
             //TODO(Brian): Use async-await instead of Application.update
             void UpdateLoop()
             {
@@ -153,13 +154,21 @@ namespace DCL.ABConverter
                                 value.LoadScene(CancellationToken.None).Wait(TimeSpan.FromSeconds(1));
                                 currentLoadingGLTF = key;
                             }
-                            
+
                             if (value.IsCompleted)
                             {
+                                FileInfo gltfFilePath = new FileInfo(key);
+                                AssetBundleMetrics metrics = new AssetBundleMetrics()
+                                {
+                                    meshesEstimatedSize = value.meshesEstimatedSize,
+                                    animationsEstimatedSize = value.animationsEstimatedSize
+                                };
+                                File.WriteAllText($"{gltfFilePath.Directory.FullName}/metrics.json", JsonUtility.ToJson(metrics, true));
+
                                 GLTFImporter.PreloadedGLTFObjects.Add(GetRelativePath(key), value.lastLoadedScene);
-                                
+
                                 env.assetDatabase.ImportAsset(key, ImportAssetOptions.ImportRecursive | ImportAssetOptions.ForceUpdate);
-                                
+
                                 dumpList.Add(key);
                                 currentLoadingGLTF = null;
                             }
@@ -203,7 +212,7 @@ namespace DCL.ABConverter
                     }
 
                     CleanupCache();
-                    
+
                     env.assetDatabase.Refresh();
                     env.assetDatabase.SaveAssets();
 
@@ -268,7 +277,7 @@ namespace DCL.ABConverter
             path = path.Replace('\\', '/');
 
             if (path.StartsWith(dataPath))
-                path =  "Assets" + path.Substring(dataPath.Length);
+                path = "Assets" + path.Substring(dataPath.Length);
 
             return path;
         }
@@ -302,9 +311,9 @@ namespace DCL.ABConverter
         {
             if (!BuildAssetBundles(out AssetBundleManifest manifest))
                 return;
-            
+
             CleanAssetBundleFolder(manifest.GetAllAssetBundles());
-            
+
             EditorCoroutineUtility.StartCoroutineOwnerless(VisualTests.TestConvertedAssets(
                 env: env,
                 OnFinish: (skippedAssetsCount) =>
@@ -335,10 +344,10 @@ namespace DCL.ABConverter
         /// <param name="assetFilename">The asset's content server file name</param>
         /// <param name="sceneCid">The asset scene ID</param>
         /// <param name="mappingPairsList">The reference of a list where the dependency mapping pairs will be added</param>
-        public void GetAssetDependenciesMappingPairs(string assetHash, string assetFilename, string sceneCid,  ref List<ContentServerUtils.MappingPair> mappingPairsList)
+        public void GetAssetDependenciesMappingPairs(string assetHash, string assetFilename, string sceneCid, ref List<ContentServerUtils.MappingPair> mappingPairsList)
         {
             // 1. Get all dependencies
-            List<AssetPath> gltfPaths = ABConverter.Utils.GetPathsFromPairs(finalDownloadedPath, new []
+            List<AssetPath> gltfPaths = ABConverter.Utils.GetPathsFromPairs(finalDownloadedPath, new[]
             {
                 new ContentServerUtils.MappingPair
                 {
@@ -856,8 +865,8 @@ namespace DCL.ABConverter
             log.Info(logBuffer);
 
             CleanupWorkingFolders();
-            
-            Utils.Exit((int) errorCode);
+
+            Utils.Exit((int)errorCode);
         }
 
         /// <summary>

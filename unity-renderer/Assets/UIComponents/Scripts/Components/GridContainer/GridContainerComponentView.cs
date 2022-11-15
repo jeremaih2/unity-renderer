@@ -91,7 +91,7 @@ public interface IGridContainerComponentView
     void RemoveItems();
 }
 
-public class GridContainerComponentView : BaseComponentView, IGridContainerComponentView, IComponentModelConfig
+public class GridContainerComponentView : BaseComponentView, IGridContainerComponentView, IComponentModelConfig<GridContainerComponentModel>
 {
     [Header("Prefab References")]
     [SerializeField] internal GridLayoutGroup gridLayoutGroup;
@@ -111,9 +111,9 @@ public class GridContainerComponentView : BaseComponentView, IGridContainerCompo
         RegisterCurrentInstantiatedItems();
     }
 
-    public void Configure(BaseComponentModel newModel)
+    public void Configure(GridContainerComponentModel newModel)
     {
-        model = (GridContainerComponentModel)newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -234,8 +234,8 @@ public class GridContainerComponentView : BaseComponentView, IGridContainerCompo
         float height = externalParentToAdaptSize != null ? externalParentToAdaptSize.rect.height : ((RectTransform)transform).rect.height;
         float width = externalParentToAdaptSize != null ? externalParentToAdaptSize.rect.width : ((RectTransform)transform).rect.width;
 
-        int amountsOfHorizontalItemsPerRow =  instantiatedItems.Count / model.constraintCount;
-        int amountsOfVerticalItemsPerColumn =  instantiatedItems.Count / amountsOfHorizontalItemsPerRow;
+        int amountsOfHorizontalItemsPerRow = instantiatedItems.Count / model.constraintCount;
+        int amountsOfVerticalItemsPerColumn = instantiatedItems.Count / amountsOfHorizontalItemsPerRow;
 
         float extraSpaceToRemoveX = model.spaceBetweenItems.x * (amountsOfHorizontalItemsPerRow - 1);
         float extraSpaceToRemoveY = model.spaceBetweenItems.y * (amountsOfVerticalItemsPerColumn - 1);

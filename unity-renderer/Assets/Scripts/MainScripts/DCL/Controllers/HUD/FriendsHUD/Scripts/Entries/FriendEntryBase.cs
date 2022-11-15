@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FriendEntryBase : MonoBehaviour, IPointerEnterHandler
+public class FriendEntryBase : BaseComponentView
 {
     public FriendEntryModel Model { get; private set; } = new FriendEntryModel();
 
     public Image playerBlockedImage;
-    
+
     [SerializeField] private RectTransform menuPositionReference;
     [SerializeField] protected internal TextMeshProUGUI playerNameText;
     [SerializeField] protected internal RawImage playerImage;
@@ -18,13 +18,13 @@ public class FriendEntryBase : MonoBehaviour, IPointerEnterHandler
     [SerializeField] protected internal GameObject onlineStatusContainer;
     [SerializeField] protected internal GameObject offlineStatusContainer;
     [SerializeField] protected internal Button passportButton;
-    
+
     private StringVariable currentPlayerInfoCardId;
     private bool avatarFetchingEnabled;
 
     public event Action<FriendEntryBase> OnMenuToggle;
 
-    public virtual void Awake()
+    public override void Awake()
     {
         menuButton.onClick.RemoveAllListeners();
         menuButton.onClick.AddListener(() => OnMenuToggle?.Invoke(this));
@@ -32,20 +32,20 @@ public class FriendEntryBase : MonoBehaviour, IPointerEnterHandler
         passportButton?.onClick.AddListener(ShowUserProfile);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public override void OnPointerEnter(PointerEventData eventData)
     {
         if (audioEventHover != null)
             audioEventHover.Play(true);
     }
-    
+
     public void Dock(UserContextMenu contextMenuPanel)
     {
-        var panelTransform = (RectTransform) contextMenuPanel.transform;
+        var panelTransform = (RectTransform)contextMenuPanel.transform;
         panelTransform.pivot = menuPositionReference.pivot;
         panelTransform.position = menuPositionReference.position;
     }
 
-    protected virtual void OnDisable()
+    public override void OnDisable()
     {
         DisableAvatarSnapshotFetching();
     }
@@ -54,7 +54,7 @@ public class FriendEntryBase : MonoBehaviour, IPointerEnterHandler
     {
         DisableAvatarSnapshotFetching();
     }
-    
+
     public virtual void EnableAvatarSnapshotFetching()
     {
         if (avatarFetchingEnabled) return;
@@ -62,7 +62,7 @@ public class FriendEntryBase : MonoBehaviour, IPointerEnterHandler
         // TODO: replace image loading for ImageComponentView implementation
         Model?.avatarSnapshotObserver?.AddListener(OnAvatarImageChange);
     }
-    
+
     public virtual void DisableAvatarSnapshotFetching()
     {
         if (!avatarFetchingEnabled) return;
@@ -71,31 +71,35 @@ public class FriendEntryBase : MonoBehaviour, IPointerEnterHandler
         Model?.avatarSnapshotObserver?.RemoveListener(OnAvatarImageChange);
     }
 
-    public virtual void Populate(FriendEntryModel model)
+    public override void RefreshControl()
     {
-        if (playerNameText.text != model.userName)
-            playerNameText.text = model.userName;
+        if (playerNameText.text != Model.userName)
+            playerNameText.text = Model.userName;
 
-        playerBlockedImage.enabled = model.blocked;
+        playerBlockedImage.enabled = Model.blocked;
 
         Model?.avatarSnapshotObserver?.RemoveListener(OnAvatarImageChange);
 
         if (isActiveAndEnabled && avatarFetchingEnabled)
             // TODO: replace image loading for ImageComponentView implementation
-            model.avatarSnapshotObserver?.AddListener(OnAvatarImageChange);
+            Model.avatarSnapshotObserver?.AddListener(OnAvatarImageChange);
 
         if (onlineStatusContainer != null)
-            onlineStatusContainer.SetActive(model.status == PresenceStatus.ONLINE && !model.blocked);
+            onlineStatusContainer.SetActive(Model.status == PresenceStatus.ONLINE && !Model.blocked);
         if (offlineStatusContainer != null)
-            offlineStatusContainer.SetActive(model.status != PresenceStatus.ONLINE && !model.blocked);
-
-        Model = model;
+            offlineStatusContainer.SetActive(Model.status != PresenceStatus.ONLINE && !Model.blocked);
     }
-    
+
+    public virtual void Populate(FriendEntryModel model)
+    {
+        Model = model;
+        RefreshControl();
+    }
+
     public virtual bool IsVisible(RectTransform container)
     {
         if (!gameObject.activeSelf) return false;
-        return ((RectTransform) transform).CountCornersVisibleFrom(container) > 0;
+        return ((RectTransform)transform).CountCornersVisibleFrom(container) > 0;
     }
 
     private void OnAvatarImageChange(Texture2D texture) { playerImage.texture = texture; }

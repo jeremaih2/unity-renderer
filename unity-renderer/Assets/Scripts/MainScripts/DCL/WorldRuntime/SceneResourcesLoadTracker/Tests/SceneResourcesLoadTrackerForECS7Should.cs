@@ -1,6 +1,7 @@
 using System.Collections;
 using DCL;
 using DCL.Controllers;
+using DCL.ECS7.InternalComponents;
 using DCL.ECSComponents;
 using DCL.ECSRuntime;
 using DCL.Models;
@@ -29,24 +30,24 @@ namespace Tests
             var sceneData = new LoadParcelScenesMessage.UnityParcelScene();
             sceneData.id = "IdTest";
             parcelScene.Configure().sceneData.Returns(sceneData);
-            
+
             // Configure entity
             gameObject = new GameObject();
             entity = Substitute.For<IDCLEntity>();
             entity.Configure().gameObject.Returns(gameObject);
             entity.Configure().entityId.Returns(5555);
-            
+
             // Create components
             resourcesLoadTracker = new SceneResourcesLoadTracker();
             resourcesLoadTracker.Track(sceneData.id);
-            hanlder = new ECSBoxShapeComponentHandler(DataStore.i.ecs7);
+            hanlder = new ECSBoxShapeComponentHandler(DataStore.i.ecs7, Substitute.For<IInternalECSComponent<InternalTexturizable>>());
         }
 
         [TearDown]
         public void TearDown()
         {
             GameObject.Destroy(gameObject);
-            hanlder.OnComponentRemoved(parcelScene,entity);
+            hanlder.OnComponentRemoved(parcelScene, entity);
             DataStore.i.ecs7.pendingSceneResources.Clear();
         }
 
@@ -61,7 +62,7 @@ namespace Tests
             };
 
             // Act
-            hanlder.OnComponentModelUpdated(parcelScene, entity,new PBBoxShape());
+            hanlder.OnComponentModelUpdated(parcelScene, entity, new PBBoxShape());
 
             // Assert
             Assert.IsTrue(resourceLoaded);
@@ -72,7 +73,7 @@ namespace Tests
         {
             // Arrange
             hanlder.OnComponentCreated(parcelScene, entity);
-            
+
             // Act
             hanlder.OnComponentRemoved(parcelScene, entity);
 
@@ -81,7 +82,7 @@ namespace Tests
             Assert.AreEqual(100, resourcesLoadTracker.loadingProgress);
             Assert.AreEqual(0, resourcesLoadTracker.pendingResourcesCount);
         }
-        
+
         [Test]
         public void WaitForAllComponentsToBeReady()
         {
@@ -90,8 +91,8 @@ namespace Tests
             var model2 = new PBBoxShape();
 
             // Act
-            hanlder.OnComponentModelUpdated(parcelScene, entity,model);
-            hanlder.OnComponentModelUpdated(parcelScene, entity,model2);
+            hanlder.OnComponentModelUpdated(parcelScene, entity, model);
+            hanlder.OnComponentModelUpdated(parcelScene, entity, model2);
 
             // Assert
             Assert.IsFalse(resourcesLoadTracker.ShouldWaitForPendingResources());

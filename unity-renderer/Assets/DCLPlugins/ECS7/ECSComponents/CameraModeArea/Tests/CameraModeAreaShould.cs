@@ -1,4 +1,4 @@
-﻿using DCL.Components;
+using DCL.Components;
 using DCL.Controllers;
 using DCL.Models;
 using NSubstitute;
@@ -57,12 +57,12 @@ namespace DCL.ECSComponents.Test
             // Assert
             areasController.Received(1).ChangeAreaMode(componentHandler.cameraModeRepresentantion);
         }
-        
+
         [Test]
         public void NotUpdateComponentIfSameMode()
         {
             // Arrange
-            var model = CreateModel();  
+            var model = CreateModel();
             componentHandler.lastModel = CreateModel();
             componentHandler.lastModel.Mode = model.Mode;
 
@@ -96,7 +96,7 @@ namespace DCL.ECSComponents.Test
             var model = CreateModel();
             componentHandler.isPlayerInside = true;
             componentHandler.OnComponentModelUpdated(scene, entity, model);
-            
+
             // Act
             componentHandler.Update();
 
@@ -132,7 +132,7 @@ namespace DCL.ECSComponents.Test
             model.Area.Y = 2f;
             model.Area.Z = 2f;
 
-            model.Mode = CameraMode.FirstPerson;
+            model.Mode = CameraModeValue.FirstPerson;
 
             return model;
         }

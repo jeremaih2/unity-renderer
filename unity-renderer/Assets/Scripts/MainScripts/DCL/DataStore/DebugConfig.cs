@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Serialization;
 using Variables.SpawnPoints;
 
@@ -22,18 +22,24 @@ namespace DCL
         /// </summary>
         [System.NonSerialized]
         public BaseVariable<bool> isDebugMode = new BaseVariable<bool>();
-        
+
         [System.NonSerialized]
         public BaseVariable<bool> isFPSPanelVisible = new BaseVariable<bool>();
-        
+
         [System.NonSerialized]
         public BaseDictionary<string, bool> showSceneBoundingBoxes = new BaseDictionary<string, bool>();
-        
+
         [System.NonSerialized]
-        public  BaseVariable<bool> isPreviewMenuActive = new BaseVariable<bool>();
-        
+        public BaseVariable<bool> isPreviewMenuActive = new BaseVariable<bool>();
+
         [System.NonSerialized]
-        public BaseDictionary<string, SceneSpawnPointsData> showSceneSpawnPoints = new BaseDictionary<string, SceneSpawnPointsData>();        
+        public BaseDictionary<string, SceneSpawnPointsData> showSceneSpawnPoints = new BaseDictionary<string, SceneSpawnPointsData>();
+
+        [System.NonSerialized]
+        public BaseVariable<bool> showSceneABDetectionLayer = new BaseVariable<bool>();
+
+        [System.NonSerialized]
+        public BaseVariable<bool> showGlobalABDetectionLayer = new BaseVariable<bool>();
 
         /// <summary>
         /// True when WSS message pipeline is enabled

@@ -1,11 +1,19 @@
+using System;
 using DCL.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class AvatarModel : BaseModel
 {
+    [Serializable]
+    public class AvatarEmoteEntry
+    {
+        public int slot;
+        public string urn;
+    }
+
     public string id;
     public string name;
     public string bodyShape;
@@ -13,24 +21,48 @@ public class AvatarModel : BaseModel
     public Color hairColor;
     public Color eyeColor;
     public List<string> wearables = new List<string>();
+
+    public List<AvatarEmoteEntry> emotes = new List<AvatarEmoteEntry>();
+
     public string expressionTriggerId = null;
     public long expressionTriggerTimestamp = -1;
     public string stickerTriggerId = null;
     public long stickerTriggerTimestamp = -1;
     public bool talking = false;
-//其他的avatar模型是否有相同颜色
+    //其他的avatar模型是否有相同颜色
     public bool HaveSameWearablesAndColors(AvatarModel other)
     {
         if (other == null)
             return false;
 
-        bool wearablesAreEqual = wearables.All(other.wearables.Contains) && wearables.Count == other.wearables.Count;
+        //wearables are the same
+        if (!(wearables.Count == other.wearables.Count
+              && wearables.All(other.wearables.Contains)
+              && other.wearables.All(wearables.Contains)))
+            return false;
+
+        //emotes are the same
+        if (emotes == null && other.emotes != null)
+            return false;
+        if (emotes != null && other.emotes == null)
+            return false;
+        if (emotes != null && other.emotes != null)
+        {
+            if (emotes.Count != other.emotes.Count)
+                return false;
+
+            for (var i = 0; i < emotes.Count; i++)
+            {
+                AvatarEmoteEntry emote = emotes[i];
+                if (other.emotes.FirstOrDefault(x => x.urn == emote.urn) == null)
+                    return false;
+            }
+        }
 
         return bodyShape == other.bodyShape &&
                skinColor == other.skinColor &&
                hairColor == other.hairColor &&
-               eyeColor == other.eyeColor &&
-               wearablesAreEqual;
+               eyeColor == other.eyeColor;
     }
 //其他avatar模型是否有相同的表示
     public bool HaveSameExpressions(AvatarModel other)
@@ -42,7 +74,9 @@ public class AvatarModel : BaseModel
 //其他avatar模型是否相同
     public bool Equals(AvatarModel other)
     {
-        bool wearablesAreEqual = wearables.All(other.wearables.Contains) && wearables.Count == other.wearables.Count;
+        bool wearablesAreEqual = wearables.All(other.wearables.Contains)
+                                 && other.wearables.All(wearables.Contains)
+                                 && wearables.Count == other.wearables.Count;
 
         return id == other.id &&
                name == other.name &&
@@ -72,6 +106,7 @@ public class AvatarModel : BaseModel
         stickerTriggerId = other.stickerTriggerId;
         stickerTriggerTimestamp = other.stickerTriggerTimestamp;
         wearables = new List<string>(other.wearables);
+        emotes = other.emotes.Select(x => new AvatarEmoteEntry() { slot = x.slot, urn = x.urn }).ToList();
     }
 //基础模型从json表中获取数据
     public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<AvatarModel>(json); }

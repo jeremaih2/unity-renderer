@@ -57,7 +57,7 @@ public interface IToggleComponentView
     void SetChangeTextColorOnSelect(bool changeTextColorOnSelect);
 }
 
-public class ToggleComponentView : BaseComponentView, IToggleComponentView, IComponentModelConfig
+public class ToggleComponentView : BaseComponentView, IToggleComponentView, IComponentModelConfig<ToggleComponentModel>
 {
     [Header("Prefab References")]
     [SerializeField] internal Toggle toggle;
@@ -78,8 +78,8 @@ public class ToggleComponentView : BaseComponentView, IToggleComponentView, ICom
         set => model.id = value;
     }
 
-    public bool isOn 
-    { 
+    public bool isOn
+    {
         get => toggle.isOn;
         set
         {
@@ -107,7 +107,7 @@ public class ToggleComponentView : BaseComponentView, IToggleComponentView, ICom
     {
         if (activeOn)
             activeOn.gameObject.SetActive(isOn);
-        
+
         if (activeOff)
             activeOff.gameObject.SetActive(!isOn);
 
@@ -115,15 +115,15 @@ public class ToggleComponentView : BaseComponentView, IToggleComponentView, ICom
             text.color = isOn ? textColorOnSelected : textColorOnUnselected;
     }
 
-    private void ToggleChanged(bool isOn) 
+    private void ToggleChanged(bool isOn)
     {
         this.isOn = isOn;
         OnSelectedChanged?.Invoke(isOn, model.id, model.text);
     }
 
-    public void Configure(BaseComponentModel newModel)
+    public void Configure(ToggleComponentModel newModel)
     {
-        model = (ToggleComponentModel)newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -160,13 +160,13 @@ public class ToggleComponentView : BaseComponentView, IToggleComponentView, ICom
 
     public void SetInteractable(bool isActive) { toggle.interactable = isActive; }
 
-    public void SetTextActive(bool isActive) 
+    public void SetTextActive(bool isActive)
     {
         model.isTextActive = isActive;
-        text.gameObject.SetActive(isActive); 
+        text.gameObject.SetActive(isActive);
     }
 
-    public void SetIsOnWithoutNotify(bool isOn) 
+    public void SetIsOnWithoutNotify(bool isOn)
     {
         model.isOn = isOn;
 

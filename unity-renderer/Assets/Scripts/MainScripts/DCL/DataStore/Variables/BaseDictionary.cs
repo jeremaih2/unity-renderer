@@ -43,7 +43,7 @@ public class BaseDictionary<TKey, TValue> : IBaseDictionary<TKey, TValue>, IEnum
 
     public void AddOrSet(TKey key, TValue value)
     {
-        if ( !dictionary.ContainsKey(key))
+        if (!dictionary.ContainsKey(key))
             dictionary.Add(key, value);
         else
             dictionary[key] = value;

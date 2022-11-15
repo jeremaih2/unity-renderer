@@ -70,6 +70,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 06109c30f10aa46efa2a63d176c8e94d, type: 3}
   - {fileID: 21300000, guid: 0187ad300d0014cd6a1aa5f9b694497d, type: 3}
   - {fileID: 21300000, guid: 9d8a1240643c848f38c614260af68c76, type: 3}
+  - {fileID: 21300000, guid: 4e932050ea8cb544eae136323b832adf, type: 3}
   - {fileID: 21300000, guid: 88dde3500b2da42c89518050e5250b21, type: 3}
   - {fileID: 21300000, guid: 8e5a1950f42154e5dac07dae292d5c6a, type: 3}
   - {fileID: 21300000, guid: 90d19c500d961c44f8941c69dcdae46a, type: 3}
@@ -85,6 +86,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 61dc3ec0be076473f85d0d5a9baa17cc, type: 3}
   - {fileID: 21300000, guid: a0fc61d060820459290cbde64b85e7ff, type: 3}
   - {fileID: 21300000, guid: 4c253fd08e34648f8a509d98c99fba7f, type: 3}
+  - {fileID: 21300000, guid: 929b3fd054ab9404fa049e1cc46c8e50, type: 3}
   - {fileID: 21300000, guid: 436a77f04f3514b10b2d7054b7c7eb2e, type: 3}
   - {fileID: 21300000, guid: 87c2ea01f3aa94b648d225daa8b22214, type: 3}
   - {fileID: 21300000, guid: 44dd7b11a83bf4605916ad96f6ce3881, type: 3}
@@ -195,6 +197,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 54679ca5073f143a6b562c4f5c5f81ef, type: 3}
   - {fileID: 21300000, guid: 520d44b5687394783ae96976dbb73c7c, type: 3}
   - {fileID: 21300000, guid: 643485b56259a47ff8f14e9b10fd47bb, type: 3}
+  - {fileID: 21300000, guid: 49b40eb567425464f9c78e91f83f482a, type: 3}
   - {fileID: 21300000, guid: aafb5ac5e24714df99ac5bc757bbbecb, type: 3}
   - {fileID: 21300000, guid: ac30fbc52a4ec41fc9257ec446b347c7, type: 3}
   - {fileID: 21300000, guid: e2754ed5e27ef44bfaacd0c451d88263, type: 3}
@@ -257,6 +260,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: def84f78307ef4b6c9864416f7d1f3df, type: 3}
   - {fileID: 21300000, guid: fd507e98e14c344e3aec24b937e8af75, type: 3}
   - {fileID: 21300000, guid: 6dca2ab88567048dea54964cd8fee779, type: 3}
+  - {fileID: 21300000, guid: 63aeecb899a60cb4da33e02ff3a4c900, type: 3}
   - {fileID: 21300000, guid: dd9591c87b7254d418d968179d9de74a, type: 3}
   - {fileID: 21300000, guid: cd958ac803911481ea50edce80f46f1c, type: 3}
   - {fileID: 21300000, guid: 194fcbd882d15453b90e80d668ab4bad, type: 3}
@@ -265,6 +269,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bc1386f864ce3b64baafbb1e74763408, type: 3}
   - {fileID: 21300000, guid: b44b6109984974ac6bb84146469cbc7a, type: 3}
   - {fileID: 21300000, guid: 87bf14092660947eb9909d5772886279, type: 3}
+  - {fileID: 21300000, guid: 24a757095370149419bcc0ee2d3718d8, type: 3}
   - {fileID: 21300000, guid: 5dc96a095ce3483459044bf3e74ccb59, type: 3}
   - {fileID: 21300000, guid: 314ecf09e6e7447d9aa0421d996754cc, type: 3}
   - {fileID: 21300000, guid: f28ec019b47e944689f27d8e149db2d5, type: 3}
@@ -301,6 +306,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f48850fa5be164fc68819a7c8586432c, type: 3}
   - {fileID: 21300000, guid: 1091aafa2a48b46ccb5333146781bd24, type: 3}
   - {fileID: 21300000, guid: e6a1e80b5ad78344ab7aa751eb27c30d, type: 3}
+  - {fileID: 21300000, guid: 74a11e0b51224564e820c68691a311bf, type: 3}
   - {fileID: 21300000, guid: e39b821b0e52e46968aea7b28016651b, type: 3}
   - {fileID: 21300000, guid: 7539fa1b890384b749ef64eec52331bb, type: 3}
   - {fileID: 21300000, guid: e1473c1b9bf9741e8a3d47d7806bf9d4, type: 3}
@@ -420,6 +426,7 @@ SpriteAtlas:
   - Outline3Radius12Gradient
   - Publish
   - RadialGradient
+  - HomePin
   - CellBright
   - RarityCornerWheel
   - mc_hammer_256
@@ -435,6 +442,7 @@ SpriteAtlas:
   - SliderHighlight
   - MapStroke
   - ContainerRow
+  - Home
   - MenuContainer
   - Rarity
   - MenuButton
@@ -545,6 +553,7 @@ SpriteAtlas:
   - BugIcon
   - GraphicsIcon
   - ArrowLeft
+  - logo_l
   - ProfileStrokeShadow
   - GradientMulticolor
   - CodeIcon
@@ -607,6 +616,7 @@ SpriteAtlas:
   - TaskBarSeparator
   - ArrowBlack
   - RejectButton
+  - HomeIconOutline
   - Container24Shadow10
   - ContainerRadius10
   - TutorialIcon
@@ -615,6 +625,7 @@ SpriteAtlas:
   - QuitIcon
   - Mic on
   - DecentralandLogo
+  - HomeIcon
   - disco_dance_256
   - RejectButtonHover
   - BackpackOn
@@ -651,6 +662,7 @@ SpriteAtlas:
   - ContainerRowHover
   - ShareIconOutline
   - dab_256
+  - logo02
   - TabBarBackground
   - MenuIcon
   - HideUIIcon

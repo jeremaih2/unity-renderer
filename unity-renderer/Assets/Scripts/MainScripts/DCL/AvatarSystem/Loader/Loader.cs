@@ -33,6 +33,12 @@ namespace AvatarSystem
             avatarMeshCombiner.uploadMeshToGpu = true;
         }
 
+        public async UniTask Load(WearableItem bodyshape, WearableItem eyes, WearableItem eyebrows, WearableItem mouth,
+            List<WearableItem> wearables, AvatarSettings settings, CancellationToken ct = default)
+        {
+            await Load(bodyshape, eyes, eyebrows, mouth, wearables, settings, null, ct);
+        }
+
         public async UniTask Load(WearableItem bodyshape, WearableItem eyes, WearableItem eyebrows, WearableItem mouth, List<WearableItem> wearables, AvatarSettings settings, SkinnedMeshRenderer bonesContainer = null, CancellationToken ct = default)
         {
             ct.ThrowIfCancellationRequested();
@@ -49,14 +55,20 @@ namespace AvatarSystem
                 if (status == ILoader.Status.Failed_Major)
                     throw new Exception($"Couldnt load (nor fallback) wearables with required category: {string.Join(", ", ConstructRequiredFailedWearablesList(loaders.Values))}");
 
-                AvatarSystemUtils.CopyBones(skinnedContainer, loaders.Values.SelectMany(x => x.rendereable.renderers).OfType<SkinnedMeshRenderer>());
+
+                foreach (IWearableLoader wearableLoader in loaders.Values)
+                {
+                    wearableLoader.SetBones(skinnedContainer.rootBone, skinnedContainer.bones);
+                }
 
                 if (bodyshapeLoader.rendereable != null)
-                    AvatarSystemUtils.CopyBones(skinnedContainer, bodyshapeLoader.rendereable.renderers.OfType<SkinnedMeshRenderer>());
+                {
+                    bodyshapeLoader.SetBones(skinnedContainer.rootBone, skinnedContainer.bones);
+                }
 
                 (bool headVisible, bool upperBodyVisible, bool lowerBodyVisible, bool feetVisible) = AvatarSystemUtils.GetActiveBodyParts(settings.bodyshapeId, wearables);
 
-                combinedRenderer = await MergeAvatar(settings, wearables, headVisible, upperBodyVisible, lowerBodyVisible, feetVisible, bonesContainer, ct);
+                combinedRenderer = await MergeAvatar(settings, wearables, headVisible, upperBodyVisible, lowerBodyVisible, feetVisible, skinnedContainer, ct);
                 facialFeaturesRenderers = new List<Renderer>();
                 if (headVisible)
                 {
@@ -69,7 +81,7 @@ namespace AvatarSystem
                 }
                 else
                 {
-                    if(bodyshapeLoader != null)
+                    if (bodyshapeLoader != null)
                         bodyshapeLoader.DisableFacialRenderers();
                 }
             }

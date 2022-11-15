@@ -272,11 +272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d143fe035025040be00c84f717cc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  configuration: {fileID: 11400000, guid: 1218d520e46e4ad4aaa05022aa0c6dee, type: 2}
+  configuration: {fileID: 11400000, guid: 1eb5732662ee00045b60663cde0dca2e, type: 2}
   teacherCamera: {fileID: 604084521501385079}
   teacherRawImage: {fileID: 6732306866191114328}
   teacher: {fileID: 977289631841785178}
   teacherCanvas: {fileID: 6650911990874416982}
+  tutorialMusicHandler: {fileID: 2404736944381587218}
   eagleEyeCamera: {fileID: 770616498577745558}
 --- !u!1 &4305190056773532184
 GameObject:

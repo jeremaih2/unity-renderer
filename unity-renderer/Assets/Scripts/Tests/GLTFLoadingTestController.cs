@@ -23,7 +23,7 @@ public class GLTFLoadingTestController : MonoBehaviour
         sceneController.UnloadAllScenes();
         sceneController.LoadParcelScenes(scenesToLoad);
 
-        var scene = Environment.i.world.state.loadedScenes["0,0"] as ParcelScene;
+        var scene = Environment.i.world.state.GetScene("0,0") as ParcelScene;
 
         // FULL GLB
         TestUtils.InstantiateEntityWithShape(scene, 1, DCL.Models.CLASS_ID.GLTF_SHAPE, new Vector3(-2.5f, 1, 0),
@@ -53,8 +53,8 @@ public class GLTFLoadingTestController : MonoBehaviour
     {
         var uwr = new UnityWebRequest(url, "POST");
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
-        uwr.uploadHandler = (UploadHandler) new UploadHandlerRaw(jsonToSend);
-        uwr.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+        uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         uwr.SetRequestHeader("Content-Type", "application/json");
 
         // Send the request then wait here until it returns

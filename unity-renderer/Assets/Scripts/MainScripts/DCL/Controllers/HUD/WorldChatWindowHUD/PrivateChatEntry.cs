@@ -2,8 +2,9 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static PrivateChatEntry;
 
-public class PrivateChatEntry : BaseComponentView, IComponentModelConfig
+public class PrivateChatEntry : BaseComponentView, IComponentModelConfig<PrivateChatEntryModel>
 {
     [SerializeField] internal Button openChatButton;
     [SerializeField] internal PrivateChatEntryModel model;
@@ -19,12 +20,11 @@ public class PrivateChatEntry : BaseComponentView, IComponentModelConfig
 
     private UserContextMenu userContextMenu;
     private IChatController chatController;
-    private ILastReadMessagesService lastReadMessagesService;
 
     public PrivateChatEntryModel Model => model;
 
     public event Action<PrivateChatEntry> OnOpenChat;
-    
+
     public static PrivateChatEntry Create()
     {
         return Instantiate(Resources.Load<PrivateChatEntry>("SocialBarV1/WhisperChannelElement"));
@@ -42,19 +42,17 @@ public class PrivateChatEntry : BaseComponentView, IComponentModelConfig
     }
 
     public void Initialize(IChatController chatController,
-        UserContextMenu userContextMenu,
-        ILastReadMessagesService lastReadMessagesService)
+        UserContextMenu userContextMenu)
     {
         this.chatController = chatController;
         this.userContextMenu = userContextMenu;
-        this.lastReadMessagesService = lastReadMessagesService;
         userContextMenu.OnBlock -= HandleUserBlocked;
         userContextMenu.OnBlock += HandleUserBlocked;
     }
-    
-    public void Configure(BaseComponentModel newModel)
+
+    public void Configure(PrivateChatEntryModel newModel)
     {
-        model = (PrivateChatEntryModel) newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -62,16 +60,17 @@ public class PrivateChatEntry : BaseComponentView, IComponentModelConfig
     {
         userNameLabel.text = model.userName;
         lastMessageLabel.text = model.lastMessage;
+        lastMessageLabel.gameObject.SetActive(!string.IsNullOrEmpty(model.lastMessage));
         SetBlockStatus(model.isBlocked);
         SetPresence(model.isOnline);
-        unreadNotifications.Initialize(chatController, model.userId, lastReadMessagesService);
-        
+        unreadNotifications.Initialize(chatController, model.userId);
+
         if (model.imageFetchingEnabled)
             EnableAvatarSnapshotFetching();
         else
             DisableAvatarSnapshotFetching();
     }
-    
+
     private void HandleUserBlocked(string userId, bool blocked)
     {
         if (userId != model.userId) return;
@@ -93,28 +92,28 @@ public class PrivateChatEntry : BaseComponentView, IComponentModelConfig
 
     private void Dock(UserContextMenu userContextMenu)
     {
-        var menuTransform = (RectTransform) userContextMenu.transform;
+        var menuTransform = (RectTransform)userContextMenu.transform;
         menuTransform.pivot = userContextMenuPositionReference.pivot;
         menuTransform.position = userContextMenuPositionReference.position;
     }
-    
+
     public bool IsVisible(RectTransform container)
     {
         if (!gameObject.activeSelf) return false;
-        return ((RectTransform) transform).CountCornersVisibleFrom(container) > 0;
+        return ((RectTransform)transform).CountCornersVisibleFrom(container) > 0;
     }
 
     public void EnableAvatarSnapshotFetching()
     {
         if (model.imageFetchingEnabled) return;
-        picture.Configure(new ImageComponentModel {uri = model.pictureUrl});
+        picture.Configure(new ImageComponentModel { uri = model.pictureUrl });
         model.imageFetchingEnabled = true;
     }
 
     public void DisableAvatarSnapshotFetching()
     {
         if (!model.imageFetchingEnabled) return;
-        picture.SetImage((string) null);
+        picture.SetImage((string)null);
         model.imageFetchingEnabled = false;
     }
 

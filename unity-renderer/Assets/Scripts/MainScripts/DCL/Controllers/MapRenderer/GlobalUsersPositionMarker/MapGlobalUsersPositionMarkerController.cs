@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +33,7 @@ namespace DCL
         /// <param name="markerPrefab">prefab for markers</param>
         /// <param name="overlayContainer">parent for markers</param>
         /// <param name="coordToMapPosFunc">function to transform coords to map position</param>
-        public MapGlobalUsersPositionMarkerController(UserMarkerObject markerPrefab, Transform overlayContainer, Func<float, float, Vector3> coordToMapPosFunc)
+        public MapGlobalUsersPositionMarkerController(UserMarkerObject markerPrefab, Transform overlayContainer, Func<Vector2Int, Vector2> coordToMapPosFunc)
         {
             fetchScenesHandler = new FetchScenesHandler(UPDATE_INTERVAL_INITIAL, UPDATE_INTERVAL_FOREGROUND, UPDATE_INTERVAL_BACKGROUND);
             markersHandler = new MarkersHandler(markerPrefab, overlayContainer, MAX_MARKERS, coordToMapPosFunc);
@@ -47,7 +47,7 @@ namespace DCL
             KernelConfig.i.EnsureConfigInitialized()
                         .Then(config =>
                         {
-                            commsRadius = (int) config.comms.commRadius + COMMS_RADIUS_THRESHOLD;
+                            commsRadius = (int)config.comms.commRadius + COMMS_RADIUS_THRESHOLD;
                             OnPlayerCoordsChanged(userPositionHandler.playerCoords);
                         });
             OnRenderStateChanged(CommonScriptableObjects.rendererState.Get(), false);

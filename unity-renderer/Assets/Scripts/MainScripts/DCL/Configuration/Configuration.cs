@@ -6,6 +6,7 @@ namespace DCL.Configuration
     public static class BIWSettings
     {
         //Note: Don't use these URL directly, you need to get them in the BuilderInWorldUtils to take into account the ENV
+        //不要直接使用这些URL，你需要在BuilderInWorldUtils中获取它们，以考虑到ENV
         public const string BASE_URL_SCENE_OBJECT_CONTENT = "https://builder-api.decentraland.{ENV}/v1/storage/contents/";
         public const string BASE_URL_CATALOG = "https://builder-api.decentraland.{ENV}/v1/assetPacks?owner=";
         public const string BASE_URL_BUILDER_API = "https://builder-api.decentraland.{ENV}/v1";
@@ -13,11 +14,11 @@ namespace DCL.Configuration
 
         public const string BASE_URL_BUILDER_PROJECT_THUMBNAIL = "https://builder-api.decentraland.{ENV}/v1/projects/{id}/media/";
 
-        //Useful links
+        //Useful links常用链接
         public const string MARKETPLACE_URL = "https://market.decentraland.org/lands";
         public const string GUEST_WALLET_INFO = "https://docs.decentraland.org/examples/get-a-wallet/";
 
-        //Deployment constants
+        //Deployment constants 部署常量
         public const string DEPLOYMENT_DEFINITION_FILE = "scene-state-definition.json";
         public const string DEPLOYMENT_SCENE_FILE = "scene.json";
         public const string DEPLOYMENT_MODELS_FOLDER = "models";
@@ -44,7 +45,7 @@ namespace DCL.Configuration
         public const int AERIAL_SCREENSHOT_WIDTH = 315;
         public const int AERIAL_SCREENSHOT_HEIGHT = 253;
 
-        // Identifiers
+        // Identifiers 标识
         public const string VOXEL_ASSETS_PACK_ID = "b51e5e7c-c56b-4ad9-b9d2-1dc1c6546169";
         public const string SMART_ITEM_ASSETS_PACK_ID = "07e7e010-3003-496d-a720-2a714a63a58b";
         public const string FLOOR_CATEGORY = "ground";
@@ -78,7 +79,7 @@ namespace DCL.Configuration
         public static float ENTITY_SCALE_REPORTING_THRESHOLD = 0.04f; // In meters
         public static float ENTITY_ROTATION_REPORTING_THRESHOLD = 0.1f; // In degrees
 
-        //Floor Scene Object
+        //Floor Scene Object地板的场景对象
         public const string FLOOR_ID = "c9b17021-765c-4d9a-9966-ce93a9c323d1";
         public const string FLOOR_MODEL = "FloorBaseGrass_01/FloorBaseGrass_01.glb";
         public const string FLOOR_NAME = "Floor";
@@ -95,9 +96,10 @@ namespace DCL.Configuration
         public const string FLOOR_THUMBNAIL_KEY = "FloorBaseGrass_01/thumbnail.png";
         public const string FLOOR_THUMBNAIL_VALUE = "QmexuPHcbEtQCR11dPXxKZmRjGuY4iTooPJYfST7hW71DE";
 
-        //Collectables
+        //Collectables 收藏品
         public const string ASSETS_COLLECTIBLES = "Collectibles";
         public const string COLLECTIBLE_MODEL_PROTOCOL = "ethereum://";
+        //public const string COLLECTIBLE_MODEL_PROTOCOL = "newton://";
 
         //Gizmos
         public const string TRANSLATE_GIZMO_NAME = "MOVE";
@@ -128,6 +130,12 @@ namespace DCL.Configuration
         public const float LAND_CHECK_MESSAGE_TIMER = 5f;
     }
 
+    public static class TextureCompressionSettings
+    {
+        public const int GLTF_TEX_MAX_SIZE_WEB = 512;
+        public const int GENERAL_TEX_MAX_SIZE_WEB = 2048;
+    }
+
     public static class ApplicationSettings
     {
         public static string version = "1.0";
@@ -137,8 +145,8 @@ namespace DCL.Configuration
     {
         public static bool RUNNING_TESTS = false;
         public static bool DEBUG = true;
-        public static readonly Vector3 MORDOR = new Vector3(10000, 10000, 10000);
-        public static readonly int MORDOR_SCALAR = 10000;
+        public static readonly int MORDOR_SCALAR = 8000;
+        public static readonly Vector3 MORDOR = new Vector3(MORDOR_SCALAR, MORDOR_SCALAR, MORDOR_SCALAR);
         public const float UNINITIALIZED_FLOAT = 999999f;
         public static readonly string AVATAR_GLOBAL_SCENE_ID = "dcl-gs-avatars";
     }

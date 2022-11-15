@@ -55,7 +55,7 @@ public interface ICarouselComponentView
     /// <param name="prefab">Prefab to create items</param>
     /// <param name="amountOfItems">Amounts of items to be created</param>
     void SetItems(BaseComponentView prefab, int amountOfItems);
-    
+
     /// <summary>
     /// Adds a new item in the carousel.
     /// </summary>
@@ -124,7 +124,7 @@ public enum CarouselDirection
     Left
 }
 
-public class CarouselComponentView : BaseComponentView, ICarouselComponentView, IComponentModelConfig
+public class CarouselComponentView : BaseComponentView, ICarouselComponentView, IComponentModelConfig<CarouselComponentModel>
 {
     [Header("Prefab References")]
     [SerializeField] internal RectTransform itemsContainer;
@@ -163,9 +163,9 @@ public class CarouselComponentView : BaseComponentView, ICarouselComponentView, 
             StartCarousel();
     }
 
-    public void Configure(BaseComponentModel newModel)
+    public void Configure(CarouselComponentModel newModel)
     {
-        model = (CarouselComponentModel)newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -237,7 +237,7 @@ public class CarouselComponentView : BaseComponentView, ICarouselComponentView, 
         nextButton.gameObject.SetActive(isActived && currentNumberOfItems > 1);
         dotsSelector.gameObject.SetActive(isActived && currentNumberOfItems > 1);
     }
-    
+
     public void SetItems(BaseComponentView prefab, int amountOfItems)
     {
         DestroyInstantiatedItems();

@@ -88,7 +88,7 @@ public class ParametrizedShapesTests : IntegrationTestSuite_Legacy
             componentJSON
         );
 
-        BoxShape boxShapeComponent = (BoxShape) scene.componentsManagerLegacy.GetSceneSharedComponent(componentId);
+        BoxShape boxShapeComponent = (BoxShape)scene.componentsManagerLegacy.GetSceneSharedComponent(componentId);
 
         // 2. Check configured values
         Assert.IsTrue(boxShapeComponent.GetModel().withCollisions);
@@ -333,7 +333,7 @@ public class ParametrizedShapesTests : IntegrationTestSuite_Legacy
         TestUtils.CreateSceneEntity(scene, entityId);
         var entity = scene.entities[entityId];
 
-        TestUtils.SetEntityTransform(scene, entity, new DCLTransform.Model {position = new Vector3(8, 1, 8)});
+        TestUtils.SetEntityTransform(scene, entity, new DCLTransform.Model { position = new Vector3(8, 1, 8) });
 
         yield return null;
 
@@ -436,9 +436,9 @@ public class ParametrizedShapesTests : IntegrationTestSuite_Legacy
         // Assert:
         foreach (IDCLEntity entity in entities)
         {
-            for (int i = 0; i < entity.meshesInfo.colliders.Count; i++)
+            foreach (Collider collider in entity.meshesInfo.colliders)
             {
-                Assert.AreEqual(withCollision, entity.meshesInfo.colliders[i].enabled);
+                Assert.AreEqual(withCollision, collider.enabled);
             }
         }
     }

@@ -25,7 +25,7 @@ public class LoadingHUDController : IHUD
         // set initial states to prevent reconciliation errors
         fadeIn.OnChange += OnFadeInChange;
         fadeOut.OnChange += OnFadeOutChange;
-        
+
         message.OnChange += OnMessageChanged;
         percentage.OnChange += OnPercentageChanged;
         showTips.OnChange += OnShowTipsChanged;

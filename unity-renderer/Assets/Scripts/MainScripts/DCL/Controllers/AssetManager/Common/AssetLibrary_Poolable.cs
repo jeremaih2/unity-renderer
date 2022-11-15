@@ -153,6 +153,6 @@ namespace DCL
             return poolId;
         }
 
-        string GetSaltSuffix() { return  $"_{salt}"; }
+        string GetSaltSuffix() { return $"_{salt}"; }
     }
 }

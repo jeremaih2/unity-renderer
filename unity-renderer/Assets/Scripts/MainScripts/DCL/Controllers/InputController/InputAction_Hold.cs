@@ -3,6 +3,7 @@ using UnityEngine;
 
 /// <summary>
 /// An on/off action that triggers Start when the input is read and Finished when the input has gone
+/// 一个开/关动作，当读取输入时触发Start，当输入结束时触发Finished
 /// </summary>
 [CreateAssetMenu(fileName = "InputAction_Hold", menuName = "InputActions/Hold")]
 public class InputAction_Hold : ScriptableObject

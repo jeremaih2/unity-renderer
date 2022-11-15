@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using DCL.Helpers;
 using DCL;
 using AvatarSystem;
+using Cysharp.Threading.Tasks;
+using Random = UnityEngine.Random;
 
 public class BaseAvatarReveal : MonoBehaviour, IBaseAvatarRevealer
 {
@@ -32,6 +36,7 @@ public class BaseAvatarReveal : MonoBehaviour, IBaseAvatarRevealer
     private float endH;
     private float endS;
     private float endV;
+    private bool isRevealing;
 
     public List<Renderer> targets = new List<Renderer>();
     List<Material> _materials = new List<Material>();
@@ -88,7 +93,7 @@ public class BaseAvatarReveal : MonoBehaviour, IBaseAvatarRevealer
         if (avatarLoaded)
             return;
 
-        if(_ghostMaterial.GetColor("_Color").a < 0.9f)
+        if (_ghostMaterial.GetColor("_Color").a < 0.9f)
         {
             Color gColor = _ghostMaterial.GetColor("_Color");
             Color tempColor = new Color(gColor.r, gColor.g, gColor.b, gColor.a + Time.deltaTime * fadeInSpeed);
@@ -103,20 +108,40 @@ public class BaseAvatarReveal : MonoBehaviour, IBaseAvatarRevealer
         }
     }
 
-    public void StartAvatarRevealAnimation(bool closeby)
+    public async UniTask StartAvatarRevealAnimation(bool withTransition, CancellationToken cancellationToken)
     {
-        if (closeby)
+        try
+        {
+            if (!withTransition)
+            {
+                SetFullRendered();
+                return;
+            }
+
+            isRevealing = true;
             animation.Play();
-        else
+            await UniTask.WaitUntil(() => !isRevealing, cancellationToken: cancellationToken).AttachExternalCancellation(cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
             SetFullRendered();
+        }
+    }
+
+    public void OnRevealAnimationEnd()
+    {
+        isRevealing = false;
+        meshRenderer.enabled = false;
     }
 
     private void SetFullRendered()
     {
+        meshRenderer.enabled = false;
         animation.Stop();
+        const float REVEALED_POSITION = -10;
         foreach (Material m in _materials)
         {
-            m.SetVector("_RevealPosition", new Vector3(0, -2.5f, 0));
+            m.SetVector("_RevealPosition", new Vector3(0, REVEALED_POSITION, 0));
         }
         _ghostMaterial.SetVector("_RevealPosition", new Vector3(0, 2.5f, 0));
         DisableParticleEffects();

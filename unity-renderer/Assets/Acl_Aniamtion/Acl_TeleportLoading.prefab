@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6281035912691726389}
   - component: {fileID: 4357392089993866939}
   - component: {fileID: 1466376896287954893}
+  - component: {fileID: 5606938549598469017}
   m_Layer: 5
   m_Name: Acl_TeleportLoading
   m_TagString: Untagged
@@ -67,6 +68,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938718776407171916}
   m_CullTransparentMesh: 1
+--- !u!95 &5606938549598469017
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938718776407171916}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 259e44a40cc836642915ab05f157789c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5143014897367399543
 GameObject:
   m_ObjectHideFlags: 0

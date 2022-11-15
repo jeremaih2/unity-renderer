@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using AssetPromiseKeeper_Tests;
 using DCL;
 using DCL.Helpers;
@@ -15,8 +15,7 @@ namespace AssetPromiseKeeper_PrimitiveMesh_Tests
     {
         protected override AssetPromise_PrimitiveMesh CreatePromise()
         {
-            PrimitiveMeshModel model = new PrimitiveMeshModel(PrimitiveMeshModel.Type.Box);
-            var prom = new AssetPromise_PrimitiveMesh(model);
+            var prom = new AssetPromise_PrimitiveMesh(AssetPromise_PrimitiveMesh_Model.CreateBox(null));
             return prom;
         }
 
@@ -63,7 +62,7 @@ namespace AssetPromiseKeeper_PrimitiveMesh_Tests
             Assert.AreEqual(1, keeper.library.masterAssets.Count);
 
             keeper.library.Cleanup();
-            
+
         }
 
         [UnityTest]
@@ -93,9 +92,9 @@ namespace AssetPromiseKeeper_PrimitiveMesh_Tests
             Assert.IsTrue(!keeper.library.Contains(loadedAsset.id));
             Assert.AreEqual(0, keeper.library.masterAssets.Count);
             keeper.library.Cleanup();
-            
+
         }
-        
+
         [UnityTest]
         public override IEnumerator KeepAndForgetIsCalledInSingleFrameWhenLoadingAsset()
         {

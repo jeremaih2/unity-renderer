@@ -264,27 +264,6 @@ PrefabInstance:
       propertyPath: model.slotNumber
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
 --- !u!1001 &2142972382944221525
@@ -458,27 +437,6 @@ PrefabInstance:
         type: 3}
       propertyPath: model.slotNumber
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
@@ -654,27 +612,6 @@ PrefabInstance:
       propertyPath: model.slotNumber
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
 --- !u!1001 &5573874714575106139
@@ -848,27 +785,6 @@ PrefabInstance:
         type: 3}
       propertyPath: model.slotNumber
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
@@ -1044,27 +960,6 @@ PrefabInstance:
       propertyPath: model.slotNumber
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
 --- !u!1001 &7026008543871670796
@@ -1229,11 +1124,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8123195354923042031, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
         type: 3}
       propertyPath: model.rarity
@@ -1248,27 +1138,6 @@ PrefabInstance:
         type: 3}
       propertyPath: model.slotNumber
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
@@ -1433,27 +1302,6 @@ PrefabInstance:
         type: 3}
       propertyPath: model.hasSeparator
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
@@ -1634,27 +1482,6 @@ PrefabInstance:
       propertyPath: model.slotNumber
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
 --- !u!1001 &8326061845368946909
@@ -1829,27 +1656,6 @@ PrefabInstance:
       propertyPath: model.slotNumber
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}
 --- !u!1001 &8690955903021355631
@@ -2023,27 +1829,6 @@ PrefabInstance:
         type: 3}
       propertyPath: model.slotNumber
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: defaultEmotePicture
-      value: 
-      objectReference: {fileID: 21300000, guid: 1bced88443a851342bd63f67b1c705a3,
-        type: 3}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.g
-      value: 0.3137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 8875235463942680543, guid: fc8ae579143d63741bc0f33c409ca892,
-        type: 3}
-      propertyPath: selectedBackgroundColor.r
-      value: 0.9294118
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8ae579143d63741bc0f33c409ca892, type: 3}

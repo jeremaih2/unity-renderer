@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DCL.Configuration;
 using Google.Protobuf.Collections;
 using Newtonsoft.Json;
@@ -16,6 +17,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
+using UnityEngine.Rendering.Universal;
 
 namespace DCL.Helpers
 {
@@ -59,6 +61,37 @@ namespace DCL.Helpers
             }
         }
 
+        public static ScriptableRendererFeature ToggleRenderFeature<T>(this UniversalRenderPipelineAsset asset, bool enable) where T : ScriptableRendererFeature
+        {
+            var type = asset.GetType();
+            var propertyInfo = type.GetField("m_RendererDataList", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            if (propertyInfo == null)
+            {
+                return null;
+            }
+
+            var scriptableRenderData = (ScriptableRendererData[])propertyInfo.GetValue(asset);
+
+            if (scriptableRenderData != null && scriptableRenderData.Length > 0)
+            {
+                foreach (var renderData in scriptableRenderData)
+                {
+                    foreach (var rendererFeature in renderData.rendererFeatures)
+                    {
+                        if (rendererFeature is T)
+                        {
+                            rendererFeature.SetActive(enable);
+
+                            return rendererFeature;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public static Vector2[] FloatArrayToV2List(RepeatedField<float> uvs)
         {
             Vector2[] uvsResult = new Vector2[uvs.Count / 2];
@@ -75,18 +108,75 @@ namespace DCL.Helpers
 
             return uvsResult;
         }
-        
-        public static Vector2[] FloatArrayToV2List(float[] uvs)
+
+        public static Vector2[] FloatArrayToV2List(IList<float> uvs)
         {
-            Vector2[] uvsResult = new Vector2[uvs.Length / 2];
+            Vector2[] uvsResult = new Vector2[uvs.Count / 2];
             int uvsResultIndex = 0;
 
-            for (int i = 0; i < uvs.Length;)
+            for (int i = 0; i < uvs.Count;)
             {
-                uvsResult[uvsResultIndex++] = new Vector2(uvs[i++],uvs[i++]);
+                uvsResult[uvsResultIndex++] = new Vector2(uvs[i++], uvs[i++]);
             }
 
             return uvsResult;
+        }
+
+        private const int MAX_TRANSFORM_VALUE = 10000;
+        public static void CapGlobalValuesToMax(this Transform transform)
+        {
+            bool positionOutsideBoundaries = transform.position.sqrMagnitude > MAX_TRANSFORM_VALUE * MAX_TRANSFORM_VALUE;
+            bool scaleOutsideBoundaries = transform.lossyScale.sqrMagnitude > MAX_TRANSFORM_VALUE * MAX_TRANSFORM_VALUE;
+
+            if (positionOutsideBoundaries || scaleOutsideBoundaries)
+            {
+                Vector3 newPosition = transform.position;
+                if (positionOutsideBoundaries)
+                {
+                    if (Mathf.Abs(newPosition.x) > MAX_TRANSFORM_VALUE)
+                        newPosition.x = MAX_TRANSFORM_VALUE * Mathf.Sign(newPosition.x);
+
+                    if (Mathf.Abs(newPosition.y) > MAX_TRANSFORM_VALUE)
+                        newPosition.y = MAX_TRANSFORM_VALUE * Mathf.Sign(newPosition.y);
+
+                    if (Mathf.Abs(newPosition.z) > MAX_TRANSFORM_VALUE)
+                        newPosition.z = MAX_TRANSFORM_VALUE * Mathf.Sign(newPosition.z);
+                }
+
+                Vector3 newScale = transform.lossyScale;
+                if (scaleOutsideBoundaries)
+                {
+                    if (Mathf.Abs(newScale.x) > MAX_TRANSFORM_VALUE)
+                        newScale.x = MAX_TRANSFORM_VALUE * Mathf.Sign(newScale.x);
+
+                    if (Mathf.Abs(newScale.y) > MAX_TRANSFORM_VALUE)
+                        newScale.y = MAX_TRANSFORM_VALUE * Mathf.Sign(newScale.y);
+
+                    if (Mathf.Abs(newScale.z) > MAX_TRANSFORM_VALUE)
+                        newScale.z = MAX_TRANSFORM_VALUE * Mathf.Sign(newScale.z);
+                }
+
+                SetTransformGlobalValues(transform, newPosition, transform.rotation, newScale, scaleOutsideBoundaries);
+            }
+        }
+
+        public static void SetTransformGlobalValues(Transform transform, Vector3 newPos, Quaternion newRot, Vector3 newScale, bool setScale = true)
+        {
+            transform.position = newPos;
+            transform.rotation = newRot;
+
+            if (setScale)
+            {
+                transform.localScale = Vector3.one;
+                var m = transform.worldToLocalMatrix;
+
+                m.SetColumn(0, new Vector4(m.GetColumn(0).magnitude, 0f));
+                m.SetColumn(1, new Vector4(0f, m.GetColumn(1).magnitude));
+                m.SetColumn(2, new Vector4(0f, 0f, m.GetColumn(2).magnitude));
+                m.SetColumn(3, new Vector4(0f, 0f, 0f, 1f));
+
+                transform.localScale = m.MultiplyPoint(newScale);
+            }
         }
 
         public static void ResetLocalTRS(this Transform t)
@@ -105,7 +195,7 @@ namespace DCL.Helpers
             t.sizeDelta = Vector2.zero;
             t.anchoredPosition = Vector2.zero;
         }
-        
+
         public static void SetToCentered(this RectTransform t)
         {
             t.anchorMin = Vector2.one * 0.5f;
@@ -151,7 +241,7 @@ namespace DCL.Helpers
             // NOTE(Santi): It seems to be very much cheaper to execute the next instructions manually than execute directly the function
             //              'LayoutRebuilder.ForceRebuildLayoutImmediate()', that theorically already contains these instructions.
             var layoutElements = rectTransformRoot.GetComponentsInChildren(typeof(ILayoutElement), true).ToList();
-            layoutElements.RemoveAll(e => (e is Behaviour && !((Behaviour) e).isActiveAndEnabled) || e is TextMeshProUGUI);
+            layoutElements.RemoveAll(e => (e is Behaviour && !((Behaviour)e).isActiveAndEnabled) || e is TextMeshProUGUI);
             foreach (var layoutElem in layoutElements)
             {
                 (layoutElem as ILayoutElement).CalculateLayoutInputHorizontal();
@@ -159,7 +249,7 @@ namespace DCL.Helpers
             }
 
             var layoutControllers = rectTransformRoot.GetComponentsInChildren(typeof(ILayoutController), true).ToList();
-            layoutControllers.RemoveAll(e => e is Behaviour && !((Behaviour) e).isActiveAndEnabled);
+            layoutControllers.RemoveAll(e => e is Behaviour && !((Behaviour)e).isActiveAndEnabled);
             foreach (var layoutCtrl in layoutControllers)
             {
                 (layoutCtrl as ILayoutController).SetLayoutHorizontal();
@@ -325,8 +415,8 @@ namespace DCL.Helpers
         public static Vector2Int WorldToGridPosition(Vector3 worldPosition)
         {
             return new Vector2Int(
-                (int) Mathf.Floor(worldPosition.x / ParcelSettings.PARCEL_SIZE),
-                (int) Mathf.Floor(worldPosition.z / ParcelSettings.PARCEL_SIZE)
+                (int)Mathf.Floor(worldPosition.x / ParcelSettings.PARCEL_SIZE),
+                (int)Mathf.Floor(worldPosition.z / ParcelSettings.PARCEL_SIZE)
             );
         }
 
@@ -381,7 +471,7 @@ namespace DCL.Helpers
             }
         }
 
-        public static event Action<bool> OnCursorLockChanged; 
+        public static event Action<bool> OnCursorLockChanged;
 
         public static void LockCursor()
         {
@@ -426,7 +516,7 @@ namespace DCL.Helpers
         public static void BrowserSetCursorState(bool locked)
         {
             Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
-            
+
             IsCursorLocked = locked;
             Cursor.visible = !locked;
         }
@@ -504,7 +594,7 @@ namespace DCL.Helpers
             return new Vector3(x, y, z);
         }
 
-        public static bool CompareFloats( float a, float b, float precision = 0.1f ) { return Mathf.Abs(a - b) < precision; }
+        public static bool CompareFloats(float a, float b, float precision = 0.1f) { return Mathf.Abs(a - b) < precision; }
 
         public static void Deconstruct<T1, T2>(this KeyValuePair<T1, T2> tuple, out T1 key, out T2 value)
         {
@@ -538,7 +628,7 @@ namespace DCL.Helpers
         /// <param name="volume">Linear volume (0 to 1)</param>
         /// <returns>Value for audio mixer group volume</returns>
         public static float ToAudioMixerGroupVolume(float volume) { return (ToVolumeCurve(volume) * 80f) - 80f; }
-        
+
         public static IEnumerator Wait(float delay, Action onFinishCallback)
         {
             yield return new WaitForSeconds(delay);

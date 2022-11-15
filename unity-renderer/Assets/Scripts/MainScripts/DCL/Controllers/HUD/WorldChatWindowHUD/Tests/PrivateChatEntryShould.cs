@@ -1,4 +1,4 @@
-﻿using NSubstitute;
+using NSubstitute;
 using NUnit.Framework;
 
 public class PrivateChatEntryShould
@@ -11,7 +11,7 @@ public class PrivateChatEntryShould
     {
         view = PrivateChatEntry.Create();
         userContextMenu = Substitute.ForPartsOf<UserContextMenu>();
-        view.Initialize(Substitute.For<IChatController>(), userContextMenu, Substitute.For<ILastReadMessagesService>());
+        view.Initialize(Substitute.For<IChatController>(), userContextMenu);
     }
 
     [TearDown]
@@ -65,13 +65,13 @@ public class PrivateChatEntryShould
 
         picture.Received(1).Configure(Arg.Is<ImageComponentModel>(im => im.uri == "someUrl"));
     }
-    
+
     [Test]
     public void DisableAvatarSnapshotFetching()
     {
         var picture = Substitute.ForPartsOf<ImageComponentView>();
         picture.WhenForAnyArgs(component => component.Configure(default)).DoNotCallBase();
-        picture.WhenForAnyArgs(component => component.SetImage((string) default)).DoNotCallBase();
+        picture.WhenForAnyArgs(component => component.SetImage((string)default)).DoNotCallBase();
         view.picture = picture;
         var model = new PrivateChatEntry.PrivateChatEntryModel("userId", "name", "hello", "someUrl", false, true, 0)
         {

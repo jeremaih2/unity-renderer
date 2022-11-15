@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DCL.Helpers;
 using DCL.Models;
 using System.Collections;
@@ -99,14 +99,14 @@ public class AvatarModifierAreaShould : IntegrationTestSuite_Legacy
         yield return null;
         mockAvatarModifier.Received().RemoveModifier(fakeObject);
     }
-    
+
     [UnityTest]
     public IEnumerator ApplyExcludedListCorrectly()
     {
         var player1 = MockPlayer("player1");
         var player2 = MockPlayer("player2");
         var player3 = MockPlayer("player3");
-        
+
         DataStore.i.player.ownPlayer.Set(player1.player);
         DataStore.i.player.otherPlayers.AddOrSet(player2.player.id, player2.player);
         DataStore.i.player.otherPlayers.AddOrSet(player3.player.id, player3.player);
@@ -120,7 +120,7 @@ public class AvatarModifierAreaShould : IntegrationTestSuite_Legacy
         mockAvatarModifier.DidNotReceive().ApplyModifier(player1.gameObject);
         mockAvatarModifier.Received().ApplyModifier(player2.gameObject);
         mockAvatarModifier.Received().ApplyModifier(player3.gameObject);
-        
+
         model.excludeIds = new[] { player2.player.id };
 
         yield return TestUtils.EntityComponentUpdate(avatarModifierArea, model);
@@ -129,29 +129,29 @@ public class AvatarModifierAreaShould : IntegrationTestSuite_Legacy
         mockAvatarModifier.Received().ApplyModifier(player1.gameObject);
         mockAvatarModifier.Received().RemoveModifier(player2.gameObject);
 
-        model.excludeIds =  new[] { player2.player.id, "notLoadedAvatar" };
+        model.excludeIds = new[] { player2.player.id, "notLoadedAvatar" };
 
         yield return TestUtils.EntityComponentUpdate(avatarModifierArea, model);
         yield return null;
-        
+
         var player4 = MockPlayer("notLoadedAvatar");
         DataStore.i.player.otherPlayers.AddOrSet(player4.player.id, player4.player);
         yield return null;
-        
+
         mockAvatarModifier.DidNotReceive().ApplyModifier(player4.gameObject);
 
-        model.excludeIds =  new string[0];
+        model.excludeIds = new string[0];
         yield return TestUtils.EntityComponentUpdate(avatarModifierArea, model);
         yield return null;
-        
+
         mockAvatarModifier.Received().ApplyModifier(player2.gameObject);
 
         yield return null;
-        
+
         DataStore.i.player.otherPlayers.Remove(player2.player.id);
         DataStore.i.player.otherPlayers.Remove(player3.player.id);
         DataStore.i.player.otherPlayers.Remove(player4.player.id);
-        
+
         Object.Destroy(((PlayerName)player1.player.playerName).gameObject);
         Object.Destroy(((PlayerName)player2.player.playerName).gameObject);
         Object.Destroy(((PlayerName)player3.player.playerName).gameObject);
@@ -163,7 +163,7 @@ public class AvatarModifierAreaShould : IntegrationTestSuite_Legacy
         Object.Destroy(player4.gameObject);
         Object.Destroy(avatarModifierArea.gameObject);
     }
-    
+
     [UnityTest]
     public IEnumerator NotRemoveModifierOnWhenModelChange()
     {
@@ -171,17 +171,17 @@ public class AvatarModifierAreaShould : IntegrationTestSuite_Legacy
 
         var fakeObject = PrepareGameObjectForModifierArea();
         yield return null;
-        
+
         mockAvatarModifier.Received().ApplyModifier(fakeObject);
         mockAvatarModifier.ClearReceivedCalls();
 
         model.area = new BoxTriggerArea { box = new Vector3(11, 11, 11) };
         yield return TestUtils.EntityComponentUpdate(avatarModifierArea, model);
         yield return null;
-        
+
         mockAvatarModifier.Received(1).RemoveModifier(fakeObject);
         mockAvatarModifier.Received().ApplyModifier(fakeObject);
-    }    
+    }
 
     private GameObject PrepareGameObjectForModifierArea()
     {

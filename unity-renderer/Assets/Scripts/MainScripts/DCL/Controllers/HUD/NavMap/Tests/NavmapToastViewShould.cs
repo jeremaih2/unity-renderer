@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TestTools;
+using NSubstitute;
 
 namespace Tests
 {
@@ -19,14 +20,14 @@ namespace Tests
             result.Add(MainSceneFactory.CreateNavMap());
             return result;
         }
-        
+
         [UnitySetUp]
         protected override IEnumerator SetUp()
         {
             yield return base.SetUp();
             yield return null;
 
-            controller = new MinimapHUDController();
+            controller = new MinimapHUDController(Substitute.For<MinimapMetadataController>(), Substitute.For<IHomeLocationController>());
             controller.Initialize();
             navmapView = Object.FindObjectOfType<NavmapView>();
             navmapToastView = navmapView.toastView;

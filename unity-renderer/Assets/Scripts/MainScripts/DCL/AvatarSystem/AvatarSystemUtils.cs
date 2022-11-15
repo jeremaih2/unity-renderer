@@ -40,19 +40,26 @@ namespace AvatarSystem
 
             return (mainTextureUrl, maskTextureUrl);
         }
-//复制骨骼
-        public static void CopyBones(SkinnedMeshRenderer source, IEnumerable<SkinnedMeshRenderer> targets)
+        //复制骨骼
+        public static void CopyBones(Transform rootBone, Transform[] bones, IEnumerable<SkinnedMeshRenderer> targets)
         {
-            if (source == null)
+            if (rootBone == null || bones == null)
                 return;
 
             foreach (SkinnedMeshRenderer skinnedMeshRenderer in targets)
             {
-                skinnedMeshRenderer.rootBone = source.rootBone;
-                skinnedMeshRenderer.bones = source.bones;
+                CopyBones(rootBone, bones, skinnedMeshRenderer);
             }
         }
-//准备材质球的颜色
+        public static void CopyBones(Transform rootBone, Transform[] bones, SkinnedMeshRenderer skinnedMeshRenderer)
+        {
+            if (rootBone == null || bones == null)
+                return;
+
+            skinnedMeshRenderer.rootBone = rootBone;
+            skinnedMeshRenderer.bones = bones;
+        }
+        //准备材质球的颜色
         public static void PrepareMaterialColors(Rendereable rendereable, Color skinColor, Color hairColor)
         {
             foreach (Renderer renderer in rendereable.renderers)

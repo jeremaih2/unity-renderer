@@ -7,6 +7,7 @@ using DCL.Models;
 using NSubstitute;
 using NSubstitute.Extensions;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 
 namespace DCL.ECSComponents.Test
@@ -17,6 +18,7 @@ namespace DCL.ECSComponents.Test
         private IParcelScene scene;
         private IDCLEntity entity;
         private GameObject entityGo;
+        private UserProfile userProfile;
 
         [SetUp]
         public void Setup()
@@ -31,11 +33,18 @@ namespace DCL.ECSComponents.Test
 
             entity = Substitute.For<IDCLEntity>();
             entity.Configure().gameObject.Returns(entityGo);
+
+            userProfile = UserProfile.GetOwnUserProfile();
+            userProfile.UpdateData(new UserProfileModel() { userId = "ownUserId" });
         }
-        
+
         [TearDown]
         public void TearDown()
         {
+            if (userProfile != null && AssetDatabase.Contains(userProfile))
+            {
+                Resources.UnloadAsset(userProfile);
+            }
             handler.Dispose();
             DataStore.Clear();
             Object.Destroy(entityGo);
@@ -45,9 +54,9 @@ namespace DCL.ECSComponents.Test
         public void DoNotDetachOrAttachIfIdMatchPreviousModel()
         {
             handler.prevModel = new PBAvatarAttach() { AvatarId = "Temptation" };
-            var newModel = new PBAvatarAttach() { AvatarId = "Temptation" }; 
+            var newModel = new PBAvatarAttach() { AvatarId = "Temptation" };
 
-            handler.OnComponentModelUpdated(Substitute.For<IParcelScene>(),Substitute.For<IDCLEntity>(), newModel);
+            handler.OnComponentModelUpdated(Substitute.For<IParcelScene>(), Substitute.For<IDCLEntity>(), newModel);
             handler.DidNotReceive().Detach();
             handler.DidNotReceive().Attach(Arg.Any<string>(), Arg.Any<AvatarAnchorPointIds>());
         }
@@ -55,18 +64,18 @@ namespace DCL.ECSComponents.Test
         [Test]
         public void AttachWhenValidUserId()
         {
-            var newModel = new PBAvatarAttach() { AvatarId = "Temptation" }; 
+            var newModel = new PBAvatarAttach() { AvatarId = "Temptation" };
 
-            handler.OnComponentModelUpdated(Substitute.For<IParcelScene>(),Substitute.For<IDCLEntity>(), newModel);
+            handler.OnComponentModelUpdated(Substitute.For<IParcelScene>(), Substitute.For<IDCLEntity>(), newModel);
             handler.Received(1).Attach(Arg.Any<string>(), Arg.Any<AvatarAnchorPointIds>());
         }
 
         [Test]
         public void OnlyDetachWhenInvalidUserId()
-        {   
-            var newModel = new PBAvatarAttach() { AvatarId = "" }; 
+        {
+            var newModel = new PBAvatarAttach() { AvatarId = "" };
 
-            handler.OnComponentModelUpdated(Substitute.For<IParcelScene>(),Substitute.For<IDCLEntity>(), newModel);
+            handler.OnComponentModelUpdated(Substitute.For<IParcelScene>(), Substitute.For<IDCLEntity>(), newModel);
             handler.Received(1).Detach();
             handler.DidNotReceive().Attach(Arg.Any<string>(), Arg.Any<AvatarAnchorPointIds>());
         }
@@ -83,7 +92,7 @@ namespace DCL.ECSComponents.Test
             handler.OnComponentCreated(scene, entity);
 
             handler.OnComponentModelUpdated(scene, entity, newModel);
-            
+
             DataStore.i.player.otherPlayers.Remove(userId);
             handler.Received(2).Detach();
         }
@@ -114,7 +123,7 @@ namespace DCL.ECSComponents.Test
             handler.IsInsideScene(Arg.Any<UnityEngine.Vector3>()).Returns(true);
             DataStore.i.player.otherPlayers.Add(userId, new Player() { id = userId, anchorPoints = anchorPoints });
             handler.OnComponentCreated(scene, entity);
-            
+
             handler.OnComponentModelUpdated(scene, entity, new PBAvatarAttach() { AvatarId = userId, AnchorPointId = 0 });
             handler.LateUpdate();
 
@@ -134,7 +143,7 @@ namespace DCL.ECSComponents.Test
 
             DataStore.i.player.otherPlayers.Add(userId, new Player() { id = userId, anchorPoints = anchorPoints });
 
-            handler.OnComponentCreated(scene,entity);
+            handler.OnComponentCreated(scene, entity);
             handler.OnComponentModelUpdated(scene, entity, new PBAvatarAttach() { AvatarId = userId, AnchorPointId = 0 });
             handler.LateUpdate();
 

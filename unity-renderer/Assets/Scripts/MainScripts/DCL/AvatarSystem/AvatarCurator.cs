@@ -12,11 +12,13 @@ namespace AvatarSystem
     public class AvatarCurator : IAvatarCurator
     {
         private readonly IWearableItemResolver wearableItemResolver;
+        private readonly IEmotesCatalogService emotesCatalog;
 
-        public AvatarCurator(IWearableItemResolver wearableItemResolver)
+        public AvatarCurator(IWearableItemResolver wearableItemResolver, IEmotesCatalogService emotesCatalog)
         {
             Assert.IsNotNull(wearableItemResolver);
             this.wearableItemResolver = wearableItemResolver;
+            this.emotesCatalog = emotesCatalog;
         }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace AvatarSystem
             WearableItem mouth,
             List<WearableItem> wearables,
             List<WearableItem> emotes
-            )> Curate(AvatarSettings settings, IEnumerable<string> wearablesId, CancellationToken ct = default)
+            )> Curate(AvatarSettings settings, IEnumerable<string> wearablesId, IEnumerable<string> emoteIds, CancellationToken ct = default)
         {
             ct.ThrowIfCancellationRequested();
 

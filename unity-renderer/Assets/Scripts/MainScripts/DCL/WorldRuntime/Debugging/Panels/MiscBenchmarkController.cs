@@ -70,18 +70,18 @@ namespace DCL
             statsPanel.SetCellText(0, 0, "");
 
             //NOTE(Brian): Row stuff (left vertical header)
-            statsPanel.SetCellText(0, (int) Rows.SHARED_OBJECTS_COUNT, SHARED_OBJECTS_COUNT_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.COMPONENT_OBJECTS_COUNT, COMPONENT_OBJECTS_COUNT_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.ENTITY_OBJECTS_COUNT, ENTITY_OBJECTS_COUNT_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.BREAK_0, BREAK_0_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.MATERIAL_COUNT, MATERIAL_COUNT_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.MESHES_COUNT, MESHES_COUNT_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.BREAK_1, BREAK_1_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.GLTF_BEING_LOADED, GLTF_BEING_LOADED_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.AB_BEING_LOADED, AB_BEING_LOADED_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.MESSAGES_PER_SECOND_REAL, MESSAGES_PER_SECOND_REAL_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.RENDERER_UNLOCK_SEGS, RENDERER_UNLOCK_TEXT);
-            statsPanel.SetCellText(0, (int) Rows.MESSAGE_BUSES, MESSAGES_BUSES_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.SHARED_OBJECTS_COUNT, SHARED_OBJECTS_COUNT_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.COMPONENT_OBJECTS_COUNT, COMPONENT_OBJECTS_COUNT_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.ENTITY_OBJECTS_COUNT, ENTITY_OBJECTS_COUNT_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.BREAK_0, BREAK_0_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.MATERIAL_COUNT, MATERIAL_COUNT_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.MESHES_COUNT, MESHES_COUNT_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.BREAK_1, BREAK_1_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.GLTF_BEING_LOADED, GLTF_BEING_LOADED_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.AB_BEING_LOADED, AB_BEING_LOADED_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.MESSAGES_PER_SECOND_REAL, MESSAGES_PER_SECOND_REAL_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.RENDERER_UNLOCK_SEGS, RENDERER_UNLOCK_TEXT);
+            statsPanel.SetCellText(0, (int)Rows.MESSAGE_BUSES, MESSAGES_BUSES_TEXT);
         }
 
         private Coroutine updateCoroutine;
@@ -126,7 +126,7 @@ namespace DCL
             {
                 sampleCount++;
                 mps += 1 / (Time.deltaTime / messagesProcessedLastFrame);
-                statsPanel.SetCellText(1, (int) Rows.MESSAGES_PER_SECOND_REAL,
+                statsPanel.SetCellText(1, (int)Rows.MESSAGES_PER_SECOND_REAL,
                     (mps / sampleCount).ToString(CultureInfo.InvariantCulture));
             }
 
@@ -144,7 +144,7 @@ namespace DCL
                 int materialCount = 0;
                 int meshesCount = 0;
 
-                var loadedScenes = Environment.i.world.state.loadedScenes;
+                var loadedScenes = Environment.i.world.state.GetLoadedScenes();
 
                 foreach (var v in loadedScenes)
                 {
@@ -170,18 +170,18 @@ namespace DCL
                     }
                 }
 
-                statsPanel.SetCellText(1, (int) Rows.SHARED_OBJECTS_COUNT, sharedCount.ToString());
-                statsPanel.SetCellText(1, (int) Rows.COMPONENT_OBJECTS_COUNT, componentCount.ToString());
-                statsPanel.SetCellText(1, (int) Rows.ENTITY_OBJECTS_COUNT, entityCount.ToString());
-                statsPanel.SetCellText(1, (int) Rows.MATERIAL_COUNT, materialCount.ToString());
-                statsPanel.SetCellText(1, (int) Rows.MESHES_COUNT, meshesCount.ToString());
-                statsPanel.SetCellText(1, (int) Rows.GLTF_BEING_LOADED,
+                statsPanel.SetCellText(1, (int)Rows.SHARED_OBJECTS_COUNT, sharedCount.ToString());
+                statsPanel.SetCellText(1, (int)Rows.COMPONENT_OBJECTS_COUNT, componentCount.ToString());
+                statsPanel.SetCellText(1, (int)Rows.ENTITY_OBJECTS_COUNT, entityCount.ToString());
+                statsPanel.SetCellText(1, (int)Rows.MATERIAL_COUNT, materialCount.ToString());
+                statsPanel.SetCellText(1, (int)Rows.MESHES_COUNT, meshesCount.ToString());
+                statsPanel.SetCellText(1, (int)Rows.GLTF_BEING_LOADED,
                     GLTFComponent.downloadingCount.ToString() + " ... In Queue: " +
                     GLTFComponent.queueCount.ToString());
-                statsPanel.SetCellText(1, (int) Rows.AB_BEING_LOADED,
+                statsPanel.SetCellText(1, (int)Rows.AB_BEING_LOADED,
                     AssetPromise_AB.downloadingCount.ToString() + " ...  In Queue: " +
                     AssetPromise_AB.queueCount.ToString());
-                statsPanel.SetCellText(1, (int) Rows.RENDERER_UNLOCK_SEGS,
+                statsPanel.SetCellText(1, (int)Rows.RENDERER_UNLOCK_SEGS,
                     RenderingController.firstActivationTime.ToString(CultureInfo.InvariantCulture));
 
                 string busesLog = "";
@@ -225,7 +225,7 @@ namespace DCL
                 busesLog +=
                     $"{MessagingBusType.SYSTEM.ToString()} bus: {pendingMessagesCount[MessagingBusType.SYSTEM.ToString()]} replaced: {messagesReplaced[MessagingBusType.SYSTEM.ToString()]}\n";
 
-                statsPanel.SetCellText(1, (int) Rows.MESSAGE_BUSES, busesLog);
+                statsPanel.SetCellText(1, (int)Rows.MESSAGE_BUSES, busesLog);
 
                 yield return WaitForSecondsCache.Get(0.2f);
             }

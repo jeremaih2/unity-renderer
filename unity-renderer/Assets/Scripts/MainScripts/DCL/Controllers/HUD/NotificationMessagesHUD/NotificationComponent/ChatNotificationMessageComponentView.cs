@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ChatNotificationMessageComponentView : BaseComponentView, IChatNotificationMessageComponentView, IComponentModelConfig
+public class ChatNotificationMessageComponentView : BaseComponentView, IChatNotificationMessageComponentView, IComponentModelConfig<ChatNotificationMessageComponentModel>
 {
     [Header("Prefab References")]
     [SerializeField] internal Button button;
@@ -22,9 +22,9 @@ public class ChatNotificationMessageComponentView : BaseComponentView, IChatNoti
     public string notificationTargetId;
     private int maxContentCharacters, maxHeaderCharacters;
 
-    public void Configure(BaseComponentModel newModel)
+    public void Configure(ChatNotificationMessageComponentModel newModel)
     {
-        model = (ChatNotificationMessageComponentModel)newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -32,7 +32,7 @@ public class ChatNotificationMessageComponentView : BaseComponentView, IChatNoti
     {
         base.Awake();
 
-        button?.onClick.AddListener(()=>OnClickedNotification.Invoke(notificationTargetId));
+        button?.onClick.AddListener(() => OnClickedNotification.Invoke(notificationTargetId));
     }
 
     public override void RefreshControl()
@@ -49,7 +49,7 @@ public class ChatNotificationMessageComponentView : BaseComponentView, IChatNoti
         SetImage(model.imageUri);
     }
 
-    public void SetMessage(string message) 
+    public void SetMessage(string message)
     {
         model.message = message;
         if (message.Length <= maxContentCharacters)
@@ -67,7 +67,7 @@ public class ChatNotificationMessageComponentView : BaseComponentView, IChatNoti
     public void SetNotificationHeader(string header)
     {
         model.messageHeader = header;
-        if(header.Length <= maxHeaderCharacters)
+        if (header.Length <= maxHeaderCharacters)
             notificationHeader.text = header;
         else
             notificationHeader.text = $"{header.Substring(0, maxHeaderCharacters)}...";

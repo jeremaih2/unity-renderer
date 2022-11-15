@@ -41,7 +41,7 @@ namespace DCL
 
         Coroutine removeEntitiesCoroutine;
 
-        public void Initialize ()
+        public void Initialize()
         {
             removeEntitiesCoroutine = CoroutineStarter.Start(CleanupEntitiesCoroutine());
             CommonScriptableObjects.rendererState.OnChange += OnRendererStateChange;
@@ -135,7 +135,7 @@ namespace DCL
 
             foreach (var scene in scenesToRemove)
             {
-                if (scene != null && !Environment.i.world.state.loadedScenes.ContainsKey(scene.sceneData.id))
+                if (scene != null && !Environment.i.world.state.ContainsScene(scene.sceneData.id))
                     Object.Destroy(scene.gameObject);
 
                 if (!immediate && DCLTime.realtimeSinceStartup - lastTime >= MAX_TIME_BUDGET)

@@ -12,36 +12,28 @@ using Type = DCL.TransactionHUDModel.Type;
 public class TransactionHUD : MonoBehaviour, ITransactionHUD
 {
     [SerializeField] private Button acceptButton;
-    
+
     [SerializeField] private Button rejectButton;
-    
+
     [SerializeField] private TMP_Text messageLabel;
 
     public Model model { get; private set; } = new Model();
 
     public event Action<ITransactionHUD> OnTransactionAccepted;
-    
+
     public event Action<ITransactionHUD> OnTransactionRejected;
 
     private void OnEnable()
     {
         acceptButton.onClick.AddListener(AcceptTransaction);
-        
+
         rejectButton.onClick.AddListener(RejectTransaction);
     }
-    
+
     public IParcelScene FindScene(string sceneId)
     {
-        if (DCL.Environment.i.world?.state?.scenesSortedByDistance != null)
-        {
-            foreach (IParcelScene scene in DCL.Environment.i.world.state.scenesSortedByDistance)
-            {
-                if (scene.sceneData.id == sceneId)
-                    return scene;
-            }
-        }
-
-        return null;
+        DCL.Environment.i.world.state.TryGetScene(sceneId, out var scene);
+        return scene;
     }
 
     private void OnDisable()
@@ -57,7 +49,7 @@ public class TransactionHUD : MonoBehaviour, ITransactionHUD
 
         if (address.Length >= 12)
             return $"{address.Substring(0, 6)}...{address.Substring(address.Length - 4)}";
-        
+
         return address;
     }
 
@@ -67,7 +59,9 @@ public class TransactionHUD : MonoBehaviour, ITransactionHUD
 
         if (scene != null)
         {
-            messageLabel.text = $"This scene {scene.sceneData.basePosition.ToString()} wants you to sign a message. Press ALLOW and then check your mobile wallet to confirm the transaction.";
+            messageLabel.text = $"This scene {scene.sceneData.basePosition.ToString()} is requesting the signature of a message. " +
+                                $"If you are interested, please click the Allow button to receive it in your Wallet Connect application. " +
+                                $"This action does not imply message approval.";
         }
     }
 
@@ -77,7 +71,7 @@ public class TransactionHUD : MonoBehaviour, ITransactionHUD
             Utils.UnlockCursor();
 
         this.model = model;
-        
+
         ShowSignMessage(model);
     }
 

@@ -26,7 +26,7 @@ public class FriendTrackerController : IDisposable
 
         if (friendsController != null)
         {
-            if (!friendsController.isInitialized)
+            if (!friendsController.IsInitialized)
             {
                 friendsController.OnInitialized += OnFriendsInitialized;
             }
@@ -56,7 +56,7 @@ public class FriendTrackerController : IDisposable
 
         wrapper = new TrackedSceneInfo(listener);
 
-        if (friendsController != null && friendsController.isInitialized)
+        if (friendsController != null && friendsController.IsInitialized)
         {
             ProcessNewListener(wrapper);
         }
@@ -87,9 +87,9 @@ public class FriendTrackerController : IDisposable
         listeners.Clear();
     }
 
-    void OnUpdateUserStatus(string userId, FriendsController.UserStatus status)
+    void OnUpdateUserStatus(string userId, UserStatus status)
     {
-        if (!friendsController.isInitialized)
+        if (!friendsController.IsInitialized)
             return;
 
         FriendTracker friend;
@@ -107,7 +107,7 @@ public class FriendTrackerController : IDisposable
         }
         else
         {
-            ProcessFriendLocation(friend, new Vector2Int((int) status.position.x, (int) status.position.y));
+            ProcessFriendLocation(friend, new Vector2Int((int)status.position.x, (int)status.position.y));
         }
     }
 
@@ -115,7 +115,7 @@ public class FriendTrackerController : IDisposable
     {
         friendsController.OnInitialized -= OnFriendsInitialized;
 
-        using (var friendsIterator = friendsController.GetFriends().GetEnumerator())
+        using (var friendsIterator = friendsController.GetAllocatedFriends().GetEnumerator())
         {
             while (friendsIterator.MoveNext())
             {
@@ -165,8 +165,8 @@ public class FriendTrackerController : IDisposable
                     continue;
                 }
 
-                friendCoords.x = (int) friendIterator.Current.Value.status.position.x;
-                friendCoords.y = (int) friendIterator.Current.Value.status.position.y;
+                friendCoords.x = (int)friendIterator.Current.Value.status.position.x;
+                friendCoords.y = (int)friendIterator.Current.Value.status.position.y;
 
                 if (listener.ContainCoords(friendCoords))
                 {

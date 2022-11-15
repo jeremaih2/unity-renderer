@@ -12,7 +12,7 @@ namespace DCL.Builder
         private const float MAX_ZOOM = 4f;
         private const float MIN_ZOOM = 1.0f;
         private const float SIZE_PER_ZOOM = 0.5f;
-        
+
         public event Action<Vector2Int> OnParcelClicked;
         public event Action<Vector2Int> OnParcelHover;
 
@@ -33,12 +33,12 @@ namespace DCL.Builder
         private bool isDragging = false;
         private float lastScale = 0;
         private float currentZoomScale = 2f;
-        
+
         private void Start()
         {
             lessZoomBtn.onClick.AddListener(LessZoom);
             moreZoomBtn.onClick.AddListener(MoreZoom);
-            
+
             viewRectTransform = GetComponent<RectTransform>();
             scrollRect.onValueChanged.AddListener((x) =>
             {
@@ -67,7 +67,7 @@ namespace DCL.Builder
         public void EndDrag()
         {
             isDragging = false;
-            if(RectTransformUtility.RectangleContainsScreenPoint(viewRectTransform, Input.mousePosition))
+            if (RectTransformUtility.RectangleContainsScreenPoint(viewRectTransform, Input.mousePosition))
                 MapRenderer.i.SetParcelHighlightActive(true);
         }
 
@@ -99,9 +99,9 @@ namespace DCL.Builder
                     bool found = false;
                     foreach (Scene scene in land.scenes)
                     {
-                        if(scene.isEmpty)
+                        if (scene.isEmpty)
                             continue;
-                        
+
                         foreach (Vector2Int sceneParcel in scene.parcels)
                         {
                             if (sceneParcel == landParcel)
@@ -111,7 +111,7 @@ namespace DCL.Builder
                             }
                         }
                     }
-                    if(found)
+                    if (found)
                         landsToHighlightWithContent.Add(landParcel);
                     else
                         landsToHighlight.Add(landParcel);
@@ -158,9 +158,9 @@ namespace DCL.Builder
 
         private void ParcelHovered(float x, float y)
         {
-            if(!isDragging)
+            if (!isDragging)
                 MapRenderer.i.SetParcelHighlightActive(true);
-            OnParcelHover?.Invoke( new Vector2Int(Mathf.RoundToInt(x), Mathf.RoundToInt(y)));
+            OnParcelHover?.Invoke(new Vector2Int(Mathf.RoundToInt(x), Mathf.RoundToInt(y)));
         }
 
         private void SetMapRendererInContainer()
@@ -170,7 +170,7 @@ namespace DCL.Builder
             atlasOriginalPosition = MapRenderer.i.atlas.chunksParent.transform.localPosition;
 
             lastScale = MapRenderer.i.transform.localScale.x;
-            
+
             MapRenderer.i.SetHighlightStyle(MapParcelHighlight.HighlighStyle.BUILDER_DISABLE);
             MapRenderer.i.atlas.viewport = scrollRect.viewport;
             MapRenderer.i.transform.SetParent(scrollRectContentTransform);
@@ -179,13 +179,13 @@ namespace DCL.Builder
             MapRenderer.i.SetPointOfInterestActive(false);
             MapRenderer.i.SetPlayerIconActive(false);
             MapRenderer.i.SetOtherPlayersIconActive(false);
-            
+
             currentZoomScale = 2f;
             ApplyCurrentZoom();
-            
+
             scrollRect.content = MapRenderer.i.atlas.chunksParent.transform as RectTransform;
             initialContentPosition = scrollRect.content.anchoredPosition;
-            
+
             // Reparent the player icon parent to scroll everything together
             MapRenderer.i.atlas.overlayLayerGameobject.transform.SetParent(scrollRect.content);
 
@@ -211,7 +211,7 @@ namespace DCL.Builder
             MapRenderer.i.atlas.overlayLayerGameobject.transform.SetParent(MapRenderer.i.atlas.chunksParent.transform.parent);
             (MapRenderer.i.atlas.overlayLayerGameobject.transform as RectTransform).anchoredPosition = Vector2.zero;
 
-            MapRenderer.i.UpdateRendering(Utils.WorldToGridPositionUnclamped(CommonScriptableObjects.playerWorldPosition.Get()));
+            MapRenderer.i.UpdateRendering(Utils.WorldToGridPositionUnclamped(DataStore.i.player.playerWorldPosition.Get()));
 
         }
 

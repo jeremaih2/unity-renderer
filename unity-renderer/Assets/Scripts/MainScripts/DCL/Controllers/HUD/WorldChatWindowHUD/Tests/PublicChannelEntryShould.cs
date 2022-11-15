@@ -1,4 +1,4 @@
-﻿using NSubstitute;
+using NSubstitute;
 using NUnit.Framework;
 
 public class PublicChannelEntryShould
@@ -9,7 +9,7 @@ public class PublicChannelEntryShould
     public void SetUp()
     {
         view = PublicChannelEntry.Create();
-        view.Initialize(Substitute.For<IChatController>(), Substitute.For<ILastReadMessagesService>());
+        view.Initialize(Substitute.For<IChatController>());
     }
 
     [TearDown]
@@ -30,9 +30,9 @@ public class PublicChannelEntryShould
     {
         var called = false;
         view.OnOpenChat += entry => called = true;
-        
+
         view.openChatButton.onClick.Invoke();
-        
+
         Assert.IsTrue(called);
     }
 }

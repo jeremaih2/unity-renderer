@@ -4,7 +4,6 @@ using DCL;
 using DCL.Interface;
 using NSubstitute;
 using NUnit.Framework;
-using SocialFeaturesAnalytics;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -31,11 +30,9 @@ public class PublicChatChannelControllerShould
         mouseCatcher = Substitute.For<IMouseCatcher>();
         controller = new PublicChatChannelController(
             chatController,
-            Substitute.For<ILastReadMessagesService>(),
             userProfileBridge,
             new DataStore(),
             new RegexProfanityFilter(Substitute.For<IProfanityWordProvider>()),
-            Substitute.For<ISocialAnalytics>(),
             mouseCatcher,
             ScriptableObject.CreateInstance<InputAction_Trigger>());
 
@@ -60,7 +57,7 @@ public class PublicChatChannelControllerShould
             body = "test message",
             sender = OWN_USER_ID,
             recipient = TEST_USER_ID,
-            timestamp = (ulong) DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            timestamp = (ulong)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
         };
 
         chatController.OnAddMessage += Raise.Event<Action<ChatMessage>>(msg);
@@ -110,19 +107,19 @@ public class PublicChatChannelControllerShould
     public void SendPublicMessage()
     {
         internalChatView.OnSendMessage += Raise.Event<Action<ChatMessage>>(new ChatMessage
-            {body = "test message", messageType = ChatMessage.Type.PUBLIC});
+        { body = "test message", messageType = ChatMessage.Type.PUBLIC });
         chatController.Received(1).Send(Arg.Is<ChatMessage>(c => c.body == "test message"
                                                                  && c.sender == OWN_USER_ID
                                                                  && c.messageType == ChatMessage.Type.PUBLIC));
         internalChatView.Received(1).ResetInputField();
         internalChatView.Received(1).FocusInputField();
     }
-    
+
     [Test]
     public void SendPrivateMessage()
     {
         internalChatView.OnSendMessage += Raise.Event<Action<ChatMessage>>(new ChatMessage
-            {body = "test message", messageType = ChatMessage.Type.PRIVATE, recipient = TEST_USER_ID});
+        { body = "test message", messageType = ChatMessage.Type.PRIVATE, recipient = TEST_USER_ID });
         chatController.Received(1).Send(Arg.Is<ChatMessage>(c => c.body == $"/w {TEST_USER_ID} test message"
                                                                  && c.sender == OWN_USER_ID
                                                                  && c.messageType == ChatMessage.Type.PRIVATE
@@ -130,16 +127,16 @@ public class PublicChatChannelControllerShould
         internalChatView.Received(1).ResetInputField();
         internalChatView.Received(1).FocusInputField();
     }
-    
+
     [Test]
     public void ResetInputFieldAndActivatePreviewWhenIsInvalidMessage()
     {
         var isPreviewMode = false;
         controller.OnPreviewModeChanged += b => isPreviewMode = b;
-        
+
         internalChatView.OnSendMessage += Raise.Event<Action<ChatMessage>>(new ChatMessage
-            {body = "", messageType = ChatMessage.Type.PUBLIC, recipient = TEST_USER_ID});
-        
+        { body = "", messageType = ChatMessage.Type.PUBLIC, recipient = TEST_USER_ID });
+
         internalChatView.Received(1).ResetInputField(true);
         view.Received(1).ActivatePreview();
         internalChatView.Received(1).ActivatePreview();
@@ -171,7 +168,7 @@ public class PublicChatChannelControllerShould
             sender = TEST_USER_ID,
             recipient = OWN_USER_ID,
             messageType = ChatMessage.Type.PRIVATE,
-            timestamp = (ulong) DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            timestamp = (ulong)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
         };
 
         yield return null;

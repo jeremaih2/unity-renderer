@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public interface ISearchBarComponentView
 {
+    string Text { get; }
+
     /// <summary>
     /// Event that will be triggered when a search is ordered in the search component.
     /// </summary>
@@ -26,7 +28,7 @@ public interface ISearchBarComponentView
     /// <summary>
     /// Clear the search component.
     /// </summary>
-    void ClearSearch();
+    void ClearSearch(bool notify = true);
 
     /// <summary>
     /// Set the idle time to search.
@@ -35,7 +37,7 @@ public interface ISearchBarComponentView
     void SetIdleSearchTime(float idleSearchTime);
 }
 
-public class SearchBarComponentView : BaseComponentView, ISearchBarComponentView, IComponentModelConfig
+public class SearchBarComponentView : BaseComponentView, ISearchBarComponentView, IComponentModelConfig<SearchBarComponentModel>
 {
     [Header("Prefab References")]
     [SerializeField] internal TMP_InputField inputField;
@@ -52,22 +54,24 @@ public class SearchBarComponentView : BaseComponentView, ISearchBarComponentView
     internal Coroutine searchWhileTypingRoutine;
     internal float lastValueChangeTime = 0;
 
+    public string Text => inputField.text;
+
     public override void Awake()
     {
         base.Awake();
-        
+
         inputField.onValueChanged.AddListener(OnValueChanged);
         inputField.onSubmit.AddListener(SubmitSearch);
         inputField.onSelect.AddListener(SelectInput);
         inputField.onDeselect.AddListener(DeselectInput);
-        clearSearchButton.onClick.AddListener(ClearSearch);
+        clearSearchButton.onClick.AddListener(() => ClearSearch());
 
         SetClearMode();
     }
 
-    public void Configure(BaseComponentModel newModel)
+    public void Configure(SearchBarComponentModel newModel)
     {
-        model = (SearchBarComponentModel)newModel;
+        model = newModel;
         RefreshControl();
     }
 
@@ -99,13 +103,15 @@ public class SearchBarComponentView : BaseComponentView, ISearchBarComponentView
         OnSubmit?.Invoke(value);
     }
 
-    public void ClearSearch()
+    public void ClearSearch(bool notify = true)
     {
         StopSearchCoroutine();
 
         inputField.SetTextWithoutNotify(string.Empty);
         SetClearMode();
-        OnSearchText?.Invoke(string.Empty);
+
+        if (notify)
+            OnSearchText?.Invoke(string.Empty);
     }
 
     public void SetIdleSearchTime(float idleSearchTime) { model.idleTimeToTriggerSearch = idleSearchTime; }
